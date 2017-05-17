@@ -1,7 +1,7 @@
 ---
 title: github博客管理
 date: 2017-05-17 19:39:40
-tag: github,博客
+tag: github
 category: 笔记
 ---
 

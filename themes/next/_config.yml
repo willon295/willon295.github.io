@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /favicon.ico
+favicon: http://hexo-1252094786.costj.myqcloud.com/willon.jpg
 
 # Set default keywords (Use a comma to separate)
 keywords: "willon"
@@ -161,7 +161,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: https://www.codexz.cn/wp-content/uploads/avatar.jpg
+avatar: http://hexo-1252094786.costj.myqcloud.com/avatar.jpg
 
 
 # Table Of Contents in the Sidebar

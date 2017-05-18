@@ -2,7 +2,6 @@
 title: HTTP状态码
 tags:
   - HTTP
-  - 学习
 id: 58
 categories:
   - 通信

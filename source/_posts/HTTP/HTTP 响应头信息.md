@@ -2,10 +2,8 @@
 title: HTTP 响应头信息
 tags:
   - HTTP
-  - 学习
 id: 56
 categories:
-  - 网站
   - 通信
 date: 2016-12-17 23:19:36
 ---

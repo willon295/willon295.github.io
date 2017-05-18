@@ -2,10 +2,8 @@
 title: HTTP请求方法
 tags:
   - HTTP
-  - 学习
 id: 54
 categories:
-  - 网站
   - 通信
 date: 2016-12-17 23:18:49
 ---

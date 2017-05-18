@@ -12,45 +12,45 @@ date: 2017-04-16 20:53:59
 
 > `Python`代码的缩进规则: 具有相同缩进的代码被视为代码块
 
-### 条件语句
+## 条件语句
 
-**一、if**
+### if
 
 if条件语句：没有`()`和 `{}`,在 `:` 之后的为逻辑处理代码块
 
-举个栗子
+	#举个栗子
+    a = 20
+    if a&gt;10:
+        print("more than 10")
+
+    ##运行结果
+	more than 10
+     
+
+### if..else..
+
+注意缩进，`if` 和 `else`必须是相同缩进量
+
+    #举个栗子
 
     a = 20
     if a&gt;10:
         print("more than 10")
-    ##运行结果是  more than 10
-    `</pre>
-
-    **二、if..else..**
-
-    注意缩进，`if` 和 `else`必须是相同缩进量
-
-    举个栗子
-
-    <pre>`a = 20
-    if a&gt;10:
-        print("more than 10")
     else:
         print("less than 10")
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`more than 10
-    `</pre>
+    more than 10
+     
+### if...elif ...else...
 
-    **三、if...elif ...else...**
+注意缩进，注意缩进，注意缩进
 
-    注意缩进，注意缩进，注意缩进
+    #举个栗子
 
-    举个栗子
-
-    <pre>`score = 70
+    score = 70
     if  score &lt;0 or score&gt;100:
         print("error")
     else:
@@ -61,22 +61,18 @@ if条件语句：没有`()`和 `{}`,在 `:` 之后的为逻辑处理代码块
                 print("B")
             else :
                 print("C")
-    `</pre>
+     
+    #运行结果
 
-    运行结果
+    B
 
-    <pre>`B
-    `</pre>
+上面的这种代码会随着逻辑处理复杂，缩进越来越复杂。代码不美观 所以这我们 使用
 
-    > 上面的这种代码会随着逻辑处理复杂，
-> 
->       缩进越来越复杂。代码不美观 所以这我们 使用
-> 
->       `if...elif ...else...`
+### if...elif ...else...
 
     举个栗子
 
-    <pre>`score = 70
+    score = 70
     if  score &lt;0 or score&gt;100:
         print("error")
     elif score&gt;=80:
@@ -86,48 +82,47 @@ if条件语句：没有`()`和 `{}`,在 `:` 之后的为逻辑处理代码块
     else :
         print("C")
     #运行结果 ： B
-    `</pre>
+     
 
-    ### 循环
+## 循环
+### for循环
 
-    **一、for循环**
+    #举个栗子
 
-    举个栗子
-
-    <pre>`L=['python',2017,True]
+    L=['python',2017,True]
     for name in  L:
         print(name)
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`python
+    python
     2017
     True
-    `</pre>
+     
 
-    **二、while循环**
+### while循环
 
-    举个栗子
+    #举个栗子
 
-    <pre>`sum = 0
+    sum = 0
     x = 1
     while x&lt;10:
         sum=sum+x
         x=x+1
     print(sum)
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`45
-    `</pre>
+    45
+     
 
-    **三、break退出**
+### break退出
 
-    举个栗子
+    #举个栗子
 
-    <pre>`#计算1-100的和
+    #计算1-100的和
     sum = 0
     x = 1
     while True:
@@ -136,18 +131,18 @@ if条件语句：没有`()`和 `{}`,在 `:` 之后的为逻辑处理代码块
         if x&gt;100:
             break
     print(sum)
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`5050
-    `</pre>
+    5050
+     
 
-    **四、continue**
+### continue**
 
-    举个栗子
+    #举个栗子
 
-    <pre>`#统计班级及格人数
+    #统计班级及格人数
     L=[45,48,89,65,76,48,96,98,87,43,84,65]
     sum = 0
     for score in L:
@@ -155,25 +150,25 @@ if条件语句：没有`()`和 `{}`,在 `:` 之后的为逻辑处理代码块
             continue
         sum=sum+1
     print("及格人数",sum)
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`及格人数 8  
-    `</pre>
+    及格人数 8  
+     
 
-    **五、嵌套**
+### 嵌套**
 
-    举个栗子
+    #举个栗子
 
-    <pre>`for a in ['A','B','C']:
+    for a in ['A','B','C']:
         for b in [1,2]:
             print(a,b)
-    `</pre>
+     
 
-    运行结果
+    #运行结果
 
-    <pre>`A 1
+    A 1
     A 2
     B 1
     B 2

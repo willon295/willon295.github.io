@@ -8,60 +8,61 @@ categories:
 date: 2017-04-16 20:54:56
 ---
 
-**一、函数的定义**
+### 函数的定义
 
 使用 `def` 定义，函数参数、返回值可选。
 
     #不带参函数
     def func():
         print('hello')
+
     #带参函数
     def func1(x,y):
         print('hello'x,y)
+
     #有返回值函数
     def func(x):
         print('hello',x)
         return x
-    `</pre>
+     
 
-    **二、函数的返回值**
+### 函数的返回值
 
-    使用`return`返回，返回值可以是任何类型数据。函数不会执行 `return` 之后的代码。
+使用`return`返回，返回值可以是任何类型数据。函数不会执行 `return` 之后的代码。
 
-    举个栗子
-
-    <pre>`def func():
+    #举个栗子
+    def func():
         return 'yes'
         return 'no'
     fun()
-    `</pre>
+     
 
-    运行结果
+    #运行结果
+    yes
+     
 
-    <pre>`yes
-    `</pre>
+### 匿名函数lambda
 
-    **三、匿名函数lambda**
+`lambda` 关键字可以用来创建一个匿名函数。
 
-    `lambda` 关键字可以用来创建一个匿名函数。
+    func=lambda 参数一,参数二 : 返回值
+大概使用就是这样      
 
-    <pre>`func=lambda 参数一,参数二 : 返回值
-    `</pre>
+    #举个栗子
 
-    举个栗子
-
-    <pre>`#正常的函数定义
+    #正常的函数定义
     def func1(x,y):
         return x*y
+
     #匿名函数
     func2 = lambda x,y: x*y
+
     #函数调用
     func1(4,5)
     func2(4,5)
-    `</pre>
+     
 
-    运行结果
-
-    <pre>`20
+    #运行结果
+    20
     20 
     

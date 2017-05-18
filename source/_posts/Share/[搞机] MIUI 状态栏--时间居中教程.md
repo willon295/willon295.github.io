@@ -19,7 +19,7 @@ date: 2017-05-04 15:59:32
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/005.png)
 
-### 准备工作
+## 准备工作
 
 去`apktool` 官网下载最新的版本，[传送门](https://ibotpeaches.github.io/Apktool/ "传送门")
 
@@ -28,36 +28,36 @@ date: 2017-05-04 15:59:32
 
 > 需要的东西后面打包
 
-### 开工
+## 开工
 
-**一、 提取文件**
+### 一、 提取文件
 
 1、system/app/miui.apk
 2、system/framework/framework-res.apk
 3、system/framework/framework-ext-res/fraework-ext-res.apk
 4、system/priv-app/miuisystemui.apk
 
-**二、 导入框架**
+### 二、 导入框架
 
 `apktool if  framework-res.apk`
 `apktool if  fraework-ext-res.apk`
 `apktool if  miui.apk`
 
-**三、 反编译文件**
+### 三、 反编译文件
 
 `apktool  d  miuisystemui.apk`
 成功后多出一个文件夹  `miuisystemui`
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/002.jpg)
 
-**四、 替换布局文件**
+### 四、 替换布局文件
 
 文件位于`res/layout/`
 
 status_bar_simple.xml
 signal_cluster_view.xml
 
-**五、 回编译**
+### 五、 回编译
 
 `apktool b  miuisystemui`
 
@@ -65,17 +65,17 @@ signal_cluster_view.xml
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/003.jpg)
 
-**六、再替换**
+### 六、再替换
 
 使用压缩软件打开回编译  MIUIsystemUI.apk   ①
 使用压缩软件打开源文件  MIUIsystemUI.apk   ②
 
 将 ① 中的 status_bar_simple.xml ，signal_cluster_view.xml替换到②中。
 
-**七、收工**
+### 七、收工
 
 将新 `MIUIsystemUI.apk`  扔进 `system/priv-app/miuisystemui/`文件夹，权限 `0644` ，重启手机
 
 ### 资源下载
 
-[download]http://wwwcodexzcn-10039191.cossh.myqcloud.com/MIUI%E6%97%B6%E9%97%B4%E5%B1%85%E4%B8%AD_byCL.zip [/download]
+[点此下载](http://wwwcodexzcn-10039191.cossh.myqcloud.com/MIUI%E6%97%B6%E9%97%B4%E5%B1%85%E4%B8%AD_byCL.zip)

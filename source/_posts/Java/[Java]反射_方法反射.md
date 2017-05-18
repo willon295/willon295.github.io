@@ -10,9 +10,7 @@ date: 2017-05-11 16:49:34
 
 看代码：
 
-	
 	public class ClassDemo1 {
-
     public static void main(String[] args) {
         //创建一个A 类型的 对象
         A a1 = new A();
@@ -64,14 +62,11 @@ date: 2017-05-11 16:49:34
 	#30
 	#HELLO,world
 
-	
-
 ### List集合反射
 
 看代码
 
 	public class ListReDemo {
-
     	public static void main(String[] args) {
         	ArrayList  list1 = new ArrayList();
         	ArrayList <String>  stringlist  =new ArrayList<>();
@@ -80,7 +75,6 @@ date: 2017-05-11 16:49:34
         	stringlist.add("world");
         	System.out.println("未反射： "+stringlist);
         // stringlist.add(100);报错，stringlist无法添加int 类型数据
-
 
         	Class ctype1 = list1.getClass();
         	Class ctype2= stringlist.getClass();

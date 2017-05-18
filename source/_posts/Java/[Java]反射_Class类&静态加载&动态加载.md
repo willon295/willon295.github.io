@@ -88,59 +88,48 @@ date: 2017-05-11 16:43:34
 
 ### 类的动态加载
 
-**第一步**
+1. 第一步
+	创建一个`Word`,`Excel` 所有程序的接口（规范）
+		interface  OfficeAble {
+	        public  void  start();
+		}
 
-创建一个`Word`,`Excel` 所有程序的接口（规范）
+2. 第二步
 
-	interface  OfficeAble {
-        public  void  start();
-	}
+	让`Word`,`Excel` 实现该接口
+		/*Word类*/
+		public class Word implements  OfficeAble{
+	    @Override
+	    public void start() {
+	        System.out.println("word__start");
+	      }
+		}
+		/*Excel类*/
+		public class Excel implements  OfficeAble{
+	    @Override
+	    public void start() {
+	        System.out.println("excel__start");
+	      }
+		}
 
+3. 第三步
 
-
-**第二步**
-
-让`Word`,`Excel` 实现该接口
-
-
-	/*Word类*/
-	public class Word implements  OfficeAble{
-    @Override
-    public void start() {
-        System.out.println("word__start");
-      }
-	}
-
-
-	/*Excel类*/
-	public class Excel implements  OfficeAble{
-    @Override
-    public void start() {
-        System.out.println("excel__start");
-      }
-	}
-
-
-**第三步**
-
-`Office` 程序动态加载类
-
-
-	public class Office {
-    public static void main(String[] args) {
-        try {
-			//创建一个某类的类类型
-            Class oft  = Class.forName(arg[0]);
-			
-			//实例化 
-            OfficeAble  ofb = (OfficeAble) oft.newInstance();
-            ofb.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-      }
-	}
-	#javac Word.java
-	#javac Office.java 
-	#java  Office  Word
-	#运行结果==> word__start
+	`Office` 程序动态加载类
+		public class Office {
+	    public static void main(String[] args) {
+	        try {
+				//创建一个某类的类类型
+	            Class oft  = Class.forName(arg[0]);
+				
+				//实例化 
+	            OfficeAble  ofb = (OfficeAble) oft.newInstance();
+	            ofb.start();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	      }
+		}
+		#javac Word.java
+		#javac Office.java 
+		#java  Office  Word
+		#运行结果==> word__start

@@ -1,5 +1,5 @@
 ---
-title: '[Python3]008_其他常用函数'
+title: '[Python3]007_其他常用函数'
 tags:
   - python3
 id: 324

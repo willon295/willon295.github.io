@@ -12,46 +12,42 @@ date: 2017-01-08 23:50:06
 
 **“CL云解析”** 是一款chrome插件，支持 爱奇艺腾讯芒果TV优酷等等<span style="color: #ff0000;">全网VIP视频</span>解析（简单说：可以看全网视频VIP会员）。目前几乎支持所有 **chrome 内核浏览器，如 ：chrome，360极速浏览器，QQ浏览器等。**
 
-<pre>**
-最近更新：2017-05-10
-最新版本：20170510
-更新摘要：
+	最近更新：2017-05-10
+	最新版本：20170510
+	更新摘要：
+	
+	#2017-05-10
+	##显示当前播放视频标题
+	
+	#2017-04-07
+	##添加最新推荐
+	##增加接口调用
+	
+	#2017-04-05
+	##修复移动端无法点击“播放”
+	##更换站点
+	
+	#2017-01-12
+	##修复小bug
+	##优化视频加载速度
+	
+	#2017-01-08
+	##增加优酷VIP视频解析
+	##修复腾讯VIP视频播放异常
+	##插件发布
 
-#2017-05-10
-##显示当前播放视频标题
 
-#2017-04-07
-##添加最新推荐
-##增加接口调用
-
-#2017-04-05
-##修复移动端无法点击“播放”
-##更换站点
-
-#2017-01-12
-##修复小bug
-##优化视频加载速度
-
-#2017-01-08
-##增加优酷VIP视频解析
-##修复腾讯VIP视频播放异常
-##插件发布
-
-**</pre>
-
-### 安装说明
+# 安装说明
 
 此处以谷歌chrome为例；
 
-<pre>
 
 ## 步骤一：
 
 找到chrome浏览器的 --&gt;更多工具--&gt;扩展程序（记得先开启--&gt;开发者选项）,点击 “加载已解压的扩展程序”。
-<bquote>
- ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/extions1.jpg)
- </bquote>
-&nbsp;
+
+![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/extions1.jpg)
+
 
 ## 步骤二
 
@@ -62,13 +58,12 @@ date: 2017-01-08 23:50:06
 此时你的浏览器会多出一个如图插件，安装完成；
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/extions3.jpg)
-</pre>
+
 
 安装完成....就是那么简单；
 
-### 使用教程
+# 使用教程
 
-<pre>
 
 ## 步骤一
 
@@ -88,15 +83,13 @@ date: 2017-01-08 23:50:06
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/extions6.jpg)
 
-&nbsp;
-</pre>
 
-### 接口调用
+## 接口调用
 
         http://vip.codexz.cn/?url=视频地址
         直接访问即可播放视频
 
-### 移动端使用说明
+## 移动端使用说明
 
 1、浏览器输入以下地址：
 `http://vip.codexz.cn`
@@ -108,11 +101,11 @@ date: 2017-01-08 23:50:06
 `https://v.qq.com/x/cover/xvlhj7cglyfwx8x.html`
 3、粘贴地址到输入框，点击播放即可.
 
-### 作品说明
+## 作品说明
 
 本人写的第一个 Chrome 插件，未经本人允许不得用于商业用途，不得以任何形式任何名义发布 此插件，本插件仅供技术交流使用，不保证长期稳定更新，如有bug 请留言反馈。如此插件侵犯您的权益，请联系本人QQ。
 
-### 回答几个问题
+## 回答几个问题
 
 1、插件后期收费吗？
 答：不会，至少我大学毕业前不会。
@@ -129,16 +122,11 @@ date: 2017-01-08 23:50:06
     2、可能该视频无法解析
     3、你长得丑
 
-### 插件下载
+# 插件下载
 
-<pre>**
+- 最新版本
+	[20170510](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170510.zip)
 
- #最新版本
-
-[20170510](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170510.zip)
-
-#历史版本
-
-[ 20170407](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170405.zip)
-[ 20170405](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170405.zip)
-**</pre>
+- 历史版本
+	[ 20170407](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170405.zip)
+	[ 20170405](http://wwwcodexzcn-10039191.cossh.myqcloud.com/CLyjx_170405.zip)

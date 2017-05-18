@@ -4,7 +4,7 @@ tags:
   - Android
 id: 232
 categories:
-  - 安卓
+  - Android
 date: 2017-01-17 12:37:28
 ---
 

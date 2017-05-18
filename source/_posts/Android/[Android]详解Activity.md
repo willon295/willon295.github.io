@@ -4,8 +4,7 @@ tags:
   - Android
 id: 260
 categories:
-  - 安卓
-  - 笔记
+  - Android
 date: 2017-03-03 22:40:04
 ---
 

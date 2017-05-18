@@ -13,7 +13,6 @@ script:
   - hexo g
 
 after_script:
-  - echo "blog.codexz.cn" >CNAME
   - cd ./public
   - git init
   - git config user.name "willon295"

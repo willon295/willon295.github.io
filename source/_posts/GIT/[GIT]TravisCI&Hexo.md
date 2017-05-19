@@ -53,7 +53,7 @@ category: github
 1. 在`username.github.io`项目添加一个`blog-source`空分支
 2. `push`本地`hexo`博客源文件至 `blog-source`分支
 3. 在项目的根目录添加一个`.travis.yml`配置文件.内容：
-		
+```
 		language: node_js
 		node_js: stable
 		
@@ -85,6 +85,7 @@ category: github
 		 global:
 		   - GH_REF: github.com/willon295/willon295.github.io.git
 			#这里是项目地址
+```
 4. 在`setting`里添加一个`token_key`，复制（备用）
 
 ### TravisCI操作

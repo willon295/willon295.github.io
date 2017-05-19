@@ -3,7 +3,7 @@ title: 测试代码高亮
 tag: git
 category: 笔记
 ---
-下面开始写代码
+指定语言的代码
 
 ```java
 public class TestSingeTon2 {
@@ -20,7 +20,7 @@ public class TestSingeTon2 {
 	//运行结果==> yes
 ```
 
-不指定语言
+非特定语言
 ```
 language: node_js
 node_js: stable
@@ -55,7 +55,7 @@ env:
     #这里是项目地址
 ```
 
-测试完毕
+不指定语言
 
 ```
 public class TestSingeTon2 {
@@ -69,5 +69,73 @@ public class TestSingeTon2 {
         }
       }
 	}
-	//运行结果==> yes
+//运行结果==> yes
 ```
+
+### 各种标题下的语言
+```
+public class TestSingeTon2 {
+	public static void main(String[] args) {
+        SingleTon2  s1 = SingleTon2.getInstance();
+        SingleTon2 s2 = SingleTon2.getInstance();
+        if (s1==s2){
+            System.out.println("yes");
+        }else{
+            System.out.println("no");
+        }
+      }
+	}
+//运行结果==> yes
+
+```
+### 带4个空格
+```
+		public class TestSingeTon2 {
+			public static void main(String[] args) {
+		        SingleTon2  s1 = SingleTon2.getInstance();
+		        SingleTon2 s2 = SingleTon2.getInstance();
+		        if (s1==s2){
+		            System.out.println("yes");
+		        }else{
+		            System.out.println("no");
+		        }
+		      }
+			}
+		//运行结果==> yes
+
+
+```
+
+### 列表下的
+
+1. 有序列表
+```
+public class TestSingeTon2 {
+	public static void main(String[] args) {
+        SingleTon2  s1 = SingleTon2.getInstance();
+        SingleTon2 s2 = SingleTon2.getInstance();
+        if (s1==s2){
+            System.out.println("yes");
+        }else{
+            System.out.println("no");
+        }
+      }
+	}
+//运行结果==> yes
+```
+2. 第二段空一行，带table
+
+	```
+	public class TestSingeTon2 {
+		public static void main(String[] args) {
+	        SingleTon2  s1 = SingleTon2.getInstance();
+	        SingleTon2 s2 = SingleTon2.getInstance();
+	        if (s1==s2){
+	            System.out.println("yes");
+	        }else{
+	            System.out.println("no");
+	        }
+	      }
+		}
+	//运行结果==> yes
+	```

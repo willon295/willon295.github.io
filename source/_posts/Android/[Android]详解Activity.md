@@ -53,7 +53,7 @@ Activity：四大组件之一
 	- 如果FirstActivity--&gt;FirstActivity  不会new实例；直接调用之前的activity实例；
 	- 如果FirstActiviy--&gt;SencondActivity--&gt;FirstActiviy，则会new出两个 实例，结束程序需结束三个实例
 	首先在清单文件中进行配置
-	```
+```
 		  <activity android:name=". FirstActivity"
 		  android:launchMode="singleTop">
 		  <intent-filter>
@@ -61,13 +61,13 @@ Activity：四大组件之一
 		  <category android:name="android.intent.category.DEFAULT"/>
 		  </intent-filter>
 		  </activity>
-	```
+```
 3. singleTask
 
 	每个不同的activity 启动时 都会new 一个实例，再次启动时都会在栈内检查是否存在该活动实例，存在不new，不存在new ,也就是说每个activity都只有一个实例
-	```
+```
 		<activity android:name=". FirstActivity"		android:launchMode="singleTask">		</activity>
-	```
+```
 4. singleInstance
 
 	被指定为此模式的activity会**启动一个新的返回栈，**这样做的好处是可以其他应用调用。

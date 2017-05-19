@@ -1,5 +1,5 @@
 ---
-title: '`github` + `TravisCI`实现 `hexo`博客自动部署'
+title: 'github + TravisCI实现hexo自动部署'
 tags:
   - github
   - TravisCI

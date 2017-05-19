@@ -9,7 +9,7 @@ date: 2017-05-11 16:49:34
 ### 方法反射
 
 看代码：
-
+```
 	public class ClassDemo1 {
     public static void main(String[] args) {
         //创建一个A 类型的 对象
@@ -61,11 +61,11 @@ date: 2017-05-11 16:49:34
 	#No param method
 	#30
 	#HELLO,world
-
+```
 ### List集合反射
 
 看代码
-
+```
 	public class ListReDemo {
     	public static void main(String[] args) {
         	ArrayList  list1 = new ArrayList();
@@ -95,3 +95,4 @@ date: 2017-05-11 16:49:34
 	#未反射： [hello, world]
 	#list 和 stringlist类类型结果：true
 	#反射： [hello, world, 100]
+```

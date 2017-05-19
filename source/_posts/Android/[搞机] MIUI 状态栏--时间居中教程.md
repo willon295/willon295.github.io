@@ -13,10 +13,9 @@ date: 2017-05-04 15:59:32
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/000.png)
 丑爆了有没有，除了时间，其他的所有图标都挤在右边。从我个人的审美角度来讲 ，这个布局比重很不合理，空间利用不充分。而且不对称。。。。也不知道谁想出来这么神经的状态栏。相比之下，虽然我对高价低配的vivo没什么好感，但是客观的讲，它的状态栏还是挺不错的。
 
-### DEMO
+## DEMO
 
 于是我决定反编译一波MIUI的状态栏。先上一张成果图
-
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/005.png)
 
 ## 准备工作
@@ -28,36 +27,38 @@ date: 2017-05-04 15:59:32
 
 > 需要的东西后面打包
 
+
+
 ## 开工
 
-### 一、 提取文件
+### 一、提取文件
 
 1、system/app/miui.apk
 2、system/framework/framework-res.apk
 3、system/framework/framework-ext-res/fraework-ext-res.apk
 4、system/priv-app/miuisystemui.apk
 
-### 二、 导入框架
+### 二、导入框架
 
 `apktool if  framework-res.apk`
 `apktool if  fraework-ext-res.apk`
 `apktool if  miui.apk`
 
-### 三、 反编译文件
+### 三、反编译文件
 
 `apktool  d  miuisystemui.apk`
 成功后多出一个文件夹  `miuisystemui`
 
 ![](http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/002.jpg)
 
-### 四、 替换布局文件
+### 四、替换布局文件
 
 文件位于`res/layout/`
 
 status_bar_simple.xml
 signal_cluster_view.xml
 
-### 五、 回编译
+### 五、回编译
 
 `apktool b  miuisystemui`
 

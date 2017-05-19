@@ -6,9 +6,9 @@ tags:
 category: github
 ---
 
-`github` + `TravisCI`实现 `hexo`博客自动部署
+`github` + `TravisCI`实现 `hexo`博客自动部署，先看不同
 
-## hexo+github
+## 一、hexo+github
 ### 发布文章
 1. 本地安装`hexo` ， `Nodejs`
 2. 写`.md`文章
@@ -24,7 +24,7 @@ category: github
 - 安装`nodejs`和`hexo`
 - `git  clone 博客源文件`
 
-## TravisCI+github
+## 二、TravisCI+github
 ### 发布文章
 
 1. 写`.md`文章
@@ -37,7 +37,7 @@ category: github
 
 - `git  clone  博客源文件`
 
-## 优劣势对比
+## 三、优劣势对比
 1. 优点
 	- 方便，只需管理文章即可
 	- 生成和发布静态页面自动完成
@@ -46,7 +46,7 @@ category: github
 	- 无法本地灵活完成`hexo`相关操作
 	- 如果博客有第三方`cdn`图床，发布文章比较麻烦
 
-## 部署github+TravisCI
+## 四、部署github+TravisCI
 ### github操作
 
 

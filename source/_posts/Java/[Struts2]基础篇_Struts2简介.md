@@ -42,56 +42,63 @@ Apache Struts2最新版的下载地址：[点击这里](http://mirrors.tuna.tsin
 
 1. 新建一个`web项目` ，在项目中新建`lib`目录，导入jar包。
 2. 在`web.xml`文件中进行如下配置:
-
-		<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>
-		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
-		</filter-class>
-		</filter>
-		<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-		</filter-mapping>
+	```
+	<filter>
+	<filter-name>struts2</filter-name>
+	<filter-class>
+	org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+	</filter-class>
+	</filter>
+	<filter-mapping>
+	<filter-name>struts2</filter-name>
+	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	```
 
 3. 在`src`目录下新建 `struts.xml`文件，代码如下：
-
-		 <?xml version="1.0" encoding="UTF-8"?>
-		 <!DOCTYPE struts PUBLIC
-		 "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-		 "http://struts.apache.org/dtds/struts-2.3.dtd">
-		 <struts>
-		 //这是struts的核心配置文件
-		 </struts>
+	```
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+	//这是struts的核心配置文件
+	</struts>
+	```
 
 4. 自动配置
     `IDEA` 和 `MyEclipse`都可以自动进行配置，在MyEclipse中，新建web项目之后可以导入Struts2框架。在IDEA则可以直接创建一个 Struts2项目，所有的准备工作会自动完成。</p>
 
 ### Demo
 1. `struts.xml`代码
-		
-		<struts>
-		 <package name="com.action" namespace="/"  extends="struts-default">
-		     <action name="hello" class="com.action.LoginAction">
-		         <result name="success" >/helloworld.jsp</result>
-		         <result name="error" >/index.jsp</result>
-		     </action>
-		 </package>
-2. `HelloWorld.java`代码
+	```
+	<struts>
+	<package name="com.action" namespace="/"  extends="struts-default">
+		<action name="hello" class="com.action.LoginAction">
+			<result name="success" >/helloworld.jsp</result>
+			<result name="error" >/index.jsp</result>
+		</action>
+	</package>
+	</struts>
+	```
 
-		package com.action;
-		 import com.opensymphony.xwork2.ActionSupport;
-		 public class LoginAction extends ActionSupport {
+2. `HelloWorld.java`代码
+	```
+	package com.action;
+	import com.opensymphony.xwork2.ActionSupport;
+	public class LoginAction extends ActionSupport {
 		 //所有的Action 默认执行的 方法
 		 public  String  execute(){
 		 //这里写处理的逻辑
 		 return "success";
 		 //或者 return SUCCESS;
 		   }
-		 }
+	}
+	```
 		 
 3. URL访问
-
-		`http://localhost:2002/hello.action
-		 //或者下面的这个url,访问后缀可以修改，默认情况下是 没有后缀 、.action
-		 http://localhost:2002/hello
+	```
+	http://localhost:2002/hello.action
+	//或者下面的这个url,访问后缀可以修改，默认情况下是 没有后缀 、.action
+	http://localhost:2002/hello
+	```

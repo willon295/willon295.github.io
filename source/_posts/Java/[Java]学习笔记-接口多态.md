@@ -12,29 +12,37 @@ date: 2016-12-23 16:29:41
 
 ### 接口定义
 
-	 interface Demo{
-	  static void func(){};//静态方法
-	   void func1();//无方法体，实现此接口的类必须复写这个方法
-	}
+```
+interface Demo{
+	static void func(){};//静态方法
+	void func1();//无方法体，实现此接口的类必须复写这个方法
+}
+```
+
 ### 接口实现
 
-	 class  C1 implements  Demo{
-	       public  void func1(){};
-	}
-	 class  C2 implements  Demo{
-	       public  void func1(){};
-	}
+```
+class  C1 implements  Demo{
+	public  void func1(){};
+}
+class  C2 implements  Demo{
+	public  void func1(){};
+}
+```
 
 ### 多态
 
 多态只有在有继承关系或者是接口实现关系情况下才有的概念，事实上我们可以把接口理解成可以用来多继承的super类
 
-	new C1.func1();
-	Demo demo =new C1;
-	demo.func1();
+```
+new C1.func1();
+emo demo =new C1;
+demo.func1();
+```
 
 ### 实例
 
+```
 	interface USB{
 	 void usbRun();
 	}
@@ -71,7 +79,8 @@ date: 2016-12-23 16:29:41
 	 usb.usbRun();
 	 }
 	}
-	#输出结果：
-	#电脑的USB可充电，可传数据
-	#硬盘的USB可传数据
-	#电脑的USB可充电，可传数据
+	//输出结果：
+	//电脑的USB可充电，可传数据
+	//硬盘的USB可传数据
+	//电脑的USB可充电，可传数据
+```

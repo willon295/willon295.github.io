@@ -20,25 +20,25 @@ date: 2017-05-12 16:48:34
 
 饿汉模式 demo 类
 
+```
+public class SingleTon1 {
 
-	public class SingleTon1 {
-
-    //私有化 构造方法,不允许外部直接创建对象
-    private SingleTon1(){ }
-
+	//私有化 构造方法,不允许外部直接创建对象
+	private SingleTon1(){ }
     // 创建唯一的实例
-    private  static SingleTon1 instance = new   SingleTon1();
-
+	private  static SingleTon1 instance = new   SingleTon1();
     //创建一个 public 方法，供外部获取实例
     public  static  SingleTon1 getInstance(){
         return  instance;
         }
 	}
+```
 
 
 测试该类
 
-	public class TestSingleTon1 {
+```
+public class TestSingleTon1 {
     public static void main(String[] args) {
          //创建两个实例，比较两个实例是否是同一个
         SingleTon1 s1 = SingleTon1.getInstance();
@@ -51,8 +51,8 @@ date: 2017-05-12 16:48:34
         }
       }
 	}
-	#运行结果==>yes
-
+	//运行结果==>yes
+```
 
 
 ### 懒汉模式
@@ -61,7 +61,8 @@ date: 2017-05-12 16:48:34
 
 懒汉模式 demo 类
 
-	public class SingleTon2 {
+```
+public class SingleTon2 {
     //1. 私有化构造方法
     private SingleTon2() {
     }
@@ -79,10 +80,12 @@ date: 2017-05-12 16:48:34
         return  instance;
       }
 	}
+```
 
 测试该类
 
-	public class TestSingeTon2 {
+```
+public class TestSingeTon2 {
     public static void main(String[] args) {
         SingleTon2  s1 = SingleTon2.getInstance();
         SingleTon2 s2 = SingleTon2.getInstance();
@@ -94,7 +97,7 @@ date: 2017-05-12 16:48:34
       }
 	}
 	//运行结果==> yes
-
+```
 
 ### 区别
 

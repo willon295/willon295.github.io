@@ -32,40 +32,46 @@ date: 2016-12-23 16:43:34
 ### 字节输出流：OutputStream
 OutputStream是整个IO包中字节输出流的最大父类，此类的定义如下：
 写数据：
-	
-		import java.io.File;
-		import java.io.FileOutputStream;
-		import java.io.IOException;
-		import java.io.OutputStream;
-		public class Test11 {
-			public static void main(String[] args) throws IOException {
-		      File f = new File("d:" + File.separator+"test.txt");
-		       OutputStream out=new FileOutputStream(f);//如果文件不存在会自动创建
-		      String str="Hello World";
+
+```
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+public class Test11 {
+	public static void main(String[] args) throws IOException {
+		File f = new File("d:" + File.separator+"test.txt");
+		OutputStream out=new FileOutputStream(f);
+		//如果文件不存在会自动创建
+		String str="Hello World";
 		      byte[] b=str.getBytes();
 		         out.write(b);//因为是字节流，所以要转化成字节数组进行输出
 		      out.close();
 		    }
 		 }
+```
+
 也可以一个字节一个字节进行输出，如下：
-	
-		import java.io.File;
-		import java.io.FileOutputStream;
-		import java.io.IOException;
-		import java.io.OutputStream;
-		  public class Test11 {
-		      public static void main(String[] args) throws IOException {
-		          File f = new File("d:" + File.separator+"test.txt");
-		          OutputStream out=new FileOutputStream(f);//如果文件不存在会自动创建
-		        String str="Hello World";
-		         byte[] b=str.getBytes();
-		        for(int i=0;i<b.length;i++){
-		             out.write(b[i]);
-		         }
-		       out.close();
+
+```
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+public class Test11 {
+	public static void main(String[] args) throws IOException {
+		File f = new File("d:" + File.separator+"test.txt");
+		OutputStream out=new FileOutputStream(f);
+		//如果文件不存在会自动创建
+		String str="Hello World";
+		byte[] b=str.getBytes();
+		for(int i=0;i<b.length;i++){
+			out.write(b[i]);
+		    }
+		out.close();
 		    }
 		 }
-
+```
 
 ### 字节输入流：InputStream
 

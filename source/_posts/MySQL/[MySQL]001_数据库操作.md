@@ -6,9 +6,13 @@ categories:
   - MySQL
 date: 2016-12-10 16:49:34
 ---
+
+## 数据库基本操作
 ### 创建数据库
 
-	CREATE CATABASE [IF NOT EXISTS] db_name;
+```
+CREATE CATABASE [IF NOT EXISTS] db_name;
+```
 
 `db_name`的命名规范：
 
@@ -19,22 +23,24 @@ date: 2016-12-10 16:49:34
 
 ### 查看数据库
 
-	SHOW DATABASE;
+```
+SHOW DATABASE;
+```
 
 ### 选择数据库
 
-	USE db_name;
+```
+USE db_name;
+```
 
 ### 删除数据库
 
-	DROP DATABASE db_name;
-
+```
+DROP DATABASE db_name;
+```
 
 ## 存储引擎
-
-
 ### 数据类型
-
 - `INT` : 整数类型，4字节
 - `FLOAT` : 浮点类型，4字节
 - `DOUBLE` : 浮点类型，8字节

@@ -60,13 +60,12 @@ CREATE VIEW view_user AS SELECT * FROM user;
 	
 	运行结果view_v2
 
-	```
-	|-------------|
-	| COUNT(name) |
-	|-------------|
-	|           3 |
-	|-------------|
-	```
+		|-------------|
+		| COUNT(name) |
+		|-------------|
+		|           3 |
+		|-------------|
+	
 3. 实现排序（ORDER BY）的视图
 
 	```
@@ -76,15 +75,16 @@ CREATE VIEW view_user AS SELECT * FROM user;
 	```
 
 	运行结果view_v3
-	```	
-	|-------|
-	| name  |
-	|-------|
-	| user3 |
-	| user2 |
-	| user1 |
-	|-------|
-	```
+
+		
+		|-------|
+		| name  |
+		|-------|
+		| user3 |
+		| user2 |
+		| user1 |
+		|-------|
+		
 ### 三、查看视图
 
 视图本身就是一种表，所以可以用和表一样查看
@@ -99,8 +99,8 @@ SELECT * FROM view_name;
 ### 四、删除视图
 
 ```
-	#同时删除多个view
-	DROP VIEW view_name1 [,view_name2..,view_namen];
+#同时删除多个view
+DROP VIEW view_name1 [,view_name2..,view_namen];
 ```
 
 ### 五、修改视图

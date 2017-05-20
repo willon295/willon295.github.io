@@ -11,17 +11,16 @@ date: 2017-05-11 16:43:34
 
 在Java中万事万物解释对象，比如一个 `class Fu{}` ，这个 `Fu `类其实也是一个 对象。是 `java.lang.Class` 的对象 。 那么这个对象该如何表示。
 
-
-	class Fu {
+```java
+class Fu {
     void show() {
         System.out.println("Fu's  show method ");
       }
 	}
 
-	public class ClassDemo1 {
-		public static void main(String[] args) {
-
-        Fu FuInstance = new Fu();
+public class ClassDemo1 {
+	public static void main(String[] args) {
+       Fu FuInstance = new Fu();
 
         //如何表示Fu 类类型,通过以下三种方式
         //方式一：通过类的 class 属性
@@ -53,10 +52,10 @@ date: 2017-05-11 16:43:34
 
       }
 	}
-	#运行结果==>
-	#true
-	#Fu's  show method 
-
+	//运行结果==>
+	//true
+	//Fu's  show method 
+```
 
 
 ### 类的静态加载
@@ -64,9 +63,8 @@ date: 2017-05-11 16:43:34
 比如说有一个`Office`程序，可以打开`word`,`excel`等类型文件。
 
 **问题**：`Word` 和 `Excel` 任何一个类有问题，`Office` 编译不通过
- 
 
-
+```java
 	public class Office {
     public static void main(String[] args) {
 		//Office 程序静态加载 Word类和Excel类
@@ -81,7 +79,7 @@ date: 2017-05-11 16:43:34
       }
 	}
 
-
+```
 
 
 
@@ -90,46 +88,53 @@ date: 2017-05-11 16:43:34
 
 1. 第一步
 	创建一个`Word`,`Excel` 所有程序的接口（规范）
-		interface  OfficeAble {
-	        public  void  start();
-		}
+	```
+	interface  OfficeAble {
+	public  void  start();
+	}
+	```
 
 2. 第二步
 
 	让`Word`,`Excel` 实现该接口
-		/*Word类*/
-		public class Word implements  OfficeAble{
-	    @Override
-	    public void start() {
-	        System.out.println("word__start");
-	      }
-		}
-		/*Excel类*/
-		public class Excel implements  OfficeAble{
+	```
+	/*Word类*/
+	public class Word implements  OfficeAble{
+	@Override
+	public void start() {
+	    System.out.println("word__start");
+	  }
+	}
+	/*Excel类*/
+	public class Excel implements  OfficeAble{
 	    @Override
 	    public void start() {
 	        System.out.println("excel__start");
 	      }
 		}
+	```
 
 3. 第三步
 
 	`Office` 程序动态加载类
-		public class Office {
-	    public static void main(String[] args) {
-	        try {
-				//创建一个某类的类类型
-	            Class oft  = Class.forName(arg[0]);
+
+	```
+	public class Office {
+	public static void main(String[] args) {
+	   try {
+			//创建一个某类的类类型
+	        Class oft  = Class.forName(arg[0]);
 				
-				//实例化 
-	            OfficeAble  ofb = (OfficeAble) oft.newInstance();
-	            ofb.start();
+			//实例化 
+	        OfficeAble  ofb = (OfficeAble) oft.newInstance();
+	        ofb.start();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
 	      }
 		}
-		#javac Word.java
-		#javac Office.java 
-		#java  Office  Word
-		#运行结果==> word__start
+		//javac Word.java
+		//javac Office.java 
+		//java  Office  Word
+		//运行结果==> word__start
+	```

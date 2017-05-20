@@ -17,7 +17,7 @@ Python也是一门面向对象的语言
 - 属性： 属性可以在类中定义，也可以在实例中扩展。
 - 方法：包括`内置的方法`和`用户定义的方法`，而且方法的第一个参数必须是`self`，当然亦可以改成其他的名字.
 
-
+```
 	#举个栗子
     class FClass:
         #定义一个成员a
@@ -31,16 +31,19 @@ Python也是一门面向对象的语言
         def display(self):
             print(self.data)
      
+```
+
 还有世界上最简单的python类:
 
-     class C:
-        pass
-     
-
+```
+class C:
+	pass
+```
 ### 类对象
 
 类的对象是类的实例，类的实例可以调用类的方法，可以访问成员。`还可以创建一个新的属性并且赋值`。
 
+```
     #举个栗子
 
     class FClass:
@@ -75,7 +78,7 @@ Python也是一门面向对象的语言
     78
     a data
     another
-     
+```
 
 ### 类方法
 
@@ -85,10 +88,13 @@ Python也是一门面向对象的语言
 
 类的继承：
 
+```
     class SubClass(BaseClass1,BaseClass2...)`
+```
 
 举个栗子
 
+```
      #这是一个基类
     class BaseClass:
         a=66
@@ -100,7 +106,7 @@ Python也是一门面向对象的语言
         b=33
         def f2(self):
             print("subclass")
-     
+```
 
 那么，`Subclass`的 `实例`会有所有父类属性和方法。并且方法是可以重写。
 
@@ -112,6 +118,7 @@ Python也是一门面向对象的语言
 2. `私有方法`：`__private_method()`:  
 	两个下划线开头，声明该方法为私有方法，不能在类地外部调用。在类的内部调用。
 	
+	```
 	    #举个栗子
 	    class ClassOne:
 	        #定义一个共有成员
@@ -148,7 +155,7 @@ Python也是一门面向对象的语言
 	    File "E:\桌面内容\Python笔记\test.py", line 25, in &lt;module&gt;
 	    print(demo.__bb)
 	    AttributeError: 'ClassOne' object has no attribute '__bb'
-
+	```
 
 ###　类的专有方法
 

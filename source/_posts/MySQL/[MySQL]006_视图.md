@@ -25,6 +25,7 @@ date: 2016-12-12 10:59:39
 CREATE VIEW view_name AS 查询语句;
 
 ```
+
 举个栗子
 
 ```	
@@ -45,11 +46,13 @@ CREATE VIEW view_user AS SELECT * FROM user;
 
 
 1. 实现查询常量的语句的视图
+
 	```
 	CREATE VIEW  view_v1 AS SELECT 3.1415;
 	```
 
 2. 封装聚合函数（SUM,MIN,MAX,COUNT等）的视图
+
 	```
 	CREATE VIEW  view_v2 AS 
 		SELECT COUNT(name) FROM user;
@@ -74,13 +77,13 @@ CREATE VIEW view_user AS SELECT * FROM user;
 
 	运行结果view_v3
 	```	
-		+-------+
-		| name  |
-		+-------+
-		| user3 |
-		| user2 |
-		| user1 |
-		+-------+
+	+-------+
+	| name  |
+	+-------+
+	| user3 |
+	| user2 |
+	| user1 |
+	+-------+
 	```
 ### 三、查看视图
 
@@ -89,7 +92,6 @@ CREATE VIEW view_user AS SELECT * FROM user;
 ```
 #查看所有表，包括视图	
 SHOW TABLES;
-
 #查看某表的内容
 SELECT * FROM view_name;
 ```
@@ -104,17 +106,20 @@ SELECT * FROM view_name;
 ### 五、修改视图
 
 1. 方式一：删后新建
+
 	```
 	DROP VIEW  view_old;
 	CREATE VIEW view_new AS 查询条件;
 	```
 
 2. 方式二：直接替换
+
 	```
 	CREATE OR  REPLACE VIEW  view_name AS 查询语句;
 	```
 
 3. 方式三：alter方式
+
 	```	
 	ALTER VIEW  view_name AS 查询语句; 
 	```
@@ -122,22 +127,27 @@ SELECT * FROM view_name;
 ### 六、视图内容操作
 
 1. 查询数据
+
 	```
 	SELECT  * FROM view_name;
 	```
 
 2. 添加数据
+
 	```
 	INSER INTO view_name VALUES (vlaue1,...,values);
 	```
 
 3. 删除数据
+
 	```
 	DELETE  FROM view_name WHERE 条件语句;
 	```
 
 4. 更新数据
+
 	```
 	UPDATE view_name SET filed=value [,...,filed2=value2]  WHERE 条件;
 	```
+
 	> 注意：视图内容的 `增---删---改` 会影响基本表`user`的内容 

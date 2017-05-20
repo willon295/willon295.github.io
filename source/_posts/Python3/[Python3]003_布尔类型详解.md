@@ -12,6 +12,7 @@ date: 2017-04-16 20:51:31
 
 先来看一段代码
 
+```
     a = "A"
     b = "B"
     c = ""
@@ -24,7 +25,7 @@ date: 2017-04-16 20:51:31
     print (c or  a   and  b)
      
 
-    运行结果
+   #运行结果
 
     A
     A
@@ -32,7 +33,7 @@ date: 2017-04-16 20:51:31
     A
     B
     B
-     
+```  
 ### 讲解
 
 1.  `0` 和 空值 `""` 表示 `False`
@@ -41,17 +42,18 @@ date: 2017-04-16 20:51:31
 
 3. `and` , `or` ,  `not`逻辑运算
 
+	```
 	    #--------and--------
-	    True and True   # ==&gt; True
-	    True and False   # ==&gt; False
-	    False and True   # ==&gt; False
-	    False and False   # ==&gt; False
+	    True and True   # ==> True
+	    True and False   # ==> False
+	    False and True   # ==> False
+	    False and False   # ==> False
 	    #--------or---------
-	    True or True   # ==&gt; True
-	    True or False   # ==&gt; True
-	    False or True   # ==&gt; True
-	    False or False   # ==&gt; False
+	    True or True   # ==> True
+	    True or False   # ==> True
+	    False or True   # ==> True
+	    False or False   # ==> False
 	    #--------not--------
-	    not True   # ==&gt; False
-	    not False   # ==&gt; True
-    
+	    not True   # ==> False
+	    not False   # ==> True
+    ```

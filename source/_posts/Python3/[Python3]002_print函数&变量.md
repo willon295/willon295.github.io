@@ -159,7 +159,7 @@ Python 是动态语言，数据类型会自动进行转换
         print(x)
     fun()
     print(x)
-    `</pre>
+   
 
     #运行结果
 	456

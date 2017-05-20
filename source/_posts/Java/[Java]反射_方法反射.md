@@ -7,8 +7,8 @@ categories:
 date: 2017-05-11 16:49:34
 ---
 ### 方法反射
+方法反射是反射里最常见的一种发射，看代码
 
-看代码：
 ```
 	public class ClassDemo1 {
     public static void main(String[] args) {

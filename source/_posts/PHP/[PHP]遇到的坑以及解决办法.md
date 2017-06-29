@@ -6,9 +6,9 @@ tag: PHP
 ---
 
 # 主要实现
-1. PhpStorm 写代码
-2. 浏览器输入URL,直接在 `wamp` 站点运行php
-3. 点击应用的`chrome`，打开浏览器，在wamp的环境运行php
+1. `PhpStorm` 写代码
+2. 浏览器输入URL,直接在 `wamp` 环境运行php
+3. 点PhpStorm的`chrome`，打开，并在wamp的环境运行php
 
 # wamp 的坑
 

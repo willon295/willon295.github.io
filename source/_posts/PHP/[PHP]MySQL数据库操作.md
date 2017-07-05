@@ -1,3 +1,11 @@
+---
+title: '[PHP]mysql数据库操作'
+tag: PHP
+category: PHP
+
+---
+
+
 # PHP数据库操作
 ## 连接数据库
 ```

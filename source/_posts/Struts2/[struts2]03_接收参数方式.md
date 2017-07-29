@@ -144,7 +144,7 @@ public class UserAction extends ActionSupport  implements ModelDriven{
 
 //jsp代码与属性驱动一样
 
-``` 
+```
 
 # 获取 URL 传参
 

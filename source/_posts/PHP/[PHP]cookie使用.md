@@ -1,5 +1,5 @@
 ---
-title: '[PHP]Cookie使用'
+title: '[PHP]Cookie&Session使用'
 category: PHP
 tag: PHP
 

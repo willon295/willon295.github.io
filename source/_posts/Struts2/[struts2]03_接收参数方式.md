@@ -1,8 +1,6 @@
 ---
 title: [Struts2]03_接收参数
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

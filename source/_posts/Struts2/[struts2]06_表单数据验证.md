@@ -1,8 +1,6 @@
 ---
 title: [Struts2]06_表单验证
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

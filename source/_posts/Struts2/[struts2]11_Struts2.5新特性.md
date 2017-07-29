@@ -1,8 +1,6 @@
 ---
 title: [Struts2]11_2.5新特性
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

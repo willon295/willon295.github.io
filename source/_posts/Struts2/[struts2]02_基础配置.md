@@ -1,8 +1,6 @@
 ---
 title: [Struts2]02_基础配置
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

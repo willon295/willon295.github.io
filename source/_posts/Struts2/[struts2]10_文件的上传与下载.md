@@ -1,8 +1,6 @@
 ---
 title: [Struts2]10_文件上传下载
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

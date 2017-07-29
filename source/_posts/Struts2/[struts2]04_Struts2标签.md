@@ -1,8 +1,6 @@
 ---
 title: [Struts2]04_标签
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

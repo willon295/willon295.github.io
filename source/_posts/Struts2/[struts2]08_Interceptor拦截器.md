@@ -1,8 +1,6 @@
 ---
 title: [Struts2]08_Intercetor拦截器
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

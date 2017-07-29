@@ -1,8 +1,6 @@
 ---
 title: [Struts2]07_防止表单重复提交
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

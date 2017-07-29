@@ -1,8 +1,6 @@
 ---
 title: [Struts2]01_简介
-tags:
-  -Java
-  -Struts2
+tag: Struts2
 category: Struts2
 
 ---

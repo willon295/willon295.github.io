@@ -6,9 +6,10 @@ category: Struts2
 
 ## 文件的上传
 
-1. model 的封装
-	- File 类型的属性: photo
-	- File 类型属性的拓展： photoFileName，photoContentType;
+### model 的封装
+
+- File 类型的属性: photo
+- File 类型属性的拓展： photoFileName，photoContentType;
 
 举个例子：
 ```
@@ -29,7 +30,7 @@ public class User {
 	
 	}
 ```
-2. JSP 表单
+### JSP 表单
 
 ```
 <!-- 加入 enctype="multipart/form-data"  ，方法必须是post-->
@@ -45,7 +46,7 @@ public class User {
 
 ```
 
-3. Action 处理
+### Action 处理
 
 ```
 	//获取真实项目路径，此处需要 javax.servlet.jar 包支持
@@ -60,11 +61,12 @@ public class User {
     }
     return SUCCESS;
 
-``` 
+```
 
-4. 限制文件的大小和文件的类型
+###  限制文件的大小和文件的类型
 
 添加拦截器即可
+
 ```
             <interceptor-ref name="fileUpload">
                 <param name="allowedTypes">
@@ -79,13 +81,14 @@ public class User {
 
 ## 文件的下载
 
-1. jsp 代码
+### jsp 代码
 
 ```
 <a href="download.action">下载</a>
+
 ```
 
-2. 配置文件
+###  配置文件
 
 ```
         <action name="download" class="actions.DownLoadAction" >
@@ -100,7 +103,7 @@ public class User {
         </action>
 ```
 
-3. Action 代码
+###  Action 代码
 
 ```
 public class DownLoadAction extends ActionSupport {

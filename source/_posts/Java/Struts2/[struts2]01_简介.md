@@ -1,11 +1,10 @@
 ---
-title: '[Struts2-基础篇] Struts2简介Demo'
+title: [Struts2]01_简介
 tags:
-  - Struts2
-id: 287
-categories:
-  - Struts2
-date: 2017-03-31 21:58:47
+  -Java
+  -Struts2
+category: Struts2
+
 ---
 
 ### 简介

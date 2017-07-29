@@ -1,8 +1,7 @@
 ---
-title: [Struts2]04_标签
+title: '[Struts2]04_标签'
 tag: Struts2
 category: Struts2
-
 ---
 
 1. `<s:property value="" />`: 通用的取值输出标签

@@ -1,8 +1,7 @@
 ---
-title: [Struts2]03_接收参数
+title: '[Struts2]03_接收参数'
 tag: Struts2
 category: Struts2
-
 ---
 
 一、 jsp 页面代码

@@ -1,8 +1,7 @@
 ---
-title: [Struts2]05_获取ServletAPI
+title: '[Struts2]05_获取ServletAPI'
 tag: Struts2
 category: Struts2
-
 ---
 
 

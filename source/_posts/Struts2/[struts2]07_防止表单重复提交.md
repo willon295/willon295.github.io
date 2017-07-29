@@ -1,8 +1,7 @@
 ---
-title: [Struts2]07_防止表单重复提交
+title: '[Struts2]07_防止表单重复提交'
 tag: Struts2
 category: Struts2
-
 ---
 
 

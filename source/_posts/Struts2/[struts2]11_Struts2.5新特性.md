@@ -1,8 +1,7 @@
 ---
-title: [Struts2]11_2.5新特性
+title: '[Struts2]11_2.5新特性'
 tag: Struts2
 category: Struts2
-
 ---
 
 1. `web.xml` 文件配置

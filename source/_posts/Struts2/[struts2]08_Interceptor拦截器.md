@@ -1,8 +1,7 @@
 ---
-title: [Struts2]08_Intercetor拦截器
+title: '[Struts2]08_Intercetor拦截器'
 tag: Struts2
 category: Struts2
-
 ---
 
 # Action拦截

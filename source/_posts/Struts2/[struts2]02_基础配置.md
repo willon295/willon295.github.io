@@ -1,8 +1,7 @@
 ---
-title: [Struts2]02_基础配置
+title: '[Struts2]02_基础配置'
 tag: Struts2
 category: Struts2
-
 ---
 
 

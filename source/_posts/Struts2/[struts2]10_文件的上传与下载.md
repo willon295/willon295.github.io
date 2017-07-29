@@ -1,8 +1,7 @@
 ---
-title: [Struts2]10_文件上传下载
+title: '[Struts2]10_文件上传下载'
 tag: Struts2
 category: Struts2
-
 ---
 
 ## 文件的上传

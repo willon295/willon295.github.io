@@ -2,7 +2,7 @@
 title: "[PHP]简单实现较为完整的身份验证"
 tag: PHP
 category: PHP
-
+id: 54
 ---
 
 ### check.php

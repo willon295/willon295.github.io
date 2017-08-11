@@ -2,7 +2,7 @@
 title: '[Python3]004_列表&元组&字典'
 tags:
   - python3
-id: 316
+id: 70
 categories:
   - Python3
 date: 2017-04-16 20:53:02

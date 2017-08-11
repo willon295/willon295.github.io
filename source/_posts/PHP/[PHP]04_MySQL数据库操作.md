@@ -1,8 +1,8 @@
 ---
-title: '[PHP]mysql数据库操作'
+title: '[PHP]04_mysql数据库操作'
 tag: PHP
 category: PHP
-
+id: 51
 ---
 
 

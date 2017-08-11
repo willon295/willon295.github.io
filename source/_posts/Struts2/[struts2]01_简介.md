@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]01_简介'
 tag: Struts2
+id: Struts2_01
 category: Struts2
 ---
 

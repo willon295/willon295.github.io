@@ -2,7 +2,7 @@
 title: '[Python3]002_print函数&变量'
 tags:
   - python3
-id: 312
+id: 68
 categories:
   - Python3
 date: 2017-04-16 20:50:57

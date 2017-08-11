@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]06_表单验证'
 tag: Struts2
+id: Struts2_06
 category: Struts2
 ---
 

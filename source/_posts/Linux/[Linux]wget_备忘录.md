@@ -2,7 +2,7 @@
 title: '[Linux]wget--备忘录'
 tags:
   - Linux
-id: 140
+id: 38
 categories:
   - Linux
 date: 2016-12-23 17:05:24

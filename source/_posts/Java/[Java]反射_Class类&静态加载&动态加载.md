@@ -5,6 +5,7 @@ tags:
   - java
 categories:
   - Java
+id: 15
 date: 2017-05-11 16:43:34
 ---
 ### Class类

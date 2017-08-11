@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]10_文件上传下载'
 tag: Struts2
+id: Struts2_10
 category: Struts2
 ---
 

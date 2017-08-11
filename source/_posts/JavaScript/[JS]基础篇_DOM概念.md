@@ -2,7 +2,7 @@
 title: '[JS]基础篇-- DOM概念'
 tags:
   - JS
-id: 167
+id: 23
 categories:
   - JS
 date: 2016-12-27 23:45:42

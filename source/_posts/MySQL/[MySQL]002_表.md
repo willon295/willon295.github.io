@@ -4,6 +4,7 @@ tags:
   - MySQL
 categories:
   - MySQL
+id: 41
 date: 2016-12-10 17:00:34
 ---
 ### 创建表

@@ -2,7 +2,7 @@
 title: '[搞机] MIUI 状态栏--时间居中教程'
 tags:
   - Android
-id: 336
+id: 3
 categories:
   - Android
 date: 2017-05-04 15:59:32

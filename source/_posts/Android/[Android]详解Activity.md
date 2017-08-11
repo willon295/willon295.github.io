@@ -2,7 +2,7 @@
 title: '[Android]详解Activity'
 tags:
   - Android
-id: 260
+id: 2
 categories:
   - Android
 date: 2017-03-03 22:40:04

@@ -2,7 +2,7 @@
 title: '[Python3]003_布尔类型详解'
 tags:
   - python3
-id: 314
+id: 69
 categories:
   - Python3
 date: 2017-04-16 20:51:31

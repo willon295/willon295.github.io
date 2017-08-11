@@ -2,7 +2,7 @@
 title: HTTP请求方法
 tags:
   - HTTP
-id: 54
+id: 10
 categories:
   - 通信
 date: 2016-12-17 23:18:49

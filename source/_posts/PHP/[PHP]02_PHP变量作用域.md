@@ -1,8 +1,8 @@
 ---
-title: '[PHP-基础篇] PHP 变量作用域'
+title: '[PHP]02_PHP 变量作用域'
 tags:
   - PHP
-id: 270
+id: 49
 categories:
   - PHP
 date: 2017-03-15 17:36:26

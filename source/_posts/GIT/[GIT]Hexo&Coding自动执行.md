@@ -2,6 +2,7 @@
 title: 'Coding&Hexo伪自动部署'
 tag: git
 category: git
+id: 7
 ---
 
 ## 痛苦来源

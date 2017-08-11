@@ -2,7 +2,7 @@
 title: MySql减少内存占用方法
 tags:
   - MySQL
-id: 258
+id: 47
 categories:
   - MySQL
 date: 2017-03-02 11:06:26

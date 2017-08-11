@@ -3,7 +3,7 @@ title: Shell-第一个shell
 tags:
   - shell
   - 学习
-id: 68
+id: 40
 categories:
   - Linux
   - shell

@@ -2,7 +2,7 @@
 title: '[Python3]006_函数定义&匿名函数'
 tags:
   - python3
-id: 320
+id: 72
 categories:
   - Python3
 date: 2017-04-16 20:54:56

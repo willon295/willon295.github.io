@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]09_类型转换器'
 tag: Struts2
+id: Struts2_09
 category: Struts2
 ---
 

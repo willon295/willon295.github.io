@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]04_标签'
 tag: Struts2
+id: Struts2_04
 category: Struts2
 ---
 

@@ -2,7 +2,7 @@
 title: '[Python3]011_面向对象'
 tags:
   - python3
-id: 332
+id: 77
 categories:
   - Python3
 date: 2017-04-16 20:59:50

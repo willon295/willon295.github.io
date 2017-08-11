@@ -1,6 +1,7 @@
 ---
 title: '[Struts2]11_2.5新特性'
 tag: Struts2
+id: Struts2_11
 category: Struts2
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: '[PHP]Cookie&Session使用'
+title: '[PHP]03_Cookie&Session使用'
 category: PHP
 tag: PHP
-
+id: 50
 ---
 
 # Cookie

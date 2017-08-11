@@ -1,8 +1,8 @@
 ---
-title: '[PHP]表单，编码，跳转操作'
+title: '[PHP]06_表单编码跳转操作'
 category: PHP
 tag: PHP
-
+id: 53
 ---
 
 # PHP表单处理、页面跳转、编码

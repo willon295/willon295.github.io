@@ -2,7 +2,7 @@
 title: '[Java]学习笔记-接口多态'
 tags:
   - java
-id: 128
+id: 19
 categories:
   - Java
 date: 2016-12-23 16:29:41

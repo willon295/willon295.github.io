@@ -3,7 +3,7 @@ title: Shell 变量
 tags:
   - shell
   - 学习
-id: 70
+id: 37
 categories:
   - Linux
   - shell

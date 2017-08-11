@@ -2,7 +2,7 @@
 title: '[JS]基础篇--confirm 消息对话框'
 tags:
   - JS
-id: 151
+id: 20
 categories:
   - JS
 date: 2016-12-27 22:55:06

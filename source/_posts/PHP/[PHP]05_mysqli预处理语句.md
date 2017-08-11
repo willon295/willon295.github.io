@@ -1,6 +1,7 @@
 ---
-title: '[PHP]mysqli预处理语句'
+title: '[PHP]05_mysqli预处理语句'
 tag: PHP
+id: 52
 category: PHP
 ---
 

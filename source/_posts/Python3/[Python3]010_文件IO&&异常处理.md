@@ -2,7 +2,7 @@
 title: '[Python3]010_文件IO&&异常处理'
 tags:
   - python3
-id: 330
+id: 76
 categories:
   - Python3
 date: 2017-04-16 20:58:53

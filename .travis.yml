@@ -1,31 +1,31 @@
-# language: node_js
-# node_js: stable
+language: node_js
+node_js: stable
 
-# # S: Build Lifecycle
-# install:
-#   - npm install
-#   - npm install hexo-generator-searchdb --save
+# S: Build Lifecycle
+install:
+  - npm install
+  - npm install hexo-generator-searchdb --save
 
 
-# #before_script:
-#  # - npm install -g gulp
+before_script:
+  - npm install -g gulp
 
-# script:
-#   - hexo g
+script:
+  - hexo g
 
-# after_script:
-#   - cd ./public
-#   - git init
-#   - git config user.name "willon295"
-#   - git config user.email "chenlong951126@gmail.com"
-#   - git add .
-#   - git commit -m "Update docs"
-#   - git push --force --quiet "https://${github_token}@${GH_REF}" master:master
-# # E: Build LifeCycle
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "willon295"
+  - git config user.email "chenlong951126@gmail.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${github_token}@${GH_REF}" master:master
+# E: Build LifeCycle
 
-# branches:
-#   only:
-#     - blog-source
-# env:
-#  global:
-#    - GH_REF: github.com/willon295/willon295.github.io.git
+branches:
+  only:
+    - blog-source
+env:
+  global:
+    - GH_REF: github.com/willon295/willon295.github.io.git

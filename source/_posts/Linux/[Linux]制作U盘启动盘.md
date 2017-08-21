@@ -1,3 +1,9 @@
+---
+title: '[Linux]制作启动U盘'
+tag: Linux
+id: 110
+---
+
 Linux下制作U盘启动盘
 
 # 大概步骤

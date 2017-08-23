@@ -55,6 +55,14 @@ category: Linux
 	boot
 	savedefault --wait=2
 
+	#Debian启动项，debianboot只是个空文件
+	title Debian9 Installer
+	find --set-root --ignore-floppies --ignore-cd  /myboot/debian/debianboot
+	kernel   /myboot/debian/vmlinuz boot=casper noacpi iso-scan/filename=/myboot/debian/debian9.iso ro quiet splash 
+	initrd  /myboot/debian/initrd.gz
+	boot
+	savedefault --wait=2
+
 	#Ubuntu16启动项
 	title Ubuntu16
 	kernel /vmlinuz.efi boot=casper iso-scan/filename=/ubuntu16.iso locale=zh_CN.UTF-8
@@ -79,6 +87,31 @@ category: Linux
 	91CD:001000F83F000100FFFE01001FF011101FF011101FF001003FF80100FFFE0000
 
 	```
+## debian启动项注意
+
+1. `vlinuxz` 和 `initrd.gz`文件不能直接从ISO中直接提取，否则找不到光驱，无法进行安装。从下面地址下载：
+
+	```
+	http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/
+	```
+
+2. `amd64`,`arm64`镜像文件不能下错，一般使用`amd64`(debian-9.1-amd64-CD.iso)
+
+3. `debianboot`只是空文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

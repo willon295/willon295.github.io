@@ -7,8 +7,27 @@ categories:
 id: 40
 date: 2016-12-10 16:49:34
 ---
+## MySQL的安装和使用
+
+以`fedora` 下安装`mysql`为例
+
+1. 执行命令
+
+```
+dnf install community-mysql-server-5.17.xxxx
+```
+2. 修改密码，默认密码是空的
+```
+#第一种
+mysqladmin  -uroot -p旧密码  password 新密码
+#第二种
+mysql> use mysql; 
+mysql> update user set password=password('123') where user='root' and host='localhost'; 
+mysql> flush privileges; 
+```
 
 ## 数据库基本操作
+
 ### 创建数据库
 
 ```

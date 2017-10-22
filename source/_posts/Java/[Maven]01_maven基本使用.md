@@ -105,3 +105,18 @@ mvn archetype:generate  -DgroupId=cn.willon.maven03 -Dpackage=cn.willon.maven03 
                 └── web.xml
 
 ```
+
+
+# 解决问题
+
+1. 如果出现了编译失败，版本小于1.6的可以手动配置编译器的版本
+```
+  <properties>
+  <--这里是解决中文乱码 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <-- 修改编译器版本号-->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+```

@@ -2,6 +2,7 @@
 title: '[Hadoop]01_安装配置测试'
 tag: Hadoop
 category: Hadoop
+date: 2017-08-28 12:22:33
 ---
 
 

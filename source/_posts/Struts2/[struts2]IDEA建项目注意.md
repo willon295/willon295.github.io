@@ -2,6 +2,7 @@
 title: '[Struts2]IDEA构建项目注意事项'
 tag: Struts2
 category: Struts2
+date: 2016-10-13 12:22:33
 ---
 
 # Struts2项目

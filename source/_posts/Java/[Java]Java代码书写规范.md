@@ -2,10 +2,9 @@
 title: '[JAVA]JAVA代码书写规范'
 tags:
   - java
-id: 14
 categories:
   - Java
-date: 2017-05-08 12:05:51
+date: 2016-12-23 16:29:41
 ---
 
 ### 一般原则

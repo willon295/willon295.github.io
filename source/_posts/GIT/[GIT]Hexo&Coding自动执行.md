@@ -1,8 +1,8 @@
 ---
-title: 'Coding&Hexo伪自动部署'
+title: '[GIT]Coding&Hexo伪自动部署'
 tag: git
 category: git
-id: 7
+date: 2016-05-17 19:39:40
 ---
 
 ## 痛苦来源

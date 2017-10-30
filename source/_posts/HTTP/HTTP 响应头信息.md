@@ -1,8 +1,7 @@
 ---
-title: HTTP 响应头信息
+title: 'HTTP 响应头信息'
 tags:
   - HTTP
-id: 9
 categories:
   - 通信
 date: 2016-12-17 23:19:36

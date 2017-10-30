@@ -2,10 +2,9 @@
 title: '[Android WebView]Android 浏览器的开发小结'
 tags:
   - Android
-id: 1
 categories:
   - Android
-date: 2017-01-17 12:37:28
+date: 2015-10-17 12:37:28
 ---
 
 # Webview

@@ -2,10 +2,9 @@
 title: '[JS] 基础篇--document.getElementById() 通过ID获取元素'
 tags:
   - JS
-id: 22
 categories:
   - JS
-date: 2016-12-27 23:56:27
+date: 2017-01-08 23:50:06
 ---
 
 ### 通过ID获取元素

@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]03_具体操作'
 tag: Hibernate
-id: 101
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

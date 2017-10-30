@@ -1,3 +1,10 @@
+---
+title: '[Java]01_面试题笔记'
+tile: java
+category: java
+date: 2016-12-23 16:29:41
+---
+
 1. String 类型的数据是不可变的，重新赋值也是引用新的地址.
 ```
 class A1 {

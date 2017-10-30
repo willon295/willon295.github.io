@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]06_本地线程绑定的session'
 tag: Hibernate
-id: 103
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

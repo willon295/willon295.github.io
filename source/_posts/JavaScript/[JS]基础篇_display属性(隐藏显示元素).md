@@ -2,10 +2,9 @@
 title: '[JS] 基础篇--display属性(隐藏/显示元素)'
 tags:
   - JS
-id: 21
 categories:
   - JS
-date: 2016-12-28 00:29:34
+date: 2017-01-08 23:50:06
 ---
 
 网页中经常会看到显示和隐藏的效果，可通过display属性来设置。

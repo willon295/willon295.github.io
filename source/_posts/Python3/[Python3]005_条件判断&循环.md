@@ -2,7 +2,6 @@
 title: '[Python3]005_条件判断&循环'
 tags:
   - python3
-id: 71
 categories:
   - Python3
 date: 2017-04-16 20:53:59

@@ -1,7 +1,7 @@
 ---
 title: '[Struts2]02_基础配置'
 tag: Struts2
-id: 89
+date: 2016-10-13 12:22:33
 category: Struts2
 ---
 

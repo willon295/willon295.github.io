@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]09_检索策略与优化'
 tag: Hibernate
-id: 107
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

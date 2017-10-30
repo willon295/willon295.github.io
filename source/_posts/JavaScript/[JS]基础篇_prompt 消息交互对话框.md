@@ -2,10 +2,9 @@
 title: '[JS]基础篇--prompt 消息交互对话框'
 tags:
   - JS
-id: 24
 categories:
   - JS
-date: 2016-12-27 23:02:56
+date: 2017-01-08 23:50:06
 ---
 
 ## prompt 消息对话框

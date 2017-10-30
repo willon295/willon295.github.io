@@ -2,10 +2,9 @@
 title: '[JS] 基础篇--改变元素样式'
 tags:
   - JS
-id: 28
 categories:
   - JS
-date: 2016-12-28 00:22:02
+date: 2017-01-08 23:50:06
 ---
 
 ## 改变 HTML 样式

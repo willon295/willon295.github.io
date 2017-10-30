@@ -4,7 +4,6 @@ tags:
   - MySQL
 categories:
   - MySQL
-id: 42
 date: 2016-12-10 17:20:45
 ---
 ### 数据插入

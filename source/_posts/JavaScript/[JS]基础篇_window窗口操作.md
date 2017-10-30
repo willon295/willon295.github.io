@@ -2,10 +2,9 @@
 title: '[JS] 基础篇--window.close()关闭窗口'
 tags:
   - JS
-id: 26
 categories:
   - JS
-date: 2016-12-27 23:23:57
+date: 2017-01-08 23:50:06
 ---
 ## window.close()
 ### 用法

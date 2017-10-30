@@ -2,7 +2,6 @@
 title: '[PHP]02_PHP 变量作用域'
 tags:
   - PHP
-id: 49
 categories:
   - PHP
 date: 2017-03-15 17:36:26

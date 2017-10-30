@@ -1,7 +1,7 @@
 ---
 title: '[Spring4]02_bean属性注入'
 tag: Spring4
-id: 109
+date: 2016-10-12 12:22:33
 category: Spring4
 ---
 

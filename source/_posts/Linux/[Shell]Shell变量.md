@@ -3,11 +3,10 @@ title: Shell 变量
 tags:
   - shell
   - 学习
-id: 37
 categories:
   - Linux
   - shell
-date: 2016-12-18 00:14:58
+date: 2016-06-13 12:22:33
 ---
 
 ## 定义变量

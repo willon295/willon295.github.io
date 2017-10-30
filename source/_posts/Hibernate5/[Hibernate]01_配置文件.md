@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]配置文件'
 tag: Hibernate
-id: 99
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

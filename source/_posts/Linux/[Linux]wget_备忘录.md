@@ -1,12 +1,10 @@
 ---
 title: '[Linux]wget--备忘录'
-tags:
-  - Linux
-id: 38
-categories:
-  - Linux
-date: 2016-12-23 17:05:24
+tag: Linux
+date: 2016-06-13 12:22:33
+category: Linux
 ---
+
 ### 常用的命令
 Linux `wget`是一个下载文件的工具，它用在命令行下。
 - wget下载单个文件		#从网络下载一个文件并保存在当前目录 ，会显示下载进度，剩余时间，字节等

@@ -2,10 +2,9 @@
 title: '[JS]基础篇--removeAttribute取消style'
 tags:
   - JS
-id: 25
 categories:
   - JS
-date: 2016-12-28 01:05:39
+date: 2017-01-08 23:50:06
 ---
 
 这是一个JS的一个 小练习，顺便讲讲removeAttribute

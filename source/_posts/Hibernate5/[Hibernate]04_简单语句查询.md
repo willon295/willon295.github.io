@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]04_简单语句查询'
 tag: Hibernate
-id: 102
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

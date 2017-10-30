@@ -1,7 +1,7 @@
 ---
 title: '[ssh]02_SSH_Demo'
 tag: ssh
-id: 113
+date: 2016-10-14 12:22:33
 category: ssh
 ---
 

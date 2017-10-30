@@ -2,7 +2,7 @@
 title: '[PHP]06_表单编码跳转操作'
 category: PHP
 tag: PHP
-id: 53
+date: 2017-03-15 18:22:27
 ---
 
 # PHP表单处理、页面跳转、编码

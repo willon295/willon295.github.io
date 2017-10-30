@@ -2,7 +2,6 @@
 title: '[PHP] 01_数据类型'
 tags:
   - PHP
-id: 48
 categories:
   - PHP
 date: 2017-03-15 18:22:27

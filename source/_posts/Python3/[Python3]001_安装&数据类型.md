@@ -2,7 +2,6 @@
 title: '[Python3]001_安装&数据类型'
 tags:
   - python3
-id: 67
 categories:
   - Python3
 date: 2017-04-16 20:49:15

@@ -1,7 +1,7 @@
 ---
 title: '[Struts2]03_接收参数'
 tag: Struts2
-id: 90
+date: 2016-10-13 12:22:33
 category: Struts2
 ---
 

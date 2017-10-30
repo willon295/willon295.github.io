@@ -2,10 +2,9 @@
 title: '[Android]详解Activity'
 tags:
   - Android
-id: 2
+date: 2015-10-17 12:37:28
 categories:
   - Android
-date: 2017-03-03 22:40:04
 ---
 
 Activity：四大组件之一

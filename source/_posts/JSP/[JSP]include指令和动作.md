@@ -4,10 +4,9 @@ tags:
   - java
   - JavaEE
   - JS
-id: 36
 categories:
   - JSP
-date: 2016-12-29 23:10:28
+date: 2016-12-29 23:17:48
 ---
 
 常用的有`page`、`include`、`taglib`指令这三种指令；

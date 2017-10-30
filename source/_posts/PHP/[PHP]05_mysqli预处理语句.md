@@ -1,7 +1,7 @@
 ---
 title: '[PHP]05_mysqli预处理语句'
 tag: PHP
-id: 52
+date: 2017-03-15 18:22:27
 category: PHP
 ---
 

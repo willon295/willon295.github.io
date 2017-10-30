@@ -4,10 +4,9 @@ tags:
   - java
   - JSP
   - 学习
-id: 30
 categories:
   - JSP
-date: 2017-01-02 21:51:44
+date: 2016-12-29 23:17:48
 ---
 
 首先去mysql官网下载jdbc 的驱动jar 包

@@ -1,11 +1,9 @@
-
 ---
 title: '[Java]设计模式_单例模式'
 tags:
   - java
 categories:
   - Java
-id: 17
 date: 2017-05-12 16:48:34
 ---
 

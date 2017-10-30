@@ -2,7 +2,6 @@
 title: '[Python3]007_其他常用函数'
 tags:
   - python3
-id: 73
 categories:
   - Python3
 date: 2017-04-16 20:56:32

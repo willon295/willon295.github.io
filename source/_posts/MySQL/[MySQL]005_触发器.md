@@ -4,7 +4,6 @@ tags:
   - MySQL
 categories:
   - MySQL
-id: 44
 date: 2016-12-11 18:59:39
 ---
 ### 一、触发器概述

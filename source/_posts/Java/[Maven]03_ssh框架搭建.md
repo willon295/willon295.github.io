@@ -1,3 +1,10 @@
+---
+title: '[Maven]03_ssh依赖'
+category: maven
+tag: maven
+date: 2017-10-08 01:00:51
+---
+
 # Maven 基本配置
 
 1. 创建`JavaWeb`项目

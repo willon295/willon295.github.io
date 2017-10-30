@@ -3,11 +3,10 @@ title: Shell-第一个shell
 tags:
   - shell
   - 学习
-id: 40
 categories:
   - Linux
   - shell
-date: 2016-12-17 23:58:12
+date: 2016-06-13 12:22:33
 ---
 
 ## 第一个shell

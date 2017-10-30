@@ -2,10 +2,9 @@
 title: '[搞机] MIUI 状态栏--时间居中教程'
 tags:
   - Android
-id: 3
 categories:
   - Android
-date: 2017-05-04 15:59:32
+date: 2015-10-17 12:37:28
 ---
 
 让我们先来看一看 MIUI 的原生状态栏

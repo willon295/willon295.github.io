@@ -4,7 +4,7 @@ tags:
   - github
   - TravisCI
 category: github
-id: 8
+date: 2016-05-17 19:39:40
 ---
 
 `github` + `TravisCI`实现 `hexo`博客自动部署，先看不同

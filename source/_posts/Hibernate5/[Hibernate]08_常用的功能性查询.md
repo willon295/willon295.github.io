@@ -1,7 +1,7 @@
 ---
 title: '[Hibernate]08_常用的功能性查询'
 tag: Hibernate
-id: 106
+date: 2016-10-12 12:22:33
 category: Hibernate
 ---
 

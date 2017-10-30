@@ -2,6 +2,7 @@
 title: '[Linux]制作启动U盘'
 tag: Linux
 category: Linux
+date: 2016-06-13 12:22:33
 ---
 
 Linux下制作U盘启动盘

@@ -20,18 +20,17 @@ Struts2通过过滤器过滤用户发送的请求，然后找到配置文件， 
 
 Apache Struts2最新版的下载地址：[点击这里](http://mirrors.tuna.tsinghua.edu.cn/apache/struts/2.5.10.1/struts-2.5.10.1-all.zip)
 解压之后会发现很多的jar包，根据项目的不同需求导入不同的包。一般情况下，最常用的`jar包` 如下：
-
-	asm.jar
-	adm-commens.jar
-	asm-tree.jar
-	commons-fileupload.jar
-	commons-io.jar
-	commons-lang.jar
-	freemarker.jar
-	ognl.jar
-	struts2-core.jar
-	xwork-core.jar
-
+```
+commons-fileupload.jar
+commons-io.jar
+commons-lang.jar
+javaassist-3.jar
+log4j-api.jar
+freemarker.jar
+ognl.jar
+struts2-annotations.jar
+struts2-core.jar
+```
 
 ## 开始项目
 

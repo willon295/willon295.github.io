@@ -5,7 +5,9 @@ category: SpringMVC
 date: 2017-10-23 00:00:00
 ---
 
-# 使用
+# @RequestMapping 注解
+
+## 使用
 
 1. 可以在 `类之前` 使用
 2. 可以再 `方法前` 使用
@@ -24,4 +26,33 @@ public class HelloHandler {
 这样就必须使用访问  `http://localhost:8080/springmvc/hello` 
 
 
-# 
+## 参数 
+
+1. value: 映射的url
+2. method: 分为 `RequestMethod.GET` , `RequestMethod.POST` , `RequestMethod.DELETE` , `RequestMethod.PUT`,分别对应 `查增删改`
+3. params: 后面传入一个数组 `{"name","age!=12"}` 解释为必须有 name 参数，而且age!= 12 的参数
+例子：
+```
+@RequestMapping(value = "/hello",method = RequestMethod.GET,params ={"name","age!=12"} )
+```
+
+# @PathVariable
+
+一般用于方法参数之前 ， 可用于 `value` 中 `占位符`--`{name}` 的传值。
+
+## 支持 Ant 风格
+
+- `/*/hello`: 映射 /aa/hello , /bbb/hello 
+- `/**/hello`: 映射 /aa/bbb/c/hello 
+- `/?/hello`: 映射 /a/hello , /d/hello 
+
+## 支持 Rest 风格
+可以实现 rest 风格的url和参数传递
+```
+    @RequestMapping(value = "/hello/{name}/{id}",method = RequestMethod.GET )
+    public  String  hello(@PathVariable("name") String name ,@PathVariable("id") int id){
+        System.out.println(id+"---------"+name);
+        System.out.println("走到hello");
+        return "success";
+    }
+```

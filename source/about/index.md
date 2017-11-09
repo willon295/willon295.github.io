@@ -8,9 +8,7 @@ Hi,I'm  Willon , student of ECJTU ，which I'd  like  to  call  [皇家铁道口
 
 |   站点 |   介绍 |
 |------|--------|
-|[码农小栈](https://www.codexz.cn)|WordPress搭起来的小栈，主题在github |
-|[CL云解析](http://vip.codexz.cn)|免费播放全网VIP视频的小栈，接口自取|
-|[Willon](http://www.willon.cn)|hexo的静态博客，写笔记就用它了|
+|[Willon](http://www.cl95.cc)|hexo的静态博客，写笔记就用它了|
 |[github](https://github.com/willon295)|github新账号，之前的密码忘了|
 
 
@@ -36,13 +34,8 @@ Hi,I'm  Willon , student of ECJTU ，which I'd  like  to  call  [皇家铁道口
 |QQ飞车|（专业）|
 |撩妹|（Loading...）|
 
-
 ### 爱好
 
+- 健身
 - 篮球
-- 乒乓球
-- 羽毛球
-- 台球
 - 敲代码
-
-

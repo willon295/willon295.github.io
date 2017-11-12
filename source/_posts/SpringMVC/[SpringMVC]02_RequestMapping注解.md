@@ -47,6 +47,7 @@ public class HelloHandler {
 - `/?/hello`: 映射 /a/hello , /d/hello 
 
 ## 支持 Rest 风格
+
 可以实现 rest 风格的url和参数传递
 ```
     @RequestMapping(value = "/hello/{name}/{id}",method = RequestMethod.GET )
@@ -55,4 +56,18 @@ public class HelloHandler {
         System.out.println("走到hello");
         return "success";
     }
+```
+注意，要实现REST风格的url需要一个过滤器
+
+```
+    <!--2.REST风格URI过滤器-->
+    <filter>
+        <filter-name>hiddenHttpFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--2.REST风格URI过滤器-->
 ```

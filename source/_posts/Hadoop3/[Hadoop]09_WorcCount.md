@@ -135,7 +135,7 @@ public class WcJobSubmiter {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 
-        job.setJar("/root/wc.jar");
+        job.setJarByClass(WcJobSubmiter.class);
 
         //设置 Mapper 和 Reducer 的类
         job.setMapperClass(WcMapper.class);

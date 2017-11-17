@@ -1,3 +1,10 @@
+---
+title: '[SSM]02_Mybatis逆向工程'
+tag: SSM
+category: SSM
+date: 2017-11-09 00:00:00
+---
+
 # Mybatis逆向工程
 
 逆向工程就是通过数据库生成相应的 POJO 类， 对应的 DAO 接口，Mapper映射文件

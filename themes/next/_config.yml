@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: http://blogimgs-1252094786.cossh.myqcloud.com/avatar.jpg
+favicon: avatar.jpg
 
 # Set default keywords (Use a comma to separate)
 keywords: "willon"
@@ -162,7 +162,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: http://blogimgs-1252094786.cossh.myqcloud.com/avatar.jpg
+avatar: avatar.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -217,7 +217,7 @@ sidebar:
 # title
 links_title: 友链
 links:
-  码农小栈: http://www.codexz.cn/
+  码农小栈: http://www.cl95.cc/
   CL云解析: http://vip.codexz.cn/
 
 # ---------------------------------------------------------------

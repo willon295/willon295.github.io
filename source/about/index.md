@@ -18,20 +18,9 @@ Hi,I'm  Willon , student of ECJTU ，which I'd  like  to  call  [皇家铁道口
 
 |  技能  |   熟练度 |
 |---------|--------|
-|java|（略懂）|
-|python|（略懂）|
-|php|（略懂）|
-|Android|（略懂）|
-|Jsp|（略懂）|
-|MySQL|（略懂）|
-|JavaScript|（略懂）|
-|Struts2|（略懂）|
-|Linux|（略懂）|
-|C,C++|（略懂）|
-|SEO|（略懂）|
-|LOL|(略略懂)|
-|王者农药|（精通）|
-|QQ飞车|（专业）|
+|SSM SSH2 框架 | 略懂|
+|Python | 有涉猎|
+|Android开发| 已放弃|
 |撩妹|（Loading...）|
 
 ### 爱好

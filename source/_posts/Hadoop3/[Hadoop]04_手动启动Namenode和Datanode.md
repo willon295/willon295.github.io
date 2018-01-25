@@ -41,7 +41,7 @@ hdpdn100
 ```
 hadoop-daemon.sh  start namenode
 ```
-5. 单个启动 `hdpdn100 所有的 `datanode`
+5. 单个启动 hdpdn100 所有的 `datanode`
 ```
 hadoop-daemon.sh  start datanode
 ```

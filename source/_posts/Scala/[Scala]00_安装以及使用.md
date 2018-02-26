@@ -2,7 +2,7 @@
 title: '[Scala]00_Scala安装'
 tag: Scala
 category: Scala
-date: 2018-01-01 00:12:34
+date: 2018-01-01 00:00:34
 ---
 
 

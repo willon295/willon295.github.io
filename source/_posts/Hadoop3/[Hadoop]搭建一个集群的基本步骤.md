@@ -82,7 +82,7 @@ export HADOOP_OPTS="-Djava.library.path=${HADOOP_HOME}/lib/native/"
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 ```
 
-## HDFS配置
+## HDFS集群搭建
 
 1. `core-site.xml` ,配置缓存目录，主节点通信地址
 ```
@@ -102,10 +102,39 @@ export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 2. `hdfs-site.xnml`,配置 `SecondaryNamenode`地址
 ```
 <configuration>
+	<!-- secondaryNamenode节点的 IP 和端口 -->
 	<property>
 		<name>dfs.namenode.secondary.http-address<name>
-		<!-- secondaryNamenode节点的 IP 和端口 -->
 		<value>hdpnn0:50090/value>
+	</property>
+	<!--  块大小 -->
+	<property>
+		<name>dfs.replication</name>
+		<value>3</value>
+	</property>
+	<!--  副本数 -->
+	<property>
+		<name>dfs.blocksize</name>
+		<value>128M</value>
+	</property>
+	<!--  Namenode的文件地址 -->
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:////usr/local/lib/hadoop/hdfs/nn</value>
+	</property>
+	<!--  SecondaryNamenode的本地文件地址 -->
+	<property>
+		<name>dfs.namenode.checkpoint.dir</name>
+		<value>file:////usr/local/lib/hadoop/hdfs/snn</value>
+	</property>
+	<property>
+		<name>dfs.namenode.checkpoint.edits.dir</name>
+		<value>file:////usr/local/lib/hadoop/hdfs/snn</value>
+	</property>
+	<!--  datanode的文件地址 -->
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:////usr/local/lib/hadoop/hdfs/dn</value>
 	</property>
 </configuration>
 ```
@@ -125,6 +154,50 @@ do
 	scp -r /usr/local/apps/hadoop root@$SERVER:/usr/local/
 done
 ```
+5. 格式化 HDFS集群
+```
+hdfs  namenode -format
+```
+6. 启动HDFS
+```
+start-dfs.sh
+```
+
+
+## YARN集群搭建
+
+YARN 集群负责任务调度，作业分发
+1. `mapred-site.xml`
+```
+<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+```
+
+2. `yarn-site.xml`
+```
+<configuration>
+	<!--  resourcemanager主机地址 -->
+	<property>
+		<name>yarn.resourcemanager.hostname</name>
+		<value>hdpnn0</value>
+	</property>
+	<!--  reduce接收的map数据源 -->
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+	<!--  nodemanager的文件缓存目录 -->
+	<property>
+		<name>yarn.nodemanager.local-dirs</name>
+		<value>file:///usr/local/lib/hadoop/yarn/nm</value>
+	</property>
+</configuration>
+```
+
 ## 启动集群
 
 1. 一键启动

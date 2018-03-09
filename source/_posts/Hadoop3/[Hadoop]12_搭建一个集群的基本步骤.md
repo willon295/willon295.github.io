@@ -1,10 +1,35 @@
 ---
-title: '[Hadoop]搭建一个集群的基本步骤'
+title: '[Hadoop]12_搭建一个集群的基本步骤'
 category: Hadoop
 tags: Hadoop
 date: 2017-09-28 12:22:33
 ---
 
+
+# 搭建前注意事项
+
+## 用户组、用户名与密码
+
+1. 所有节点最好创建一个名为 `hadoop-cluster` 的用户组 ， 该组下创建一个 `hadoop` 用户，密码统一如 `hadooppwd`
+2. 这样做的好处：
+	- 用户名统一：方便免密登录时统一使用 `hadoop` 用户登录
+	- 密码统一： 方便后期维护，统一操作
+
+## 系统选择
+
+最好选择  `centos6.5`或者 `centos7.X` ，稳定
+
+## 节点分配
+
+1. namenode ， resoucemanager 用一台
+2. secondarynamenode 一台
+3. datanode 若干台
+
+
+## 配置文件
+
+1. 所有节点的所有配置文件相同
+2. `slaves` 文件只写 `从节点` 地址
 
 # 配置免密登录
 

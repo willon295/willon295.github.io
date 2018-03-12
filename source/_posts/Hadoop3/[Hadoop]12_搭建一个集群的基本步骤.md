@@ -2,7 +2,7 @@
 title: '[Hadoop]12_搭建一个集群的基本步骤'
 category: Hadoop
 tags: Hadoop
-date: 2017-09-28 12:22:33
+date: 2017-08-28 00:12:33
 ---
 
 

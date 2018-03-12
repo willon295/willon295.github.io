@@ -2,7 +2,7 @@
 title: '[Hadoop]07_动态扩容'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:07:33
 ---
 
 # 什么是动态扩容？

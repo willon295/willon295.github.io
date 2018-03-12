@@ -2,7 +2,7 @@
 title: '[Hadoop]08_MapReduce环境准备'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:08:33
 ---
 
 # 环境配置

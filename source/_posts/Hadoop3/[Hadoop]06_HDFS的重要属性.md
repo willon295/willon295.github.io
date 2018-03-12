@@ -2,7 +2,7 @@
 title: '[Hadoop]06_HDFS的基本属性'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:06:33
 ---
 
 HDFS的基本属性

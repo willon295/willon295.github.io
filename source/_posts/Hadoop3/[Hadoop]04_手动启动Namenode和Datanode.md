@@ -2,7 +2,7 @@
 title: '[Hadoop]04_手动启动Namenode和Datanode'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:04:33
 ---
 
 # 配置并启动集群

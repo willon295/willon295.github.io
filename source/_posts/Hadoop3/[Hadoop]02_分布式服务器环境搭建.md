@@ -2,7 +2,7 @@
 title: '[Hadoop]02_分布式服务器网络环境搭建'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:02:33
 ---
 
 # 简介

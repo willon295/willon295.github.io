@@ -2,7 +2,7 @@
 title: '[Hadoop]10_自定义VALUE类型'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:10:33
 ---
 
 比如现在有一个文件

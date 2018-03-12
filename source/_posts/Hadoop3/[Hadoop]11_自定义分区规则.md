@@ -2,7 +2,7 @@
 title: '[Hadoop]11_自定义分区规则'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-29 12:22:33
+date: 2017-08-28 00:11:33
 ---
 
 # 解决的问题

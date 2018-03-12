@@ -2,7 +2,7 @@
 title: '[Hadoop]05_文件操作'
 category: Hadoop
 tags: Hadoop
-date: 2017-08-28 12:22:33
+date: 2017-08-28 00:05:33
 ---
 
 在hdfs中，分成很多 `块`，每块 `128M` , 所有存储的文件都会被切割成若干块，并且有 `三份` 用于备份，分布存储于不同的 `datanode`

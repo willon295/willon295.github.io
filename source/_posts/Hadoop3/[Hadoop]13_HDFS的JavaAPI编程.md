@@ -30,7 +30,11 @@ date: 2017-08-28 00:13:33
 
 # Coding
 
-加载所有需要导入的类都是 `org.apache.hadoop` 中的
+加载所有需要导入的类都是 `org.apache.hadoop.*`
+
+## 简单的文件上传例子 
+
+将本地文件上传到 hdfs中
 
 ```
 package cn.willon.hadoop.hdfs;

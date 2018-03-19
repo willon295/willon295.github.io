@@ -107,18 +107,18 @@ export HADOOP_OPTS="-Djava.library.path=${HADOOP_HOME}/lib/native/"
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 ```
 
-## HDFS集群搭建
+## HDFS集群配置
 
 1. `core-site.xml` ,配置缓存目录，主节点通信地址
 ```
 <configuration>
 	<property>
-		<name>fs.defaultFS<name>
+		<name>fs.defaultFS</name>
 		<!-- 主节点的 IP 和端口 -->
 		<value>hdfs://hdpnn0:9000</value>
 	</property>
 	<property>
-		<name>hadoop.tmp.dir<name>
+		<name>hadoop.tmp.dir</name>
 		<!-- 缓存目录 -->
 		<value>/root/hadooptmp</value>
 	</property>
@@ -129,15 +129,15 @@ export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 <configuration>
 	<!-- secondaryNamenode节点的 IP 和端口 -->
 	<property>
-		<name>dfs.namenode.secondary.http-address<name>
-		<value>hdpnn0:50090/value>
+		<name>dfs.namenode.secondary.http-address</name>
+		<value>hdpnn0:50090</value>
 	</property>
-	<!--  块大小 -->
+	<!--  副本数 -->
 	<property>
 		<name>dfs.replication</name>
 		<value>3</value>
 	</property>
-	<!--  副本数 -->
+	<!--  块大小 -->
 	<property>
 		<name>dfs.blocksize</name>
 		<value>128M</value>
@@ -189,7 +189,7 @@ start-dfs.sh
 ```
 
 
-## YARN集群搭建
+## YARN集群配置
 
 YARN 集群负责任务调度，作业分发
 1. `mapred-site.xml`

@@ -12,7 +12,8 @@ date: 2017-08-28 00:11:33
 
 # Hadoop的处理逻辑
 
-Hadoop使用的分区工具来实现，默认是 `HashPartitioner`
+1. 默认reduce数量为 1
+2. 默认分区规则是 `HashPartitioner` ， 源代码如下：
 ```
 public  int  getPartition(K key,V value,int  numReduceTasks){
 
@@ -20,14 +21,15 @@ public  int  getPartition(K key,V value,int  numReduceTasks){
 	return (key.hashCode() & Integer.MAX_VALUE) % numReduceTasks;
 }
 ```
+3. reduce处理结果生成的文件一般有 `numReduceTasks+1` 个，一个是 `_SUCCESS`
 
 # 自定义分区规则
 
-1. 继承 `HashPartitioner`类，重写 `getPartition()` 方法
+1. 继承 `Partitioner`类，重写 `getPartition()` 方法（）
 ```
-public class ProvincePartitioner extends HashPartitioner{
+public class ProvincePartitioner extends Partitioner{
 
-	public  int  getPartition(K key,V value,int  numReduceTasks){
+	public  int  getPartition(K key,V value,int  numPartitions){
 	
 		//分出3个分区
 		pro=key.toString();

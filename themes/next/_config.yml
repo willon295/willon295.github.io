@@ -217,8 +217,8 @@ sidebar:
 # title
 links_title: 友链
 links:
-  码农小栈: http://www.cl95.cc/
-  CL云解析: http://vip.codexz.cn/
+  Travis-CI: https://travis-ci.org/
+  交大教务处: http://jwc.ecjtu.jx.cn/
 
 # ---------------------------------------------------------------
 # Post Settings

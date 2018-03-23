@@ -112,3 +112,9 @@ END{
 	printf "This is the  end line"
 }
 ```
+
+# awk 简单实现 wordcount
+
+```
+awk -F" "  '{for(i=1;i<=NF;i++) print $i}' ./* | sort | uniq  -c | awk '{print $2,$1}' | cat >> ../out1/res.txt
+```

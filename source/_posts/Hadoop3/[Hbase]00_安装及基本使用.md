@@ -94,12 +94,34 @@ hbase是nosql的一种，所以不支持sql语句，但是默认使用 ruby语�
 `bin/hbase  shell` 进入交互界面
 1. 查看数据库： list
 2. 查看表： scan 't_user'
-3. 创建表： create 't_user','base_info','extra_info'. (t_user是表，base_info和extra_info是列族)
-4. 创建名称空间： create_namespace 'db0001'
-5. 在指定名称空间创建表：create 'db0001:t_student','fam1','fam2' 
-6. 插入记录： put 't_user','rowkey001','base_info:username','zhangsan'. (rowkey001是行键，username是键，zhangsan是值)
-7. 删除记录： delete 't_user','rowkey001','base_info:username'
-8. 删除表： disable 't_user'; drop 't_user'. (先屏蔽，再删除)
+3. 创建表： 
+```
+create 'test:t_user','base_info','extra_info'
+//或者是下面这样， 
+create 'test:t_user',{NAME='baseinfo',VERSIONS=1},{NAME='extrainfo',VERSIONS=1}
+```
+> test是命名空间,t_user是表，base_info和extra_info是列族
+4. 创建名称空间 
+```
+create_namespace 'nas0001'
+```
+5. 在指定名称空间创建表：
+```
+create 'db0001:t_student','fam1','fam2' 
+```
+6. 插入记录：
+```
+put 't_user','rowkey001','base_info:username','zhangsan'
+//(rowkey001是行键，username是键，zhangsan是值)
+```
+7. 删除记录： 
+```
+delete 't_user','rowkey001','base_info:username'
+```
+8. 删除表(先屏蔽，再删除)： 
+```
+disable 't_user'; drop 't_user'.
+```
 具体看表：
 
 |操作| 表达	| 

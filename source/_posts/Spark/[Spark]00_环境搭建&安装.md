@@ -19,10 +19,8 @@ date: 2018-03-01 00:00:00
 ```
 #JDK环境
 export JAVA_HOME=/usr/local/jdk-1.8
-
 #Master主机地址
 export  SPARK_MASTER_IP=192.168.10.1
-
 #Master的RPC通信端口
 export SPARK_MASTER_PORT=7077
 ```
@@ -31,7 +29,7 @@ export SPARK_MASTER_PORT=7077
 192.168.10.2
 192.168.10.3
 192.168.10.4
-``` 
+```
 3. 将配置好的 文件拷贝到其他节点
 
 ## 启动
@@ -40,6 +38,7 @@ export SPARK_MASTER_PORT=7077
 ```
 start-all.sh
 ```
+
 jps查看进程，分别有 Master 、 Worker 进程，在 `8080` 端口可以查看集群的基本信息
 
 

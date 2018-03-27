@@ -79,5 +79,10 @@ for (a <- numlist if a < 5; if a > 3) {
 `yield` 跟在for语句结束处，直接返回结果，注意此时用的是 `{}` 包含遍历条件
 
 ```
-var newList = for {a <- numlist if a >= 1; if a < 5} yield a
+//基本语法
+//for () yield {}
+var newList = for (a <- numlist if a >= 1; if a < 5) yield a
+
+//如果迭代器由两个集合，返回类型取决于第一个
+for (a <- seq ; b <- 1 to 10) yield {a+b}
 ```

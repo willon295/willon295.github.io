@@ -50,13 +50,12 @@ printStrings("aaa","bbb","ccc")
 
 1. 简单明了的定义
 ```
-//注意  =>  左边的是参数的定义，右边是函数体
-
+//注意  =  左边的是函数名及参数的定义，右边是函数体
 val f1 = (x: Int , y: Int ) => x+y 
 ```
 2. 完整的定义
 ```
-// f2 是函数，返回值类型是
+// f2 是函数，返回值类型是Double
 val f2: Int => Double = (a: Int) => Math.pow(a, 4)
 // 注解: 传入两个 Int 类型数据，返回值为Double类型
 val f2: (Int, Int) => Double =  { (x,y) => (x+y).toDouble}

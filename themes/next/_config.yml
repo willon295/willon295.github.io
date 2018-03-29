@@ -111,7 +111,7 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+scheme: Pisces
 #scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
@@ -388,7 +388,7 @@ valine:
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
   pageSize: 10 # pagination size
-#  placeholder: Just go go # comment box placeholder
+  placeholder: 说点什么吧 # comment box placeholder
 #  avatar: mm # gravatar style
 #  guest_info: nick,mail,link # custom comment header
 

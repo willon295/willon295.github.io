@@ -10,6 +10,7 @@
         notify: {{ theme.valine.notify }},
         appId: '{{ theme.valine.appid }}',
         appKey: '{{ theme.valine.appkey }}',
+		placeholder: '{{ theme.valine.placeholder }}',
         avatar: 'hide',
         guest_info: ['nick'],
         pageSize:'{{ theme.valine.pageSize }}' || 10,

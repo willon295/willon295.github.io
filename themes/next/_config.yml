@@ -140,6 +140,9 @@ scheme: Pisces
 social:
   Github: https://github.com/willon295 || github
   QQ: http://wpa.qq.com/msgrd?v=3&uin=1411082228&site=qq&menu=yes || qq
+# Enable Social_icons
+social_icons:
+  enable: true
 
 # Blog rolls
 links_title: 友链

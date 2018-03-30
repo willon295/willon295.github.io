@@ -77,3 +77,13 @@ search:
   field: post
   format: html
   limit: 10000
+ 
+ 
+# SEO
+plugins:
+  - hexo-generator-baidu-sitemap
+  - hexo-generator-sitemap
+baidusitemap:
+  path: baidusitemap.xml
+sitemap:
+  path: sitemap.xml

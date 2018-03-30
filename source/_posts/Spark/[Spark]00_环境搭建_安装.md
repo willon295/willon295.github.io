@@ -1,5 +1,5 @@
 ---
-title: '[Spark]00_环境搭建&安装.md'
+title: '[Spark]00_环境搭建_安装.md'
 category: Spark
 tag: Spark
 date: 2018-03-01 00:00:00

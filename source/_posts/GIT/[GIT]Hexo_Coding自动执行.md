@@ -1,5 +1,5 @@
 ---
-title: '[GIT]Coding&Hexo伪自动部署'
+title: '[GIT]Coding_Hexo伪自动部署'
 tag: git
 category: git
 date: 2016-05-17 19:39:40

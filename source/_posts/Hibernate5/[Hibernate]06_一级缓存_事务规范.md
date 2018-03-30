@@ -1,5 +1,5 @@
 ---
-title: '[Hibernate]05_一级缓存&事务规范'
+title: '[Hibernate]05_一级缓存_事务规范'
 tag: Hibernate
 date: 2016-10-12 12:22:33
 category: Hibernate

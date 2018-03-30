@@ -1,5 +1,5 @@
 ---
-title: '[Python3]004_列表&元组&字典'
+title: '[Python3]004_列表_元组_字典'
 tags:
   - python3
 categories:

@@ -1,5 +1,5 @@
 ---
-title: '[zookeeper]01_安装&基本使用'
+title: '[zookeeper]01_安装_基本使用'
 tag: zookeeper
 category: zookeeper
 date: 2017-11-01 11:23:00

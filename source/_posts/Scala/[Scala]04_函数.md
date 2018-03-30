@@ -1,5 +1,5 @@
 ---
-title: '[Scala]04_方法&函数'
+title: '[Scala]04_方法_函数'
 tag: Scala
 category: Scala
 date: 2018-01-01 00:04:34

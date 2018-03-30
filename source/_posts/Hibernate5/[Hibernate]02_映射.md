@@ -1,5 +1,5 @@
 ---
-title: '[Hibernate]01_开始&关系映射'
+title: '[Hibernate]01_开始_关系映射'
 tag: Hibernate
 date: 2016-10-12 12:22:33
 category: Hibernate

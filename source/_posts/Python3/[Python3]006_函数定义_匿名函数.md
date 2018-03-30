@@ -1,5 +1,5 @@
 ---
-title: '[Python3]006_函数定义&匿名函数'
+title: '[Python3]006_函数定义_匿名函数'
 tags:
   - python3
 categories:

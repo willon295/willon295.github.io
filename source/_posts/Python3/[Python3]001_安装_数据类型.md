@@ -1,5 +1,5 @@
 ---
-title: '[Python3]001_安装&数据类型'
+title: '[Python3]001_安装_数据类型'
 tags:
   - python3
 categories:

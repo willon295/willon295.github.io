@@ -1,5 +1,5 @@
 ---
-title: '简单系统菜单命令'
+title: '[Shell]简单系统菜单命令'
 tag: shell
 categories:
   - Linux

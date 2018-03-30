@@ -1,5 +1,5 @@
 ---
-title: Shell 变量
+title: '[Shell]Shell 变量'
 tags:
   - shell
   - 学习

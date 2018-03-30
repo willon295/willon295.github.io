@@ -1,5 +1,5 @@
 ---
-title: '[zookeeper]02_选举机制&Observer模式'
+title: '[zookeeper]02_选举机制_Observer模式'
 tag: zookeeper
 category: zookeeper
 date: 2017-11-01 11:23:02

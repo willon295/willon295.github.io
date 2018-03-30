@@ -1,5 +1,5 @@
 ---
-title: '[Python3]002_print函数&变量'
+title: '[Python3]002_print函数_变量'
 tags:
   - python3
 categories:

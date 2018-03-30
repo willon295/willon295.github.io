@@ -143,11 +143,11 @@ social:
   
 social_icons:
   enable: true
-  QQ: qq
+  QQ: fa-qq
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
-  Twitter: twitter
+  GitHub: fa-github
+  Twitter: fa-twitter
   Weibo: weibo
 
 # Blog rolls

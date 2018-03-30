@@ -80,9 +80,6 @@ search:
  
  
 # SEO
-plugins:
-  - hexo-generator-baidu-sitemap
-  - hexo-generator-sitemap
 baidusitemap:
   path: baidusitemap.xml
 sitemap:

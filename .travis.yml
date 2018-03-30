@@ -5,7 +5,8 @@ node_js: stable
 install:
   - npm install
   - npm install hexo-generator-searchdb --save
-
+  - npm install hexo-generator-sitemap --save-dev
+  - npm install hexo-generator-baidu-sitemap --save-dev
 
 before_script:
   - npm install -g gulp

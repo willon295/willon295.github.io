@@ -106,3 +106,17 @@ val arr2 = Array.ofDim[Int](3,4)
 
 1. 带 `=` 的 会改变原集合
 2. 一个加号 `+` 一般是 集合与元素， 两个加号 `++` 是集合与集合操作
+
+
+
+# BitSet
+
+位集： 包位于 `scala.collection.mutable`
+```
+//0000 0000 ....  0100
+val  bits = BitSet(2)
+bits.toBitMask //输出Array(3)
+//在第 6 位补 1
+bits += 6
+//传入的参数意思是：  在index处添加 1 ， 默认从低位开始索引
+```

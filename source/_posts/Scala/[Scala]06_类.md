@@ -76,3 +76,37 @@ class Teacher(val id: Int, var name: String, var age: Int, var position: String)
 ```
 private[day02] class Teacher(){}
 ```
+
+
+
+# case class
+
+基本的语法
+
+```
+case class Demo(v:A,v2:B....){...}
+```
+
+举个例子
+```
+//属性默认使用 val 修饰
+case class Student(id:Int,name:String)
+
+//可以new实例，也可以不用 new 
+val s1 = Student(1,"Lilei")
+val s2 = new Student(2,"Jili")
+
+
+//可以获取属性的值,但是不可赋值改变
+s1.id
+
+//可以通过cpoy方法改变某个属性的值，返回一个新的对象
+
+val s3 = s2.copy(name="ZhangSan")
+
+//s3 = Student(2,"ZhangSan")
+
+
+```
+
+

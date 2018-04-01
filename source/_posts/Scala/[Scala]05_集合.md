@@ -17,7 +17,6 @@ val arr = Array(1,2,3,4)
 `Nil` 表示空的 `List` ,常用的方法有
 - `head`: 第一个元素
 - `tail`： 除第一个之外所有元素
-- `::`：  不同的 集合拼接 ， 单个元素可以直接拼接在集合的前面 `5 :: lst`
 3. Map
 ```
 val  m = new HashMap[String, Int]("aa"-> 2,"bb"->3)
@@ -69,6 +68,25 @@ val par = lst.par
 println(par.sum)
 ```
 
+# Nil
+
+所有类型的Nil都是相同的，内容相同，hashCode也相同
+```
+val a: List[String] = Nil
+val b: List[Int] = Nil
+//eq 比的是 对象的hashCode，== 比较的是内容
+
+(a == Nil) should be(true)
+(a eq Nil) should be(true)
+
+(b == Nil) should be(true)
+(b eq Nil) should be(true)
+
+(a == b) should be(true)
+(a eq b) should be(true)
+```
+
+
 # 多维数组
 
 ```
@@ -101,6 +119,13 @@ val arr2 = Array.ofDim[Int](3,4)
 6. `++:()`
 语法： `集合1.++:(集合2)`
 > 集合2 放入集合1 的头部，原 集合1 不改变
+7. `::`
+语法：  `Any::List[  | Seq]`
+> 在集合的 `前面` 加入 Any 元素
+8. `:::`
+语法： `集合:::集合`
+> 将两个 集合进行合并，返回一个List
+
 
 # 符号的总结
 

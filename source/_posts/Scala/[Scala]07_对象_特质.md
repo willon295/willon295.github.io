@@ -1,5 +1,5 @@
 ---
-title: '[Scala]07_对象_特质'
+title: '[Scala]07_对象_trait'
 tag: Scala
 category: Scala
 date: 2018-01-01 00:07:34
@@ -72,7 +72,6 @@ object HelloWorld {
 2. 特质可以混入 类、对象、特质、实例中
 3. 实例混入特质的构造顺序
     - 超特质 -> 父特质 -> 类 -> 从左往右特质
-4. 如果 `多个特质` 重写 `同一个特质` 的 `同一个方法`，方法前必须要 `override`
     
 ## 贴代码
 
@@ -138,6 +137,7 @@ trait Logger {
   def log()
 }
 
+
 //特质，需要传入两个参数 ， 一个文件名 ，一个文件内容
 trait FileLogger extends Logger {
   val fielname: String
@@ -174,58 +174,3 @@ object DynamicClassExtention {
 
 1. 为了避免特质构造时发生空指针异常，将其被调用处资源 申明为 `lazy`
 2. 在混入特质时，需要重写其属性，并且赋值
-
-
-## super调用
-
-如果 `多个特质` 重写了 `同一个方法` ，且该方法中都调用了父类的方法， 那么具体的调用是 从右往左 开始
-
-举个例子
-
-
-```
-//定义一个抽象类和子类
-abstract class CharBuffer {
-  def get: Char
-  def put(c: Char)
-}
-
-class Overlay extends CharBuffer{
-  val buf = new ArrayBuffer[Char]
-  override def get: Char = {
-    if (buf.length != 0) buf(0) else '@'
-  }
-  override def put(c: Char): Unit = {
-    buf.append(c)
-  }
-}
-
-
-//定义两种对输入字符进行操作的特质:
-//此处继承了 CharBuffer ，只有CharBuffer子类菜可以使用 该特质
-trait ToUpper extends CharBuffer {
-    // 特质中重写抽象方法  abstract override
-    abstract override def put(c: Char) = super.put(c.toUpper)
-}
-trait ToLower extends CharBuffer {
-    abstract override def put(c: Char) = super.put(c.toLower)
-}
-
-
-//测试
-object TestOverlay extends App {
-  val cb1 = new Overlay with ToLower with ToUpper
-  val cb2 = new Overlay with ToUpper with ToLower
-
-  cb1.put('A')
-  println(cb1.get)
-
-  cb2.put('a')
-  println(cb2.get)
-
-}
-
-
-
-
-```

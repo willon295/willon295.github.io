@@ -110,3 +110,48 @@ val s3 = s2.copy(name="ZhangSan")
 ```
 
 
+# 抽象类
+
+```
+package ooad
+
+abstract class Father {
+  def run():String
+  var name:String
+  val age:Int
+  var birthDay:Int = 1992
+}
+
+class Son extends Father {
+   def run(): String = {
+    println("son run ")
+    "yes"
+  }
+
+  var name = "sdf"
+  val age: Int = 23
+  birthDay = 2019
+}
+
+
+object Son {
+
+  def main(args: Array[String]): Unit = {
+    val son: Son = new Son
+    println(son.age, son.name, son.run(), son.birthDay)
+  }
+}
+```
+
+
+
+
+
+1. 抽象类默认所有 属性和 方法都是抽象的
+2. 子类重写父类的属性时
+    - var , val 要相同
+    - 可以不使用关键字 override
+    - 父类中有具体值的属性，不能使用override重写，直接重写,不需要 val和var修饰
+3. 子类重写父类方法时
+    - 可以不使用override关键字
+    - 返回值和函数名称参数列表都要相同

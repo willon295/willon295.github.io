@@ -53,7 +53,7 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
 ```
 <configuration>
 
-    <!-- Set nameservices,which is the same as core-site.xml-->
+    <!-- Set nameservices,which is the same as  in core-site.xml-->
     <property>
         <name>dfs.nameservices</name>
         <value>mycluster</value>
@@ -114,7 +114,7 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
         <value>/root/.ssh/id_rsa</value>
     </property>
 
-    <!-- set namenode and datanode local file dir-->
+    <!-- set local  dir of namenode and datanode -->
     <property>
        <name>dfs.name.dir</name>
        <value>/root/hadoopData/hdfs/name</value>

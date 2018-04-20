@@ -47,10 +47,10 @@ ssh-keygen  -t rsa
 #所有服务器的地址/域名
 SERVERS="hdp0 hdp1 hdp2";
 
-#其他服务器的密码
+# 其他服务器的密码
 PASSWORD=hadoop
 
-#实现输入密码登录
+# 实现输入密码登录
 auto_ssh_copy_id(){
 	expect -c "set timeout -1;
 	spawn ssh-copy-id $1;
@@ -60,7 +60,7 @@ auto_ssh_copy_id(){
 		eof {exit 0;}
 	}";
 }
-#分发公钥到所有服务器
+# 分发公钥到所有服务器
 ssh_copy_id_to_all(){
 	for SERVER in $SERVERS
 	do
@@ -68,7 +68,7 @@ ssh_copy_id_to_all(){
 	done
 }
 
-#开始执行
+# 开始执行
 ssh_copy_id_to_all
 ```
 
@@ -243,9 +243,9 @@ start-yarn.sh
 
 1. 下载解压之后，删除无用目录，保留
 ```
-bin  
-conf  
-lib  
+bin
+conf
+lib
 zookeeper-3.4.10.jar
 ```
 2. 拷贝配置文件

@@ -44,3 +44,23 @@ class EnumOne
 
 //运行结果 create create create FIXED
 ```
+4. Integer的自动装箱与拆箱
+```
+Integer i = 200;  // Integer  i = Integer.valueOf(200); 自动装箱
+int  i2 = i;  // int i2 = i.intValue(); //自动拆箱
+
+
+/**
+当Integer 的值范围在 -127  128 之间时，会在内存中缓存，若不在会创建新的实例
+*/
+
+Integer a = 10;
+Integer b = 10;
+System.out.println(a == b);        // true
+System.out.println(a.equals(b));   // true
+Integer a = 1000;
+Integer b = 1000;
+System.out.println(a == b);        // false
+System.out.println(a.equals(b));   // true
+
+```

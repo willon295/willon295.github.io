@@ -1,10 +1,8 @@
 ---
-title: '[JAVA]JAVA代码书写规范'
-tags:
-  - java
-categories:
-  - Java
-date: 2016-12-23 16:29:41
+title: '[JAVA]01_JAVA代码书写规范'
+tag: Java
+category: Java
+date: 2016-05-12 00:01:00
 ---
 
 ### 一般原则

@@ -1,12 +1,12 @@
 
 ---
-title: '[Java]反射_Class类_静态加载_动态加载'
-tags:
-  - java
-categories:
-  - Java
-date: 2016-12-23 16:29:41
+title: '[Java]04_01_反射_Class类_静态加载_动态加载'
+tag: Java
+category: Java
+date: 2016-05-12 00:04:01
 ---
+
+
 ### Class类
 
 在Java中万事万物解释对象，比如一个 `class Fu{}` ，这个 `Fu `类其实也是一个 对象。是 `java.lang.Class` 的对象 。 那么这个对象该如何表示。

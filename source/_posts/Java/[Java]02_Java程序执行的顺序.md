@@ -1,8 +1,8 @@
 ---
-title: '[Java]Java程序执行的顺序'
+title: '[Java]02_Java程序执行的顺序'
 category: Java
 tag: Java
-date: 2017-12-12 00:00:00
+date: 2016-05-12 00:02:00
 ---
 
 

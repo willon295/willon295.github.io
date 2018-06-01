@@ -33,8 +33,8 @@ select name  from s_dept where  name  like '\_%' escape '\';
 
 # UNION,UNION ALL
 
-`UNION`: 将结果进行合并，去重
-`UNION ALL`: 直接将结果进行合并，不去重
+- `UNION`: 将结果进行合并，去重
+- `UNION ALL`: 直接将结果进行合并，不去重
 
 ```
 select id from student where  id!=10

@@ -1,5 +1,5 @@
 ---
-title: '[Shell]Shell 变量'
+title: '[Shell]Shell变量'
 tag: Linux
 category: Linux
 date: 2016-06-13 12:22:33

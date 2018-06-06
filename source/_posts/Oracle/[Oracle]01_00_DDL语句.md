@@ -39,9 +39,9 @@ name varchar2(10) constraint TEST_NAME_UQunique
 
 ### check 约束
 ```
-create tableperson(
+create table person(
  id number(7) primary key,
- gender varchar2(10) check (genderin('male','female'))
+ gender varchar2(10) check (gender  in('male','female'))
 );
 // 限制性别只能是 male 和 female
 
@@ -70,7 +70,7 @@ oracle 默认不会完全删除表，而是放入回收站。彻底删除可以�
 
 `||` ， 双竖线可以连接两个变量或者属性，如果两个连接符之间有其他的字符串，使用单引号 `' '`
 ```
-selectlast_name || ',' || salary froms_emp;
+select last_name || ',' || salary froms_emp;
 
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: [Shell]Shell-第一个shell
-tag: shell
+title: '[Shell]Shell-第一个shell'
+tag: Linux
 category: Linux
 date: 2016-06-13 12:22:33
 ---

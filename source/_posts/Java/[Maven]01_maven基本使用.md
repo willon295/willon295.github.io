@@ -10,14 +10,14 @@ date: 2017-10-08 00:00:51
 1. 下载相应的压缩包
 2. 解压
 3. 配置环境变量
-	```
+```
 	export M2_HOME=/usr/local/lib/maven3.1
 	export PATH=$M2_HOME/bin:$PATH
-	```
+```
 4. 测试
-	```
+```
 	mvn -v
-	```
+```
 
 # 基本命令
 

@@ -67,6 +67,7 @@ startup
 ```
 
 
+
 # 用户的创建
 
 1. 创建用户
@@ -88,4 +89,17 @@ conn u1/u1;
 2. 环境变量中追加
 ```
 alias  sqlplus='/usr/bin/rlwrap  sqlplus'
+```
+
+# 解决启动监听 support no services
+
+修改 `$ORACLE_HOME/network/admin/listener.ora` 文件，添加
+```
+SID_LIST_LISTENER =
+(SID_LIST =
+  (SID_DESC =
+  (GLOBAL_DBNAME = orcl)
+  (SID_NAME = oracleSID)
+  )
+)
 ```

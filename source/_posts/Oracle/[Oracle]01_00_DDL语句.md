@@ -1,5 +1,5 @@
 ---
-title: '[Oracle]01_DDL语句'
+title: '[Oracle]01_00_DDL语句'
 category: Oracle
 tag: Oracle
 date: 2018-05-12 00:01:00
@@ -63,7 +63,7 @@ drop table tab_name;
 ```
 oracle 默认不会完全删除表，而是放入回收站。彻底删除可以使用以下两种方法
 
-1. 彻底删除表：`drop table table_namepurge`
+1. 彻底删除表：`drop table table_name purge`
 2. 清空回收站： `purge recyclebin`
 
 # 连接符

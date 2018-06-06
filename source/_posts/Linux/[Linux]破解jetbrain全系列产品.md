@@ -1,5 +1,5 @@
 ---
-title: '[分享] 破解jetbrain全系列产品'
+title: '[分享]Jetbrain全系列产品'
 tag: 分享
 date: 2016-06-13 12:22:33
 ---

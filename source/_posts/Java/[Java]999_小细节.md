@@ -1,3 +1,10 @@
+---
+title: '[Java]999_Java小细节.md'
+tag: Java
+category: Java
+date: 2016-05-12 23:59:59
+---
+
 1. 遍历集合问题
 ```
 int len = l.size();

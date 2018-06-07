@@ -1,7 +1,7 @@
 ---
 title: '[Java]08_XML解析'
-tag: SSM
-category: SSM
+tag: Java
+category: Java
 date: 2016-05-12 00:08:00
 ---
 

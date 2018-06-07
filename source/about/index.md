@@ -3,15 +3,14 @@ title: about
 date: 2017-05-16 20:14:39
 ---
 
-Hi,I'm  Willon , student of ECJTU ，which I'd  like  to  call [皇家铁道口贵族院校](http://www.ecjtu.jx.cn/)
-
+一位热爱健身爱敲代码就读于 [皇家铁道口贵族院校](http://www.ecjtu.jx.cn/) 的码农。
 
 # 个人站点
 
 |   站点 |   介绍 |
 |------|--------|
-|[Willon](http://www.cl95.cc)|hexo的静态博客，写笔记就用它了|
-|[github](https://github.com/willon295)|github新账号，之前的密码忘了|
+|[Willon](https://willon.cn)|个人博客，主要写笔记|
+|[github](https://github.com/willon295)|github|
 
 
 
@@ -29,3 +28,5 @@ Hi,I'm  Willon , student of ECJTU ，which I'd  like  to  call [皇家铁道口�
 - 健身
 - 篮球
 - 敲代码
+
+

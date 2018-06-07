@@ -1,7 +1,7 @@
 ---
 title: '[Java]07_常用的数据生成类'
-tag: SSM
-category: SSM
+tag: Java
+category: Java
 date: 2016-05-12 00:07:00
 ---
 

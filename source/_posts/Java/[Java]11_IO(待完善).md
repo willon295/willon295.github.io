@@ -24,11 +24,6 @@ date: 2016-05-12 00:11:00
 |--BufferedWriter
 |--OutputStreamWriter--FileWriter
 ```
-**举个例子**
-```
-
-    
-```
 
 # 字节流
 

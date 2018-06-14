@@ -1,8 +1,8 @@
 ---
-title: '[Design_Pattern]02_抽象工厂模式'
+title: '[Design_Pattern]02_02_抽象工厂模式'
 category: 设计模式
 tag: 设计模式
-date: 2017-10-11 00:02:00
+date: 2017-10-11 00:02:02
 ---
 
 `抽象工厂模式` 属于 `创建模式` ，通俗的理解就是 `工厂的工厂`， 使用`工厂生成类` 获取 `相应的工厂`
@@ -17,9 +17,9 @@ date: 2017-10-11 00:02:00
 
 # DEMO
 
-![01](/images/dp02_abstractFactory_01.png);
-![02](/images/dp02_abstractFactory_02.png);
-![03](/images/dp02_abstractFactory_03.png);
+![01](/images/dp02_abstractFactory_01.png)
+![02](/images/dp02_abstractFactory_02.png)
+![03](/images/dp02_abstractFactory_03.png)
 
 
 1. 创建手机、电脑的接口和实现类

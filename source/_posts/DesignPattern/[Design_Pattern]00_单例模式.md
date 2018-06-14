@@ -1,0 +1,79 @@
+---
+title: '[Design_Pattern]00_单例模式'
+category: 设计模式
+tag: 设计模式
+date: 2017-10-11 00:00:00
+---
+
+
+`单例模式` 属于 `创建模式`， 设计初衷是为例某类的 `实例唯一`
+
+# 大概步骤
+
+
+1. 声明private的该类类型的成员
+2. 私有化构造方法
+3. 提供public、static的获取唯一实例的方法
+4. 至于成员什么时候实例化，分为两种模式： `懒汉` ， `饿汉`
+
+
+
+# 饿汉模式
+
+在类加载时就创建唯一实例
+```
+public class SingletonStarve {
+
+    private static SingletonStarve instance = new SingletonStarve();
+
+    private SingletonStarve() {
+    }
+    
+    public static SingletonStarve getInstance() {
+        return instance;
+    }
+
+}
+```
+
+# 懒汉模式
+
+在调用获取实例方法时创建实例
+
+```
+public class SingletonLazy {
+
+    private static SingletonLazy instance;
+
+    private SingletonLazy() {
+    }
+    public static SingletonLazy getInstance() {
+        if (instance == null) {
+            instance =  new SingletonLazy();
+        }
+        return instance;
+    }
+}
+```
+
+# 具体使用
+
+```
+    public static void main(String[] args) {
+        SingletonLazy i1 = SingletonLazy.getInstance();
+        SingletonLazy i2 = SingletonLazy.getInstance();
+        SingletonLazy i3 = SingletonLazy.getInstance();
+
+        System.out.println(i1 == i2); //true
+        System.out.println(i2 == i3); //true
+
+
+        SingletonStarve s1 = SingletonStarve.getInstance();
+        SingletonStarve s2 = SingletonStarve.getInstance();
+        SingletonStarve s3 = SingletonStarve.getInstance();
+
+        System.out.println(s1==s2); //true
+        System.out.println(s2==s3); //true
+    }
+
+```

@@ -1,0 +1,43 @@
+---
+title: '[JSP]00_JSP基本标签_内置对象'
+tag: Java
+category: JSP
+date: 2016-12-29 00:00:00
+---
+
+
+# 基本页面标签
+
+1. `<% %>` : 用于嵌入 java 代码,如：  ` <% response.getWriter().write("EMpty"); %>`
+2. `<%@ page %>` : 用于设置页面信息，如： `<%@ page contentType="text/html;charset=UTF-8" language="java" %>`
+3. `<%@include %>`: 用于引入 其他 jsp页面 `源码` ，如：`<%@include file="header.jsp"%>`
+4. `<%@taglib %>`, 用于引入标签库，如: `<%@taglib prefix="myc" uri="http://java.sun.com/jsp/jstl/core" %>` ，prefix的值可以自定义，使用 `:` 调用方法:  `<myc:out value="HEllo">`
+5. `<%= %>"`: 用于给某些内容赋值，语句不需要结束符，如：`value="<%=request.getParameter("id")%>"`
+
+
+# jsp对象标签
+
+1. `<jsp:include  />`: 引用其他jsp页面输出结果
+2. `<jsp:setProperty />`: 设置一个 property,可以设置作用域 `session`,`application` ,`request`
+3. `<jsp:getProperty />`: 获取一个 property的值
+4. `<jsp:forward page="XXX" />`: 转发请求，page对象内容可以是页面或者 servlet
+5. `<jsp:useBean id="" beanName="" class="" scope="session"/>` : 设置一个 userBean,可以直接通过id获取对象信息。
+
+# jsp 内置对象
+
+1. `page`: 获取 page 对象,没有任何方法
+2. `pageContext`： 获取 page上下文对象
+3. `application`: 获取这个app的对象
+4. `jspContext`: 没什么用
+5. `config`: 获取配置信息对象
+6. `session`: 获取会话对象
+7. `request`: 获取请求对象
+8. `response`： 获取响应对象
+9. `out`: 获取 response.getWriter() 对象
+
+# Servlet 的方法
+
+1. `init()`: 只执行一次，用于资源的初始化
+2. `doGet()`: 处理 `GET` 请求
+3. `doPost()`: 处理 `POST` 请求
+4. `service()`: 如果重写此方法，`doGet` 、 `doPost` 方法 `不会被调用`

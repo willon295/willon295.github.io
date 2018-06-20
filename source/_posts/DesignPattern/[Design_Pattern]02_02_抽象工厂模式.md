@@ -17,9 +17,7 @@ date: 2017-10-11 00:02:02
 
 # DEMO
 
-![01](/images/dp02_abstractFactory_01.png)
-![02](/images/dp02_abstractFactory_02.png)
-![03](/images/dp02_abstractFactory_03.png)
+![01](/images/dp02_abstractFactory_00.png)
 
 
 1. 创建手机、电脑的接口和实现类

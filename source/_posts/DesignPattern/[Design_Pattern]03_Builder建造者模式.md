@@ -10,6 +10,7 @@ Builder模式是一步一步创建一个复杂对象的创建型模式，它允�
 
 # 使用内部Builder(简单)
 
+![](images/)
 1. 具体实现
 ```
 public class SmartPhone {
@@ -127,12 +128,13 @@ public class Test {
 
 ## 举个例子
 
-产品： 手机
-产品经理： 我要 MI8 和 VIVO X21
-技术主管： 用什么技术，怎么造
-码农： 照着技术埋头造
+1. 产品： 手机
+2. 产品经理： 我要 MI8 和 VIVO X21
+3. 技术主管： 用什么技术，怎么造
+4. 码农： 照着技术埋头造
 
 ![img](/images/dp03_builder_01.png)
+![img](/images/dp03_builder_00_01.png)
 
 1. 产品
 ```

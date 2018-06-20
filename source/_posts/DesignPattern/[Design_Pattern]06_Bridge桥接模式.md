@@ -34,8 +34,8 @@ date: 2017-10-11 00:06:00
 1. 消息类型： 普通消息， 加急消息，特急消息
 2. 发送方式： 邮件，短信
 3. 关系图
-![图1](/images/dp06_bridge_01.png)
-![图2](/images/dp06_bridge_02.png)
+![图1](/images/dp06_bridge_00.png)
+
 
 ## 代码
 

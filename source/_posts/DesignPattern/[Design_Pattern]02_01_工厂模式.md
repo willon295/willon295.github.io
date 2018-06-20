@@ -20,7 +20,7 @@ date: 2017-10-11 00:02:01
 
 生产汽车为例
 
-![图片](images/dp02_normalFactory_00.png)
+![](/images/dp02_normalFactory_00.png)
 
 1. 创建 `Car` 接口
 ```

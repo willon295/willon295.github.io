@@ -133,7 +133,6 @@ public class Test {
 3. 技术主管： 用什么技术，怎么造
 4. 码农： 照着技术埋头造
 
-![img](/images/dp03_builder_01.png)
 ![img](/images/dp03_builder_00_01.png)
 
 1. 产品

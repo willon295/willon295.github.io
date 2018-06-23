@@ -18,8 +18,10 @@ date: 2017-10-11 00:13:00
 
 # 实现
 
-将遥控器、具体命令、电视分离
+将遥控器、具体命令、电视分离。
+
 具体结构图：
+
 ![](/images/dp13_command_00.png)
 
 1. 电视
@@ -122,50 +124,44 @@ public class CommandChangeChannel implements Command {
  */
 public class Controller {
 
-    //维护一系列的命令
-    private Command on, off, change;
+    //维护一个命令实例
+    private Command command;
 
-    public Controller(Command on, Command off, Command change) {
-        this.on = on;
-        this.off = off;
-        this.change = change;
+    public void setCommand(Command command) {
+        this.command = command;
     }
 
-
-    public void  turnON(){
-        on.execute();
-    }
-    public void turnOFF(){
-        off.execute();
-    }
-
-    public void change(){
-        change.execute();
+    public void execute(){
+        command.execute();
     }
 }
-
 ```
 4. 测试类
 ```
 public class Client {
     public static void main(String[] args) {
         TV tv = new TV();
-        Command on = new CommandON(tv);
-        Command off = new CommandOFF(tv);
-        Command change = new CommandChangeChannel(tv);
 
-        Controller controller = new Controller(on, off, change);
-        controller.turnON();
-        controller.change();
-        controller.turnOFF();
+        Controller controller = new Controller();
+
+
+        controller.setCommand(new CommandON(tv));
+        controller.execute();
+
+        controller.setCommand(new CommandOFF(tv));
+        controller.execute();
+
+        controller.setCommand(new CommandChangeChannel(tv));
+        controller.execute();
+
 
 
         /*运行结果
-        
+
         TV on...
         Channel change to 2
         TV off...
-        
+
         */
 
     }

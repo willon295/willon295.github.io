@@ -87,7 +87,7 @@ date: 2017-11-09 00:00:00
 
 public class MBGtest {
     public static void main(String[] args) throws Exception {
-        List<String>warnings = new ArrayList<String>();
+        List<String>  warnings = new ArrayList<String>();
         boolean overwrite =true;
         File configFile = new File("mbg.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);

@@ -6,15 +6,15 @@ date: 2017-10-11 00:01:00
 ---
 
 
-`单例模式` 属于 `创建模式`， 设计初衷是为例某类的 `实例唯一`
+`单例模式` 属于 `创建模式`， 设计初衷是某类的 `实例唯一`，有且仅有一个实例对象
 
 # 大概步骤
 
 
 1. 声明private的该类类型的成员
-2. 私有化构造方法
+2. 私有化构造方法、使其不可通过 new 创建实例
 3. 提供public、static的获取唯一实例的方法
-4. 至于成员什么时候实例化，分为两种模式： `懒汉` ， `饿汉`
+4. 至于实例成员什么时候实例化，分为两种模式： `懒汉` ， `饿汉`
 
 
 
@@ -24,11 +24,14 @@ date: 2017-10-11 00:01:00
 ```
 public class SingletonStarve {
 
+    //声明并且创建唯一实例
     private static SingletonStarve instance = new SingletonStarve();
 
+    //私有化构造方法
     private SingletonStarve() {
     }
     
+    //提供获取实例的方法
     public static SingletonStarve getInstance() {
         return instance;
     }
@@ -47,6 +50,8 @@ public class SingletonLazy {
 
     private SingletonLazy() {
     }
+    
+    //只有调用此方法时才创建实例
     public static SingletonLazy getInstance() {
         if (instance == null) {
             instance =  new SingletonLazy();

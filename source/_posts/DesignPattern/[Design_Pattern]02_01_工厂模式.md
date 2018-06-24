@@ -2,7 +2,7 @@
 title: '[Design_Pattern]02_01_工厂模式'
 category: 设计模式
 tag: 设计模式
-date: 2017-10-11 00:02:01
+date: 2018-06-10 00:02:01
 ---
 
 
@@ -20,7 +20,7 @@ date: 2017-10-11 00:02:01
 
 生产汽车为例
 
-![](/images/dp02_normalFactory_00.png)
+![图片](images/dp02_normalFactory_00.png)
 
 1. 创建 `Car` 接口
 ```

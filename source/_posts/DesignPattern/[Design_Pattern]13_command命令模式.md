@@ -2,15 +2,19 @@
 title: '[Design_Pattern]13_command命令模式'
 category: 设计模式
 tag: 设计模式
-date: 2017-10-11 00:13:00
+date: 2018-06-10 00:13:00
 ---
 
-命令模式就是对命令的封装 (`行为模式` 的一种)，它主要将一条命令执行过程细分： 请求者（Invoker）、命令接口|基类（Command）、命令实现类（ConcreteCommand）、接收者（Receiver）
+命令模式就是对命令的封装 (`行为模式` 的一种)，它主要将一条命令执行过程细分： 请求者（Invoker）、命令接口|基类（Command）、命令实现类（ConcreteCommand）、接收者（Receiver）.
 
 - `Invoker`: 持有一个Command的实例引用，调用其方法
 - `Command`: 抽象的接口或者抽象类或普通基类
 - `ConcreteCommand`: 持有一个Receiver 对象，调用其方法
 - `Receiver`: 真正执行请求
+
+# 使用场景
+
+某些场合，比如需要对行为进行记录、撤销或重做、事务等处理时。
 
 # 举个例子
 

@@ -1,5 +1,5 @@
 ---
-title: '[Design_Pattern]00_设计模式介绍(后续完善)'
+title: '[Design_Pattern]00_设计模式介绍'
 category: 设计模式
 tag: 设计模式
 date: 2018-06-10 00:00:00

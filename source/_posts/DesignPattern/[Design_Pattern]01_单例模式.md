@@ -82,3 +82,51 @@ public class SingletonLazy {
     }
 
 ```
+
+# 线程安全问题
+
+- 测试类
+
+```
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> {
+                SingletonLazy instance = SingletonLazy.getInstance();
+                System.out.println("lazy: "+instance.hashCode());
+            }).start();
+        }
+
+
+        for (int i = 0; i < 5; i++) {
+
+            new Thread(() -> {
+                SingletonStarve instance = SingletonStarve.getInstance();
+                System.out.println("stave: "+instance.hashCode());
+            }).start();
+        }
+    }
+}
+
+/*
+
+lazy: 1506862609
+lazy: 546952365
+lazy: 1506862609
+lazy: 1163972460
+lazy: 1506862609
+stave: 357399586
+stave: 357399586
+stave: 357399586
+stave: 357399586
+stave: 357399586
+
+ */
+```
+可以看出
+
+1. 饿汉模式不会产生线程安全问题，因为在 `类加载时唯一实例就已经创建`
+2. 懒汉模式`会产生` 线程安全问题，所以在 饿汉模式需要将方法加锁 `synchronized`

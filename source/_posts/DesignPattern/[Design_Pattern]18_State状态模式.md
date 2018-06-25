@@ -165,3 +165,12 @@ Current State: ExhaustedState
 */
 
 ```
+
+# 其他应用场景
+
+当然除了在不同的状态有不同的行为之外，还可以用于切换状态，建立一套完整的工作流。如：
+计算机开机，先启动，开始初始化，初始化完毕之后进入开机状态，这是一套完整的流程。
+
+1. 启动状态, 完毕之后设置状态为 初始化状态 ( `setState(new InitState())`)
+2. 初始化状态, 完毕之后设置状态为  开机状态 (`  setState(new StartedState())` )
+3. 开机状态, 完毕之后设置状态为 待机状态 ( `setState(new SleepState)` )

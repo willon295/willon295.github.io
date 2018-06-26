@@ -1,10 +1,8 @@
 ---
-title: '[JS]基础篇--confirm 消息对话框'
-tags:
-  - JS
-categories:
-  - JS
-date: 2017-01-08 23:50:06
+title: '[JS]01_confirm消息对话框'
+tag: JavaScript
+category: JavaScript
+date: 2017-01-08 00:01:00
 ---
 
 ## confirm 消息对话框

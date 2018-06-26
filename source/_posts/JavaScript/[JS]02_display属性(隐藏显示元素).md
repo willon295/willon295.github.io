@@ -1,10 +1,8 @@
 ---
-title: '[JS] 基础篇--display属性(隐藏/显示元素)'
-tags:
-  - JS
-categories:
-  - JS
-date: 2017-01-08 23:50:06
+title: '[JS]02_Display(隐藏/显示元素)'
+tag: JavaScript
+category: JavaScript
+date: 2017-01-08 00:02:00
 ---
 
 网页中经常会看到显示和隐藏的效果，可通过display属性来设置。
@@ -21,6 +19,7 @@ date: 2017-01-08 23:50:06
 
 ### 实例
 	
+```
 	<!DOCTYPE HTML>
 	<html>
 	<head>
@@ -48,3 +47,4 @@ date: 2017-01-08 23:50:06
 	 </form>
 	</body> 
 	</html>
+```

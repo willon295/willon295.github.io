@@ -1,10 +1,8 @@
 ---
-title: '[JS]基础篇--prompt 消息交互对话框'
-tags:
-  - JS
-categories:
-  - JS
-date: 2017-01-08 23:50:06
+title: '[JS]04_prompt消息交互对话框'
+tag: JavaScript
+category: JavaScript
+date: 2017-01-08 00:04:00
 ---
 
 ## prompt 消息对话框
@@ -15,8 +13,9 @@ date: 2017-01-08 23:50:06
 
 ### 语法
 
+```
 	prompt(str1, str2);
-
+```
 ### 参数说明
 
 - str1: 要显示在消息对话框中的文本，不可修改
@@ -28,8 +27,10 @@ date: 2017-01-08 23:50:06
 
 看看下面代码:
 
+```
 	var myname=prompt("请输入你的姓名:");
 	if(myname!=null)
 	  {   alert("你好"+myname); }
 	else
 	  {  alert("你好 my friend.");  }
+```

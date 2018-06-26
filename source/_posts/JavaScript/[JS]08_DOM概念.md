@@ -1,10 +1,8 @@
 ---
-title: '[JS]基础篇-- DOM概念'
-tags:
-  - JS
-categories:
-  - JS
-date: 2017-01-08 23:50:06
+title: '[JS]08_DOM概念'
+tag: JavaScript
+category: JavaScript
+date: 2017-01-08 00:08:00
 ---
 
 ## 认识DOM
@@ -23,8 +21,9 @@ HTML文档可以说由节点构成的集合，三种常见的DOM节点:
 
 看下面代码:
 
+```
 	<a href="http://www.imooc.com">JavaScript DOM</a>
-
+```
 - 元素节点：<span style="color: #ff6600;">a </span>
 - 属性节点：<span style="color: #ff6600;">href="http://www.imooc.com"</span>
 - 文本节点：<span style="color: #ff6600;">JavaScript DOM</span>

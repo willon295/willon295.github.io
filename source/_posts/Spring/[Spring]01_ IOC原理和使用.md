@@ -1,8 +1,8 @@
 ---
-title: '[Spring4]01_ IOC原理和使用.md'
-tag: Spring4
-category: Spring4
-date: 2016-10-12 12:22:33
+title: '[Spring]01_ IOC原理和使用.md'
+tag: Spring
+category: Spring
+date: 2016-10-12 00:01:00
 ---
 
 `Spring` 通过一种称作`控制反转（IoC）`的技术促进了低耦合

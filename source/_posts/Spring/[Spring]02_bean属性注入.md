@@ -1,8 +1,8 @@
 ---
-title: '[Spring4]02_bean属性注入'
-tag: Spring4
-date: 2016-10-12 12:22:33
-category: Spring4
+title: '[Spring]02_bean属性注入'
+tag: Spring
+date: 2016-10-12 00:02:00
+category: Spring
 ---
 
 分为几类：

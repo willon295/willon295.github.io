@@ -1,13 +1,13 @@
 ---
-title: '[Spring4]04_AOP操作'
-tag: Spring4
-date: 2016-10-12 12:22:33
-category: Spring4
+title: '[Spring]04_AOP操作'
+tag: Spring
+date: 2016-10-12 00:04:00
+category: Spring
 ---
 
 ## AOP术语
 
-- 切点：需要被增强的类
+- 切点：需要被增强的类的方法
 - 切面：用于增强的类
 - 增强：前置（方法执行前），后置（方法return之后），环绕（方法执行之前之后）
 > 大概顺序是 ：前置--> 环绕的前--> 方法执行--> 环绕的后--> 后置

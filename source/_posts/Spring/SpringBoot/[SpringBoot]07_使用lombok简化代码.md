@@ -91,7 +91,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name) {
+    public User(Integer id) {
         this.id = id;
         this.name = name;
     }
@@ -102,25 +102,17 @@ public class User {
 ```
 @Data
 @Slf4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-
     private Integer id;
     private String name;
-
-    public User() {
-    }
-
-    public User(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public static void main(String[] args) {
-
-        User user = new User(1001,"willon");
-        log.info(user.toString());
+        User willon = new User(1001, "willon");
+        log.info(willon.toString());
     }
 }
+
 
 ```
 3. @Cleanup，释放资源

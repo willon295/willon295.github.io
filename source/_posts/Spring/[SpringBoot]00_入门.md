@@ -99,4 +99,4 @@ public class DemoApplication {
 
 # 注意事项
 
-1. Application 入口文件 `不能`  放在 `classpath` 当中， 必须放在一个包中，否则报错
+1. Application 只会扫描当前所在位置的包以及子包。不符合条件的包需要手动使用注解 `@ComonentScan`

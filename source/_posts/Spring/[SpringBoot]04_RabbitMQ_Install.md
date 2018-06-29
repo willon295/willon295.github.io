@@ -1,6 +1,8 @@
 ---
 title: '[SpringBoot]04_RabbitMQ_Install'
-tag: SpringBoot
+tags:
+  - SpringBoot
+  - RabbitMQ
 category: SpringBoot
 date: 2018-06-20 00:04:00
 ---

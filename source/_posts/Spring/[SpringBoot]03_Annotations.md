@@ -5,12 +5,12 @@ category: SpringBoot
 date: 2018-06-20 00:03:00
 ---
 
-- `@SpringBootApplication`: Spring boot Application start
-- `@SpringBootConfiguration`: A replacement of `@Configuraion`, which has function is same as `<bean />` in traditional spring `xml`
-- `@enableAutoConfiguration`: Enable auto load coonfigurations of `jar` 
-- `@ComponemtScan`: The replacement of `<context: component-scan />`
-- `@RestController`: Equal to `@Controller` + `@RequestMapping`
-- `@Value`: Get the value which  custom defined in `application.yml` 
+- `@SpringBootApplication`: Spring boot Application entrance
+- `@SpringBootConfiguration`: A replacement of `@Configuraion`, which has the same function as `<bean />` in traditional spring `xml`
+- `@enableAutoConfiguration`: Enable  load coonfigurations of `jar` automaticly
+- `@ComponemtScan`: An replacement of `<context: component-scan />`
+- `@RestController`: Equals to `@Controller` + `@RequestMapping`
+- `@Value`: Get the value  defined in `application.yml` 
 - `@ControllerAdvice`: Unifid excption handler.
 
 # Define a custom Excption handler

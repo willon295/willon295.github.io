@@ -1,5 +1,5 @@
 ---
-title: '[SpringBoot]03_Annotations_UnifiedExcption'
+title: '[SpringBoot]03_Annotations_全局捕获异常'
 tag: SpringBoot
 category: SpringBoot
 date: 2018-06-20 00:03:00
@@ -13,7 +13,7 @@ date: 2018-06-20 00:03:00
 - `@Value`: Get the value  defined in `application.yml` 
 - `@ControllerAdvice`: Unifid excption handler.
 
-# Define a custom Excption handler
+# 全局捕获异常
 
 `@ControllerAdvice`、 can handle all the excption in  `@Controller`
 

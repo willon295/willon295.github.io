@@ -5,9 +5,30 @@ category: SpringBoot
 date: 2018-06-20 00:00:00
 ---
 
-# 什么是Spring Boot
+# Spring Boot
 
-可以快速构建，免去Spring以及相关组件一大堆配置。可以独立打包成 `jar` `war` 文件运行，可以实现快速开发
+
+1. 快速开发框架
+2. 能够帮助我们快速的整合第三放框架（通过Maven依赖关系）
+3. 完全采用注解化，简化xml配置
+4. 内嵌web服务器
+5. 最终以java程序执行(也可以以war方式运行)
+
+
+## Spring Boot 与 Spring MVC
+
+1. SpringBoot Web 组件集成 Spring MVC
+2. Spring MVC 3.0 之后支持注解启动，SpringBoot Web 通过扫描注解启动Spring MVC
+
+
+## Spring Boot 和 Spring Cloud
+
+1. 一套完整的 `微服务框架` （功能十分强大）。 
+2. 注册中心
+3. 客户端调用工具
+4. 服务治理（负载均衡、断路由、分布式配置中心、网关、服务链路、消息总线等）
+
+微服务开发---RPC远程通讯技术、服务治理
 
 
 ## Spring Boot Demo

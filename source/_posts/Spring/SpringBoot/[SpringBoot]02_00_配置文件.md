@@ -1,5 +1,5 @@
 ---
-title: '[SpringBoot]02_Core_conf'
+title: '[SpringBoot]02_00_配置文件'
 tag: SpringBoot
 category: SpringBoot
 date: 2018-06-20 00:02:00

@@ -1,9 +1,21 @@
 ---
-title: '[Spring]06_Transactional注解'
+title: '[Spring]06_事务_@Transactional注解'
 tag: Spring
 category: Spring
 date: 2016-10-12 00:06:00
 ---
+
+# 事务的分类
+
+1. 声明式事务： 通过 aop 实现
+2. 编程式事务： 通过jdbc编程实现
+
+# 原理
+
+使用 AOP 技术， 环绕通知进行拦截
+不要try ， 因为要把异常抛出给外层
+
+# @Transational
 
 @Transational 注解用于管理事务， 一般用于 `业务层`，注解在方法之上，也可以注解在类之上，一般不同的业务方法抛出的异常不同、需要处理的方式不同，所以一般注解在方法之上。
 

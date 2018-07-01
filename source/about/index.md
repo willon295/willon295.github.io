@@ -27,13 +27,13 @@ date: 2017-05-16 20:14:39
         }
 
         h1 {
-            margin-top: 50px;
+            margin-top: 20px;
             margin-bottom: 40px;
         }
 
         hr {
 
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         h3 {
@@ -57,9 +57,8 @@ date: 2017-05-16 20:14:39
             border-radius: 5px;
         }
 
-
     </style>
-    <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 <hr>
@@ -137,4 +136,3 @@ date: 2017-05-16 20:14:39
 
 </body>
 </html>
-

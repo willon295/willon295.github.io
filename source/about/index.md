@@ -3,7 +3,6 @@ layout: false
 title: 'About'
 date: 2017-05-16 20:14:39
 ---
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,8 +17,6 @@ date: 2017-05-16 20:14:39
             font-family: 微软雅黑, monospace;
             font-size: 15px;
             line-height: 18px;
-            color: #000000;
-            margin: 10px 13px 10px 20px;
         }
 
         span {
@@ -27,7 +24,6 @@ date: 2017-05-16 20:14:39
         }
 
         h3 {
-            margin: 0 0 10px     10px;
             font-size: 18px;
         }
 
@@ -51,7 +47,7 @@ date: 2017-05-16 20:14:39
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-<hr>
+
 <h1>陈龙 / Willon Chen</h1>
 
 <div class="resume_part">
@@ -69,25 +65,22 @@ date: 2017-05-16 20:14:39
 
 
     <span class="fa fa-product-hunt"> 基于Hadoop商品推荐引擎  </span> <br>
-    <span></span> <span class="fa fa-book"> 对用户行为<mark>进行相似度分析</mark> ,通过离线计算,向用户<mark>推荐可能感兴趣</mark> 的产品.<br></span>
+    <span></span> <span class="fa fa-book"> 对用户行为<mark>进行相似度分析</mark> ,通过离线计算,向用户<mark>推荐可能感兴趣</mark> 的产品.</span><br><br>
 
 
     <span class="fa fa-product-hunt"> 基于Hadoop电信运营支撑系统  </span> <br>
-    <span></span> <span class="fa fa-book"> 基于Hadoop的数据处理系统,对实时上网数据采集分析处理.<br></span>
-
+    <span></span> <span class="fa fa-book"> 基于Hadoop的数据处理系统,对实时上网数据采集分析处理.</span><br><br>
 
 
     <span class="fa fa-product-hunt"> 第三方卡密管理系统  </span> <br>
-    <span></span> <span class="fa fa-book"> 包括 卡密生成 , 用户卡密授权 , 权限过期扫描 , 对外开放接口等等.<br> </span>
+    <span></span> <span class="fa fa-book"> 包括 卡密生成 , 用户卡密授权 , 权限过期扫描 , 对外开放接口等等 </span>.<br><br>
 
 
     <span class="fa fa-product-hunt"> 物联网环境检测系统  </span> <br>
-    <span></span> <span class="fa fa-book">该项目主要对实验箱传感器各项环境指数进行<mark>实时采集分析入库并展示.</mark><br> </span>
-
+    <span></span> <span class="fa fa-book">该项目主要对实验箱传感器各项环境指数进行<mark>实时采集分析入库并展示.</mark></span><br><br>
 
     <span class="fa fa-product-hunt"> ADTYY  </span> <br>
-    <span></span> <span class="fa fa-book">Android应用程序,实现对各种视频,游戏,网页
-    <mark>广告过滤</mark>.<br> </span>
+    <span></span> <span class="fa fa-book">Android应用程序,实现对各种视频,游戏,网页<mark>广告过滤</mark>. </span><br>
 
 
 </div>

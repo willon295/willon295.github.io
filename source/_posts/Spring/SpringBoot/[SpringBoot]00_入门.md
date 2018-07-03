@@ -121,3 +121,16 @@ public class DemoApplication {
 # 注意事项
 
 1. Application 只会扫描当前所在位置的包以及子包。不符合条件的包需要手动使用注解 `@ComonentScan`
+
+2. 在 `2.0` 之后, `Actuator` 对外web端暴露的信息 只有 `helth` ,   ` info` , 如果向对外 暴露更多信息,需要修改配置文件
+
+   ```
+   management:
+     endpoints:
+       web:
+         exposure:
+           include: "*"
+   ```
+
+   并且,接口的地址也发生改变,从原来的 `/`  变更为 `/actuator/` 
+

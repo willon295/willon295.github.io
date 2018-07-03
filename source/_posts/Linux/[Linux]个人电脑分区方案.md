@@ -10,7 +10,8 @@ date: 2017-10-11 12:00:00
 1. 系统： Fedora25
 2. 桌面： xfce4
 3. 主题&图标： numix
-4. 软件： Chrome, IDEA2016-3, WPS ， SmPlayer, SecureCRT，Geany(文本编辑器),Axel(多线程下载)，Wechat、QQ
+4. 软件： Chrome, IDEA2016-3, WPS ， SmPlayer, SecureCRT，SciTE(文本编辑器),  Typora(md编辑器) ,Axel(多线程下载)，Wechat、QQ , 
+5. chrome插件: Postman-RestClietn, JSONView
 
 
 

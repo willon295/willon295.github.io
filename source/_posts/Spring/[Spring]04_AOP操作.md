@@ -27,7 +27,7 @@ category: Spring
 - execution(* cn.willon.*(..))  : 对所有的类的所有方法
 3. 配置文件
 这里需要引入 `aop` 约束
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -65,7 +65,7 @@ category: Spring
 </beans>
 ```
 4. 切面类
-```
+```java
 public class UserAOP {
     public void  front(){
         System.out.println("前置.....");

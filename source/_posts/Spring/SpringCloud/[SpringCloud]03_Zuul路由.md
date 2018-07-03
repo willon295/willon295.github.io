@@ -3,10 +3,10 @@ title: '[SpringCloud]03_Zuul网关'
 tags:
   - Zuul
   - SpringCloud
-  categories:
+categories:
   - Zuul
   - SpringCloud
-  date: 2018-06-29 00:03:00
+date: 2018-06-29 00:03:00
 ---
 
 相当于一个 `路由` 中心, 可以做到 `请求转发` . 比如: 

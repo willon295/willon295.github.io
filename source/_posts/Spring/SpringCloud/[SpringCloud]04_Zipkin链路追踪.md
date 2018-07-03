@@ -3,10 +3,10 @@ title: '[SpringCloud]04_Zipkin链路追踪'
 tags:
   - Zipkin
   - SpringCloud
-  categories:
+categories:
   - Zipkin
   - SpringCloud
-  date: 2018-06-29 00:04:00
+date: 2018-06-29 00:04:00
 ---
 
 

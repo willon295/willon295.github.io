@@ -3,10 +3,10 @@ title: '[SpringCloud]02_Hystrix_断路器'
 tags:
   - Hystrix
   - SpringCloud
-  categories:
+categories:
   - Hystrix
   - SpringCloud
-  date: 2018-06-29 00:02:00
+date: 2018-06-29 00:02:00
 ---
 
 `断路器`  :  当客户端访问服务器, 发现服务器 `异常不能访问` ,那么客户端执行一个

@@ -77,3 +77,38 @@ use mysql;
 update user set Host='%' where user='用户名'; 
 ```
 3. 重启mysql服务
+
+
+
+
+
+
+
+# MariaDB
+
+redhat系列采用本数据库， 也是mysql
+
+注意事项：
+
+1. 修改密码
+
+   ```bash
+   mysqladmin  -uroot -p  password "123543"
+   ```
+
+   
+
+2. 默认的字符集,`必须使用root`  用户修改
+
+   ```bash
+   #先查看字符集
+   show variables like 'character_set_%';
+   
+   #把不是utf8的字符集修改成utf8
+   set  global character_set_server=utf8;
+   set  global character_set_database=utf8;
+   ```
+
+   
+
+   

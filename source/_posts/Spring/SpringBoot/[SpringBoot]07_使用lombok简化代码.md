@@ -134,3 +134,26 @@ try{
 
 ```
 
+
+
+
+
+# 注意
+
+如果不是SpringBoot项目需要引入 `logback` 的依赖
+
+```xml
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+```

@@ -32,7 +32,7 @@ ls -l /dev/disk/by-uuid //比如我的 0934-7576
 
 该文件要手动创建，位于 `/boot/grub2/` 目录
 
-```
+```bash
 set timeout=10
 insmod fat
 set default=0
@@ -51,16 +51,15 @@ menuentry 'Windows PE'{
         initrd16 /boot/win/winpe.iso
 }
 
-menuentry 'Fedora (64 bit)' {
-    insmod fat
-	insmod loopback
-	#设置 Fedora ISO 的位置
-	set isofile='/boot/fedora/Fedora.iso'
-	#设置根目录，UUID
-    search --no-floppy --fs-uuid --set=root ${USBUUID}
-	loopback loop   $isofile
-    linux (loop)/isolinux/vmlinuz iso-scan/filename=$isofile root=live:LABEL=Fedora-Xfce-Live-25-1-3 rootfstype=auto ro rd.live.image quiet
-    initrd (loop)/isolinux/initrd.img
+menuentry 'Install Fedora 26' {
+        insmod fat
+		insmod loopback
+		set isofile=/boot/fedora/Fedora-Xfce-Live-x86_64-26-1.5.iso
+        search --no-floppy --fs-uuid --set=root ${USBUUID}
+		loopback loop   $isofile
+		set root=(loop)
+        linux (loop)/isolinux/vmlinuz iso-scan/filename=$isofile root=live:LABEL=Fedora-Xfce-Live-26-1-5 rootfstype=auto  ro rd.live.image quiet
+        initrd (loop)/isolinux/initrd.img
 
 }
 

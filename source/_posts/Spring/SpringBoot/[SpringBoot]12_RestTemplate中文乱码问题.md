@@ -15,29 +15,40 @@ date: 2018-06-20 00:12:00
 
 # 解决办法
 
-看代码 解释
+1. 添加 `httpclient`  依赖文件
 
-```java
-@Configuration
-public class RestTemplateConfig {
+   ```xml
+   <dependency>
+               <groupId>org.apache.httpcomponents</groupId>
+               <artifactId>httpclient</artifactId>
+   </dependency>
+   ```
 
-    @Bean
-    public RestTemplate restTemplate() {
+2. 修改默认编码
 
-        RestTemplate build = new RestTemplateBuilder().build();
-        //重新设置编码
-        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+   ```java
+   @Configuration
+   public class RestTemplateConfig {
+   
+       @Bean
+       public RestTemplate restTemplate() {
+   
+           RestTemplate build = new RestTemplateBuilder().build();
+           //重新设置编码
+           StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+   
+           List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
+   
+           list.add(stringHttpMessageConverter);
+           build.setMessageConverters(list);
+   
+           return build;
+       }
+   
+   }
+   ```
 
-        List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
-
-        list.add(stringHttpMessageConverter);
-        build.setMessageConverters(list);
-
-        return build;
-    }
-
-}
-```
+   
 
 
 

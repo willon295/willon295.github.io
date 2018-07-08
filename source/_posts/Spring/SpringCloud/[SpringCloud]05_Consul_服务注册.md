@@ -6,6 +6,7 @@ categories:
 tags:
   - SpringCloud
   - Consul
+date: 2018-06-29 00:05:00
 ---
 
 Consul是服务注册中心的一种， 它是独立的软件

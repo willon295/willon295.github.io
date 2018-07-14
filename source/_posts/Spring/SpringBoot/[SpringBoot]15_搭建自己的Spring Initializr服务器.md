@@ -2,7 +2,7 @@
 title: ' [SpringBoot]15_搭建自己的Spring Initializr服务器'
 tag: SpringBoot
 category: SpringBoot
-date: 2018-06-20 00:14:00
+date: 2018-07-14 00:15:00
 ---
 
 
@@ -22,7 +22,7 @@ date: 2018-06-20 00:14:00
 git clone  https://github.com/spring-io/initializr.git
 ```
 3. 比如我克隆的项目在  `~/Others/initializr` 
-    因为  `initializr-docs` 项目有问题，构建失败，导致 `initializr-service` 失败，所以删除 `initializr-docs`， 删除 `pom.xml ` 中的 `<module></module>` 中的依赖， 接下来开始构建 ：
+    因为  `initializr-docs` 项目有问题，构建失败，导致 `initializr-service` 失败，所以删除 `initializr-docs`， 删除 `pom.xml ` 中的 `<module>initializr-docs</module>` ， 接下来开始构建 ：
 
   ```bash
   cd ~/Others/initializr
@@ -33,13 +33,13 @@ git clone  https://github.com/spring-io/initializr.git
 
 4. 全部构建完毕之后 ， 把 `需要的jar` 文件,拷贝出来：
 
-   ```
+   ```bash
    ~/.m2/repository/io/spring/initializr/initializr-service/0.6.0.BUILD-SNAPSHOT/initializr-service-0.6.0.BUILD-SNAPSHOT.jar
    ```
 
 5. 运行,并且指定 监听端口
 
-   ```
+   ```bash
    java -jar initializr-service-0.6.0.BUILD-SNAPSHOT.jar --server.port=9000
    ```
 

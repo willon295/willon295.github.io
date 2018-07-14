@@ -21,6 +21,29 @@ date: 2016-05-12 00:10:00
 **关系**
 1. 一个进程可以对应多个线程
 
+
+
+## 线程的状态
+
+根据 Java8API的介绍：线程的状态为枚举类型  `Thread.State`  State共有 `六种状态` 
+
+1. **NEW** :  线程被创建 ==> new 的时候
+2. **RUNNABLE** :  可执行，即就绪状态， `Thread.start()` 调用之后为此状态
+3. **BLOCKED** :     阻塞，Object.wait() 方法调用时，等待 锁
+4. **WAITING** :    会释放锁，Object.wait(), Thread.jion() ,LockSupport.park(),调用时为此状态 ，通过 `notify()` , `notifyAll()` 唤醒
+5. **TIMED_WAITING** : 有时间的等待，不会释放锁 。 
+     - `Thread.sleep(long time)`
+     - `Object.wait(long time)`
+     - `Thread.join()`
+     - `LockSupport.parkNanos()`
+     - `LockSupport.parkUntil()`
+6. **TEMINATED**:  线程执行完毕，被销毁
+
+
+
+
+
+
 ## 继承Thread类,重写run()方法
 
 1. 需要同步的资源需要将其声明为 `static` , 静态单例，否则会出现读写脏数据
@@ -30,7 +53,7 @@ date: 2016-05-12 00:10:00
 
 1. 通过重写Runnable接口，运行时需要将该 `类的实例` 放入 `线程` 中，执行线程实例的 `start()` 方法
 2. 共享资源可以不声明为静态，因为对像是单例
-```
+```java
 
 public class RunnaImpl implements Runnable{
 
@@ -54,7 +77,7 @@ public class RunnaImpl implements Runnable{
     }
 
 }
-``` 
+```
 
 
 
@@ -69,7 +92,7 @@ public class RunnaImpl implements Runnable{
 2. 添加要执行的任务，任务必须是线程类
 3. 关闭线程池
 
-```
+```java
 public class ThreadPoolImpl {
 
     public static void main(String[] args) {
@@ -119,7 +142,7 @@ class Test implements Runnable {
 - 修饰代码块: 该段代码块被执行时，会被加锁
 2. 举个例子
 
-```
+```java
 package com.briup.thread;
 
 public class Account {

@@ -17,7 +17,7 @@ byte, short , char , int  , long , float , double , boolean , String
 
 
 当使用 `new String()` 方式创建时，会产生新的地址。
-```
+```java
 public class Test {
     public static void main(String[] args) {
 
@@ -51,11 +51,11 @@ public class Test {
 
 
 - `==`：比地址 （int 和 Integer 比较时，比较内容）
-- `equals`： 比较内容
+- `equals`： 比较内容(intValue())
 
 
 1. 当 int 基本数据类型和 Integer 对象比较时，Integer 对象会自动拆箱，然后比较内容
-```
+```java
 int i1 = 10;
 Integer i2 = new Integer(10);
 
@@ -63,7 +63,7 @@ System.out.print(i1==i2); //true
 System.out.print(i2.equals(i1)); //true
 ```
 2. 自动装箱机制
-```
+```java
 Integer i1 = 10;
 Integer i2 = Integer.valueOf(10);
 Integer i2 = new Integer(10); //重新创建一个实例
@@ -74,7 +74,7 @@ System.out.println(i2==i1); //true
 
 ## 啃源码
 
-```
+```java
     public static Integer valueOf(int i) {
         if (i >= IntegerCache.low && i <= IntegerCache.high)
             return IntegerCache.cache[i + (-IntegerCache.low)];

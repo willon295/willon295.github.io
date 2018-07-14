@@ -6,7 +6,7 @@ date: 2016-05-12 00:08:00
 ---
 
 
-# XML
+# XML解析
 
 简介： 它是一种标记语言
 注意事项：
@@ -15,7 +15,7 @@ date: 2016-05-12 00:08:00
 
 ## 举个例子
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <employees>
     <employee id="1" deptName="教学部">
@@ -64,7 +64,7 @@ date: 2016-05-12 00:08:00
 - 重写 `characters()` 、 `startDocument()` 、 `startElement()` 、 `endElement()` 方法
 
 **举个例子**
-```
+```java
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -195,7 +195,7 @@ class EmployeeHandler extends DefaultHandler {
 3. 通过 `Document` 对象获取 `Element` 元素
 4. 基本操作
 
-```
+```java
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -276,7 +276,7 @@ public class EmployeeDOM {
 
 **套路**
 1. 通过 `SAXReader` 对象读取XML,获取 `Document` 实例
-```
+```java
 Document document =  new SAXReader().read(ClassLoader.getSystemResourceAsStream("city.xml"));
 ```
 2. 通过 `document` 实例 获取根节点

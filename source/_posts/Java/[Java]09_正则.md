@@ -36,7 +36,7 @@ date: 2016-05-12 00:09:00
 # Example
 
 
-```
+```java
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Main {

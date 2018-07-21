@@ -64,3 +64,30 @@ System.out.println(a == b);        // false
 System.out.println(a.equals(b));   // true
 
 ```
+
+
+
+# Java基础
+
+
+
+# 线程池
+
+
+
+# 算法
+
+
+
+## 从100亿个数字中找出最大的前10个
+
+
+# 数据库
+
+1. 索引
+2. 索引底层实现
+3. 聚簇索引
+4. 视图
+
+# 
+

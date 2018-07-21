@@ -92,47 +92,155 @@ public class RunnaImpl implements Runnable{
 2. 添加要执行的任务，任务必须是线程类
 3. 关闭线程池
 
+## 举个例子
+
+一个服务器， 创建线程池处理 N 个 客户端的请求
+
+### 服务端
+
+
+
 ```java
-public class ThreadPoolImpl {
 
-    public static void main(String[] args) {
-        Test t = new Test();
+/**
+ * 带有线程池的服务端
+ */
+public class Server implements Runnable {
+    private final ServerSocket serverSocket;
+    private final ExecutorService poll;
 
-        //创建线程池 ， 线程数量为5
-        ExecutorService es = Executors.newFixedThreadPool(5);//创建只有5 个线程的线程池
-
-        //执行  6 个任务
-        for (int i = 0; i < 6; i++) {
-            //开始线程
-            es.execute(t);
-        }
-        
-
-        System.out.println(es);
-
-        //关闭线程池
-        es.shutdown();
+    public Server(int port, int poolSize) throws IOException {
+        this.serverSocket = new ServerSocket(port);
+        this.poll = Executors.newFixedThreadPool(poolSize);
     }
 
 
+    @Override
+    public void run() { //run service
+
+        while (true) {
+            try {
+                poll.execute(new MyHandler(serverSocket.accept()));
+            } catch (IOException e) {
+                poll.shutdown();
+            }
+        }
+
+    }
+
+
+    /**
+     * 关闭资源
+     *
+     * @param es
+     */
+    void shutdown(ExecutorService es) {
+
+        poll.shutdown();
+
+        try {
+            if (!poll.awaitTermination(10, TimeUnit.SECONDS)) {
+
+                poll.shutdown();
+
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            poll.shutdown();
+            Thread.currentThread().interrupt();
+        }
+    }
 }
 
-class Test implements Runnable {
-    private static int t = 100;
+/**
+ * 处理客户端请求的类
+ */
+class MyHandler implements Runnable {
+    private Socket socket;
+    public MyHandler(Socket accept) {
+        this.socket = accept;
+    }
 
+    @Override
     public void run() {
-        while (t > 0) {
-            t--;
-            look();
+        InputStream in;
+        try {
+            in = socket.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String s = br.readLine();
+            System.out.println(Thread.currentThread().getId()+"____"+s);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+}
+```
 
-    public void  look(){
-        System.out.println(Thread.currentThread().getName()+"---"+t);
+
+
+### 客户端
+
+```java
+//客户端
+public class Client implements Runnable {
+
+    private Socket socket;
+    private String content;
+
+    public Client(String host, int port, String content) throws IOException {
+        this.socket = new Socket(host, port);
+        this.content = content;
+    }
+
+
+    //客户端一运行， 向服务端发送消息
+    @Override
+    public void run() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            bw.write(content);
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+
+
+### 具体使用
+
+```java
+//创建具有 20 个线程的服务端
+public class TestServer {
+    public static void main(String[] args) throws IOException {
+
+        //创建 只有 20 个线程的 服务器
+        Server server = new Server(9999, 20);
+        new Thread(server).start();
     }
 }
 
+//创建 1000个客户端 发送请求
+public class TestClient {
+    public static void main(String[] args) throws IOException {
+
+        //创建 1000 个线程 代表1000客户端访问服务器
+        for (int i = 0; i < 1000; i++) {
+            Client client = new Client("127.0.0.1", 9999, "client_" + i);
+            new Thread(client).start();
+        }
+
+    }
+}
 ```
+
+
+
+
+
+
 
 # 线程同步
 
@@ -143,7 +251,6 @@ class Test implements Runnable {
 2. 举个例子
 
 ```java
-package com.briup.thread;
 
 public class Account {
     private int balance;

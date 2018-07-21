@@ -6,10 +6,15 @@ date: 2017-07-01 00:00:00
 ---
 
 
+
+# 如何使用
+
+
+
 此项目基于 ` SpringBoot` , 依赖 `pagehelper-spring-boot-starter` , `common-lang3`
 
 1. 依赖
-```
+```xml
 <dependency>
     <groupId>com.github.pagehelper</groupId>
     <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -22,7 +27,7 @@ date: 2017-07-01 00:00:00
 </dependency>
 ```
 2. pageHelper配置信息
-```
+```yaml
 # pageHelper分页配置
 pagehelper:
   helper-dialect: mysql
@@ -33,7 +38,7 @@ pagehelper:
 ```
 3. 业务层使用
 
-```
+```java
     @Transactional
     public PageInfo<User> findAll(int page, int pageSize) {
         PageHelper.startPage(page, pageSize);
@@ -47,7 +52,7 @@ pagehelper:
 http://localhost:8888/list1?page=4&pageSize=2
 ```
 5. 返回数据
-```
+```json
 {
 	"total": 8,
 	"list": [{
@@ -85,7 +90,7 @@ http://localhost:8888/list1?page=4&pageSize=2
 通过代理,拦截方法,拼接 `limit` 语句,执行查询
 
 过程: 
-```
+```java
        PageHelper.startPage(page, pageSize);
        List<User> userList = userMapper.findAll();
        PageInfo<User> pageUserInfo =  new PageInfo<>(userList);
@@ -93,7 +98,7 @@ http://localhost:8888/list1?page=4&pageSize=2
 ```
 
 关键源码: 
-```
+```java
 public abstract class PageSqlSource implements SqlSource {
  /**
      * 获取正常的BoundSql
@@ -146,7 +151,7 @@ public abstract class PageSqlSource implements SqlSource {
 
 PageInfo源代码:
 
-```
+```java
 public class PageInfo<T> extends PageSerializable<T> {
     private int pageNum;
     private int pageSize;

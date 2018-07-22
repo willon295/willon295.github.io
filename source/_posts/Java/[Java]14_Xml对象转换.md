@@ -101,7 +101,6 @@ date:  2016-05-12 00:14:00
        }
    
    }
-   
    ```
 
    
@@ -122,4 +121,9 @@ date:  2016-05-12 00:14:00
    ```
 
    
+
+# 总结
+
+1. xml 转 java对象使用  `context.createUnmarshaller();`  ,调用 `unmarshal()` 方法
+2. java 转 xml 文件使用 `context.createMarshaller()` ， 调用 `marshal()` 方法
 

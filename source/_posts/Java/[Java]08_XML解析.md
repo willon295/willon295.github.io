@@ -292,5 +292,3 @@ List elements = root.elements();
 e.attribute("id").getValue(); //获取属性内容
 e.getText();  //获取开始、结束标签之间的文本内容
 ```
-
-

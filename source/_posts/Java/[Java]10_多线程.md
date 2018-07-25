@@ -342,3 +342,49 @@ public class Account {
 }
 
 ```
+
+
+
+
+
+# 线程池
+
+优点： 初始化时创建固定线程的线程池， 当有新的任务进入时，直接从线程池获取线程执行任务，而不是创建线程（因为线程创建是十分耗费资源的）
+
+1. 创建的方式， 通常情况下，可以通过  `Executors.newXXXXXThreadPool()`  创建
+
+
+
+## 自定义的线程池创建
+
+
+
+看源码： 
+
+```java
+   //源代码中，默认的拒绝策略处理（直接丢弃）
+ private static final RejectedExecutionHandler defaultHandler =
+        new AbortPolicy();
+
+//构造器
+public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory) {
+        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+             threadFactory, defaultHandler);
+    }
+
+```
+
+
+
+- corePoolSize: 核心线程数量，创建后不会被回收
+- maximumPoolSize： 线程池允许的最大线程数量
+- keepAliveTime： 线程存活时间（核心线程之外）
+- unit :  存活的时间单位（枚举类型 `Timeunit`）
+- workQueue: 队列，当任务数超过maximumPoolSize时， 任务会进入此队列; 但是不同的队列 线程池处理的方式不同
+  - LinkedBlockQueue: 如果使用此队列，maximumPoolSize失效，所有等待的任务都会进入此队列
+  - ArrayBlockingQueue<>(int capacity): FIFO调度策略的队列，需要指定容量、自定义拒绝策略

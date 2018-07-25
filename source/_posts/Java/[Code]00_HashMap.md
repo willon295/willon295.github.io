@@ -7,18 +7,16 @@ date: 2018-07-25 00:00:00
 
 
 
-1. 实现 `Map` 接口
+具体有两种实现：
 
-```java
-HashMap<K,V> extends AbstractMap<K,V>....
-abstract class AbstractMap<K,V> implements Map<K,V> .....
-```
+1.  数组 + 链表
+2. 红黑树
 
 
 
 ## 数组+链表存储结构
 
-使用  `数组`  +  ` 链表`  /   `红黑树`  实现
+
 
 1. 当链表长度小于 8 时， 采用 `数组` + `链表` 存储，存储的 `位置`  由  `key ` 计算得出的 ` hash` 决定
 2. 当链表长度 > 8 时，转换成 `红黑树`  存储

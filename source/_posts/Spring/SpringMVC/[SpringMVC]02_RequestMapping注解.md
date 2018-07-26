@@ -31,7 +31,10 @@ public class HelloHandler {
 1. value: 映射的url
 2. method: 分为 `RequestMethod.GET` , `RequestMethod.POST` , `RequestMethod.DELETE` , `RequestMethod.PUT`,分别对应 `查增删改`
 3. params: 后面传入一个数组 `{"name","age!=12"}` 解释为必须有 name 参数，而且age!= 12 的参数
-例子：
+  例子：
+4. headers: 绑定请求头信息
+5. consumes ： 能接受/处理的 `Content-type`
+6. produces: 返回的数据 `Content-type`
 ```
 @RequestMapping(value = "/hello",method = RequestMethod.GET,params ={"name","age!=12"} )
 ```

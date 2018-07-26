@@ -1,0 +1,277 @@
+---
+title: '[Linux]ArchLinux_Xfce4装机指南 '
+category: Linux
+tag: Linux
+date: 2018-07-26 00:00:00
+---
+
+
+
+官网教程有太多坑，比如说操作到某一步，只告诉你要干什么，具体怎么做不提，或者教程在其他网页某个角落。有些步骤是必须的，但是官网说 不需要或者压根不提。所以自己记笔记，避开不必要的坑。
+
+# 准备工作
+
+  1. 分区、格式化分区
+
+     ```bash
+        #查看分区情况
+        fdisk  -l
+        #分区
+        fdisk  /dev/sda
+        #根据实际情况分区
+        ........
+        #格式化分区
+        mkfs.ext4  /dev/sda1    
+     ```
+
+     
+
+2. 同步时间（可选）
+
+   ```bash
+    timedatectl set-ntp true
+   ```
+
+3. 挂载分区
+
+   ```bash
+   mount /dev/sda1  /mnt
+   #如果有其他分区同理挂载到相应的分区
+   ```
+
+
+
+# 安装
+
+
+
+## 基础安装
+
+
+
+1. 选择镜像源
+   编辑   `/etc/pacman.d/mirrorlist` ,  将  `cn`  的某个/全部注释 `#` 删除
+
+2. 安装基础系统
+
+   ```bash
+   pacstrap /mnt base
+   ```
+
+3. 生成 `Fstab` 
+
+   ```bash
+    genfstab -U /mnt >> /mnt/etc/fstab
+   ```
+
+4. 进入新的系统
+
+   ```bash
+   arch-chroot /mnt
+   ```
+
+5. 设置时区
+
+   ```bash
+   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+   ```
+
+6. 生成 `/etc/adjtime`
+
+   ```bash
+   hwclock --systohc 
+   ```
+
+7. 安装 vim
+
+   ```bash
+   pacman -S vim
+   ```
+
+8. 本地化
+
+   ```bash
+   
+   cat >  /etc/locale.gen << EOF
+   en_US.UTF-8 UTF-8
+   zh_CN.UTF-8 UTF-8
+   zh_TW.UTF-8 UTF-8
+   EOF
+   
+   locale-gen
+   
+   echo "LANG=en_US.UTF-8"  > /etc/locale.conf
+   ```
+
+9. 修改主机名, hosts映射
+
+   ```bash
+   echo "willon" > /etc/hostname
+   
+   cat >  /etc/hosts << EOF
+   127.0.0.1	localhost
+   ::1		localhost
+   EOF
+   ```
+
+10. 修改 root 密码
+
+    ```
+    passwd
+    ```
+
+    
+
+## 设置网络
+
+1. 启动dhcp
+
+   ```bash
+   systemctl enable  dhcpd
+   ```
+
+2. 无线连接
+
+   ```bash
+   pacman -S iw wpa_supplicant dialog
+   ```
+
+## 引导相关
+
+1. Initramfs、官网说可以不用，但是实际上要这一步
+
+   ```bash
+   mkinitcpio -p linux
+   ```
+
+2. 安装 grub 引导
+
+   ```
+   pacman -S grub
+   grub-install --target=i386-pc /dev/sda1 #这步好像不用也行
+   grub-mkconfig -o /boot/grub/grub.cfg   
+   ```
+
+3. 退出，重启进入新的系统
+
+
+
+# 零碎工作
+
+1. 添加用户组，用户
+
+   ```bash
+   groupadd willon
+   useradd -g willon -d -s /bin/bash -m willon
+   passwd
+   ```
+
+2. 安装中文字体、输入法
+
+   ```bash
+   pacman -S wqy-microhei wqy-zenhei
+   pacman -S fcitx fctix-libpinyin fcitx-configtool
+   ```
+
+3. 修改 `/etc/profile` 
+
+   ```bash
+   export GTK_IM_MODULE=fcitx
+   export QT_IM_MODULE=fcitx
+   export XMODIFIERS="@im=fcitx"
+   ```
+
+4. 配置声音
+
+   ```bash
+   pacman -S alsa-utils
+   vi nano /lib/systemd/system/alsa-state.service
+   #写入
+   [Install] 
+   WantedBy=multi-user.target
+   
+   #设置开机自启
+   systemctl start alsa-state.service
+   systemctl enable alsa-state.service
+   ```
+
+5. 启用国内源、multilib， 修改 `/etc/pacman.conf`
+
+   ```
+   [multilib] 
+   Include = /etc/pacman.d/mirrorlist
+   
+   [archlinuxcn]
+   SigLevel=Optional TrustAll
+   Server=http://mirrors.tsinghua.edu.cn/archlinuxcn/$arch
+   ```
+
+6. 同步仓库
+
+   ```
+   pacman  -Sy
+   ```
+
+   
+
+# 桌面环境
+
+
+
+1. `Xorg`
+
+   ```
+   pacman -S xorg
+   ```
+
+   
+
+2. `Xfce4` 
+
+   ```
+   pacman -S xfce4 xfce4-goodies
+   ```
+
+   
+
+3. 登陆管理器
+
+   ```bash
+    pacman -S lightdm lightdm-gtk-greeter
+   ```
+
+4. 启动登陆管理器
+
+   ```bash
+   systemctl start lightdm.service
+   ```
+
+5. 此时会进入图形界面，将其设置为开机自启动
+
+   ```bash
+   systemctl enable lightdm.service
+   ```
+
+6. 锁屏软件
+
+   ```bash
+   pacman -S xscreensaver xlockmore 
+   ```
+
+
+
+# 其他软件
+
+1. TIM 、Wechat 安装 `deepin.com.XXXX`  
+
+2. Chrome
+
+3. Mariadb，只是下载好软件包，并没有完整安装，需要手动安装
+
+   ```bash
+   mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+   ```
+
+   MySQL 默认禁用客户端自动补全功能。要在整个系统中启用它，编辑 `/etc/mysql/my.cnf`，将 `no-auto-rehash` 替换为 `auto-rehash`。下次客户端启动时就会启用自动补全。
+
+4. WPS-Office: 官网 [http://linux.wps.cn](http://linux.wps.cn)

@@ -1,0 +1,110 @@
+---
+title: '[Linux]Linux_Grub4dos4_制作多启动U盘'
+tag: Linux
+category: Linux
+date: 2016-06-13 12:22:33
+---
+
+
+# 主要目的
+
+
+
+**目的**：Linux下制作WinPE和,Ubuntu16，（CDlinux可选）二合一启动U盘，这样一个U盘可以实现装Windows和Linux双系统，装Linux时也不用刻录
+
+
+## 准备工作
+
+1. `grub4dos.7Z` ：[点击下载](http://grub4dos.chenall.net/downloads/grub4dos-0.4.6a-2017-06-25/)用于写入引导
+
+2. `TouchPE.iso`:  WindowsPE镜像，用于重装Windows
+
+3. `Ubuntu16.04.iso`： Ubuntu16镜像，用于装Linux
+
+## 开始动手
+
+1. 将 `grubdos.7Z` 解压,文件夹满权限
+	```
+	sudo chmod  -R 777 grubdosXXX
+	```
+2. 以`FAT32`格式化U盘
+3. 使用 `df` 或 `fdisk` 查看U盘，我的U盘为 `/dev/sdc4`
+4. cd到grub4dos目录，将其安装到U盘
+	```
+	sudo ./bootlace.com  --floppy  /dev/sdc4
+	```
+5. 把 `grub4dos` 中的 `grldr` 和 `menu.lst` 复制到 U 盘根目录
+6. 把`ubuntu16.iso`镜像中 `casper` 下的 `vmlinuz.efi` 和 `initrd.lz` 复制到 U 盘根目录或子目录中
+7. 把`TouchPE.iso`复制到 U 盘根目录
+8. 编辑 `menu.lst`文件，制作启动菜单
+
+  ```
+  #WindowsPE启动项
+  title WindowsPE
+  find --set-root --ignore-floppies --ignore-cd /TouchPE.iso
+  map /TouchPE.iso (hd32)
+  map --hook
+  chainloader (hd32)
+  boot
+  savedefault --wait=2
+  
+  #CDLinux启动项（可选）
+  title CDLinux
+  find --set-root --ignore-floppies --ignore-cd /CDlinux/bzImage
+  kernel /CDlinux/bzImage CDL_DEV=LABEL=CDLINUX CDL_LANG=zh_CN.UTF-8
+  initrd /CDlinux/initrd
+  boot
+  savedefault --wait=2
+  
+  #Debian启动项，debianboot只是个空文件
+  title Debian9 Installer
+  find --set-root --ignore-floppies --ignore-cd  /myboot/debian/debianboot
+  kernel   /myboot/debian/vmlinuz boot=casper noacpi iso-scan/filename=/myboot/debian/debian9.iso ro quiet splash 
+  initrd  /myboot/debian/initrd.gz
+  boot
+  savedefault --wait=2
+  
+  #Ubuntu16启动项
+  title Ubuntu16
+  kernel /vmlinuz.efi boot=casper iso-scan/filename=/ubuntu16.iso locale=zh_CN.UTF-8
+  initrd  /initrd.lz
+  boot
+  savedefault --wait=2
+  
+  title reboot 
+  reboot
+  
+  title halt 
+  halt
+	
+  ```
+## debian启动项注意
+
+1. `vlinuxz` 和 `initrd.gz`文件不能直接从ISO中直接提取，否则找不到光驱，无法进行安装。从下面地址下载：
+
+	```
+	http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/
+	```
+
+2. `amd64`,`arm64`镜像文件不能下错，一般使用`amd64`(debian-9.1-amd64-CD.iso)
+
+3. `debianboot`只是空文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

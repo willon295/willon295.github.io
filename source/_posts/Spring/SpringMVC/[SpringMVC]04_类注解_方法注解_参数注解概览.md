@@ -85,8 +85,89 @@ date: 2017-10-23 00:04:00
 
 6. `@RequestPart` : 绑定文件参数,即表单使用 `multipart/form-data`  且有文件类型参数时
 
+   ```java
+    @RequestPart("photo") MultipartFile file
    ```
-   @RequestPart(name="img") 
+
+   >  具体如何操作文件  `上传 /下载`  
+
+
+
+
+
+# 文件的上传下载
+
+
+
+## 上传
+
+
+
+1. 在方法注解处 使用 `consumes`   指定 处理的 `Content-type` 为  `multipart/form-data`
+
+2.  使用  `MutipartFile`  接收文件
+
+   ```java
+     @PostMapping(name = "/upload/photos"
+               , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+       public void upload(@RequestPart(name = "photo") MultipartFile photo) {
+   }
+   //常量定义如下
+   public static final String MULTIPART_FORM_DATA_VALUE = "multipart/form-data";
    ```
 
    
+
+
+
+## 下载
+
+1. 将方法返回类型改成 `byte[]`  字节数组
+
+2. 使用 `produces`  指定返回的 `Content-type` 为具体的文件类型
+
+   ```java
+      @GetMapping(value = "/get/{id}",produces = MediaType.IMAGE_JPEG_VALUE)
+       public byte[] download(@PathVariable("id") int id) {
+       }
+   ```
+
+
+
+## Demo
+
+
+
+```java
+    /**
+     * 文件上传
+     * @param id id
+     * @param file 传入的文件
+     * @throws IOException 异常
+     */
+    @PostMapping(value = "/{id}/photos", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void upload(@PathVariable int id, @RequestParam("photo") MultipartFile file) throws IOException {
+        FileOutputStream fos = new FileOutputStream(file.getOriginalFilename());
+        System.out.println("接收到文件： " + file.getOriginalFilename());
+        IOUtils.copy(file.getInputStream(), fos);
+        fos.close();
+    }
+
+    /**
+     * 文加的下载
+     * @param id id
+     * @return 文件的字节数组
+     * @throws IOException 异常
+     */
+    @GetMapping(value = "/{id}/icon", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] download(@PathVariable int id) throws IOException {
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("icon.jpg");
+        return IOUtils.toByteArray(is);//使用的是 apache common io 包
+    }
+```
+
+
+
+# 问题
+
+文件的上传 使用注解 `@RequestParam`  和 `@RequestPart` 都行

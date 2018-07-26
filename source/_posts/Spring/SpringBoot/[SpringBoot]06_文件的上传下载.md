@@ -23,28 +23,6 @@ import java.io.InputStream;
 @RequestMapping("/tv")
 public class TvseriesController {
 
-    @GetMapping(value = "/{id}")
-    public String get(@PathVariable int id) {
-        return "Get msg of :" + id;
-    }
-
-    @PostMapping(value = "/{id}")
-    public String add(@PathVariable int id, @RequestBody TVseries tVseries) {
-        tVseries.setId(id);
-        return "添加： " + tVseries;
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public String delete(@PathVariable int id) {
-        return "delete: " + id;
-    }
-
-
-    @PutMapping("/{id}")
-    public String update(TVseries tv) {
-        return "upate: " + tv;
-    }
-
     /**
      * 文件上传
      * @param id id

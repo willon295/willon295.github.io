@@ -258,6 +258,20 @@ date: 2018-07-26 00:00:00
    pacman -S xscreensaver xlockmore 
    ```
 
+### 普通用户无法进入桌面环境?
+
+将 /root/.Xauthority  文件拷贝到 用户目录， 更改用户组和拥有者
+
+```bash
+cp /root/.Xauthority  /home/willon/
+cd  /home/willon
+chown willon .Xauthority
+chgrp willon .Xauthority
+reboot
+```
+
+
+
 
 
 # 其他软件

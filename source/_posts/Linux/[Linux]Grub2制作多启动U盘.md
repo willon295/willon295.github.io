@@ -25,8 +25,7 @@ grub2-install --force --no-floppy --root-directory=/run/media/willon/CL  /dev/sd
 ls -l /dev/disk/by-uuid //比如我的 0934-7576
 ```
 4. 下载可用的 Winpe ISO 和 Fedora ISO
-5. 提取 Fedora ISO 中的 `/isolinux` 文件夹到 `U盘根目录`
-6. 下载WinPE启动需要的依赖文件 [memdisk](https://pan.baidu.com/s/1c0x63XQ)
+5. 下载WinPE启动需要的依赖文件 [memdisk](https://pan.baidu.com/s/1c0x63XQ)
 
 # grub.cfg
 
@@ -43,18 +42,20 @@ insmod vbe
 insmod loopback
 insmod iso9660
 terminal_output gfxterm
-set USBUUID="7C71-7790"
+set USBUUID="8631-511C"
+
 
 menuentry 'Windows PE'{
-        linux16 /boot/win/memdisk iso raw
+        linux16 /iso/win/memdisk iso raw
         echo 'Loading PE...'
-        initrd16 /boot/win/winpe.iso
+        initrd16 /iso/win/winpe.iso
 }
 
-menuentry 'Install Fedora 26' {
+
+menuentry 'Fedora 26 X86_64' {
         insmod fat
-		insmod loopback
-		set isofile=/boot/fedora/Fedora-Xfce-Live-x86_64-26-1.5.iso
+	    insmod loopback
+		set isofile=/iso/fedora/Fedora-Xfce-Live-x86_64-26-1.5.iso
         search --no-floppy --fs-uuid --set=root ${USBUUID}
 		loopback loop   $isofile
 		set root=(loop)
@@ -63,18 +64,20 @@ menuentry 'Install Fedora 26' {
 
 }
 
-menuentry "启动第一存储器主引导记录 " {
-    set root=(hd0)
-    chainloader +1
+
+menuentry "Arch Linux  x86_64" --class arch {
+  set isoname="archlinux-2018.07.01-x86_64.iso"
+  set isofile="/iso/arch/${isoname}"
+  echo "Using ${isoname}..."
+  loopback loop $isofile
+  linux (loop)/arch/boot/x86_64/vmlinuz img_label=CC  img_loop=$isofile
+  initrd (loop)/arch/boot/intel_ucode.img (loop)/arch/boot/x86_64/archiso.img
 }
-menuentry "启动第二存储器主引导记录 " {
-    set root=(hd1)
-    chainloader +1
-}
-menuentry "重启"{
+
+menuentry "Reboot"{
     reboot
 }
-menuentry "关机"{
+menuentry "Shotdown"{
     halt
 }
 

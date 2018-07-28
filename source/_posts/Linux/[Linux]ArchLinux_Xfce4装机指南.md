@@ -20,7 +20,7 @@ date: 2018-07-26 00:00:00
         fdisk  /dev/sda
         #根据实际情况分区
         ........
-        #格式化分区
+        #格式化分区,注意使用 ext4格式
         mkfs.ext4  /dev/sda1    
      ```
 
@@ -127,7 +127,7 @@ date: 2018-07-26 00:00:00
 1. 启动dhcp
 
    ```bash
-   systemctl enable  dhcpd
+   systemctl enable  dhcpcd
    ```
 
 2. 无线连接
@@ -146,9 +146,9 @@ date: 2018-07-26 00:00:00
 
 2. 安装 grub 引导
 
-   ```
+   ```bash
    pacman -S grub
-   grub-install --target=i386-pc /dev/sda1 #这步好像不用也行
+   grub-install --target=i386-pc /dev/sda
    grub-mkconfig -o /boot/grub/grub.cfg   
    ```
 
@@ -162,7 +162,7 @@ date: 2018-07-26 00:00:00
 
    ```bash
    groupadd willon
-   useradd -g willon -d -s /bin/bash -m willon
+   useradd -g willon -d /home/willon -s /bin/bash -m willon
    passwd
    ```
 
@@ -183,9 +183,9 @@ date: 2018-07-26 00:00:00
 
 4. 配置声音
 
-   ```bash
+   ```properties
    pacman -S alsa-utils
-   vi nano /lib/systemd/system/alsa-state.service
+   vim  /lib/systemd/system/alsa-state.service
    #写入
    [Install] 
    WantedBy=multi-user.target
@@ -193,17 +193,20 @@ date: 2018-07-26 00:00:00
    #设置开机自启
    systemctl start alsa-state.service
    systemctl enable alsa-state.service
+   
+   #安装pulseaudio
+   pacman -S pulseaudio
    ```
 
 5. 启用国内源、multilib， 修改 `/etc/pacman.conf`
 
-   ```
+   ```properties
    [multilib] 
    Include = /etc/pacman.d/mirrorlist
    
    [archlinuxcn]
-   SigLevel=Optional TrustAll
-   Server=http://mirrors.tsinghua.edu.cn/archlinuxcn/$arch
+   SigLevel = Optional TrustAll
+   Server =  http://repo.archlinuxcn.org/$arch
    ```
 
 6. 同步仓库
@@ -218,7 +221,7 @@ date: 2018-07-26 00:00:00
 
 
 
-1. `Xorg`
+1. `Xorg` [必装]
 
    ```
    pacman -S xorg
@@ -271,6 +274,38 @@ reboot
 ```
 
 
+
+# 开机优化 
+
+1. 检查无效、删除服务
+
+   ```bash
+   #检查无效的服务
+   systemctl --all | grep not-found
+   #删除无效的服务
+   systemctl mask XXX
+   ```
+
+2. 关闭开机延迟
+
+   ```
+   echo  GRUB_FORCE_HIDDEN_MENU='true' >>  /etc/default/grub
+   ```
+
+3. 将文件 [31_hold_shift](https://gist.github.com/Jetchisel/10407606)  放入 `/etc/grub.d`  , 给其可执行权限
+
+   ```
+   mv 31_hold_shift /etc/grub.d/
+   chmod a+x 31_hold_shift
+   ```
+
+4. 重新制作引导
+
+   ```
+   grub-mkconfig  -o /boot/grub/grub.cfg
+   ```
+
+   
 
 
 

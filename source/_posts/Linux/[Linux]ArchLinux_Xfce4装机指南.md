@@ -95,7 +95,6 @@ date: 2018-07-26 00:00:00
    cat >  /etc/locale.gen << EOF
    en_US.UTF-8 UTF-8
    zh_CN.UTF-8 UTF-8
-   zh_TW.UTF-8 UTF-8
    EOF
    
    locale-gen
@@ -124,16 +123,18 @@ date: 2018-07-26 00:00:00
 
 ## 设置网络
 
-1. 启动dhcp
+1. 安装必要软件
+
+   ```bash
+   pacman -S networkmanager  network-manager-applet net iw wpa_supplicant dialog
+   
+   ```
+
+2. 开机自启
 
    ```bash
    systemctl enable  dhcpcd
-   ```
-
-2. 无线连接
-
-   ```bash
-   pacman -S iw wpa_supplicant dialog
+   systemctl enable  NetworkManager
    ```
 
 ## 引导相关
@@ -148,7 +149,7 @@ date: 2018-07-26 00:00:00
 
    ```bash
    pacman -S grub
-   grub-install --target=i386-pc /dev/sda
+   grub-install --force /dev/sda
    grub-mkconfig -o /boot/grub/grub.cfg   
    ```
 
@@ -163,7 +164,7 @@ date: 2018-07-26 00:00:00
    ```bash
    groupadd willon
    useradd -g willon -d /home/willon -s /bin/bash -m willon
-   passwd
+   passwd willon
    ```
 
 2. 安装中文字体、输入法
@@ -179,6 +180,7 @@ date: 2018-07-26 00:00:00
    export GTK_IM_MODULE=fcitx
    export QT_IM_MODULE=fcitx
    export XMODIFIERS="@im=fcitx"
+   PS1='\[\e[1;36m\]\u@\h:\[\e[32m\]\w\[\e[36m\] > \[\e[m'
    ```
 
 4. 配置声音
@@ -203,10 +205,9 @@ date: 2018-07-26 00:00:00
    ```properties
    [multilib] 
    Include = /etc/pacman.d/mirrorlist
-   
    [archlinuxcn]
    SigLevel = Optional TrustAll
-   Server =  http://repo.archlinuxcn.org/$arch
+   Server =  http://mirror.tuna.tsinghua.edu.cn/archlinuxcn/$arch
    ```
 
 6. 同步仓库
@@ -258,7 +259,7 @@ date: 2018-07-26 00:00:00
 6. 锁屏软件
 
    ```bash
-   pacman -S xscreensaver xlockmore 
+   pacman -S xscreensaver 
    ```
 
 ### 普通用户无法进入桌面环境?
@@ -292,12 +293,102 @@ reboot
    echo  GRUB_FORCE_HIDDEN_MENU='true' >>  /etc/default/grub
    ```
 
-3. 将文件 [31_hold_shift](https://gist.github.com/Jetchisel/10407606)  放入 `/etc/grub.d`  , 给其可执行权限
-
+3. 将文件 [31_hold_shift](https://gist.github.com/Jetchisel/10407606)  (开机按住shift进入启动菜单，否则直接跳过)   放入 `/etc/grub.d`  , 给其可执行权限
    ```
    mv 31_hold_shift /etc/grub.d/
    chmod a+x 31_hold_shift
    ```
+
+   31_hold_shift文件的内容：
+   ```bash
+   #! /bin/sh
+   set -e
+   prefix="/usr"
+   exec_prefix="${prefix}"
+   datarootdir="${prefix}/share"
+   
+   export TEXTDOMAIN=grub
+   export TEXTDOMAINDIR="${datarootdir}/locale"
+   source "${datarootdir}/grub/grub-mkconfig_lib"
+   
+   found_other_os=
+   
+   make_timeout () {
+   
+     if [ "x${GRUB_FORCE_HIDDEN_MENU}" = "xtrue" ] ; then 
+       if [ "x${1}" != "x" ] ; then
+         if [ "x${GRUB_HIDDEN_TIMEOUT_QUIET}" = "xtrue" ] ; then
+       verbose=
+         else
+       verbose=" --verbose"
+         fi
+   
+         if [ "x${1}" = "x0" ] ; then
+       cat <<EOF
+   if [ "x\${timeout}" != "x-1" ]; then
+     if keystatus; then
+       if keystatus --shift; then
+         set timeout=-1
+       else
+         set timeout=0
+       fi
+     else
+       if sleep$verbose --interruptible 3 ; then
+         set timeout=0
+       fi
+     fi
+   fi
+   EOF
+         else
+       cat << EOF
+   if [ "x\${timeout}" != "x-1" ]; then
+     if sleep$verbose --interruptible ${GRUB_HIDDEN_TIMEOUT} ; then
+       set timeout=0
+     fi
+   fi
+   EOF
+         fi
+       fi
+     fi
+   }
+   
+   adjust_timeout () {
+     if [ "x$GRUB_BUTTON_CMOS_ADDRESS" != "x" ]; then
+       cat <<EOF
+   if cmostest $GRUB_BUTTON_CMOS_ADDRESS ; then
+   EOF
+       make_timeout "${GRUB_HIDDEN_TIMEOUT_BUTTON}" "${GRUB_TIMEOUT_BUTTON}"
+       echo else
+       make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}"
+       echo fi
+     else
+       make_timeout "${GRUB_HIDDEN_TIMEOUT}" "${GRUB_TIMEOUT}"
+     fi
+   }
+     adjust_timeout
+   
+       cat <<EOF
+   if [ "x\${timeout}" != "x-1" ]; then
+     if keystatus; then
+       if keystatus --shift; then
+         set timeout=-1
+       else
+         set timeout=0
+       fi
+     else
+       if sleep$verbose --interruptible 3 ; then
+         set timeout=0
+       fi
+     fi
+   fi
+   EOF
+   ```
+
+   
+
+   
+
+
 
 4. 重新制作引导
 
@@ -313,9 +404,7 @@ reboot
 
 1. TIM 、Wechat 安装 `deepin.com.XXXX`  
 
-2. Chrome
-
-3. Mariadb，只是下载好软件包，并没有完整安装，需要手动安装
+2. Mariadb，只是下载好软件包，并没有完整安装，需要手动安装
 
    ```bash
    mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
@@ -323,4 +412,15 @@ reboot
 
    MySQL 默认禁用客户端自动补全功能。要在整个系统中启用它，编辑 `/etc/mysql/my.cnf`，将 `no-auto-rehash` 替换为 `auto-rehash`。下次客户端启动时就会启用自动补全。
 
-4. WPS-Office: 官网 [http://linux.wps.cn](http://linux.wps.cn)
+3. WPS-Office: 官网 [http://linux.wps.cn](http://linux.wps.cn)
+
+
+
+## 自动挂载硬盘
+
+```
+pacman -S  gvfs  ntfs-3g
+```
+
+
+

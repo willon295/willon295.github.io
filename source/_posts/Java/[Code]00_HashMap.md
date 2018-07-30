@@ -1,8 +1,8 @@
 ---
-title: '[Java]JDK8中HashMap存储结构'
+title: '[Java]JDK8中HashMap存储结构[修正版]'
 tag: Java
 category: Java
-date: 2018-07-25 00:00:00
+date: 2018-07-29 00:00:00
 ---
 
 
@@ -14,12 +14,32 @@ date: 2018-07-25 00:00:00
 
 
 
+## 关键词定义、解释
+
+1. `size()` : Map 中 元素的总数
+2. `threshold` : 阈值
+3. `capcity` : 容量
+4. `loadFactor` : 加载因子
+5. `Node<K,V>` : 链表，可以 大于 8
+6. `TreeNode<K,V>` : 树
+
+
+
 ## 数组+链表存储结构
 
+map刚初始化时，采用本结构进行存储。
+
+### 关键属性
+
+```java
+    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; //默认 capcity = 16，之后每次 * 2
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;  // 默认加载 0.75
+    static final int TREEIFY_THRESHOLD = 8;         // 树化 或者 扩容的 阈值 
+    static final int MIN_TREEIFY_CAPACITY = 64;    // 树化的 capcity 最低值
+ int threshold; // map 的属性， 初始化时为 16 × 0.75 = 12， 之后每次 × 2
+```
 
 
-1. 当链表长度小于 8 时， 采用 `数组` + `链表` 存储，存储的 `位置`  由  `key ` 计算得出的 ` hash` 决定
-2. 当链表长度 > 8 时，转换成 `红黑树`  存储
 
 ###  数组 
 
@@ -41,7 +61,6 @@ static class Node<K,V> implements Map.Entry<K,V> {
         final K key;
         V value;
         Node<K,V> next;   //链表的下一个node
- 
         Node(int hash, K key, V value, Node<K,V> next) { ... }
         public final K getKey(){ ... }
         public final V getValue() { ... }
@@ -50,6 +69,15 @@ static class Node<K,V> implements Map.Entry<K,V> {
         public final V setValue(V newValue) { ... }
         public final boolean equals(Object o) { ... }
 }
+```
+
+
+
+### 什么时候扩容
+
+```
+((size()  / loadFactor) > threshold ) 
+|| (table[i].length > TREEIFY_THRESHOLD && capcity < MIN_TREEIFY_CAPACITY ) 
 ```
 
 
@@ -73,7 +101,6 @@ static class Node<K,V> implements Map.Entry<K,V> {
       // h ^ (h >>> 16)  为第二步 高位参与运算
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
-
 
 	/**
 	 * 具体存储过程
@@ -100,7 +127,8 @@ static class Node<K,V> implements Map.Entry<K,V> {
                         //向链表中添加元素
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) 
-                            //如果大于 8 ，转换成红黑树，并且将原有的数据传递给树
+                            //如果大于 8 ，具体扩容还是树化分情况  ----> #treeifyBin()
+                            // 如果是 扩容， 那么只要遍历到 链表长度大于 8 的， 扩容
                             treeifyBin(tab, hash);
                         break;
                     }
@@ -125,66 +153,57 @@ static class Node<K,V> implements Map.Entry<K,V> {
         return null;
     }
     
-```
-
-
-
-## 关于扩容
-
-```java
-
-static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // 默认的初始化容量 16
-static final int MAXIMUM_CAPACITY = 1 << 30;   //最大容量
-
-/** 当  链表长度 大于 8 时， 会自动转换成 红黑树存储
- * The bin count threshold for using a tree rather than list for a
- * bin.  Bins are converted to trees when adding an element to a
- * bin with at least this many nodes. The value must be greater
- * than 2 and should be at least 8 to mesh with assumptions in
- * tree removal about conversion back to plain bins upon
- * shrinkage.
- */
-static final int TREEIFY_THRESHOLD = 8;
-    
-
-//随机因子
-static final float DEFAULT_LOAD_FACTOR = 0.75f;
-/**
- *  扩容具体实现
- */
-final Node<K,V>[] resize() {
-        Node<K,V>[] oldTab = table;
-        int oldCap = (oldTab == null) ? 0 : oldTab.length;
-        int oldThr = threshold;
-        int newCap, newThr = 0;
-        if (oldCap > 0) {
-            if (oldCap >= MAXIMUM_CAPACITY) {
-            //如果已经是最大容量，不再扩容
-                threshold = Integer.MAX_VALUE;
-                return oldTab;
-            }
-            else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
-                     oldCap >= DEFAULT_INITIAL_CAPACITY)
-                // 旧的容量 × 2
-                newThr = oldThr << 1; 
+   //  --->  #treeifyBin : 具体树化还是  扩容由此方法决定
+    final void treeifyBin(Node<K,V>[] tab, int hash) {
+        int n, index; Node<K,V> e;
+        //如果 capcity  < 64 ,扩容
+        if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
+            resize(); // threshold、capcity 都 × 2
+        //如果 capcity > 64 树化
+        else if ((e = tab[index = (n - 1) & hash]) != null) {
+            TreeNode<K,V> hd = null, tl = null;
+            do {
+                TreeNode<K,V> p = replacementTreeNode(e, null);
+                if (tl == null)
+                    hd = p;
+                else {
+                    p.prev = tl;
+                    tl.next = p;
+                }
+                tl = p;
+            } while ((e = e.next) != null);
+            if ((tab[index] = hd) != null)
+                hd.treeify(tab);
         }
-        else if (oldThr > 0) // initial capacity was placed in threshold
-            newCap = oldThr;
-        else {               // zero initial threshold signifies using defaults
-            newCap = DEFAULT_INITIAL_CAPACITY;
-            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
-        }
-        if (newThr == 0) {
-            float ft = (float)newCap * loadFactor;
-            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
-                      (int)ft : Integer.MAX_VALUE);
-        }
-        }
+    }
+
+
 ```
 
 
 
 ## 红黑树存储
+
+
+
+## 关键属性
+
+```java
+    static final int TREEIFY_THRESHOLD = 8;  //树化的链表最小长度
+    static final int UNTREEIFY_THRESHOLD = 6; //转成 非树化 的最小因子
+    static final int MIN_TREEIFY_CAPACITY = 64; // 树化的最小容量
+```
+
+
+
+## 树化及非树化
+
+1. 容量 大于 `64`  时，树化
+2. 阈值小于 6 时 ，转化成 ` 数组 +  链表` 
+
+
+
+### 树的定义
 
 ```java
  static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
@@ -194,8 +213,6 @@ final Node<K,V>[] resize() {
         TreeNode<K,V> prev;    // needed to unlink next upon deletion
         boolean red;  //是否为 红色
 ```
-
-
 
 
 
@@ -212,11 +229,8 @@ final Node<K,V>[] resize() {
     static final int MIN_TREEIFY_CAPACITY = 64;
     final void treeifyBin(Node<K,V>[] tab, int hash) {
         int n, index; Node<K,V> e;
-        
-        if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
-            //容量小于 64，扩容，
+        if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY){
             resize();
-       
         else if ((e = tab[index = (n - 1) & hash]) != null) {
             TreeNode<K,V> hd = null, tl = null;
             do {
@@ -235,6 +249,8 @@ final Node<K,V>[] resize() {
         }
     }
 ```
+
+
 
 
 

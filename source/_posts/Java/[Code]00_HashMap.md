@@ -10,9 +10,7 @@ date: 2018-07-29 00:00:00
 具体有两种实现：
 
 1.  数组 + 链表
-2. 红黑树
-
-
+2. 数组 + 红黑树
 
 ## 关键词定义、解释
 
@@ -75,14 +73,12 @@ static class Node<K,V> implements Map.Entry<K,V> {
 
 ### 什么时候扩容
 
-```
+```java
 ((size()  / loadFactor) > threshold ) 
 || (table[i].length > TREEIFY_THRESHOLD && capcity < MIN_TREEIFY_CAPACITY ) 
 ```
 
-
-
-
+> 原来 链表中的元素,   重新 `hash` 存放进  `新的数组` 
 
 ## put() 方法
 
@@ -182,7 +178,7 @@ static class Node<K,V> implements Map.Entry<K,V> {
 
 
 
-## 红黑树存储
+## 数组 + 红黑树存储
 
 
 
@@ -229,6 +225,8 @@ static class Node<K,V> implements Map.Entry<K,V> {
     static final int MIN_TREEIFY_CAPACITY = 64;
     final void treeifyBin(Node<K,V>[] tab, int hash) {
         int n, index; Node<K,V> e;
+        
+        //如果容量小于 64 ,优先扩容，而不是树化
         if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY){
             resize();
         else if ((e = tab[index = (n - 1) & hash]) != null) {

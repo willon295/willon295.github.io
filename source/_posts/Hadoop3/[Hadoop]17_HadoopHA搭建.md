@@ -24,7 +24,7 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
 
 ## core-site.xml
 
-```
+```xml
 <configuration>
 
     <!-- Set cluster name -->
@@ -36,7 +36,7 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
     <!-- Set zookerper address -->
     <property>
         <name>ha.zookeeper.quorum</name>
-        <value>node-10:2181,node-11:2181,node-12:2181</value>
+        <value>node-11:2181,node-12:2181,node-13:2181</value>
     </property>
 
     <!-- Set tmpdir -->
@@ -50,7 +50,7 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
 ## hdfs-site.xml
 
 主要配置通信节点
-```
+```xml
 <configuration>
 
     <!-- Set nameservices,which is the same as  in core-site.xml-->
@@ -62,33 +62,33 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
     <!--Set namesevices  IDs -->
     <property>
         <name>dfs.ha.namenodes.mycluster</name>
-        <value>nn0,nn1</value>
+        <value>nn1,nn2</value>
     </property>
 
     <!--Set rpc-address -->
     <property>
-        <name>dfs.namenode.rpc-address.mycluster.nn0</name>
-        <value>node-00:9000</value>
-    </property>
-    <property>
         <name>dfs.namenode.rpc-address.mycluster.nn1</name>
         <value>node-01:9000</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.mycluster.nn2</name>
+        <value>node-02:9000</value>
     </property>
 
     <!--Set http-address  IDs -->
     <property>
-        <name>dfs.namenode.http-address.mycluster.nn0</name>
-        <value>node-00:50070</value>
-    </property>
-    <property>
         <name>dfs.namenode.http-address.mycluster.nn1</name>
         <value>node-01:50070</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-address.mycluster.nn2</name>
+        <value>node-02:50070</value>
     </property>
 
     <!--Set the path of jounalNode -->
     <property>
         <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://node-10:8485;node-11:8485;node-12:8485/mycluster</value>
+        <value>qjournal://node-11:8485;node-12:8485;node-13:8485/mycluster</value>
     </property>
     <property>
           <name>dfs.journalnode.edits.dir</name>
@@ -138,33 +138,33 @@ Hadoop HA(High Availability) 包括 `HDFS-HA` 和 `YARN-HA` ，主要解决单�
 只能配置 datanode 的地址
 
 ```
-node-10
 node-11
 node-12
+node-13
 ```
 
 ## 格式化以及启动集群
 
-1. 启动 zk 集群 =>  node-10,node-11,node-12
+1. 启动 zk 集群 =>  node-11,node-12,node-13
 ```
 zkServer.sh start
 //出现进程  QuorumPeerMain
 ```
 
-2. 启动 `journalnode`，格式化 ZK => node-00, node-01
+2. 启动 `journalnode`，格式化 ZK => node-01, node-02
 ```
 hdfs zkfc -formatZK
 //出现进程  DFSZKFailoverController
 ```
-3. 格式化 namenode => node-00
+3. 格式化 namenode => node-01
 ```
 hadoop  namenode  -format
 ```
-4. 启动 dfs集群  => node-00
+4. 启动 dfs集群  => node-01
 ```
 start-dfs.sh 
 ```
-5. 启动 standby => node-01
+5. 启动 standby => node-02
 ```
 hdfs namenode -bootstrapstandby
 ```
@@ -172,14 +172,26 @@ hdfs namenode -bootstrapstandby
 
 
 
-
 # Yarn-HA 搭建
+
+## mapred-site.xml
+
+```xml
+<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+```
+
+
 
 
 ## yarn-site.sh
 
 
-```
+```xml
 <configuration>
 
     <property>
@@ -195,33 +207,33 @@ hdfs namenode -bootstrapstandby
 
     <property>
             <name>yarn.resourcemanager.ha.rm-ids</name>
-            <value>rm0,rm1</value>
+            <value>rm1,rm2</value>
     </property>
 
-    <property>
-            <name>yarn.resourcemanager.hostname.rm0</name>
-            <value>node-00</value>
-    </property>
     <property>
             <name>yarn.resourcemanager.hostname.rm1</name>
             <value>node-01</value>
     </property>
-
-
     <property>
-            <name>yarn.resourcemanager.webapp.address.rm0</name>
-            <value>node-00:8088</value>
+            <name>yarn.resourcemanager.hostname.rm2</name>
+            <value>node-02</value>
     </property>
+
+
     <property>
             <name>yarn.resourcemanager.webapp.address.rm1</name>
             <value>node-01:8088</value>
+    </property>
+    <property>
+            <name>yarn.resourcemanager.webapp.address.rm2</name>
+            <value>node-02:8088</value>
     </property>
 
 
 
     <property>
             <name>yarn.resourcemanager.zk-address</name>
-            <value>node-10:2181,node11:2181,node-12:2181</value>
+            <value>node-11:2181,node12:2181,node-13:2181</value>
     </property>
 
     <property>
@@ -237,11 +249,11 @@ hdfs namenode -bootstrapstandby
 
 ## 启动 yarn-ha集群
 
-1. 启动 yarn 集群 => node-00
+1. 启动 yarn 集群 => node-01
 ```
 start-yarn.sh
 ```
-2. 启动 resourcemanager => node01
+2. 启动 resourcemanager => node02
 ```
 yarn-daemon.sh start resourcemanger
 ```

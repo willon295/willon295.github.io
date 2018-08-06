@@ -83,14 +83,48 @@ public class RunnaImpl implements Runnable{
 
 ## 通过Callable和FutureTask创建线程
 
-待完善
+这个方式创建可以获取 `子线程` 的  `返回值` 
+
+1. 自定义线程类， 实现 `Callable`  接口， 重写  `call()` 方法
+2. 使用  `FutureTask` 包装这个线程
+3. 将包装完毕的 `FutureTask` 当成线程 放入 `线程池`  或者 `Thread`  中运行
+
+
+
+### 举个例子
+
+- 自定义线程类 ，实现 `Callable` 接口，指定返回值类型，重写 `call` 方法
+
+  ```java
+  //需要 指定 返回值
+  public class MyCallable implements Callable<String> {
+      @Override
+      public String call() throws Exception {
+          return Thread.currentThread().getName();
+      }
+  }
+  
+  ```
+
+- 使用 `FutureTask`  包装这个类的实例
+
+  ```java
+  MyCallable myCallable = new MyCallable();
+  FutureTask<String> ft = new FutureTask<>(myCallable);
+  
+  //执行这个包装后额任务线程
+   new Thread(ft).start();
+  ```
+
+  
 
 ## 通过线程池创建线程
 
 
 1. 创建线程池
 2. 添加要执行的任务，任务必须是线程类
-3. 关闭线程池
+3. 提交任务
+4. 关闭线程池
 
 ## 举个例子
 
@@ -387,4 +421,32 @@ public ThreadPoolExecutor(int corePoolSize,
 - unit :  存活的时间单位（枚举类型 `Timeunit`）
 - workQueue: 队列，当任务数超过maximumPoolSize时， 任务会进入此队列; 但是不同的队列 线程池处理的方式不同
   - LinkedBlockQueue: 如果使用此队列，maximumPoolSize失效，所有等待的任务都会进入此队列
-  - ArrayBlockingQueue<>(int capacity): FIFO调度策略的队列，需要指定容量、自定义拒绝策略
+  - ArrayBlockingQueue<>(int capacity,boolean fair): FIFO调度策略的队列，需要指定容量、自定义拒绝策略, 可以设置 `公平` 或者 `不公平` 获得锁
+    - 公平： 按照等待的时间竞争锁
+    - 非公平： 自由竞争，可以提高程序并发能力
+
+
+
+# 拒绝策略
+
+- ` ThreadPoolExecutor.AbortPolicy`  
+  **直接拒绝策略** ：默认的拒绝策略， 直接抛出异常 
+
+  ```
+  A handler for rejected tasks that throws a RejectedExecutionException.
+  ```
+
+- `ThreadPoolExecutor.CallerRunsPolicy` 
+  **调用者执行任务策略** ： 在执行 `execute()` 方法的 `调用者` 中执行 `被拒绝的任务` ， 谁调用的就在谁那运行
+
+- `ThreadPoolExecutor.DiscardOldestPolicy`
+  **丢弃最老任务策略** ： 
+
+  ```
+  1. 丢弃最老的 未执行的 任务
+  2. 执行新来的任务
+  ```
+
+- `ThreadPoolExecutor.DiscardPolicy` 
+  **静默丢弃策略**：
+  直接丢弃，不会抛出异常,程序正常运行

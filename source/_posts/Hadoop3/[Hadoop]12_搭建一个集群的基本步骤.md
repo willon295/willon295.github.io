@@ -171,7 +171,7 @@ hdpdn1
 hdpdn2000
 ```
 4. 拷贝当前 `hadoop` 文件夹到所有字节点
-```
+```bash
 SERVERS='hdpdn0 hdpdn1 hdpdn2'
 for SERVER in $SERVER
 do
@@ -193,7 +193,7 @@ start-dfs.sh
 
 YARN 集群负责任务调度，作业分发
 1. `mapred-site.xml`
-```
+```xml
 <configuration>
 	<property>
 		<name>mapreduce.framework.name</name>
@@ -203,7 +203,7 @@ YARN 集群负责任务调度，作业分发
 ```
 
 2. `yarn-site.xml`
-```
+```xml
 <configuration>
 	<!--  resourcemanager主机地址 -->
 	<property>

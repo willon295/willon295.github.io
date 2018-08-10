@@ -60,5 +60,3 @@ date: 2017-02-02: 00:00:00
 
 - **-XX:+CMSIncrementalMode**: 增量模式
 - **-XX:ParallelGCThreads=n** ： 线程数
-
-# 

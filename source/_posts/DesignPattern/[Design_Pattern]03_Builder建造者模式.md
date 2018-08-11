@@ -8,12 +8,67 @@ date: 2018-06-10 00:03:00
 Builder模式是一步一步创建一个复杂对象的创建型模式，它允许用户在不知道内部构建细节的情况下，可以更精细地控制对象的构造流程。
 该模式是为了将构建复杂对象的过程和它的部件解耦，使得构建过程和部件的表示隔离开来。
 
-# 使用内部Builder(简单)
+# 单/多职责Builder(简单)
 
 ![img](/images/dp03_builder_01.png)
 
-1. 具体实现
+## 单一职责的Builder
+
+比如 `StringBuilder` ,就是无限的 `append()` ,好比堆积木。
+手写一个StringBuilder
+```java
+/**
+ * Created By willon
+ *
+ * @author willon
+ */
+public class MyStringBuilder {
+
+    private String base = "";
+
+
+    public MyStringBuilder append(String s) {
+        base += s;
+        return this;
+    }
+
+    public MyStringBuilder append(Integer i) {
+        base += String.valueOf(i);
+        return this;
+    }
+
+    public MyStringBuilder append(Double d) {
+        base += String.valueOf(d);
+        return this;
+    }
+
+    public MyStringBuilder append(Object o) {
+        base += o.toString();
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return base;
+    }
+
+    public static void main(String[] args) {
+
+        MyStringBuilder my = new MyStringBuilder();
+        my.append("sdfdsf")
+                .append(123)
+                .append(456654.00)
+                .append("aaadf");
+        System.out.println(my);
+    }
+}
+
 ```
+
+## 多职责的，结果统一的Builder
+
+1. 举个例子： 一部手机的建造过程
+```java
 public class SmartPhone {
 
     //手机编号
@@ -98,7 +153,7 @@ public class SmartPhone {
 
 ```
 2. 测试
-```
+```java
 public class Test {
     public static void main(String[] args) {
         // 可  链式调用
@@ -120,7 +175,7 @@ public class Test {
 }
 ```
 
-# 常规的Builder模式
+# 职责分离的Builder模式
 
 1. 具体的产品
 2. 一个抽象建造者，声明有哪些建造的方法、一个build() 方法，返回类型是产品类型，不管内部如何实现（技术主管）
@@ -137,7 +192,7 @@ public class Test {
 ![img](/images/dp03_builder_00_01.png)
 
 1. 产品
-```
+```java
 public class Phone {
     private String  name;
     private int  id;
@@ -179,20 +234,20 @@ public class Phone {
 
 ```
 2. 抽象建造者类（技术主管）
-```
+```java
 public abstract class PhoneBuilder {
-
+	//要设置手机名称
     abstract PhoneBuilder setName(String name);
-
+	//要设置手机编号
     abstract PhoneBuilder setId(int id);
-
+	//要设置手机的功能
     abstract PhoneBuilder setFunction(String  fuc);
-
+	//最后组装手机
     abstract Phone build();
 }
 ```
 3. 具体建造者类(码农)
-```
+```java
 public class ConcretePhoneBuilder extends PhoneBuilder {
     private Phone phone;
     private InnerProductCache cache  = new InnerProductCache();
@@ -255,7 +310,7 @@ public class ConcretePhoneBuilder extends PhoneBuilder {
 
 ```
 4. Director(产品经理)
-```
+```java
 public class Director {
     
     //喊一个码农过来做产品
@@ -274,7 +329,7 @@ public class Director {
 ```
 5. 测试
 
-```
+```java
     public static void main(String[] args) {
         
         //上来一位产品经理

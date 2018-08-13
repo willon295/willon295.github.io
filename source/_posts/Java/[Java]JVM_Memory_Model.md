@@ -2,7 +2,7 @@
 title: '[Java]JVM_Java内存模型(待续)'
 category: Java
 tag: Java
-date: 2017-02-02: 00:00:00
+date: 2017-02-02 00:00:00
 ---
 
 [官方文档](https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html)

@@ -4,10 +4,12 @@ node_js: stable
 # S: Build Lifecycle
 install:
   - npm install
-  - npm install hexo-generator-searchdb --save
   - npm install hexo-generator-sitemap --save
   - npm install hexo-generator-baidu-sitemap --save
-
+  - npm install hexo-renderer-less --save
+  - npm install hexo-generator-feed --save
+  - npm install hexo-generator-json-content --save
+  - npm install hexo-helper-qrcode --save
 before_script:
   - npm install -g gulp
 
@@ -18,7 +20,7 @@ after_script:
   - cd ./public
   - git init
   - git config user.name "willon295"
-  - git config user.email "chenlong951126@gmail.com"
+  - git config user.email "willon295@gmail.com"
   - git add .
   - git commit -m "Update docs"
   - git push --force --quiet "https://${github_token}@${GH_REF}" master:master

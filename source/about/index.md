@@ -37,13 +37,13 @@ comments: false
 * 技术: Tomcat , Servlet , Java注解, 反射 , JSON
 * 简介：
     * 实现注解:
-```
-@AutoWired,@Resource, @Bean , @Configuration 
-@Component  ,@Service , @Controller , @RestController
-@PathVariable , @RequestBody, @RequestMapping , @RequestParam
-@ResponseBody ,@SpringBootApplication
-```
-* 实现功能
+	```
+	@AutoWired,@Resource, @Bean , @Configuration 
+	@Component  ,@Service , @Controller , @RestController
+	@PathVariable , @RequestBody, @RequestMapping , @RequestParam
+	@ResponseBody ,@SpringBootApplication
+	```
+    * 实现功能
         * 内置Tomcat ,项目以 Jar 包运行, 不需要额外安装Tomcat
         * 能处理Restful风格请求
         * 能处理 JSON 格式数据请求

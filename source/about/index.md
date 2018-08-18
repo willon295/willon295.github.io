@@ -114,7 +114,7 @@ comments: false
 
 
 - 编程语言: Java
-- 后端框架: Spring/SpringMVC/SpringBoot/SpringCloud/Mybatis
+- 后端框架: SpringMVC/SpringBoot/SpringCloud/Mybatis
 - 前端框架：Bootstrap/JQery/Vue
 - 数据库相关：MySQL
 - 常用工具: Git/Maven

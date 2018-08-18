@@ -37,8 +37,8 @@ comments: false
 
 ## 微服务架构电商项目(2018-6~2018-6)
 
-* 后端技术: Spring Boot + Spring Cloud + Spring MVC + Mybatis + MySQL
-* 前端技术: Nginx + JQery + Ajax + HTML + CSS
+* 后端技术: `Spring Boot` + `Spring Cloud` + `Spring MVC` + `Mybatis` + `MySQL`
+* 前端技术: `Nginx` + `JQery` + `Ajax` + `HTML` + `Bootstrap`
 * 简介:
     * 核心模块: 商品模块, 客户模块, 购物车模块, 订单模块
     * 将各模块 服务化
@@ -53,7 +53,7 @@ comments: false
 
 ## 手写Spring,SpringMVC(2018-5~2018-5)
 
-* 技术: Tomcat , Servlet , Java注解, 反射 , JSON
+* 技术: `Tomcat` , `Servlet` , `Java注解`, `反射` , `JSON`
 * 实现注解:
 ```
 @AutoWired
@@ -80,7 +80,7 @@ comments: false
 
 ## 大数据商品推荐引擎(2017-10~2017-10)
 
-* 技术: Java, Hadoop, Shell
+* 技术: `Java` , `Hadoop` , `Shell`
 * 目的: 通过大数据技术进行数据分析, 向客户推荐其 可能感兴趣,最可能购买但还未购买的商品
 * 简介:
     * 采集用户淘宝购物数据
@@ -97,7 +97,7 @@ comments: false
 
 ## 物联网环境监测系统(2016-10~2016-10)
 
-* 技术: Java , xml , ZigBee
+* 技术: `Java` , `xml` , `ZigBee`
 * 目的: 采集环境(光照,二氧化碳,温度,湿度,紫外线)数据并实时显示
 * 简介:
     * 向装有树莓派系统的试验箱发送ZigBee协议数据

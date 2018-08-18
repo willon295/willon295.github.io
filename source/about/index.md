@@ -3,32 +3,28 @@ layout: about
 comments: false
 ---
 
-# 主要信息
-
-@column-2{
-
-@card{
-    
 # 联系方式
 
-* 手机: 13677062940
-* Email：willon295@163.com
-* QQ/微信号：13677062940
-
-}
 
 @card{
+
+
+* 手机:  [136-7706-2940](tel:13677062940)
+* Email：[willon295@163.com](mailto:willon295@163.com)
+* QQ/微信号:  [1411082228](http://wpa.qq.com/msgrd?v=3&uin=1411082228)
+
+}
 
 # 个人信息
 
-* 陈龙/男/1995
-* 本科/华东交通大学.软件工程
-* 英语水平: CET4
-* 个人博客：[https://willon.cn](https://willon.cn)
-* Github：[http://github.com/willon295](http://github.com/willon295)
-* 期望城市：杭州/江西
+@card{
 
-}
+
+* 陈龙/男/1995
+* 本科/华东交通大学/软件工程
+* 英语水平: CET4
+* 个人博客：[http://willon.cn](https://willon.cn)
+* Github：[http://github.com/willon295](http://github.com/willon295)
 
 }
 
@@ -60,10 +56,16 @@ comments: false
 * 技术: Tomcat , Servlet , Java注解, 反射 , JSON
 * 实现注解:
 ```
-@AutoWired,@Resource, @Bean , @Configuration 
-@Component  ,@Service , @Controller , @RestController
-@PathVariable , @RequestBody, @RequestMapping , @RequestParam
-@ResponseBody ,@SpringBootApplication
+@AutoWired
+@Resource
+@Bean
+@Configuration 
+@Component,@Service 
+@Controller , @RestController
+@PathVariable , @RequestBody
+@RequestMapping , @RequestParam
+@ResponseBody
+@SpringBootApplication
 ```
 * 实现功能
 1. 内置Tomcat ,项目以 Jar 包运行, 不需要额外安装Tomcat

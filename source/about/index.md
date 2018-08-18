@@ -3,10 +3,9 @@ layout: about
 comments: false
 ---
 
+# 主要信息
 
 @column-2{
-
-# 主要信息
 
 @card{
     
@@ -107,12 +106,10 @@ comments: false
 }
 
 
+# 技能清单
 
 @card{
 
-
-
-# 技能清单
 
 - 开发语言: Core Java
 - 后端框架: Spring/SpringMVC/SpringBoot/SpringCloud/Mybatis
@@ -166,7 +163,7 @@ comments: false
 
 ###### 6月
 
-* 华东交通大学双基大赛二等奖
+华东交通大学双基大赛二等奖
 
 }
 
@@ -175,7 +172,7 @@ comments: false
 
 ###### 5月
 
-* 江西省计算机作品大赛三等奖
+江西省计算机作品大赛三等奖
 
 }
 

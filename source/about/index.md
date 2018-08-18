@@ -23,7 +23,7 @@ comments: false
 * 陈龙/男/1995
 * 本科/华东交通大学/软件工程
 * 英语水平: CET4
-* 个人博客：[http://willon.cn](https://willon.cn)
+* 个人博客：[https://willon.cn](https://willon.cn)
 * Github：[http://github.com/willon295](http://github.com/willon295)
 
 }
@@ -61,7 +61,7 @@ comments: false
 @Bean
 @Configuration 
 @Component,@Service 
-@Controller , @RestController
+@Controller,@RestController
 @PathVariable , @RequestBody
 @RequestMapping , @RequestParam
 @ResponseBody
@@ -113,7 +113,7 @@ comments: false
 @card{
 
 
-- 开发语言: Core Java
+- 编程语言: Java
 - 后端框架: Spring/SpringMVC/SpringBoot/SpringCloud/Mybatis
 - 前端框架：Bootstrap/JQery/Vue
 - 数据库相关：MySQL
@@ -165,7 +165,7 @@ comments: false
 
 ###### 6月
 
-华东交通大学双基大赛二等奖
+华东交通大学双基大赛 `二等奖`
 
 }
 
@@ -174,7 +174,7 @@ comments: false
 
 ###### 5月
 
-江西省计算机作品大赛三等奖
+江西省计算机作品大赛 `三等奖`
 
 }
 

@@ -3,11 +3,22 @@ layout: about
 comments: false
 ---
 
+
+@column-2{
+
+# 主要信息
+
+@card{
+    
 # 联系方式
 
 * 手机: 13677062940
 * Email：willon295@163.com
 * QQ/微信号：13677062940
+
+}
+
+@card{
 
 # 个人信息
 
@@ -18,36 +29,53 @@ comments: false
 * Github：[http://github.com/willon295](http://github.com/willon295)
 * 期望城市：杭州/江西
 
+}
+
+}
+
+
+
+
 # 项目经验
+
+@card{
 
 ## 微服务架构电商项目(2018-6~2018-6)
 
 * 后端技术: Spring Boot + Spring Cloud + Spring MVC + Mybatis + MySQL
 * 前端技术: Nginx + JQery + Ajax + HTML + CSS
 * 简介:
-    1. 核心模块: 商品模块, 客户模块, 购物车模块, 订单模块
-    2. 将各模块 服务化
-    3. 使用Spring Cloud 搭建服务平台, 包括: 注册中心, 各项服务等
-    4. 使用Nginx 反向代理, 分发客户请求至相应服务器
-    5. 前台Bootstrap+HTML实现页面渲染, Vue+JQery实现数据渲染
-    6. 前后端使用 JSON 进行数据传输
+    * 核心模块: 商品模块, 客户模块, 购物车模块, 订单模块
+    * 将各模块 服务化
+    * 使用Spring Cloud 搭建服务平台, 包括: 注册中心, 各项服务等
+    * 使用Nginx 反向代理, 分发客户请求至相应服务器
+    * 前台Bootstrap+HTML实现页面渲染, Vue+JQery实现数据渲染
+    * 前后端使用 JSON 进行数据传输
+
+}
+
+@card{
 
 ## 手写Spring,SpringMVC(2018-5~2018-5)
 
 * 技术: Tomcat , Servlet , Java注解, 反射 , JSON
-* 简介：
-    * 实现注解:
-	```
-	@AutoWired,@Resource, @Bean , @Configuration 
-	@Component  ,@Service , @Controller , @RestController
-	@PathVariable , @RequestBody, @RequestMapping , @RequestParam
-	@ResponseBody ,@SpringBootApplication
-	```
-    * 实现功能
-        * 内置Tomcat ,项目以 Jar 包运行, 不需要额外安装Tomcat
-        * 能处理Restful风格请求
-        * 能处理 JSON 格式数据请求
-        * 能响应返回统一格式 JSON 数据
+* 实现注解:
+```
+@AutoWired,@Resource, @Bean , @Configuration 
+@Component  ,@Service , @Controller , @RestController
+@PathVariable , @RequestBody, @RequestMapping , @RequestParam
+@ResponseBody ,@SpringBootApplication
+```
+* 实现功能
+1. 内置Tomcat ,项目以 Jar 包运行, 不需要额外安装Tomcat
+2. 能处理Restful风格请求
+3. 能处理 JSON 格式数据请求
+4. 能响应返回统一格式 JSON 数据
+
+}
+
+
+@card{
 
 ## 大数据商品推荐引擎(2017-10~2017-10)
 
@@ -61,6 +89,11 @@ comments: false
     * 得到 用户id--> 商品id --> 该商品推荐指数 最终数据
     * 将结果写入数据库, 供其他平台推荐商品使用
 
+}
+
+
+@card{
+
 ## 物联网环境监测系统(2016-10~2016-10)
 
 * 技术: Java , xml , ZigBee
@@ -71,17 +104,108 @@ comments: false
     * 对各项数据进行分析,入库
     * 使用JfreeChart实时显示数据
 
+}
+
+
+
+@card{
+
+
+
 # 技能清单
 
-* 开发语言: Core Java
-* 后端框架: Spring/SpringMVC/SpringBoot/SpringCloud/Mybatis
-* 前端框架：Bootstrap/JQery/Vue
-* 数据库相关：MySQL
-* 常用工具: Git/Maven
-* 单元测试：Junit/Travis-CI
-* Linux相关: Centos/Nginx
+- 开发语言: Core Java
+- 后端框架: Spring/SpringMVC/SpringBoot/SpringCloud/Mybatis
+- 前端框架：Bootstrap/JQery/Vue
+- 数据库相关：MySQL
+- 常用工具: Git/Maven
+- 单元测试：Junit/Travis-CI
+- Linux相关: Centos/Nginx
 
-# 获奖情况
-* 江西省计算机作品大赛三等奖
+
+}
+
+
+
+# 个人经历
+
+
+@timeline{
+
+##### 2018
+
+@item{
+
+###### 5月
+
+昆山软件园实训
+
+}
+
+##### 2017
+
+@item{
+
+###### 8月
+
+荣获厦门触控实训 `最佳项目经理`
+
+}
+
+@item{
+
+###### 7月
+
+厦门触控未来科技实训
+
+}
+
+##### 2016
+
+@item{
+
+###### 6月
+
 * 华东交通大学双基大赛二等奖
+
+}
+
+
+@item{
+
+###### 5月
+
+* 江西省计算机作品大赛三等奖
+
+}
+
+##### 2015
+
+@item{
+
+###### 11月
+
+学习 Android 开发
+
+}
+
+@item{
+
+###### 10月
+
+加入软件学院保卫部
+
+}
+
+@item{
+
+###### 9月
+
+加入华东交通大学计算机紧急响应组(CERT)
+
+}
+
+}
+
+
 

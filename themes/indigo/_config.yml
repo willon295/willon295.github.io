@@ -12,10 +12,10 @@ menu:
     text: 主页
     url: /
   archives:
-  	text: 归档
+    text: 归档
     url: /archives
   tags:
-  	text: 标签
+    text: 标签
     url: /tags
   th-list:
     text: 分类

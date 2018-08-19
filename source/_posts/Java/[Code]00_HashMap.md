@@ -16,10 +16,10 @@ date: 2018-07-29 00:00:00
 
 1. `size()` : Map 中 元素的总数
 2. `threshold` : 阈值
-3. `capcity` : 容量
+3. `capcity` : 容量, 数组的长度
 4. `loadFactor` : 加载因子
-5. `Node<K,V>` : 链表，可以 大于 8
-6. `TreeNode<K,V>` : 树
+5. `Node<K,V>` : 链表节点，可以 大于 8
+6. `TreeNode<K,V>` : 树节点
 
 
 
@@ -34,7 +34,7 @@ map刚初始化时，采用本结构进行存储。
     static final float DEFAULT_LOAD_FACTOR = 0.75f;  // 默认加载 0.75
     static final int TREEIFY_THRESHOLD = 8;         // 树化 或者 扩容的 阈值 
     static final int MIN_TREEIFY_CAPACITY = 64;    // 树化的 capcity 最低值
- int threshold; // map 的属性， 初始化时为 16 × 0.75 = 12， 之后每次 × 2
+    int threshold; // map 的属性， 初始化时为 16 × 0.75 = 12， 之后每次 × 2
 ```
 
 
@@ -186,16 +186,26 @@ static class Node<K,V> implements Map.Entry<K,V> {
 
 ```java
     static final int TREEIFY_THRESHOLD = 8;  //树化的链表最小长度
-    static final int UNTREEIFY_THRESHOLD = 6; //转成 非树化 的最小因子
+    static final int UNTREEIFY_THRESHOLD = 6; //转成 非树化 的最小阈值
     static final int MIN_TREEIFY_CAPACITY = 64; // 树化的最小容量
+```
+
+
+
+## 什么时候树化?
+
+
+
+```
+capcity > MIN_TREEIFY_CAPACITY
 ```
 
 
 
 ## 树化及非树化
 
-1. 容量 大于 `64`  时，树化
-2. 阈值小于 6 时 ，转化成 ` 数组 +  链表` 
+1. 容量 `capcity`   大于 `64`  时，树化
+2. 阈值小于 `6`  时 ，转化成 ` 数组 +  链表` 
 
 
 

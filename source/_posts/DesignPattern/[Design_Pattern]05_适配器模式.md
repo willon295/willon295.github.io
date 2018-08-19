@@ -21,7 +21,7 @@ date: 2018-06-10 00:05:00
 110V 转 220V
 
 1. 通用接口
-```
+```java
 public interface Charger {
 
 
@@ -30,7 +30,7 @@ public interface Charger {
 
 ```
 2. 具体实现类
-```
+```java
 public class USCharger implements Charger {
 
  
@@ -57,7 +57,7 @@ public class CNCharger implements Charger {
 
 ```
 3. 适配器
-```
+```java
 
 public class USChargerAdapter implements Charger {
 
@@ -79,7 +79,7 @@ public class USChargerAdapter implements Charger {
 }
 ```
 4. 让需要转的类拥有此适配器
-```
+```java
 public class USCharger implements Charger {
 
     USChargerAdapter adapter;
@@ -96,7 +96,7 @@ public class USCharger implements Charger {
 }
 ```
 5. 测试类
-```
+```java
 public class ChargerTest {
     public static void main(String[] args) {
 
@@ -106,3 +106,19 @@ public class ChargerTest {
     }
 }
 ```
+
+
+# 经常使用
+
+
+
+一个 C类  需要 A 接口的某个方法, 但是又 `不需要` 实现 `全部` 的方法, 这个时候我们需要:
+
+
+
+1. 创建一个父类B 实现 A接口
+2. 让C类继承 B 类
+
+
+
+属于简单且典型的桥接

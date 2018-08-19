@@ -16,7 +16,7 @@ date: 2018-06-10 00:21:00
 ![](/images/dp21_template_00.png)
 
 - 抽象基类
-```
+```java
 /**
  * 游戏规则
  */
@@ -37,7 +37,7 @@ public abstract class Game {
 }
 ```
 - 具体游戏
-```
+```java
 
 /**
  * 篮球
@@ -84,7 +84,7 @@ public class Football extends Game {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
 
     public static void main(String[] args) {

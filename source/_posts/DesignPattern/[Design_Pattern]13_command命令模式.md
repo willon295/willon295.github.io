@@ -29,7 +29,7 @@ date: 2018-06-10 00:13:00
 ![](/images/dp13_command_00.png)
 
 1. 电视
-```
+```java
 
 /**
  * Receiver 电视
@@ -55,7 +55,7 @@ public class TV {
 ```
 2. 命令接口和具体实现类
 - 接口
-```
+```java
 /**
  * Command命令接口
  */
@@ -65,7 +65,7 @@ public interface Command {
 }
 ```
 - 开机命令
-```
+```java
 /**
  * 具体命令类 -  打开
  */
@@ -84,7 +84,7 @@ public class CommandON implements Command {
 }
 ```
 - 关机命令
-```
+```java
 /**
  * 具体命令 -- 关机
  */
@@ -103,7 +103,7 @@ public class CommandOFF implements Command {
 }
 ```
 - 换台
-```
+```java
 /**
  * 具体命令 -- 换台
  */
@@ -122,7 +122,7 @@ public class CommandChangeChannel implements Command {
 }
 ```
 3. 遥控器
-```
+```java
 /**
  * Invoker:  遥控器
  */
@@ -141,7 +141,7 @@ public class Controller {
 }
 ```
 4. 测试类
-```
+```java
 public class Client {
     public static void main(String[] args) {
         TV tv = new TV();

@@ -23,13 +23,13 @@ date: 2018-06-10 00:02:01
 ![图片](images/dp02_normalFactory_00.png)
 
 1. 创建 `Car` 接口
-```
+```java
 public interface Car {
     void run();
 }
 ```
 2. 创建具体的实现类 `BMW`， `BenCi` 实现 `Car`接口
-```
+```java
 public class BenCi  implements Car{
     @Override
     public void run() {
@@ -45,7 +45,7 @@ public class BMW implements Car {
 }
 ```
 3. 创建工厂
-```
+```java
 public class CarFactory {
     static final Integer  BMW = 1;
     static final Integer  BENCI = 2;
@@ -63,7 +63,7 @@ public class CarFactory {
 }
 ```
 4. 具体使用
-```
+```java
 public class Customer {
     public static void main(String[] args) {
         Car bmw = CarFactory.getCar(CarFactory.BMW);

@@ -37,7 +37,7 @@ date: 2018-06-10 00:22:00
 ## 上代码
 
 - Bill接口
-```
+```java
 
 /**
  * Element 接口
@@ -48,7 +48,7 @@ public interface Bill {
 }
 ```
 - Visitor接口
-```
+```java
 /**
  * 访问者
  */
@@ -62,7 +62,7 @@ public interface Visitor {
 }
 ```
 - 具体Bill
-```
+```java
 /**
  * 收入
  */
@@ -148,7 +148,7 @@ public class ConsumeBill implements Bill {
 }
 ```
 - 具体访问者
-```
+```java
 
 /**
  * Boss
@@ -208,7 +208,7 @@ public class CPA  implements Visitor{
 
 ```
 - 测试类
-```
+```java
 
 public class Main {
 

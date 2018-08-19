@@ -8,7 +8,7 @@ date: 2018-06-10 00:20:00
 策略模式 是 `行为模式` 的一种，当一个类的行为或者是算法在运行时可以改变。
 
 举个简单的例子， 使用第三方接口解析数据，但是第三方有JSON、有XML，如果使用if..else就很low
-```
+```java
 if (xml){
     parseXML();
 }else if(json){
@@ -32,7 +32,7 @@ if (xml){
 ![](/images/dp20_strategy_00.png)
 
 - 抽象策略接口
-```
+```java
 /**
  * 统一接口
  */
@@ -42,7 +42,7 @@ public interface Parser {
 
 ```
 - 具体实现类
-```
+```java
 /**
  * JSON 解析
  */
@@ -77,7 +77,7 @@ public class XMLParser implements Parser {
 }
 ```
 - 具体环境类
-```
+```java
 /**
  * 具体环境类
  */
@@ -103,7 +103,7 @@ public class Context {
 
 
 - 测试类
-```
+```java
 public class Main {
 
     public static void main(String[] args) {

@@ -24,7 +24,7 @@ date: 2018-06-10 00:08:00
 ![图片](/images/dp08_composite_01.png)
 2. 上代码
 
-```
+```java
 import java.util.ArrayList;
 import java.util.List;
 

@@ -20,7 +20,7 @@ date: 2018-06-10 00:10:00
 ![](/images/dp10_facade_00.png)
 
 1. 通用接口
-```
+```java
 /**
  * 基本的组件接口
  */
@@ -31,7 +31,7 @@ public interface Component {
 ```
 2. 具体的组件类
 - CPU
-```
+```java
 public class CPU implements Component {
     @Override
     public void start() {
@@ -45,7 +45,7 @@ public class CPU implements Component {
 }
 ```
 - 内存
-```
+```java
 
 public class Memory implements Component {
     @Override
@@ -61,7 +61,7 @@ public class Memory implements Component {
 
 ```
 - 硬盘
-```
+```java
 public class Disk implements Component {
     @Override
     public void start() {
@@ -77,7 +77,7 @@ public class Disk implements Component {
 }
 ```
 3. 电脑
-```
+```java
 public class Computer {
 
     private CPU cpu;
@@ -110,7 +110,7 @@ public class Computer {
 }
 ```
 4. 测试，用户使用
-```
+```java
 
 public class TestFacade {
     public static void main(String[] args) {

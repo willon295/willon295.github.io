@@ -25,7 +25,7 @@ Subject `1 --> N` Observer, 例如： 微信推送了版本更新信息，已经
 ### 代码
 
 - 微信服务器
-```
+```java
 public class Subject {
 
     private String message;
@@ -76,7 +76,7 @@ public class Subject {
 }
 ```
 - 用户
-```
+```java
 public  class Observer {
 
     private String name;
@@ -116,7 +116,7 @@ public  class Observer {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 
@@ -169,7 +169,7 @@ public class Main {
 
 
 - 普通订阅者
-```
+```java
 public class NormalUser {
 
     private String name;
@@ -213,7 +213,7 @@ public class NormalUser {
 
 ```
 - 抽象话题基类
-```$xslt
+```java
 public abstract class Item {
 
     protected  String  message;
@@ -238,7 +238,7 @@ public abstract class Item {
 }
 ```
 - 具体实现类
-```$xslt
+```java
 
 /* Java 话题 */
 public class JavaItem extends Item {
@@ -309,7 +309,7 @@ public class PythonItem extends Item {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 

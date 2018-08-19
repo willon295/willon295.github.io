@@ -41,7 +41,7 @@ date: 2018-06-10 00:06:00
 
 1. 不同发送形式消息的实现
 - 通用接口
-```
+```java
 /**
  * 用于规范
  * 不同形式的消息 的发送接口 (短信，邮件，微信....)
@@ -59,7 +59,7 @@ public interface Messager {
 
 ```
 - 短信
-```
+```java
 /**
  * 短信
  */
@@ -72,7 +72,7 @@ public class MessageSMS implements Messager {
 }
 ```
 - 邮件
-```
+```java
 /**
  * 邮件 消息
  */
@@ -86,7 +86,7 @@ public class MessageEmail implements Messager {
 ```
 2. 不同处理级别的消息
 - 抽象类
-```
+```java
 
 /**
  * 抽象消息类，所有消息类型的父类（普通消息，加急消息，特急消息...）
@@ -112,7 +112,7 @@ public  abstract class AbstractMessage {
 }
 ```
 - 普通消息
-```
+```java
 /**
  * 普通消息
  */
@@ -133,7 +133,7 @@ public class CommonMessage extends AbstractMessage {
 }
 ```
 - 加急消息
-```
+```java
 /**
  * 加急消息
  * */
@@ -164,7 +164,7 @@ public class UrgengcyMessage  extends  AbstractMessage{
 }
 ```
 - 特急消息
-```
+```java
 
 /**
  * 特急消息
@@ -188,7 +188,7 @@ public class SpecialUrgencyMessage  extends AbstractMessage{
 }
 ```
 3. 测试不同形式发送不同级别消息
-```
+```java
 public class TestMessage {
     public static void main(String[] args) {
 

@@ -16,7 +16,7 @@ date: 2018-06-10 00:15:00
 QQ 聊天，QQ就是一个中介者
 
 1. QQUser
-```
+```java
 public class QQUser {
 
     private String name;
@@ -43,7 +43,7 @@ public class QQUser {
 }
 ```
 2. QQ
-```
+```java
 public class QQ {
 
     public static void  showMessage(QQUser user,String  msg){
@@ -57,7 +57,7 @@ public class QQ {
 
 ```
 3. 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) throws Exception {
 

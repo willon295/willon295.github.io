@@ -65,7 +65,7 @@ public abstract class AbstractFactory {
 }
 ```
 3. 创建手机、电脑的 `工厂类`，继承 `抽象工厂类`，重写方法
-```
+```java
 //电脑的工厂类
 public class ComputerFactory extends AbstractFactory {
 
@@ -113,7 +113,7 @@ public class MobilePhoneFactory extends AbstractFactory {
 }
 ```
 4. 创建 `工厂生成类`
-```
+```java
 public class FactoryProducer {
     static final int COMPUTER_FACTORY = 1;
     static final int MOBILE_PHONE_FACTORY = 2;
@@ -131,7 +131,7 @@ public class FactoryProducer {
 }
 ```
 5. 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 

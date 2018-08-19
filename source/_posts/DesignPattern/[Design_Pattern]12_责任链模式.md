@@ -23,7 +23,7 @@ date: 2018-06-10 00:12:00
 ![图片](/images/dp12_chainOfResp_00.png)
 
 1. 通用接口
-```
+```java
 /**
  * 通用过滤接口
  */
@@ -33,7 +33,7 @@ public interface Filter {
 ```
 2. 具体过滤器
 - HTML标签过滤器
-```
+```java
 
 /**
  * Html 字符过滤器
@@ -46,7 +46,7 @@ public class HTMLFilter implements Filter {
 }
 ```
 - 敏感词过滤器
-```
+```java
 /**
  * 敏感字过滤器
  */
@@ -58,7 +58,7 @@ public class SenstiveFilter implements Filter {
 }
 ```
 3. 过滤链
-```
+```java
 /**
  * 过滤链
  */
@@ -88,7 +88,7 @@ public class FilterChain implements Filter {
 }
 ```
 4. 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 

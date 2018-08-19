@@ -20,7 +20,7 @@ date: 2018-06-10 00:19:00
 
 
 - 抽象基类
-```
+```java
 public abstract class AbstractEncType {
     protected String name;
     abstract  boolean isNil();
@@ -29,7 +29,7 @@ public abstract class AbstractEncType {
 
 ```
 - 具体实现类
-```
+```java
 /**
  * GBK类
  */
@@ -87,7 +87,7 @@ public class EncNULL extends AbstractEncType {
 
 ```
 - 工厂类
-```
+```java
 public class EncTypeFactory {
 
     private static final String UTF8 = "UTF8";
@@ -107,7 +107,7 @@ public class EncTypeFactory {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 

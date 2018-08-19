@@ -25,7 +25,7 @@ date: 2018-06-10 00:07:00
 ![](/images/dp07_filter_00.png)
 
 1. 学生类
-```
+```java
 public class Student {
     private String name;
     private int score;
@@ -78,13 +78,13 @@ public class Student {
 ```
 2. 过滤器
 - 接口标准
-```
+```java
 public interface Filter {
      List<Student> doFilter(List<Student> students);
 }
 ```
 - male过滤器
-```
+```java
 /**
  * 男生信息过滤器
  */
@@ -107,7 +107,7 @@ public class MaleFilter implements Filter {
 
 ```
 - female过滤器
-```
+```java
 public class FemaleFilter implements Filter {
     @Override
     public List<Student> doFilter(List<Student> students) {
@@ -125,7 +125,7 @@ public class FemaleFilter implements Filter {
 }
 ```
 - 高分过滤器
-```
+```java
 public class HighScoreFilter implements Filter {
     @Override
     public List<Student> doFilter(List<Student> students) {
@@ -144,7 +144,7 @@ public class HighScoreFilter implements Filter {
 
 ```
 - 联合条件过滤器
-```
+```java
 
 /**
  * 联合过滤器
@@ -171,7 +171,7 @@ public class AndFilter implements Filter {
 
 ```
 - 测试类
-```
+```java
 
 public class TestFilter {
     public static void main(String[] args) {

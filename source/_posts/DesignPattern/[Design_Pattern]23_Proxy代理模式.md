@@ -29,7 +29,7 @@ date: 2018-06-10 00:23:00
 ![](/images/dp23_proxy_static_00.png)
 
 - 接口
-```
+```java
 
 /**
  * 用户行为的统一接口
@@ -42,7 +42,7 @@ public interface Action {
 
 ```
 - 用户类
-```
+```java
 /**
  * 具体用户实现类
  */
@@ -70,7 +70,7 @@ public class User implements Action {
 }
 ```
 - 代理类
-```
+```java
 /**
  * 代理类
  */
@@ -104,7 +104,7 @@ public class UserProxy implements Action{
 
 ```
 - 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 
@@ -135,14 +135,14 @@ Jack睡觉
 ![](/images/dp23_proxy_static_01.png)
 
 - 接口
-```
+```java
 public interface Image {
 
     void display();
 }
 ```
 - 具体图片类
-```
+```java
 /**
  * 具体实现类
  */
@@ -178,7 +178,7 @@ public class GIFImage  implements Image{
 
 ```
 - 代理类
-```
+```java
 public class ImageProxy implements Image {
 
     private String name;
@@ -204,7 +204,7 @@ public class ImageProxy implements Image {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
     public static void main(String[] args) {
 
@@ -244,7 +244,7 @@ public class Main {
 
 ![](/images/dp23_proxy_dynamic_00.png)
 - 接口
-```
+```java
 /**
  * 票
  */
@@ -253,7 +253,7 @@ public interface Ticket {
 }
 ```
 - 具体票
-```
+```java
 /**
  * 火车票
  */
@@ -298,7 +298,7 @@ public class AirTicket  implements Ticket{
 }
 ```
 - 动态代理类
-```
+```java
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -325,7 +325,7 @@ public class DynamicProxy implements InvocationHandler {
 }
 ```
 - 测试类
-```
+```java
 public class Main {
 
     public static void main(String[] args) {

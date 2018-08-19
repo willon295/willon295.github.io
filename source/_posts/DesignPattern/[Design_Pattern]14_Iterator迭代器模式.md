@@ -25,7 +25,7 @@ date: 2018-06-10 00:14:00
 
 
 1. Iterator、Container接口
-```
+```java
 /**
  * 迭代器接口
  */
@@ -44,7 +44,7 @@ public interface Container {
 
 ```
 2. 水果集合类
-```
+```java
 /**
  * 一个水果的容器
  */
@@ -81,7 +81,7 @@ public class FruitCollection  implements Container{
 
 ```
 3. 测试类
-```
+```java
 public class Main {
 
     public static void main(String[] args) {

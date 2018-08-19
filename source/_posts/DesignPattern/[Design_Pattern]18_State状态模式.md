@@ -11,7 +11,7 @@ date: 2018-06-10 00:18:00
 
 一个篮球运动员 ，场均得分 ： 正常状态可得 10, 疲惫状态可得 5，超常状态可得 15 , 伪代码如下
 
-```
+```java
 if(state=="normal"){
     getScore(10);
 }else if(state=="exhausted"){
@@ -34,7 +34,7 @@ if(state=="normal"){
 ## 上代码
 
 - 运动员类
-```
+```java
 public class Athlete {
 
     //持有一个状态实例
@@ -55,7 +55,7 @@ public class Athlete {
 
 ```
 - 抽象的状态接口
-```
+```java
 /**
  * 抽象的状态接口
  */
@@ -64,7 +64,7 @@ public interface State {
 }
 ```
 - 具体状态和具体的行为
-```$xslt
+```java
 /**
  * 正常状态
  */
@@ -122,7 +122,7 @@ public class ExhaustedState  implements State{
 
 ```
 - 测试类
-```
+```java
 public class Main {
 
     public static void main(String[] args) {

@@ -33,7 +33,7 @@ date: 2018-06-10 00:09:00
 ![](/images/dp09_decorator_01_00.png)
 
 1. 接口
-```
+```java
 /**
  * 形状， 统一接口
  * */
@@ -44,7 +44,7 @@ public interface Shape {
 }
 ```
 2. 形状的具体实现类
-```
+```java
 /**
  * 圆
  */
@@ -67,7 +67,7 @@ public class Rectangle  implements Shape{
 }
 ```
 3. 抽象装饰类
-```
+```java
 
 /**
  * 抽象装饰类
@@ -93,7 +93,7 @@ public abstract class ShapeDecorator implements Shape {
 ```
 4. 具体的装饰类
 - 红颜色修饰类
-```
+```java
 /**
  * 1. 红颜色修饰类
  */
@@ -120,7 +120,7 @@ public class ColorDecrator extends ShapeDecorator{
 }
 ```
 - 边框修饰类
-```
+```java
 /**
  * 2. 边框修饰类
  */
@@ -146,7 +146,7 @@ public class BorderDecorator extends ShapeDecorator {
 }
 ```
 5. 测试类
-```
+```java
 public class TestDecorator {
     public static void main(String[] args) {
 
@@ -187,7 +187,7 @@ public class TestDecorator {
 ![](/images/dp09_decorator_02_00.png)
 
 1. 抽象饮料基类
-```
+```java
 /**
  * 抽象饮料类
  */
@@ -209,7 +209,7 @@ public abstract class Beverage {
 ```
 2. 具体饮料类
 - 奶昔
-```
+```java
 /**
  * 奶昔类
  */
@@ -226,7 +226,7 @@ public class MikeShake extends Beverage {
 
 ```
 - 奶茶
-```
+```java
 /**
  * 奶茶
  */
@@ -244,7 +244,7 @@ public class MikeTea extends Beverage {
 
 ```
 3. 辅料基类
-```
+```java
 /**
  * 辅料基类
  */
@@ -257,7 +257,7 @@ public abstract class CondimentDecorator  extends Beverage{
 ```
 4. 辅料实现类
 - 绿豆类
-```
+```java
 /**
  * 绿豆类
  */
@@ -280,7 +280,7 @@ public class Mung  extends CondimentDecorator{
 
 ```
 - 珍珠类
-```
+```java
 /**
  * 珍珠类
  */
@@ -303,7 +303,7 @@ public class Pearl  extends CondimentDecorator{
 }
 ```
 5. 测试类
-```
+```java
 public class TestDecorator2 {
     public static void main(String[] args) {
 

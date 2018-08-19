@@ -21,7 +21,7 @@ date: 2018-06-10 00:01:00
 # 饿汉模式
 
 在类加载时就创建唯一实例
-```
+```java
 public class SingletonStarve {
 
     //声明并且创建唯一实例
@@ -43,7 +43,7 @@ public class SingletonStarve {
 
 在调用获取实例方法时创建实例
 
-```
+```java
 public class SingletonLazy {
 
     private static SingletonLazy instance;
@@ -63,7 +63,7 @@ public class SingletonLazy {
 
 # 具体使用
 
-```
+```java
     public static void main(String[] args) {
         SingletonLazy i1 = SingletonLazy.getInstance();
         SingletonLazy i2 = SingletonLazy.getInstance();
@@ -87,7 +87,7 @@ public class SingletonLazy {
 
 - 测试类
 
-```
+```java
 public class Main {
 
 

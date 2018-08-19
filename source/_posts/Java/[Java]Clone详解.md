@@ -9,10 +9,11 @@ date: 2018-08-11 00:00:00
 
 如果要实现克隆，， 必须注意一下几点
 
-1. `clone()` 是 `Object` 的 方法，且访问权限是 `protected` 
+`clone()`  是  `Object`  的 方法，且访问权限是  `protected` 
+
 ```java
 protected native Object clone() throws CloneNotSupportedException;
-``` 
+```
 
 
 一个简单错误的例子： 

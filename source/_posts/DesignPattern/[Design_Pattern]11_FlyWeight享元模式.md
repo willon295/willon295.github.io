@@ -16,7 +16,7 @@ date: 2018-06-10 00:11:00
 ![](/images/dp11_flyweight_00.png)
 
 1. 实体类
-```
+```java
 /**
  * 连接实体类
  */
@@ -39,7 +39,7 @@ public class DBConnection {
 }
 ```
 2. 工厂类
-```
+```java
 /**
  * 一个工厂类
  */
@@ -72,7 +72,7 @@ public class DBConnFactory {
 }
 ```
 3. 测试类
-```
+```java
 public class TestFlyWeight {
     public static void main(String[] args) {
         DBConnection mysql = DBConnFactory.getDBConnection("mysql");

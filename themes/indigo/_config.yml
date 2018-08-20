@@ -40,7 +40,7 @@ brand: /img/brand.jpg
 favicon: /img/favicon.ico
 
 # email
-email: 
+email: null
 
 # 设置 Android L Chrome 浏览器状态栏颜色
 color: '#546e7a'

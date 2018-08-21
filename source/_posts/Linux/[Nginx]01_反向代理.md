@@ -28,8 +28,11 @@ date: 2017-05-01 00:01:00
 1. 负载均衡
 2. 访问加速
 
-
 # Nginx反向代理配置
+
+
+
+## Demo01
 
 **简单介绍**
 1. 两台 `tomcat` 服务器, tomcat1监听 `8080` ,tomcat2监听 `8081`
@@ -44,7 +47,7 @@ date: 2017-05-01 00:01:00
 
 **配置**
 
-```
+```nginx
 upstream tomcat1{
     #真正处理tomcat1.com的服务器
     server 127.0.0.1:8080;
@@ -84,3 +87,47 @@ server {
 }
 
 ```
+
+
+
+
+
+
+
+## Demo02
+
+1. 静态资源 , tomcat 服务器分离
+2. 反向代理, 带有权重
+
+
+
+样例
+
+
+
+```
+upstream  nginx_server{
+    server 10.0.0.101:80  weight=1;
+    server 10.0.0.102:80  weight=4;
+}
+upstream  tomcat_server{
+    server  10.0.2.101:8080 weight=1;
+    server  10.0.2.102:8080 weight=1;
+    server  10.0.2.103:8080 weight=1;
+}
+
+server{
+    listen 80;
+    server_name demo.com;
+    
+    location ~* \.[html|png|js|css|jpeg|gif]{
+        proxy_pass http://nginx_server;
+    }
+    
+    location / {
+        proxy_pass http://tomcat_server
+    }
+    
+}
+```
+

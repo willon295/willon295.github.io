@@ -41,12 +41,12 @@ date: 2017-02-02 00:00:00
  1. 新生代 --  Eden ： Survivor0 ：  Survivor1 = 8:1:1 ( 可使用–XX:SurvivorRatio调节)--->  Minor GC (次要的GC)
  2. 老年代 --  Tenured --> FULL(Major) GC （主要GC）
  3. 永久带 --  Permanent -- 满了之后 JVM回去停止工作，执行 FULL GC
-  
+
  1.8 之后
  1. 新生带
  2. 老年代
  3. Meta Space -- 可自动扩容
- 
+
 # GC 触发条件
 
 回收算法： 
@@ -75,11 +75,11 @@ date: 2017-02-02 00:00:00
 ##  栈、堆设置
 
 -  **-Xss128k**  : 设置每个线程的  `栈帧`  大小为128k
--  **-Xms** : jvm初始化  `堆 ` 大小
-- **-Xmx** :  最大堆大小
-- **-Xmn** : 设置老代大小
-- **-XX:NewSize=n** ： 新生代 大小
-- **-XX:NewRatio=n** : 设置新生代 和 老代的大小比例
+-  **-Xms** : 初始  `堆 ` 大小, 同 `-XX:InitialHeapSize`
+-  **-Xmx** :  `堆` 最大值 , 同 `-XX:MaxHeapSize`
+-  **-Xmn** :  `年轻带` 大小 , 同 `-XX:NewSize`
+-  **-XX:NewRatio** : 设置新生代 和 老代的大小比例 `-XX:NewRatio=4`  年轻带/老年代 = 1/4
+-  **-XX:SurvivorRatio** ： Survivor/Eden 的比例 `-XX:SurvivorRatio=8`  s0/s1/eden = 1/1/8
 
 > 建议 把 -Xms  -Xmx 设置成相同的值， 减少 JVM动态调节频率
 

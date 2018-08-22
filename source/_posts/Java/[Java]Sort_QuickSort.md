@@ -14,14 +14,6 @@ date: 2015-11-11 00:00:00
 
 ```java
 
-/**
- * Created By willon
- *
- * @author willon
- * @version 1.0
- */
-public class QuickSort {
-
     /**
      * 快速排序
      *
@@ -29,56 +21,52 @@ public class QuickSort {
      * @param left  左边
      * @param right 右边
      */
-    public static void quickSort(int[] a, int left, int right) {
-
-        // 如果左右两边开始搜索的下标 l < r 可以回溯
+    private static void quickSort(int[] a, int left, int right) {
         if (left < right) {
-
-            //记录基准数
+            // 取得基准数
             int base = a[left];
             int i = left, j = right;
-            while (i < j) {
 
-                //从右边开始遍历，找到比基准数 小 的， 填上一个坑
-                while (i < j && a[j] > base) {
-                    j--;
-                }
-                if (i < j) {
-                    a[i++] = a[j];
-                }
-
-
-                //从左边开始，找到比基准数  大 的， 填上一个坑
-                while (i < j && a[j] < base) {
-                    i++;
-                }
-                if (i < j) {
-                    a[j--] = a[i];
-                }
-
+            //找一个比基准数小的
+            while (i < j && a[j] > base) {
+                j--;
+            }
+            if (i < j) {
+                // 填坑
+                a[i] = a[j];
             }
 
-            //填上本趟遍历的 最后一个坑
+
+            //找一个比基准数 大的
+            while (i < j && a[i] < base) {
+                i++;
+            }
+
+            if (i < j) {
+                //填坑
+                a[j] = a[i];
+            }
+
+            //填最后一个坑
             a[j] = base;
 
-            // 递归排序
+            //往中间靠拢
             quickSort(a, left + 1, right);
             quickSort(a, left, right - 1);
         }
 
-    }
 
-    public static void quickSort(int[] a) {
+    }
+	// 重载方法, 简化调用操作
+    private static void quickSort(int[] a) {
         quickSort(a, 0, a.length - 1);
     }
 
-
     public static void main(String[] args) {
-        int[] a = {6, 4, 3, 5, 7, 9, 2, 8, 1};
+        int[] a = {4, 3, 6, 8, 2, 9, 5, 7};
         quickSort(a);
         System.out.println(Arrays.toString(a));
     }
-}
 
 ```
 

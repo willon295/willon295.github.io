@@ -37,13 +37,14 @@ comments: false
 
 ## 微服务架构电商项目(2018-6~2018-6)
 
-* 后端技术: `Spring Boot` + `Spring Cloud` + `Spring MVC` + `Mybatis` + `MySQL`
-* 前端技术: `Nginx` + `JQery` + `Ajax` + `HTML` + `Bootstrap`
+* 后端技术: `Spring Boot` + `Spring Cloud` + `Spring MVC` + `Mybatis` + `MySQL` + `Redis`
+* 前端技术: `Nginx` + `JQery` + `Ajax`  + `Vue` + `Bootstrap`
 * 简介:
-    * 核心模块: 商品模块, 客户模块, 购物车模块, 订单模块
-    * 将各模块 服务化
-    * 使用Spring Cloud 搭建服务平台, 包括: 注册中心, 各项服务等
-    * 使用Nginx 反向代理, 分发客户请求至相应服务器
+    * 核心服务: 商品服务, 客户服务, 购物车服务, 订单服务
+    * Spring Cloud 搭建服务平台, 包括: 注册中心, 各项服务
+    * 使用Redis缓存商品信息
+    * Nginx 作为 webserver, 存放静态文件
+    * Nginx 作为反向代理服务器, 分发请求
     * 前台Bootstrap+HTML实现页面渲染, Vue+JQery实现数据渲染
     * 前后端使用 JSON 进行数据传输
 
@@ -116,10 +117,10 @@ comments: false
 - 编程语言: Java
 - 后端框架: SpringMVC/SpringBoot/SpringCloud/Mybatis
 - 前端框架：Bootstrap/JQery/Vue
-- 数据库相关：MySQL
+- 数据库相关：MySQL, Redis ,Hbase
 - 常用工具: Git/Maven
 - 单元测试：Junit/Travis-CI
-- Linux相关: Centos/Nginx
+- 其他: RabbitMQ/Nginx
 
 
 }

@@ -116,11 +116,10 @@ comments: false
 
 - 编程语言: Java
 - 后端框架: SpringMVC/SpringBoot/SpringCloud/Mybatis
-- 前端框架：Bootstrap/JQery/Vue
-- 数据库相关：MySQL, Redis ,Hbase
+- 前端框架：Vue/JQery/Bootstrap
+- 数据库：MySQL, Redis 
+- 其他: Hadoop/Hive/RabbitMQ/Nginx
 - 常用工具: Git/Maven
-- 单元测试：Junit/Travis-CI
-- 其他: RabbitMQ/Nginx
 
 
 }

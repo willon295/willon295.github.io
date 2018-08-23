@@ -116,7 +116,6 @@ public class RunnaImpl implements Runnable{
    new Thread(ft).start();
   ```
 
-  
 
 ## 通过线程池创建线程
 
@@ -378,6 +377,13 @@ public class Account {
 ```
 
 
+
+
+
+## 用什么锁?
+
+1. `synchronized`  方法用的是 `this`  锁
+2. `static   synchronized`  方法用的是 `Class` 锁  
 
 
 

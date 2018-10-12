@@ -11,6 +11,9 @@ date: 2018-07-26 00:00:00
 
 # 准备工作
 
+
+## 非UEFI启动分区
+
   1. 分区、格式化分区
 
      ```bash
@@ -24,15 +27,30 @@ date: 2018-07-26 00:00:00
         mkfs.ext4  /dev/sda1    
      ```
 
-     
 
-2. 同步时间（可选）
+
+
+## UEFI 启动分区
+
+格式化 U 盘, 分出两个区, 一个EFI,一个Linux文件系统 , `*`  标识可启动
+
+```
+分区         大小   文件格式
+/dev/sdc1 * 300M  EFI/FAT32 
+/dev/sdc2   250G  ext4
+```
+
+
+
+## 其他
+
+1. 同步时间（可选）
 
    ```bash
     timedatectl set-ntp true
    ```
 
-3. 挂载分区
+2. 挂载分区
 
    ```bash
    mount /dev/sda1  /mnt
@@ -119,7 +137,6 @@ date: 2018-07-26 00:00:00
     passwd
     ```
 
-    
 
 ## 设置网络
 
@@ -139,6 +156,10 @@ date: 2018-07-26 00:00:00
 
 ## 引导相关
 
+
+
+## 非 UEFI
+
 1. Initramfs、官网说可以不用，但是实际上要这一步
 
    ```bash
@@ -154,6 +175,29 @@ date: 2018-07-26 00:00:00
    ```
 
 3. 退出，重启进入新的系统
+
+
+
+## EFI
+
+
+
+1. 挂载并且写入引导
+
+```bash
+pacman -S grub efibootmgr dosfstools os-prober mtools
+mkdir /boot/EFI
+mount /dev/sda1 /boot/EFI
+grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+```
+
+2. 生成配置文件
+
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+
 
 
 
@@ -216,7 +260,6 @@ date: 2018-07-26 00:00:00
    pacman  -Sy
    ```
 
-   
 
 # 桌面环境
 
@@ -228,15 +271,11 @@ date: 2018-07-26 00:00:00
    pacman -S xorg
    ```
 
-   
-
 2. `Xfce4` 
 
    ```
    pacman -S xfce4 xfce4-goodies
    ```
-
-   
 
 3. 登陆管理器
 
@@ -384,9 +423,6 @@ reboot
    EOF
    ```
 
-   
-
-   
 
 
 
@@ -396,7 +432,6 @@ reboot
    grub-mkconfig  -o /boot/grub/grub.cfg
    ```
 
-   
 
 
 

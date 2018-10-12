@@ -14,17 +14,16 @@ date: 2017-10-21 10:34:23
 
 1. 将`JetBrainsCracker-2.xx.jar` 复制到idea安装目录bin下
 2. 编辑文件 `bin/idea.vmoptions` 和`bin/idea64.vmoptions` ，最后一行加入
-```
+```bash
 -javaagent:/安装目录/bin/JetBrainsCracker-2.xx.jar
 ```
 3. 启动时写入激活key
-```
+```bash
 ThisCrackLicenseId-{  
-"licenseId":"ThisCrackLicenseId",  
+"licenseId":"testID",  
 "licenseeName":"willon",  
 "assigneeName":"",  
-"assigneeEmail":"idea@163.com",  
-"licenseRestriction":"For This Crack, Only Test! Please support genuine!!!",  
+"assigneeEmail":"idea@163.com",   
 "checkConcurrentUse":false,  
 "products":[  
 {"code":"II","paidUpTo":"2099-12-31"},  
@@ -45,3 +44,4 @@ ThisCrackLicenseId-{
 "autoProlongated":false}
 ```
 4. 结束
+

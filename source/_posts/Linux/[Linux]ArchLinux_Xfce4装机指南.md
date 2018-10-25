@@ -49,6 +49,12 @@ date: 2018-07-26 00:00:00
    ```bash
     timedatectl set-ntp true
    ```
+> 如果时间与实际时间有差异, 编辑 `/etc/systemd/timesyncd.conf` 文件
+```
+[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+```
 
 2. 挂载分区
 

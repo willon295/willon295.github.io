@@ -1,16 +1,12 @@
 ---
-title: '[IDEA]IDEA2017破解'
+title: '[IDEA]IDEA相关'
 tag: idea
-category: 分享
+category: Share
 date: 2017-10-21 10:34:23
 ---
 
-# 准备
+# 科学激活
 
-1. Intellij IDEA 2017 pro
-2. JavaCracker-2.69.jar
-
-# 开始
 
 1. 将`JetBrainsCracker-2.xx.jar` 复制到idea安装目录bin下
 2. 编辑文件 `bin/idea.vmoptions` 和`bin/idea64.vmoptions` ，最后一行加入
@@ -45,3 +41,17 @@ ThisCrackLicenseId-{
 ```
 4. 结束
 
+# 添加自定义快捷输入
+
+1. File -> Settings ->  Live Templates -> + Live Template
+2. Abbreviation 填写 提示语, 如: `loge`
+3. Template text 填写表达式
+```
+LoggerUtil.error(ApLoggerFactory.EXECUTOR, ApLogFormat.init("$desc$", $obj$)
+        .$initParam$
+        .buildLogMsg(),e);
+```
+4. variables 变量属性填写 groovy脚本
+```
+groovyScript("'' +''+_1.collect { 'add(\"'+it+'\",'+ it+')'}.join('.')+ ''", methodParameters())
+```

@@ -6,7 +6,7 @@ date: 2016-12-29 00:02:00
 ---
 
 1. 实现 `Servlet` 接口，重载方法
-```
+```java
 public class FirstServlet implements Servlet {
     public void init(ServletConfig servletConfig) throws ServletException {
 
@@ -32,7 +32,7 @@ public class FirstServlet implements Servlet {
 }
 ```
 2. 继承 `GenericServlet` 类，重写 `service`方法
-```
+```java
 public class SecondServlet extends GenericServlet {
 
 

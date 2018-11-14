@@ -301,10 +301,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
    systemctl enable lightdm.service
    ```
 
-6. 锁屏软件
+6. 锁屏软件, 解压软件
 
    ```bash
-   pacman -S xscreensaver 
+   pacman -S xscreensaver   engrampa
    ```
 
 ### 普通用户无法进入桌面环境?

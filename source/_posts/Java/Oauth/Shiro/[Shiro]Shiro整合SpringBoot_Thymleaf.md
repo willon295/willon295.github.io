@@ -351,3 +351,33 @@ spring:
 2. `shiroFilterFactoryBean.setSuccessUrl("/index")` 不生效
 这个问题可以直接使用 html 页面实现跳转,  不要依赖框架
 
+3. 关于权限控制
+权限控制可以分为
+- **过滤器统一配置**: 如统一配置角色
+```
+        map.put("/user/**", "roles[user]");
+        map.put("/admin/**", "roles[admin]");
+```
+- **注解具体配置**, 如:
+```java
+
+    @RequestMapping("/list")
+    @RequiresRoles(value = {"admin"})
+    public String list() {
+        return "list";
+    }
+
+    @RequiresRoles(value = {"user", "admin"}, logical = Logical.OR)
+    @GetMapping(value = {"/index", "/"})
+    String index() {
+        return "index";
+    }
+
+    @ResponseBody
+    @RequiresPermissions("user:delete")
+    @GetMapping("/user/delete")
+    public String testUserDelete() {
+        return "user delete";
+    }
+```
+

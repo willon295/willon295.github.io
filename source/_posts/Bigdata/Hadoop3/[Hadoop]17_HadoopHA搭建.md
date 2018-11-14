@@ -151,8 +151,10 @@ zkServer.sh start
 //出现进程  QuorumPeerMain
 ```
 
-2. 启动 `journalnode`，格式化 ZK => node-01, node-02
+2. 启动 `journalnode`，格式化 ZK => node-01, node-02其中一台
 ```
+hadoop-daemon.sh start journalnode
+// 出现进程JournalNode
 hdfs zkfc -formatZK
 //出现进程  DFSZKFailoverController
 ```

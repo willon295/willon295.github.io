@@ -18,6 +18,7 @@ script:
 
 after_script:
   - cd ./public
+  - echo '![Travis-CI](https://api.travis-ci.org/willon295/willon295.github.io.svg?branch=blog-source)' > readme.md
   - git init
   - git config user.name "willon295"
   - git config user.email "willon295@gmail.com"

@@ -14,18 +14,13 @@ date: 2018-07-26 00:00:00
 
 ## 非UEFI启动分区
 
-  1. 分区、格式化分区
+分区、格式化分区
 
-     ```bash
-        #查看分区情况
-        fdisk  -l
-        #分区
-        fdisk  /dev/sda
-        #根据实际情况分区
-        ........
-        #格式化分区,注意使用 ext4格式
-        mkfs.ext4  /dev/sda1    
-     ```
+```bash
+分区         大小   文件格式
+/dev/sda1   250G  ext4
+/dev/sda2 * 300M  EFI/FAT32 
+```
 
 
 
@@ -36,8 +31,8 @@ date: 2018-07-26 00:00:00
 
 ```
 分区         大小   文件格式
-/dev/sdc1 * 300M  EFI/FAT32 
-/dev/sdc2   250G  ext4
+/dev/sda1   250G  ext4
+/dev/sda2 * 300M  EFI/FAT32 
 ```
 
 
@@ -50,7 +45,7 @@ date: 2018-07-26 00:00:00
     timedatectl set-ntp true
    ```
 > 如果时间与实际时间有差异, 编辑 `/etc/systemd/timesyncd.conf` 文件
-```
+```bash
 [Time]
 NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
 FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
@@ -109,7 +104,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
 7. 安装 vim
 
    ```bash
-   pacman -S vim
+   pacman -S vim bash-completion
    ```
 
 8. 本地化
@@ -193,7 +188,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
 ```bash
 pacman -S grub efibootmgr dosfstools os-prober mtools
 mkdir /boot/EFI
-mount /dev/sda1 /boot/EFI
+mount /dev/sda2 /boot/EFI
 grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
 ```
 
@@ -231,6 +226,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
    export QT_IM_MODULE=fcitx
    export XMODIFIERS="@im=fcitx"
    PS1='\[\e[1;36m\]\u@\h:\[\e[32m\]\w\[\e[36m\] > \[\e[m'
+   alias vi='vim'
+   alias ls='ls --color=auto'
+   alias ll='ls -al'
+   export TZ='CST-8'
    ```
 
 4. 配置声音
@@ -286,7 +285,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 3. 登陆管理器
 
    ```bash
-    pacman -S lightdm lightdm-gtk-greeter
+    pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
    ```
 
 4. 启动登陆管理器
@@ -304,7 +303,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 6. 锁屏软件, 解压软件
 
    ```bash
-   pacman -S xscreensaver   engrampa
+   pacman -S xscreensaver
    ```
 
 ### 普通用户无法进入桌面环境?
@@ -457,10 +456,10 @@ reboot
 
 
 
-## 自动挂载硬盘
+## 自动挂载硬盘,解压缩软件
 
-```
-pacman -S  gvfs  ntfs-3g
+```bash
+pacman -S  gvfs  ntfs-3g    engrampa
 ```
 
 

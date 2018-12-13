@@ -12,51 +12,26 @@ date: 2018-07-26 00:00:00
 # 准备工作
 
 
-## 非UEFI启动分区
+## 分区
 
-分区、格式化分区
+1. 非 UEFI 分区
 
 ```bash
 分区         大小   文件格式
 /dev/sda1   250G  ext4
-/dev/sda2 * 300M  EFI/FAT32 
 ```
 
-
-
-
-## UEFI 启动分区
-
-格式化 U 盘, 分出两个区, 一个EFI,一个Linux文件系统 , `*`  标识可启动
+2. UEFI 分区, 2个区, 一个EF分区I , `*`  标识可启动 ,  另一个Linux文件系统分区
 
 ```
-分区         大小   文件格式
-/dev/sda1   250G  ext4
-/dev/sda2 * 300M  EFI/FAT32 
+分区       可启动    大小     文件格式
+/dev/sda1            250G      ext4
+/dev/sda2    *       300M      EFI/FAT32 
 ```
-
-
-
-## 其他
-
-1. 同步时间（可选）
-
-   ```bash
-    timedatectl set-ntp true
-   ```
-> 如果时间与实际时间有差异, 编辑 `/etc/systemd/timesyncd.conf` 文件
+3. 挂载分区
 ```bash
-[Time]
-NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
-FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+mount /dev/sda1  /mnt
 ```
-
-2. 挂载分区
-
-   ```bash
-   mount /dev/sda1  /mnt
-   #如果有其他分区同理挂载到相应的分区
-   ```
 
 
 
@@ -89,25 +64,13 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
    arch-chroot /mnt
    ```
 
-5. 设置时区
-
-   ```bash
-   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-   ```
-
-6. 生成 `/etc/adjtime`
-
-   ```bash
-   hwclock --systohc 
-   ```
-
-7. 安装 vim
+5. 安装 vim
 
    ```bash
    pacman -S vim bash-completion
    ```
 
-8. 本地化
+6. 语言环境
 
    ```bash
    
@@ -121,7 +84,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
    echo "LANG=en_US.UTF-8"  > /etc/locale.conf
    ```
 
-9. 修改主机名, hosts映射
+7. 修改主机名, hosts映射
 
    ```bash
    echo "willon" > /etc/hostname
@@ -132,7 +95,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
    EOF
    ```
 
-10. 修改 root 密码
+8. 修改 root 密码
 
     ```
     passwd
@@ -157,48 +120,33 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
 
 ## 引导相关
 
-
-
-## 非 UEFI
-
-1. Initramfs、官网说可以不用，但是实际上要这一步
-
-   ```bash
-   mkinitcpio -p linux
-   ```
-
-2. 安装 grub 引导
-
-   ```bash
-   pacman -S grub
-   grub-install --force /dev/sda
-   grub-mkconfig -o /boot/grub/grub.cfg   
-   ```
-
-3. 退出，重启进入新的系统
-
-
-
-## EFI
-
-
-
-1. 挂载并且写入引导
-
-```bash
-pacman -S grub efibootmgr dosfstools os-prober mtools
-mkdir /boot/EFI
-mount /dev/sda2 /boot/EFI
-grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+```
+mkinitcpio -p linux
 ```
 
-2. 生成配置文件
+1. 非 UEFI
+	```bash
+	pacman -S grub
+	grub-install --force /dev/sda
+	grub-mkconfig -o /boot/grub/grub.cfg   
+	```
+2. EFI
+	```bash
+	pacman -S grub efibootmgr dosfstools os-prober mtools
+	mkdir /boot/EFI
+	mount /dev/sda2 /boot/EFI
+	grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+	```
 
-```
-grub-mkconfig -o /boot/grub/grub.cfg
-```
+3. 生成配置文件
+
+	```bash
+	grub-mkconfig -o /boot/grub/grub.cfg
+	```
 
 
+
+> 重启后进入新的系统
 
 
 
@@ -215,8 +163,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 2. 安装中文字体、输入法
 
    ```bash
-   pacman -S wqy-microhei wqy-zenhei
-   pacman -S fcitx fctix-libpinyin fcitx-configtool
+   pacman -S  wqy-zenhei fcitx fctix-libpinyin fcitx-configtool
    ```
 
 3. 修改 `/etc/profile` 
@@ -234,7 +181,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 4. 配置声音
 
-   ```properties
+   ```bash
    pacman -S alsa-utils
    vim  /lib/systemd/system/alsa-state.service
    #写入
@@ -251,7 +198,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 5. 启用国内源、multilib， 修改 `/etc/pacman.conf`
 
-   ```properties
+   ```bash
    [multilib] 
    Include = /etc/pacman.d/mirrorlist
    [archlinuxcn]
@@ -311,11 +258,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 将 /root/.Xauthority  文件拷贝到 用户目录， 更改用户组和拥有者
 
 ```bash
-cp /root/.Xauthority  /home/willon/
-cd  /home/willon
-chown willon .Xauthority
-chgrp willon .Xauthority
-reboot
+    cp /root/.Xauthority  /home/willon/
+    chown willon:willon /home/willon/.Xauthority
+    reboot
 ```
 
 
@@ -440,27 +385,65 @@ reboot
 
 
 
-# 其他软件
 
-1. TIM 、Wechat 安装 `deepin.com.XXXX`  
+# 问题
 
-2. Mariadb，只是下载好软件包，并没有完整安装，需要手动安装
+
+
+
+
+1. fcitx开机无法识别, 部分应用无法使用输入法,  编辑 `/etc/profile`
 
    ```bash
-   mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+   export GTK_IM_MODULE=fcitx
+   export QT_IM_MODULE=fcitx
+   export XMODIFIERS="@im=fcitx"
    ```
 
-   MySQL 默认禁用客户端自动补全功能。要在整个系统中启用它，编辑 `/etc/mysql/my.cnf`，将 `no-auto-rehash` 替换为 `auto-rehash`。下次客户端启动时就会启用自动补全。
+2. chrome 漏字 , 安装 `fcitx-gtk3 `  重启修复
 
-3. WPS-Office: 官网 [http://linux.wps.cn](http://linux.wps.cn)
+   ```bash
+   yaourt  -S  fcitx-gtk3  
+   ```
 
+3. 自动挂硬盘, 解压缩软件
 
+   ```bash
+   yaourt -S  gvfs  ntfs-3g    engrampa
+   ```
 
-## 自动挂载硬盘,解压缩软件
+4. 完美的截图软件
 
-```bash
-pacman -S  gvfs  ntfs-3g    engrampa
-```
+   ```bash
+   yaourt  -S deepin-screenshot
+   ```
 
+5. dock
 
+   ```bash
+   yaourt  -S plank
+   ```
 
+6. 主题相关
+
+   ```bash
+   yaourt    -S  gtk-theme-arc-git  numix-circle-icon-theme-git
+   ```
+
+7. 设置时区
+
+   ```bash
+   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+   ```
+
+8. 生成 `/etc/adjtime`
+
+   ```bash
+   hwclock --systohc 
+   ```
+9.  时间同步问题 ,编辑 `/etc/systemd/timesyncd.conf` 文件
+    ```bash
+    [Time]
+    NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+    FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+    ```

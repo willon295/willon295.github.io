@@ -418,30 +418,37 @@ mkinitcpio -p linux
    yaourt  -S deepin-screenshot
    ```
 
-5. dock
+5. aur软件编译失败
+
+   ```bash
+   yaourt  -S  coreutils  bind-tools
+   ```
+
+6. dock
 
    ```bash
    yaourt  -S plank
    ```
 
-6. 主题相关
+7. 主题相关
 
    ```bash
    yaourt    -S  gtk-theme-arc-git  numix-circle-icon-theme-git
    ```
 
-7. 设置时区
+8. 设置时区
 
    ```bash
    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
    ```
 
-8. 生成 `/etc/adjtime`
+9. 生成 `/etc/adjtime`
 
    ```bash
    hwclock --systohc 
    ```
-9.  时间同步问题 ,编辑 `/etc/systemd/timesyncd.conf` 文件
+
+10. 时间同步问题 ,编辑 `/etc/systemd/timesyncd.conf` 文件
     ```bash
     [Time]
     NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org

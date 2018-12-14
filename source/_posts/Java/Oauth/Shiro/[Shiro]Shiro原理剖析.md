@@ -94,6 +94,14 @@ domain: *
 
 ![](/images/shiro_authentication.png)
 
+1. 获取用户的token信息
+2. Subject.login() , 底层是在 realm 中比较信息差异
+3. 如果登录成功, 返回认证信息
+
 ### 授权流程
 
 ![](/images/shiro_authorizer.png)
+
+1. 获取用户的认证信息
+2. 获取用户的授权信息
+3. 检查用户是否有权限

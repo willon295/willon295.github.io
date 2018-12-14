@@ -7,10 +7,10 @@ date: 2018-12-13 00:00:00
 
 # 通用名词
 
-1. 认证(authentication): 对用户身份进行验证
-2. 授权(authorization):  对用户进行授权,如该用户拥有什么角色 , 拥有什么权限
+1. 认证(authentication):  你是谁? 
+2. 授权(authorization):  你可以做什么?
 3. 角色(role)的定义: 开发者自定义的角色 , 如 `admin` , `vip` , `user`
-4. 权限(permission)的定义:  应该符合一定的规则
+4. 权限(permission)
 
 
 # Shiro 架构

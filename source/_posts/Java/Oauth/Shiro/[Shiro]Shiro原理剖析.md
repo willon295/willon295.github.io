@@ -3,8 +3,6 @@ title: '[Shiro]Shiro架构以及原理剖析'
 category: Java
 tag: Shiro
 date: 2018-12-13 00:00:00
-
-
 ---
 
 # 通用名词
@@ -61,9 +59,8 @@ shiro结构中的名词:
 ```java
 
 /**
- * JPA/Hibernate persisted permissions that wish to store the parts of the permission string
- * in separate columns (e.g. 'domain', 'actions' and 'targets' columns), which can be used in querying
- * strategies.
+ * the permission string
+ * in separate columns (e.g. 'domain', 'actions' and 'targets' columns)
  */
 public class DomainPermission extends WildcardPermission {
     private String domain;
@@ -200,7 +197,8 @@ domain: *
    ```java
    
        /**
-        * 管理shiroBean的生命周期 , 这个方法必须是静态的,在类加载之前就完成实例化,  否则Spring启动异常, 属性注入异常
+        * 管理shiroBean的生命周期 , 这个方法必须是静态的,
+        * 在类加载之前就完成实例化,  否则Spring启动异常, 属性注入异常
         */
        @Bean
        public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -212,7 +210,8 @@ domain: *
         */
        @Bean
        public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-           DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+           DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator =
+               new DefaultAdvisorAutoProxyCreator();
            defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
            return defaultAdvisorAutoProxyCreator;
        }
@@ -222,8 +221,10 @@ domain: *
         */
        @Bean
        public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
-           AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+           AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor =
+               new AuthorizationAttributeSourceAdvisor();
            authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
            return authorizationAttributeSourceAdvisor;
        }
    ```
+

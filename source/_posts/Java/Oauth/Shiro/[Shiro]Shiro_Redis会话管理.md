@@ -15,18 +15,18 @@ date: 2018-11-11 01:00:00
 
 1. 添加 pom 
 
-```
-        <!--redis实现会话管理-->
-        <dependency>
-            <groupId>org.crazycake</groupId>
-            <artifactId>shiro-redis</artifactId>
-            <version>2.8.8</version>
-        </dependency>
-        <!--redis 客户端-->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
+```xml
+<!--redis实现会话管理-->
+<dependency>
+	<groupId>org.crazycake</groupId>
+	<artifactId>shiro-redis</artifactId>
+	<version>2.8.8</version>
+</dependency>
+<!--redis 客户端-->
+<dependency>
+	<groupId>redis.clients</groupId>
+	<artifactId>jedis</artifactId>
+</dependency>
 ```
 2. `ShiroConfig` 类需要写入
 ```java

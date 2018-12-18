@@ -28,7 +28,7 @@ shiro结构中的名词:
 
 ## 工作原理
 
-![shiro架构图](/images/shiro_arc.png)
+![shiro架构图](https://willon.cn/images/shiro_arc.png)
 
 1. SecurityManager 是整个框架的核心 , 包含 `Authenticator`  ,  `Authorizor` , `SessionManager` , `CacheManager` , `Realm`  ,  `SessioinDAO`
 2.  Realm 提供  Authenticator 的 认证需要的信息源 , 提供  Authorizor 授权信息源
@@ -36,7 +36,7 @@ shiro结构中的名词:
 
 ### 认证流程
 
-![](/images/shiro_authentication.png)
+![](https://willon.cn/images/shiro_authentication.png)
 
 1. 获取用户的token信息
 2. Subject.login() , 底层是在 realm 中比较信息差异
@@ -44,7 +44,7 @@ shiro结构中的名词:
 
 ### 授权流程
 
-![](/images/shiro_authorizer.png)
+![](https://willon.cn/images/shiro_authorizer.png)
 
 1. 获取用户的认证信息
 2. 获取用户的授权信息
@@ -67,9 +67,6 @@ public class DomainPermission extends WildcardPermission {
     private Set<String> actions;
     private Set<String> targets;
 }
-
-
-
 public class WildcardPermission implements Permission, Serializable {
     protected static final String WILDCARD_TOKEN = "*";
     protected static final String PART_DIVIDER_TOKEN = ":";
@@ -113,11 +110,11 @@ domain: *
 
 # Realm
 
-
+Realm 是认证信息、授权信息数据来源的组件
 
 ## IniRealm
 
-简单的文件 , 按照一定的规则定义  用户, 角色, 权限 
+简单的 `ini` 文件 , 按照一定的规则定义  用户, 角色, 权限 
 
 ```ini
 [users]   #写死的
@@ -127,19 +124,31 @@ domain: *
 角色=权限...
 ```
 
-
-
 ## 自定义Realm
 
 1. 继承 `org.apache.shiro.realm.AuthorizingRealm` 
 2.  重写  `doGetAuthenticationInfo`  获取认证信息
 3.  重写 `doGetAuthorizationInfo`    获取授权信息
 
+## 如何使用Realm
 
+在自定义的 `ShiroConfig` 类中添加:
+
+```java
+@Bean
+public CustomRealm customRealm() {
+	return new CustomRealm();
+}
+
+@Bean
+public WebSecurityManager securityManager() {
+	DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+	securityManager.setRealm(customRealm());
+	return securityManager;
+}
+```
 
 # Shiro注解
-
-
 
 1. `@RequiresAuthentication` : 表明这个接口的访问需要经过认证
 
@@ -228,3 +237,10 @@ domain: *
        }
    ```
 
+
+
+# 完整Spring Boot Shiro Demo
+
+git地址：
+
+1. [https://github.com/willon295/spring-boot-shiro-demo](https://github.com/willon295/spring-boot-shiro-demo)

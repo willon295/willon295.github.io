@@ -9,7 +9,7 @@ date: 2018-06-20 00:11:00
 解决的问题； 当一个项目需要多个数据源（数据库）、那么就通过几种方式
 1. 分包： 不同的包的业务访问不同的数据库
 2. 自定义注解： 在业务层方法上面使用自定义注解指定数据库
- 
+
 # 数据库的划分
 
 垂直： 每个表对应着不同的业务
@@ -23,7 +23,7 @@ service2 事务的执行并不会影响 service1 的事务，
 service1 事务执行成功， service2 执行失败。
 而我们想要的结果是： `要么一起成功，要么一起回滚`.
 
-```
+```java
 @Service
 public class UserServiceTest2 {
 
@@ -89,14 +89,14 @@ public class UserServiceTest2 {
 
 
 1. 引入jta-atomikos依赖
-```
+```xml
 <dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-jta-atomikos</artifactId>
 </dependency>
 ```
 2. 配置文件中配置多个数据源信息
-```
+```yaml
 test1:
   mysql:
     datasource:
@@ -127,7 +127,7 @@ test2:
       maxIdleTime: 60
 ```
 3. 数据源配置
-```
+```java
 @Data
 @NoArgsConstructor
 @Configuration
@@ -244,7 +244,7 @@ public class DataSourceConfig2 {
 }
 ```
 4. Mapper
-```
+```java
 @Mapper
 public interface UserMapper1 {
 
@@ -268,7 +268,7 @@ public interface UserMapper1 {
 
 使用 jta-atomikos 管理事务可以解决问题
 
-```
+```java
 @Service
 public class UserServiceTest2 {
 
@@ -297,7 +297,7 @@ public class UserServiceTest2 {
 
 发送数据测试
 
-```
+```bash
 curl -X POST -H "Content-type:application/json" \
 --data '{"name":"小明","age":24}' \
  http://localhost:8888/add2

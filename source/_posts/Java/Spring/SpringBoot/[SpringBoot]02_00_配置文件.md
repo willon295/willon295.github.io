@@ -5,36 +5,6 @@ category: SpringBoot
 date: 2018-06-20 00:02:00
 ---
 
-# 核心配置文件
-
-## 配置文件类型
-
-1. properties文件
-````
-server.port=8888
-server.address=127.0.0.1
-```
-
-2. yml配置,树状结构
-```
-server:
-  port: 8888
-```
-
-## 配置文件取值
-
-1. 自定义字段并取值
-```
-willon:
-  name: chen
-  password: chenpwd
-  toString: ${willon.name} ${willon.password}
-```
-2. 取随机数
-```
-server:
-    port: ${random.int[1024,9999]}
-```
 
 
 # 多环境配置
@@ -49,7 +19,7 @@ application-dev.yml
 application-test.yml
 ```
 2. 单个文件
-```
+```yaml
 spring:
     profiles: dev
 spring:
@@ -60,6 +30,37 @@ spring:
 
 使用 `--spring.profiles.active=` 指定 `profiles` 字段
 
-```
+```bash
 java -jar XXX.jar  --spring.profiles.active=dev
+```
+
+# 核心配置文件
+
+## 配置文件类型
+
+1. properties文件
+```properties
+server.port=8888
+server.address=127.0.0.1
+```
+
+2. yml配置,树状结构
+```yaml
+server:
+  port: 8888
+```
+
+## 配置文件取值
+
+1. 自定义字段并取值
+```yaml
+willon:
+  name: chen
+  password: chenpwd
+  toString: ${willon.name} ${willon.password}
+```
+2. 取随机数
+```yaml
+server:
+    port: ${random.int[1024,9999]}
 ```

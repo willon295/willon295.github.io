@@ -26,6 +26,10 @@ Using generated security password: e4ad1710-01a7-4332-a641-93a63276a2e3
 ```
 访问站点出现登录表单
 
+![](https://willon.cn/images/spring_security_default_login.png)
+
+
+
 ## 分析
 
 1. 搜索日志的输出信息 `generated security password`  发现其出现在两个类中：

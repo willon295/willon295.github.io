@@ -26,7 +26,7 @@ Using generated security password: e4ad1710-01a7-4332-a641-93a63276a2e3
 ```
 访问站点出现登录表单
 
-![](https://willon.cn/images/spring_security_default_login.png)
+![](/images/spring_security_default_login.png)
 
 
 

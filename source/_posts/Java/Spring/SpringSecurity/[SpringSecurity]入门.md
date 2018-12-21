@@ -9,9 +9,9 @@ date: 2018-12-19 00:00:00
 
 【待完善】permission 的自定义与 `hasPermission` , `hasAnyAuthority` 的详解
 
-基于 `Spring Boot 2.0.7.RELEASE`
+**!注** :  本demo基于 `Spring Boot 2.0.7.RELEASE`
 
-首先， 在原有的 `Spring Boot` 项目中加上
+首先， 在原有的 `Spring Boot Web`  项目中加上
 ```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -57,36 +57,14 @@ private String getOrDeducePassword(SecurityProperties.User user,
 ```java
 
 	public static class User {
-
-		/**
-		 * Default user name.
-		 */
-		private String name = "user";
-
-		/**
-		 * Password for the default user name.
-		 */
+        // 默认的用户名是  user
+		private String name = "user"; 
+        // 默认密码是 UUID 生成的
 		private String password = UUID.randomUUID().toString();
-
-		/**
-		 * Granted roles for the default user name.
-		 */
+        // 默认角色是空
 		private List<String> roles = new ArrayList<>();
-
+        // 默认生成随机密码
 		private boolean passwordGenerated = true;
-
-		public String getName() {
-			return this.name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getPassword() {
-			return this.password;
-		}
-
 		public void setPassword(String password) {
 			if (!StringUtils.hasLength(password)) {
 				return;
@@ -94,24 +72,12 @@ private String getOrDeducePassword(SecurityProperties.User user,
 			this.passwordGenerated = false;
 			this.password = password;
 		}
-
-		public List<String> getRoles() {
-			return this.roles;
-		}
-
-		public void setRoles(List<String> roles) {
-			this.roles = new ArrayList<>(roles);
-		}
-
-		public boolean isPasswordGenerated() {
-			return this.passwordGenerated;
-		}
-
+        // setter getter
 	}
 
 ```
 
-再看 `SecurityProperties` 这个类源码
+再回头看 `SecurityProperties` 这个类源码
 
 ```java
 @ConfigurationProperties(prefix = "spring.security")
@@ -121,7 +87,7 @@ public class SecurityProperties {
 }
 ```
 
-可以看出， 这个properties类会加载 springboot 配置文件前缀为 `spring.security` 的信息，  那么猜测可以通过配置文件修改 `user` ， `password` ， `roles` ， 测试：
+根据 `@ConfigurationProperties` 可以看出， 这个类会加载配置文件前缀为 `spring.security` 的信息，  那么猜测可以通过配置文件修改 `user` ， `password` ， `roles` ， 测试：
 
 ```yaml
 server:
@@ -139,8 +105,8 @@ spring:
 ## 当前结论
 
 1.  引入maven依赖， 未做任何配置时， spring默认会启动安全校验
-2. 默认会校验所有URI
-3. 自带单点登录表单
+2. 默认会拦截所有请求URI
+3. SpringSecurity自带单点登录表单
 4. 默认的用户名： `user` , 密码由 `UUID` 随机生成， 且无加密手段
 5. 可以通过yml配置文件 `spring.security` 修改默认账户信息
 
@@ -148,26 +114,28 @@ spring:
 
 通过上面简单入门发现几个问题
 
-1. 用户名密码只有一个， 且是通过配置文件定义的， 并非从从数据库获取
-2. 具体验证的方法不是自定义的
+1. 用户名密码只有一个， 且是通过配置文件定义的， 并非`从数据库` 获取
+2. 具体 `验证的方法` 不是自定义的
 
-通过啃官方文档之后， 发现需要定一个类， 继承 `WebSecurityConfigurerAdapter` , 重写 `configure` 方法， 看 `WebSecurityConfigurerAdapter` 源码
+通过啃官方文档之后， 如果要实现上面两个自定义功能，需要定一个类继承 `WebSecurityConfigurerAdapter` , 重写 `configure` 方法。
+
+先从 `WebSecurityConfigurerAdapter` 源码入手
 
 ```java
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.anyRequest().authenticated()
+				.anyRequest().authenticated() // 任何请求， 需要认证
 				.and()
-			.formLogin().and()
+			.formLogin().and()  // 开启表单登录
 			.httpBasic();
 	}
 ```
 
-**简单分析** 
+**源码简单分析结论** 
 
-1. 拦截所有请求
-2. 表单登录
+1. 所有请求需要认证
+2. 默认开启表单登录
 
 在通过搜索登录表单的信息发现出现在 `DefaultLoginPageGeneratingFilter` 的 `generateLoginPageHtml` 方法中 ， 其中源码关键定义如下
 
@@ -208,10 +176,10 @@ public FormLoginConfigurer() {
 
 首先实现自定义登录用户的信息， 需要注意的是
 
-1. 源码中大部分的 `PasswordEncoder` 已经被废弃
+1. 源码中`大部分` 的 `PasswordEncoder` 实现类已经被废弃
 2. 如果需要使用可通过工厂类 `PasswordEncoderFactories` 创建
 
-如果需要使用密码加密手段
+如果需要使用密码加密手段，可以这样配置
 
 ```java
 @EnableWebSecurity
@@ -533,8 +501,6 @@ public class UserDAO {
 
 
 # 总结
-
-
 
 1. 目前只实现了单点登录
 2. 进行了 Role 的校验， 并没有 `Permission` 以及更详细的权限校验

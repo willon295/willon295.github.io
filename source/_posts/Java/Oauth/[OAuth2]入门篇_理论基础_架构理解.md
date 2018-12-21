@@ -17,6 +17,15 @@ date: 2018-12-20 10:00:00
 4. 返回钉钉注册页面
 5. 钉钉读取用户微信基本信息
 
+
+
+# 大前提
+
+这个场景的发生前提是：
+
+1. 微信有开放的第三方授权服务器，授权接口，资源服务器
+2. 钉钉 `作为客户端` 在 `微信授权服务器` 注册 , 且微信授权服务器给钉钉发放了唯一身份id （client_id）
+
 # 角色划分
 
 那么我们对以上场景进行  **角色划分** 
@@ -80,6 +89,7 @@ scope: user                          #表明需要的授权范围为user
 ```
 
 **D流程** ： 微信授权服务器返回授权信息，包括
+
 ```properties
 access_token: er2rsersdf4534sds     #授权token
 refresh_token: 9834892sfsdfsf324    #刷新token 
@@ -114,3 +124,104 @@ expire_in: 864000						#失效时间
   |        |<-(H)----------- Access Token -------------|               |
   +--------+           & Optional Refresh Token        +---------------+
 ```
+
+
+
+# 授权方式
+
+
+
+
+
+##   Authorization Code Grant (授权码模式)
+
+本中上方例子就是授权码模式
+
+
+
+## Implicit Grant（简化隐式授权模式）
+
+省略 `授权码模式` 中的获取 `code` 步骤，  客户端直接向  授权服务器请求 token
+
+- 客户端发起获取授权请求： 参数
+
+  ```properties
+  client_id: dingdingxxxxxxx           #表明请求来自钉钉
+  response_type: token               #表明返回类型是token
+  scope: user                          #表明需要的授权范围为user
+  redirect_uri: https://dingtalk.com/register/callback  #表明用户确认后回调的URL
+  ```
+
+- 授权服务端， 根据 `redirect_uri`  返回数据
+
+  ```properties
+  access_token: er2rsersdf4534sds     #授权token
+  refresh_token: 9834892sfsdfsf324    #刷新token 
+  expire_in: 864000						#失效时间
+  ```
+
+##  Resource Owner Password Credentials Grant(用户密码授权模式)
+
+1. 客户端向用户索要账号密码
+
+2. 客户端根据此凭证向  `授权服务器`  请求授权token
+
+   ```properties
+     grant_type: password
+     username:tom
+     password=A3ddj3w
+   ```
+
+3. 授权服务器返回token
+
+   ```properties
+   access_token: er2rsersdf4534sds     #授权token
+   refresh_token: 9834892sfsdfsf324    #刷新token 
+   expire_in: 864000						#失效时间
+   ```
+
+
+
+##  Client Credentials Grant (客户端授权模式)
+
+```
+     +---------+                                  +---------------+
+     |         |                                  |               |
+     |         |>--(A)- Client Authentication --->| Authorization |
+     | Client  |                                  |     Server    |
+     |         |<--(B)---- Access Token ---------<|               |
+     |         |                                  |               |
+     +---------+                                  +---------------+
+```
+
+如图， 客户端直接与授权服务器交互
+
+> 前提是client 是绝对信任的
+
+1. 客户端发起的请求参数如下
+
+   ```properties
+   grant_type: client_credentials
+   ```
+2. 授权服务器返回token
+
+   ```properties
+   access_token: er2rsersdf4534sds     #授权token
+   refresh_token: 9834892sfsdfsf324    #刷新token 
+   expire_in: 864000				   #失效时间
+   ```
+
+
+
+# Refresh Token
+
+当 `client` 的 `access_token` 过期、失效时， 凭借 `refresh_token` 向授权服务器请求新的 `access_token`,  请求数据如下
+
+1. Client 请求参数如下
+
+```properties
+ grant_type: refresh_token
+ refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
+```
+
+2. 授权服务器返回新的token信息

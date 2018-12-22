@@ -9,9 +9,8 @@ comments: false
 @card{
 
 
-* 手机:  [136-7706-2940](tel:13677062940)
 * Email：[willon295@163.com](mailto:willon295@163.com)
-* QQ/微信号:  [1411082228](http://wpa.qq.com/msgrd?v=3&uin=1411082228)
+* QQ:  [1411082228](http://wpa.qq.com/msgrd?v=3&uin=1411082228)
 
 }
 

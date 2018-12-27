@@ -27,7 +27,7 @@ date: 2018-12-22 00:00:00
 
 ```bash
 └── test-app-final       #项目
-    ├── conf/            #存放SpringBoot的yml配置文件
+    ├── conf/            #存放SpringBoot的yml配置文件,logback配置文件
     ├── lib/             #存放项目依赖jar包
     └── test-app-final.jar   #只存放编译的class文件
 ```
@@ -62,7 +62,8 @@ date: 2018-12-22 00:00:00
                         </manifestEntries>
                     </archive>
                     <excludes>
-                        <exclude>**/*.yml</exclude>
+                        <exclude>*.yml</exclude>
+                        <exclude>*.xml</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -122,8 +123,8 @@ date: 2018-12-22 00:00:00
         <fileSet>
             <directory>${basedir}/${project.build.directory}/classes</directory>
             <includes>
-                <include>**/*.yml</include>
-                <include>**/*.xml</include>
+                <include>*.yml</include>
+                <include>*.xml</include>
             </includes>
             <outputDirectory>/conf</outputDirectory>
         </fileSet>
@@ -139,3 +140,8 @@ date: 2018-12-22 00:00:00
     </dependencySets>
 </assembly>
 ```
+
+
+
+
+

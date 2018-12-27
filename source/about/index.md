@@ -3,18 +3,17 @@ layout: about
 comments: false
 ---
 
-# 联系方式
+# 1. 联系方式
 
 
 @card{
 
-
-* Email：[willon295@163.com](mailto:willon295@163.com)
-* QQ:  [1411082228](http://wpa.qq.com/msgrd?v=3&uin=1411082228)
-
+* 手机: 13677062940
+* 邮件: [willon295@163.com](mailto:willon295@163.com)
+* 微信: 13677062940
 }
 
-# 个人信息
+# 2. 个人信息
 
 @card{
 
@@ -23,18 +22,44 @@ comments: false
 * 本科/华东交通大学/软件工程
 * 英语水平: CET4
 * 个人博客：[https://willon.cn](https://willon.cn)
-* Github：[http://github.com/willon295](http://github.com/willon295)
 
 }
 
 
-
-
-# 项目经验
+# 3. 实习经历
 
 @card{
 
-## 微服务架构电商项目(2018-6~2018-6)
+## 3.1 杭州二维火科技(2018-9~2018-12)
+
+- 会员营销
+- 优惠券
+- 活动
+- 工具化
+  
+
+}
+
+# 4. 项目经验
+
+
+@card{
+## 4.1 高级服务商城定向发券(2018-11~2018-12)
+
+负责活动平台,中间件相关业务
+
+## 4.2 新零售优惠券对接(2018-10~2018-11)
+
+负责活动平台,中间件,网关接入等业务
+
+## 4.3 活动后台工具化(2018-9~2018-10)
+
+负责会员信息数据工具化相关业务
+}
+
+@card{
+
+## 4.4 微服务架构电商项目(2018-6~2018-6)
 
 * 后端技术: `Spring Boot` + `Spring Cloud` + `Spring MVC` + `Mybatis` + `MySQL` + `Redis`
 * 前端技术: `Nginx` + `JQery` + `Ajax`  + `Vue` + `Bootstrap`
@@ -51,7 +76,7 @@ comments: false
 
 @card{
 
-## 手写Spring,SpringMVC(2018-5~2018-5)
+## 4.5 手写Spring,SpringMVC(2018-5~2018-5)
 
 * 技术: `Tomcat` , `Servlet` , `Java注解`, `反射` , `JSON`
 * 实现注解:
@@ -78,7 +103,7 @@ comments: false
 
 @card{
 
-## 大数据商品推荐引擎(2017-10~2017-10)
+## 4.6 大数据商品推荐引擎(2017-10~2017-10)
 
 * 技术: `Java` , `Hadoop` , `Shell`
 * 目的: 通过大数据技术进行数据分析, 向客户推荐其 可能感兴趣,最可能购买但还未购买的商品
@@ -95,7 +120,7 @@ comments: false
 
 @card{
 
-## 物联网环境监测系统(2016-10~2016-10)
+## 4.7 物联网环境监测系统(2016-10~2016-10)
 
 * 技术: `Java` , `xml` , `ZigBee`
 * 目的: 采集环境(光照,二氧化碳,温度,湿度,紫外线)数据并实时显示
@@ -108,13 +133,13 @@ comments: false
 }
 
 
-# 技能清单
+# 5. 技能清单
 
 @card{
 
 
 - 编程语言: Java
-- 后端框架: SpringMVC/SpringBoot/SpringCloud/Mybatis
+- 后端框架:  Shiro/OAuth2/SpringBoot/Dubbo/SpringCloud/Mybatis
 - 前端框架：Vue/JQery/Bootstrap
 - 数据库：MySQL, Redis 
 - 其他: Hadoop/Hive/RabbitMQ/Nginx
@@ -125,12 +150,20 @@ comments: false
 
 
 
-# 个人经历
+# 6. 经历
 
 
 @timeline{
 
 ##### 2018
+
+@item{
+
+###### 9月~12月
+
+杭州二维火科技实习(JAVA)
+
+}
 
 @item{
 

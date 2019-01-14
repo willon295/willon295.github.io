@@ -56,8 +56,13 @@ service.msc
 
 ## 端口及字符编码
 
+**注意： ** MariaDb 配置文件在  `/etc/my.cnf`
+
 1. 修改 `/etc/mysql/mysqld.conf.d/mysqld.conf`，写入：
-```
+```bash
+[mysql]
+default-character-set=utf8
+
 [mysqld]
 #修改端口
 port=5700
@@ -96,8 +101,6 @@ redhat系列采用本数据库， 也是mysql
    mysqladmin  -uroot -p  password "123543"
    ```
 
-   
-
 2. 默认的字符集,`必须使用root`  用户修改
 
    ```bash
@@ -108,7 +111,3 @@ redhat系列采用本数据库， 也是mysql
    set  global character_set_server=utf8;
    set  global character_set_database=utf8;
    ```
-
-   
-
-   

@@ -2,8 +2,8 @@
 title: '[Dubbo]SpringBoot_Dubbo_Zookeeper'
 category: 'Java'
 tags:
-  - java
-  - dubbo
+  - Java
+  - Dubbo
 date: 2018-09-21 00:00:00 
 ---
 

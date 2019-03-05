@@ -454,3 +454,15 @@ mkinitcpio -p linux
     NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
     FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
     ```
+
+11. mysql无法启动问题
+
+    ```
+    mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+    
+    #在执行
+    
+    systemctl  start  mariadb
+    ```
+
+    

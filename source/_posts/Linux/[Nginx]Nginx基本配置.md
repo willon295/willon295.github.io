@@ -21,7 +21,7 @@ event{
 }
 ```
 
-**HTTP服务器配置**
+# HTTP服务器配置
 
 ```nginx
 http{
@@ -53,6 +53,8 @@ http{
 
 location就是定位， 将不同的 `URI` 进行具体访问定位
 
+**匹配规则** ： 尽量`命中正则`， 尽量命中`长的、精准的` 表达式
+
 一般匹配的语法是：
 
 ```nginx
@@ -74,11 +76,15 @@ location / {
     root  /usr/local/nginx/html;
     index index.html index.htm;
 }
+
+location /user {
+    root /var/www/html/user;
+}
 ```
 
-如访问 `www.local.com`  --> 找到站点根目录  --> 找到 index对应文件
+如访问 `localhost/`  --> 找到站点根目录`/usr/local/nginx/html`  --> 找到 index对应文件
 
-
+如果访问 `localhost/user`  --> 找到站点根目录 `/var/www/html/user`
 
 **正则： **
 
@@ -88,5 +94,49 @@ location ~.*(js|css|png|gif|jpg|mp3|ogg)$  {
 }
 ```
 
-> 1. 访问 localhost/aa/bb/main.css  
-> 2. 寻找 /var/www/static/aa/bb/main.css 文件
+1. 访问 localhost`/aa/bb/main.css`  
+2. 寻找 `/var/www/static/aa/bb/main.css`  文件
+
+
+
+```nginx
+location ~  image|css|js {
+    root /var/www;
+}
+```
+
+1. 访问 localhost /`image/logo.jpg` --> 寻找 `/var/www/image/logo.jpg`
+2. 范文localhost`/css/main.css`  --> 寻找 `/var/www/css/man.css`
+
+
+
+# 反向代理
+
+
+
+举个例子， 将所有的图片请求，分发到一组服务器
+
+```nginx
+up_stream   cdnserver {
+    server 10.0.0.11  weight=1 fail_timeout=3;
+    server 10.0.0.12  weight=3 fail_timeout=3;
+    server 10.0.0.13  weight=1 fail_timeout=3;
+}
+
+location /image {
+    proxy_pass https://cdnserver
+}
+
+```
+
+另一种就是不同的请求直接指定代理服务器
+
+```nginx
+location /image {
+    proxy_pass https://10.0.0.110;
+}
+location /js {
+    proxy_pass https://10.0.0.100;
+}
+```
+

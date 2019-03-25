@@ -2,7 +2,7 @@
 title: '[Nginx]Nginx基本配置'
 category: Nginx
 tag: Nginx
-date: 2019-01-03 00:00:01
+date: 2017-01-03 00:00:01
 ---
 
 

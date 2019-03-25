@@ -1,6 +1,6 @@
 ---
 title: '[Spring]SpringDataJPA的基本使用'
-date: 2019-03-02 00:00:00
+date: 2018-03-02 00:00:00
 tag: Spring
 category: Java
 ---

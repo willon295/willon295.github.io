@@ -268,8 +268,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.willon.autocon
 
 效果图： 
 
-![](/springbootstarter01.png)
-![](/springbootstarter02.png)
+![](/images/springbootstarter01.png)
+![](/images/springbootstarter02.png)
 
 
 

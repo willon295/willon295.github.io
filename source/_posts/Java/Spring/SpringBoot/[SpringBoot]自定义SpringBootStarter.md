@@ -273,6 +273,32 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.willon.autocon
 
 
 
-# 注意的问题
+# 总结
 
-使用 `application.properties ` 中文乱码， 使用 `application.yaml` 解决
+1. 项目结构： 
+
+   ```
+   xxx-starter
+   xxx-starter-autoconfigure
+   ```
+
+2. autoconfigure大概需要的文件
+
+   ```
+   |java
+       XxxProperties         ==> 存储yml配置信息
+       XxxServiceImpl        ==> 使用Properties
+       XxxAutoConfiguration  ==> 配置上面两者
+   
+   |resource
+     |META-INF
+       spring.factories ==> 让Spring扫描AutoConfiguration
+       spring-configuration-metadata.json ==> IDE给提示
+   ```
+
+3. 如果需要使用自定义starter，需要install到本地库,依赖关系：
+  ```
+  demo  --> starter  --> starter-autoconfigure
+  ```
+
+4. 使用 `application.properties ` 中文乱码， 使用 `application.yaml` 解决

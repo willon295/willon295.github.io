@@ -9,7 +9,7 @@ date: 2019-04-10 00:00:00
 
 
 
-# 项目架构
+# 项目架构以及简单介绍
 
 
 
@@ -213,6 +213,63 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.willon.autocon
    ```
 
 7. 浏览器访问 `localhost:8080/say/11111`
+
+
+
+
+
+# 元数据的配置(让IDE给出提示)
+
+
+
+配置的元数据定义文件为 `resources/META-INF/spring-configuration-metadata.json`
+
+实例
+```json
+{
+  "groups": [
+    {
+      "name": "hello",
+      "sourceType": "cn.willon.autoconfigure.props.HelloProperties",
+      "type": "cn.willon.autoconfigure.props.HelloProperties"
+    }
+  ],
+
+  "properties": [
+    {
+      "name": "hello.msg",
+      "type": "java.lang.String",
+      "defaultValue": "HELLO",
+      "sourceType": "cn.willon.autoconfigure.props.HelloProperties",
+      "description": "打招呼内容"
+    }
+  ],
+
+
+  "hints": [
+    {
+      "name": "hello.msg",
+      "values": [
+        {
+          "value": "你好",
+          "description": "中文方式打招呼"
+        },
+        {
+          "value": "Hi",
+          "description": "英文方式打招呼"
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+
+效果图： 
+
+![](/springbootstarter01.png)
+![](/springbootstarter02.png)
 
 
 

@@ -157,7 +157,8 @@ public class HelloAutoConfiguration {
 由于 `@EnableAutoConfiguration` 最终关键执行的方法是 `SpringFactoriesLoader.loadFactoryNames()` 加载 `resource/META-INF/factories`  文件， 扫描对应的信息， 完成自动配置， 所以需要定义 `factories` 文件 ， 指定 configuration 类
 
 ```properties
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.willon.autoconfigure.conf.HelloAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.willon.autoconfigure.conf.HelloAutoConfiguration
 ```
 
 

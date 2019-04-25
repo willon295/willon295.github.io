@@ -1,5 +1,5 @@
 ---
-title: '[Way2God_Basic_01]Java基础数据类型'
+title: '[Way2God_Basic]Java基础数据类型'
 category: Way2God
 tag: Basic
 date: 2019-04-24 00:00:00

@@ -1,5 +1,5 @@
 ---
-title: '[Way2God_Basic_02]拆装箱_缓存机制'
+title: '[Way2God_Basic]Java拆装箱_Integer缓存机制'
 category: Way2God
 tag: Basic
 date: 2019-04-24 00:00:01

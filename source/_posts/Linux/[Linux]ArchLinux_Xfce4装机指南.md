@@ -110,7 +110,7 @@ mount /dev/sda1  /mnt
 1. 安装必要软件
 
    ```bash
-   pacman -S networkmanager  network-manager-applet net iw wpa_supplicant dialog
+   pacman -S  intel-ucode  iw wpa_supplicant dialog
    
    ```
 
@@ -135,10 +135,10 @@ mkinitcpio -p linux
 	```
 2. EFI
 	```bash
-	pacman -S grub efibootmgr dosfstools os-prober mtools
+	pacman -S grub efibootmgr 
 	mkdir /boot/EFI
 	mount /dev/sda2 /boot/EFI
-	grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+	grub-install --target=x86_64-efi  --efi-directory=/boot/EFI --bootloader-id=grub
 	```
 
 3. 生成配置文件

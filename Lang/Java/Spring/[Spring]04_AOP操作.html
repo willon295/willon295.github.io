@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Spring]04_AOP操作 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Spring">
+    <meta name="description" content="AOP术语 切点：需要被增强的类的方法 切面：用于增强的类 增强：前置（方法执行前），后置（方法return之后），环绕（方法执行之前之后） 大概顺序是 ：前置–&amp;gt; 环绕的前–&amp;gt; 方法执行–&amp;gt; 环绕的后–&amp;gt; 后置    AOP的准备 jar 包：   aopalliance.jar aspectjweaver.jar spring-aspects-4.xx.jar spri">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Spring]04_AOP操作">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/[Spring]04_AOP操作.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="AOP术语 切点：需要被增强的类的方法 切面：用于增强的类 增强：前置（方法执行前），后置（方法return之后），环绕（方法执行之前之后） 大概顺序是 ：前置–&amp;gt; 环绕的前–&amp;gt; 方法执行–&amp;gt; 环绕的后–&amp;gt; 后置    AOP的准备 jar 包：   aopalliance.jar aspectjweaver.jar spring-aspects-4.xx.jar spri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Spring]04_AOP操作">
+<meta name="twitter:description" content="AOP术语 切点：需要被增强的类的方法 切面：用于增强的类 增强：前置（方法执行前），后置（方法return之后），环绕（方法执行之前之后） 大概顺序是 ：前置–&amp;gt; 环绕的前–&amp;gt; 方法执行–&amp;gt; 环绕的后–&amp;gt; 后置    AOP的准备 jar 包：   aopalliance.jar aspectjweaver.jar spring-aspects-4.xx.jar spri">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Spring]04_AOP操作</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Spring]04_AOP操作</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-11T16:04:00.000Z" itemprop="datePublished" class="page-time">
+  2016-10-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring/">Spring</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOP术语"><span class="post-toc-number">1.</span> <span class="post-toc-text">AOP术语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOP的准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">AOP的准备</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/[Spring]04_AOP操作"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Spring]04_AOP操作</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-12 00:04:00" datetime="2016-10-11T16:04:00.000Z"  itemprop="datePublished">2016-10-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring/">Spring</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="AOP术语"><a href="#AOP术语" class="headerlink" title="AOP术语"></a>AOP术语</h2><ul>
+<li>切点：需要被增强的类的方法</li>
+<li>切面：用于增强的类</li>
+<li>增强：前置（方法执行前），后置（方法return之后），环绕（方法执行之前之后）<blockquote>
+<p>大概顺序是 ：前置–&gt; 环绕的前–&gt; 方法执行–&gt; 环绕的后–&gt; 后置</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="AOP的准备"><a href="#AOP的准备" class="headerlink" title="AOP的准备"></a>AOP的准备</h2><ol>
+<li>jar 包：</li>
+</ol>
+<ul>
+<li>aopalliance.jar</li>
+<li>aspectjweaver.jar</li>
+<li>spring-aspects-4.xx.jar</li>
+<li>spring-aop-4.xx.jar</li>
+</ul>
+<ol start="2">
+<li>切入点表达式<br><code>execution(&lt;修饰符&gt;?&lt;返回类型&gt;&lt;方法名&gt;(参数)&lt;异常&gt;)</code></li>
+</ol>
+<ul>
+<li>execution(* cn.willon.User.add(..))  :  User类的add 方法</li>
+<li>execution(<em> cn.willon.</em>(..))  : 对所有的类的所有方法</li>
+</ul>
+<ol start="3">
+<li><p>配置文件<br>这里需要引入 <code>aop</code> 约束</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span> <span class="comment">&lt;!-- bean definitions here --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.willon"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--1. 配置用于增强的 类（切面）--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAop"</span> <span class="attr">class</span>=<span class="string">"cn.willon.aop.UserAOP"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--2. 配置一个 aop --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--3. 配置一个切点，用表达式表示指定 切点--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pointcut_userService"</span> <span class="attr">expression</span>=<span class="string">"execution(* cn.willon.service.UserService.add(..))"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--4. 配置一个切面，选择切面的类--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect_user"</span> <span class="attr">ref</span>=<span class="string">"myAop"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--5. 配置增强的方式，前置后置环绕，指定被增强的切点--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"front"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut_userService"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"around"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut_userService"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"end"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut_userService"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切面类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAOP</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">front</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"前置....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">end</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"后置....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">around</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"环绕前....."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//这里被增强的方法会被执行</span></span><br><span class="line">        proceedingJoinPoint.proceed();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"环绕后....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/[Spring]04_AOP操作.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/[Spring]04_AOP操作.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/[Spring]05_JDK代理_CGLib代理.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Spring]05_JDK代理_CGLib代理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/[Spring]03_使用注解.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Spring]03_使用注解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

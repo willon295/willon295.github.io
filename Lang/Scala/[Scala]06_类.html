@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Scala]06_类 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Scala">
+    <meta name="description" content="类的定义 类名可以和文件名不同 类可以有一个伴生对象  123456789101112131415161718192021222324252627282930313233343536package day02class Student &amp;#123;  // val 修饰的属性  不可改变，相当于 用 final 修饰  val name = &amp;quot;tom&amp;quot;  var age = 1">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Scala]06_类">
+<meta property="og:url" content="https://willon.cn/Lang/Scala/[Scala]06_类.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="类的定义 类名可以和文件名不同 类可以有一个伴生对象  123456789101112131415161718192021222324252627282930313233343536package day02class Student &amp;#123;  // val 修饰的属性  不可改变，相当于 用 final 修饰  val name = &amp;quot;tom&amp;quot;  var age = 1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Scala]06_类">
+<meta name="twitter:description" content="类的定义 类名可以和文件名不同 类可以有一个伴生对象  123456789101112131415161718192021222324252627282930313233343536package day02class Student &amp;#123;  // val 修饰的属性  不可改变，相当于 用 final 修饰  val name = &amp;quot;tom&amp;quot;  var age = 1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Scala]06_类</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Scala]06_类</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-31T16:06:34.000Z" itemprop="datePublished" class="page-time">
+  2018-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类的定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">类的定义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#构造器"><span class="post-toc-number">2.</span> <span class="post-toc-text">构造器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#case-class"><span class="post-toc-number">3.</span> <span class="post-toc-text">case class</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#抽象类"><span class="post-toc-number">4.</span> <span class="post-toc-text">抽象类</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Scala/[Scala]06_类"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Scala]06_类</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-01 00:06:34" datetime="2017-12-31T16:06:34.000Z"  itemprop="datePublished">2018-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h1><ol>
+<li>类名可以和文件名不同</li>
+<li>类可以有一个伴生对象</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package day02</span><br><span class="line"></span><br><span class="line">class Student &#123;</span><br><span class="line"></span><br><span class="line">  // val 修饰的属性  不可改变，相当于 用 final 修饰</span><br><span class="line">  val name = &quot;tom&quot;</span><br><span class="line">  var age = 10</span><br><span class="line"></span><br><span class="line">  //  var 修饰的实行 可以改变 相当于有 set get 方法的属性</span><br><span class="line">  val id: Int = 100</span><br><span class="line"></span><br><span class="line">  //private 修饰的属性 只能在 本类、伴生对象 进行访问和操作，在类之外不可以</span><br><span class="line">  private var sex = &quot;man&quot;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  //private[this] 修饰的变量只能在 类的内部 使用</span><br><span class="line">  private[this] var password = &quot;333444&quot;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  def  printName(): Unit =&#123;</span><br><span class="line">    println(age)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//伴生对象 ， 根类名相同 且在同一个文件中</span><br><span class="line">object Student&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  //定义在 object 里面的方法相当于 java里面的 static 方法</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line"></span><br><span class="line">    val s = new Student</span><br><span class="line">    s.printName()</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h1><ol>
+<li><p>在类名定义的构造器叫主构造器，一般主构造器为无参构造器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//主构造器的  变量 会变成成员变量</span><br><span class="line">//如果构造器定义一个没有 val ,var修饰的变量，相当于用 private[this] 修饰</span><br><span class="line">class Teacher(val id: Int, var name: String, var age: Int, var position: String) &#123;</span><br><span class="line">  </span><br><span class="line">  //主构造器之外的成员  初始值 设置为 null 或者 _</span><br><span class="line">  var gender: String = _</span><br><span class="line">  </span><br><span class="line">  //辅助构造器 名称都为 this(...)</span><br><span class="line">  def this(id: Int, name: String, age: Int, position: String, gender: String) &#123;</span><br><span class="line">    </span><br><span class="line">    //必须先调用主构造器</span><br><span class="line">    this(id, name, age, position)</span><br><span class="line">    //给其他成员赋值</span><br><span class="line">    this.gender = gender</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在类内部定义的构造器叫辅助构造器</p>
+</li>
+<li>主构造器用 <code>private</code> 修饰时（class Teacher private(….) ），只能在伴生对象中使用</li>
+<li><code>class</code> 之前用 <code>private[day02]</code>=&gt; 只能在 day02 包内访问<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private[day02] class Teacher()&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="case-class"><a href="#case-class" class="headerlink" title="case class"></a>case class</h1><p>基本的语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">case class Demo(v:A,v2:B....)&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>举个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//属性默认使用 val 修饰</span><br><span class="line">case class Student(id:Int,name:String)</span><br><span class="line"></span><br><span class="line">//可以new实例，也可以不用 new </span><br><span class="line">val s1 = Student(1,&quot;Lilei&quot;)</span><br><span class="line">val s2 = new Student(2,&quot;Jili&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//可以获取属性的值,但是不可赋值改变</span><br><span class="line">s1.id</span><br><span class="line"></span><br><span class="line">//可以通过cpoy方法改变某个属性的值，返回一个新的对象</span><br><span class="line"></span><br><span class="line">val s3 = s2.copy(name=&quot;ZhangSan&quot;)</span><br><span class="line"></span><br><span class="line">//s3 = Student(2,&quot;ZhangSan&quot;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package ooad</span><br><span class="line"></span><br><span class="line">abstract class Father &#123;</span><br><span class="line">  def run():String</span><br><span class="line">  var name:String</span><br><span class="line">  val age:Int</span><br><span class="line">  var birthDay:Int = 1992</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Son extends Father &#123;</span><br><span class="line">   def run(): String = &#123;</span><br><span class="line">    println(&quot;son run &quot;)</span><br><span class="line">    &quot;yes&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var name = &quot;sdf&quot;</span><br><span class="line">  val age: Int = 23</span><br><span class="line">  birthDay = 2019</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">object Son &#123;</span><br><span class="line"></span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val son: Son = new Son</span><br><span class="line">    println(son.age, son.name, son.run(), son.birthDay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>抽象类默认所有 属性和 方法都是抽象的</li>
+<li>子类重写父类的属性时<ul>
+<li>var , val 要相同</li>
+<li>可以不使用关键字 override</li>
+<li>父类中有具体值的属性，不能使用override重写，直接重写,不需要 val和var修饰</li>
+</ul>
+</li>
+<li>子类重写父类方法时<ul>
+<li>可以不使用override关键字</li>
+<li>返回值和函数名称参数列表都要相同</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Scala/[Scala]06_类.html" target="_blank" rel="external">https://willon.cn/Lang/Scala/[Scala]06_类.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Scala/[Scala]07_对象_特质.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Scala]07_对象_trait</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]05_集合.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]05_集合_并行集合</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

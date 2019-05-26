@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Mysql]数据库使用规范 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="MySQL">
+    <meta name="description" content="表设计规范（建议) 建数据库表的时候请指定下编码为 utf8mb41、数据库名、表名、字段名都 小写 ，名字越短越好，务必精炼；索引命名：普通索引 - idx_col_name 唯一索引 - uniq_col_name2、字段名字如有多个词组就用下划线分割，表名和数据库不建议有分隔符号3、单库不超过300个表4、单表字段数不超过50个字段以上 — 控制单行数据长度。默认情况下，innodb每个数据">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Mysql]数据库使用规范">
+<meta property="og:url" content="https://willon.cn/Database/MySQL/MySQL]数据库使用规范.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="表设计规范（建议) 建数据库表的时候请指定下编码为 utf8mb41、数据库名、表名、字段名都 小写 ，名字越短越好，务必精炼；索引命名：普通索引 - idx_col_name 唯一索引 - uniq_col_name2、字段名字如有多个词组就用下划线分割，表名和数据库不建议有分隔符号3、单库不超过300个表4、单表字段数不超过50个字段以上 — 控制单行数据长度。默认情况下，innodb每个数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Mysql]数据库使用规范">
+<meta name="twitter:description" content="表设计规范（建议) 建数据库表的时候请指定下编码为 utf8mb41、数据库名、表名、字段名都 小写 ，名字越短越好，务必精炼；索引命名：普通索引 - idx_col_name 唯一索引 - uniq_col_name2、字段名字如有多个词组就用下划线分割，表名和数据库不建议有分隔符号3、单库不超过300个表4、单表字段数不超过50个字段以上 — 控制单行数据长度。默认情况下，innodb每个数据">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Mysql]数据库使用规范</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Mysql]数据库使用规范</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-18T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-09-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表设计规范（建议"><span class="post-toc-number">1.</span> <span class="post-toc-text">表设计规范（建议)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库禁止事项"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据库禁止事项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些注意点"><span class="post-toc-number">3.</span> <span class="post-toc-text">一些注意点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重复Insert问题"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">重复Insert问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#update或delete操作结束后缓存和DB中数据不一致的几种解决方案"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">update或delete操作结束后缓存和DB中数据不一致的几种解决方案</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据记录相关注意项"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">数据记录相关注意项</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库使用相关注意事项"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">数据库使用相关注意事项</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Database/MySQL/MySQL]数据库使用规范"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Mysql]数据库使用规范</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-19 00:00:00" datetime="2018-09-18T16:00:00.000Z"  itemprop="datePublished">2018-09-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="表设计规范（建议"><a href="#表设计规范（建议" class="headerlink" title="表设计规范（建议)"></a>表设计规范（建议)</h2><p> 建数据库表的时候请指定下编码为 <code>utf8mb4</code><br>1、数据库名、表名、字段名都 <code>小写</code> ，名字越短越好，务必精炼；索引命名：普通索引 - idx_col_name 唯一索引 - uniq_col_name<br>2、字段名字如有多个词组就用下划线分割，表名和数据库不建议有分隔符号<br>3、单库不超过300个表<br>4、单表字段数不超过50个字段以上 — <em>控制单行数据长度。默认情况下，innodb每个数据页为16k，至少存储2行数据，若行数据超过8k则会发生行溢出，导致IO繁忙</em><br>5、不允许用mysql保留字作为字段名<br>6、能用tinyint就不要用smallint，能用smallint就不要用int，能用int就不要用bigint — <em>精简数据库存储</em><br>7、如需存储用户ip，则用int型存储，不要用char –<em>- 整型 要比 字符类型存储效率高</em><br>9、表及字段必须有注释<br>8、标识位，如（type/status）类型字段，尽量使用 - tinyint 类型<br>10、mysql引擎使用 innodb<br>11、前台表必须有主键，并且采用整形递增设计，主键ID，建议建议表名+id;如表member，主键ID为：member_id — <em>1、整型数据存储效率略高于字符串；2、innodb数据存储按照主键顺序存储，整型递增可优化数据插入效率；3、后期的可持续化管理（数据排序、数据清理等）</em><br>12、根据合适的查询条件建立合适的索引，查询条件顺序必须和索引顺序一一对应<br>13、前台业务，禁止使用关联查询（join）<br>14、in 句型若条件为字符串，需控制在100个以内 — in 对整型无限制， 字符串类型数据，超过200个左右，会导致索引失效<br>15、时间类字段使用bigint存储到毫秒<br>16、对于大表（单分片超过千万级别）的表结构变更，开发初期请找DBA进行商讨方案。建议尽量采用关联新表的方式进行处理</p>
+<h2 id="数据库禁止事项"><a href="#数据库禁止事项" class="headerlink" title="数据库禁止事项"></a>数据库禁止事项</h2><p>10、禁止使用联合主键设计 —<br>11、禁止使用text或blob数据类型；</p>
+<p>  — 禁用text 或 blob的原因：现有的业务线采用的为utf8mb4字符集，单字符占用4字节，若存储字段数据过长，如按2000来算，那么每次需要的从磁盘取8k的数据，并且需通过网络传输给客户端。</p>
+<p>— 当然，偶尔少量的这样字段存在也不是说完全不可以。完全是怕大家养成习惯，无限制的存储大字段，且，对于该表的查询有可能会被在代码中作为查询模板（每次查询都会涉及该大字段的查询），后期量大的话，IO和网络带宽成为瓶颈的可能性大大增加。</p>
+<p>— 因此建议：blob、text字段尽量转为简化长度，并选择varchar(1000) 以内。超过varchar(256) 建议拆表，若超过1000 必须将该字段拆出之新表进行主键关联。</p>
+<p>12、字段必须采用not null设计。<br>13、禁止使用外键，不允许在mysql里做任何计算<br>14、对于非配置表，禁止使用like查询<br>15、禁止在事物种添加select 语句，保持事务短小，与事务无关操作放到事务外面<br>16、禁止使用存储过程和触发器<br>17、禁止使用select ＊，尽可能不要带上该业务不需要的字段<br>18、禁止使用or，如有多条件并行查询语句，可使用union语句<br>19、非配置类数据表，禁止使用 负向查询 NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT EXISTS、NOT IN、 NOT LIKE — 索引失效问题<br>20、禁止通过跳板机使用可写账号登录数据库<br>21、varchar超过1000长度，需将该字段拆分出原表 — <em>控制单行数据长度。默认情况下，innodb每个数据页为16k，至少存储2行数据，若行数据超过8k则会发生行溢出，导致IO繁忙</em> </p>
+<h2 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h2><h3 id="重复Insert问题"><a href="#重复Insert问题" class="headerlink" title="重复Insert问题"></a>重复Insert问题</h3><ol>
+<li>先使用cacheService.setnx(String key, int expireSecond, String value)方法来防止并发操作，该方法的返回值=1(long类型)，表示没有并发，如果返回值=0，表示已有操作在进行，可直接抛出业务异常(BizValidateException或BizException均可)。</li>
+<li>步骤1验证通过后，先查询DB中是否存在该数据，存在时直接返回业务异常，不存在时才进行insert操作(该步骤目的是防止dubbo处理超时客户端再次提交导致的重复Insert)。</li>
+</ol>
+<blockquote>
+<p> 注：可以配合唯一索引一起使用。</p>
+</blockquote>
+<h3 id="update或delete操作结束后缓存和DB中数据不一致的几种解决方案"><a href="#update或delete操作结束后缓存和DB中数据不一致的几种解决方案" class="headerlink" title="update或delete操作结束后缓存和DB中数据不一致的几种解决方案"></a>update或delete操作结束后缓存和DB中数据不一致的几种解决方案</h3><ol>
+<li>尽可能不使用事务。</li>
+<li>方法最后再使用cacheService.del(String key)方法清一次缓存。</li>
+<li>尽可能将update操作放在方法的最后执行，将操作时间较长的处理放在前面(例如调用Remote处理)。</li>
+</ol>
+<h3 id="数据记录相关注意项"><a href="#数据记录相关注意项" class="headerlink" title="数据记录相关注意项"></a>数据记录相关注意项</h3><p>1、整形数据类型（int/bigint/smallint/tinyint）都有固定的存储范围，其后面所跟的数字只有显示位宽限定，无数据存储范围约定效果<br>2、单行数据应尽量简短（数据长度）。最长长度不可超过7k。 预防行溢出而导致的io问题</p>
+<h3 id="数据库使用相关注意事项"><a href="#数据库使用相关注意事项" class="headerlink" title="数据库使用相关注意事项"></a>数据库使用相关注意事项</h3><ol>
+<li>新增/修改SQL语句需要评审</li>
+<li>数据库只使用insert,update,select权限，删除用is_valid=0代替，特殊业务授于delete权限</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Database/MySQL/MySQL]数据库使用规范.html" target="_blank" rel="external">https://willon.cn/Database/MySQL/MySQL]数据库使用规范.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Dubbo/[Dubbo]SpringBoot_Dubbo_Zookeeper.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Dubbo]SpringBoot_Dubbo_Zookeeper</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Tools/GIT/[GIT]TravisCI_Hexo.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Share]CI_Github实现博客自动部署</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

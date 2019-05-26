@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[GIT]002_常用命令 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="Git常用操作命令： 一、远程仓库相关命令 检出仓库：$ git clone git://github.com/jquery/jquery.git  查看远程仓库：$ git remote -v  添加远程仓库：$ git remote add [name] [url]  删除远程仓库：$ git remote rm [name]  修改远程仓库：$ git remote set-url –pus">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[GIT]002_常用命令">
+<meta property="og:url" content="https://willon.cn/Tools/GIT/[GIT]002_常用指令.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Git常用操作命令： 一、远程仓库相关命令 检出仓库：$ git clone git://github.com/jquery/jquery.git  查看远程仓库：$ git remote -v  添加远程仓库：$ git remote add [name] [url]  删除远程仓库：$ git remote rm [name]  修改远程仓库：$ git remote set-url –pus">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[GIT]002_常用命令">
+<meta name="twitter:description" content="Git常用操作命令： 一、远程仓库相关命令 检出仓库：$ git clone git://github.com/jquery/jquery.git  查看远程仓库：$ git remote -v  添加远程仓库：$ git remote add [name] [url]  删除远程仓库：$ git remote rm [name]  修改远程仓库：$ git remote set-url –pus">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[GIT]002_常用命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[GIT]002_常用命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-17T11:39:40.000Z" itemprop="datePublished" class="page-time">
+  2016-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、远程仓库相关命令"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、远程仓库相关命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、分支-branch-操作相关命令"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、分支(branch)操作相关命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git常用指令"><span class="post-toc-number">3.</span> <span class="post-toc-text">git常用指令</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Tools/GIT/[GIT]002_常用指令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[GIT]002_常用命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-17 19:39:40" datetime="2016-05-17T11:39:40.000Z"  itemprop="datePublished">2016-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Git常用操作命令：</p>
+<h3 id="一、远程仓库相关命令"><a href="#一、远程仓库相关命令" class="headerlink" title="一、远程仓库相关命令"></a>一、远程仓库相关命令</h3><ul>
+<li><p>检出仓库：$ git clone git://github.com/jquery/jquery.git</p>
+</li>
+<li><p>查看远程仓库：$ git remote -v</p>
+</li>
+<li><p>添加远程仓库：$ git remote add [name] [url]</p>
+</li>
+<li><p>删除远程仓库：$ git remote rm [name]</p>
+</li>
+<li><p>修改远程仓库：$ git remote set-url –push [name] [newUrl]</p>
+</li>
+<li><p>拉取远程仓库：$ git pull [remoteName] [localBranchName]</p>
+</li>
+<li><p>推送远程仓库：$ git push [remoteName] [localBranchName]</p>
+</li>
+</ul>
+<blockquote>
+<p>如果想把本地的某个分支test提交到远程仓库，<br>并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：</p>
+</blockquote>
+<pre><code>$git push origin test:master         
+#提交本地test分支作为远程的master分支
+
+$git push origin test:test              
+#提交本地test分支作为远程的test分支
+</code></pre><p><br></p>
+<h3 id="二、分支-branch-操作相关命令"><a href="#二、分支-branch-操作相关命令" class="headerlink" title="二、分支(branch)操作相关命令"></a>二、分支(branch)操作相关命令</h3><ul>
+<li><p>查看本地分支：$ git branch</p>
+</li>
+<li><p>查看远程分支：$ git branch -r</p>
+</li>
+<li><p>创建本地分支：$ git branch [name]</p>
+</li>
+<li><p>切换分支：$ git checkout [name]</p>
+</li>
+<li><p>创建新分支并立即切换到新分支：$ git checkout -b [name]</p>
+</li>
+<li><p>删除分支：$ git branch -d [name]</p>
+</li>
+<li><p>合并分支：$ git merge [name] </p>
+</li>
+<li><p>本地分支push到远程：$ git push origin [name]</p>
+</li>
+<li><p>删除远程分支：$ git push origin :heads/[name] 或 $ gitpush origin :[name] </p>
+</li>
+</ul>
+<blockquote>
+<p>*创建空的分支：(执行命令之前记得先提交你当前分支的修改，否则会被强制删干净没得后悔)</p>
+</blockquote>
+<pre><code>$git symbolic-ref HEAD refs/heads/[name]
+$rm .git/index
+$git clean -fdx
+</code></pre><h3 id="git常用指令"><a href="#git常用指令" class="headerlink" title="git常用指令"></a>git常用指令</h3><ul>
+<li><code>git init</code> #初始化本地git仓库（创建新仓库）</li>
+<li><code>git config --global user.name &quot;xxx&quot;</code> #配置用户名</li>
+<li><code>git config --global user.email &quot;xxx@xxx.com&quot;</code> #配置邮件</li>
+<li><code>git config --global color.ui true</code> #git status等命令自动着色</li>
+<li><code>git config --global color.status auto</code></li>
+<li><code>git config --global color.diff auto</code></li>
+<li><code>git config --global color.branch auto</code></li>
+<li><code>git config --global color.interactive auto</code></li>
+<li><code>git clone git+ssh://git@192.168.53.168/VT.*git</code>  #clone远程仓库</li>
+<li><code>git status</code> #查看当前版本状态（是否修改）</li>
+<li><code>git add xyz</code> #添加xyz文件至index</li>
+<li><code>git add .</code>#增加当前子目录下所有更改过的文件至index</li>
+<li><code>git commit -m &#39;xxx&#39;</code> #提交</li>
+<li><code>git commit --amend -m &#39;xxx&#39;</code>#合并上一次提交（用于反复修改）</li>
+<li><code>git commit -am &#39;xxx&#39;</code>#将add和commit合为一步</li>
+<li><code>git rm xxx</code>#删除index中的文件</li>
+<li><code>git rm -r *</code>#递归删除</li>
+<li><code>git log</code>#显示提交日志</li>
+<li><code>git log -1</code>#显示1行日志 -n为n行</li>
+<li><code>git log -5</code></li>
+<li><code>git log --stat</code> #显示提交日志及相关变动文件</li>
+<li><code>git log -p -2</code>#显示最近两次日志</li>
+<li><code>git show dfb02e6e4f2f7b573337763e5c0013802e392818</code>#显示某个提交的详细内容</li>
+<li><code>git show dfb02</code> #可只用commitid的前几位</li>
+<li><code>git show HEAD</code> #显示HEAD提交日志</li>
+<li><code>git show HEAD^</code>#显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</li>
+<li><code>git tag #显示已存在的tag</code></li>
+<li><code>git tag -a v2.0 -m &#39;xxx&#39;</code>#增加v2.0的tag</li>
+<li><code>git show v2.0</code>#显示v2.0的日志及详细内容</li>
+<li><code>git log v2.0</code>#显示v2.0的日志</li>
+<li><code>git diff</code> #显示所有未添加至index的变更</li>
+<li><code>git diff --cached</code> #显示所有已添加index但还未commit的变更</li>
+<li><code>git diff HEAD^</code>#比较与上一个版本的差异</li>
+<li><code>git diff origin/master..master</code> #比较远程分支master上有本地分支master上没有的</li>
+<li><code>git diff origin/master..master --stat</code>#只显示差异的文件，不显示具体内容</li>
+<li><code>git remote add origin git+ssh://git@192.168.53.168/VT.git</code>#增加远程定义（用于push/pull/fetch）</li>
+<li><code>git branch</code>#显示本地分支</li>
+<li><code>git branch --contains 50089</code> #显示包含提交50089的分支</li>
+<li><code>git branch -a</code> #显示所有分支</li>
+<li><code>git branch -r</code> #显示所有原创分支</li>
+<li><code>git branch --merged</code> #显示所有已合并到当前分支的分支</li>
+<li><code>git branch --no-merged</code> #显示所有未合并到当前分支的分支</li>
+<li><code>git branch -m master master_copy</code>#本地分支改名</li>
+<li><code>git checkout -b master_copy</code> #从当前分支创建新分支master_copy并检出</li>
+<li><code>git checkout -b master master_copy</code> #上面的完整版</li>
+<li><code>git checkout features/performance</code> #检出已存在的features/performance分支</li>
+<li><code>git checkout --track hotfixes/BJVEP933</code> #检出远程分支hotfixes/BJVEP933并创建本地跟踪分支</li>
+<li><code>git checkout v2.0</code> # 检出版本v2.0</li>
+<li><code>git checkout -b devel origin/develop</code> #从远程分支develop创建新本地分支devel并检出</li>
+<li><code>git checkout -- README</code>#检出head版本的README文件（可用于修改错误回退）</li>
+<li><code>git merge origin/master</code>#合并远程master分支至当前分支</li>
+<li><code>git cherry-pick ff44785404a8e</code> #合并提交ff44785404a8e的修改</li>
+<li><code>git push origin master</code>#将当前分支push到远程master分支</li>
+<li><code>git push origin :hotfixes/BJVEP933</code> # 删除远程仓库的hotfixes/BJVEP933分支</li>
+<li><code>git push --tags</code>#把所有tag推送到远程仓库</li>
+<li><code>git fetch</code>#获取所有远程分支（不更新本地分支，另需merge）</li>
+<li><code>git fetch --prune</code>#获取所有原创分支并清除服务器上已删掉的分支</li>
+<li><code>git pull origin master</code>#获取远程分支master并merge到当前分支</li>
+<li><code>git mv README README2</code> #重命名文件README为README2</li>
+<li><code>git reset --hard HEAD</code>#将当前版本重置为HEAD（通常用于merge失败回退）</li>
+<li><code>git rebase</code></li>
+<li><code>git branch -d hotfixes/BJVEP933</code>#删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）</li>
+<li><code>git branch -D hotfixes/BJVEP933</code>#强制删除分支hotfixes/BJVEP933</li>
+<li><code>git ls-files</code> #列出git index包含的文件</li>
+<li><code>git show-branch</code>#图示当前分支历史</li>
+<li><code>git show-branch --all</code> #图示所有分支历史</li>
+<li><code>git whatchanged</code>#显示提交历史对应的文件修改</li>
+<li><code>git ls-tree HEAD</code>#内部命令：显示某个git对象</li>
+<li><code>git rev-parse v2.0</code>#内部命令：显示某个ref对于的SHA1 HASH</li>
+<li><code>git reflog</code>#显示所有提交，包括孤立节点</li>
+<li><code>git show HEAD@{5}</code></li>
+<li><code>git show master@{yesterday}</code>#显示master分支昨天的状态</li>
+<li><code>git log --pretty=format:&#39;%h %s&#39; --graph</code> #图示提交日志</li>
+<li><code>git show HEAD~3</code></li>
+<li><code>git show -s --pretty=raw 2be7fcb476</code></li>
+<li><code>git stash</code>#暂存当前修改，将所有至为HEAD状态</li>
+<li><code>git stash list</code> #查看所有暂存</li>
+<li><code>git stash show -p stash@{0}</code> #参考第一次暂存</li>
+<li><code>git stash apply stash@{0}</code>#应用第一次暂存</li>
+<li><code>git grep &quot;delete from&quot;</code> #文件中搜索文本“delete from”</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Tools/GIT/[GIT]002_常用指令.html" target="_blank" rel="external">https://willon.cn/Tools/GIT/[GIT]002_常用指令.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Tools/GIT/[GIT]001_基本使用.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[GIT]001_基本使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Tools/GIT/[GIT]Hexo_Coding自动执行.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[GIT]Coding_Hexo伪自动部署</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

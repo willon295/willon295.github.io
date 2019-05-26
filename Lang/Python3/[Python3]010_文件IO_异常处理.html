@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Python3]010_文件IO_异常处理 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="python3">
+    <meta name="description" content="首先最简单的是交互环境下键盘输入 raw_input(&amp;#39;请输入：&amp;#39;) 当执行到这一行的时候，系统会进入等待状态。用户输入并且回车之后结束等待，继续执行 文件先最好申明编码格式 # -*- coding: UTF-8 -*- 打开和关闭文件举个栗子 1234567891011121314151617# -*- coding: UTF-8 -*-# 打开, wb为打开模式（可写，二进制">
+<meta name="keywords" content="python3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python3]010_文件IO_异常处理">
+<meta property="og:url" content="https://willon.cn/Lang/Python3/[Python3]010_文件IO_异常处理.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="首先最简单的是交互环境下键盘输入 raw_input(&amp;#39;请输入：&amp;#39;) 当执行到这一行的时候，系统会进入等待状态。用户输入并且回车之后结束等待，继续执行 文件先最好申明编码格式 # -*- coding: UTF-8 -*- 打开和关闭文件举个栗子 1234567891011121314151617# -*- coding: UTF-8 -*-# 打开, wb为打开模式（可写，二进制">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Python3]010_文件IO_异常处理">
+<meta name="twitter:description" content="首先最简单的是交互环境下键盘输入 raw_input(&amp;#39;请输入：&amp;#39;) 当执行到这一行的时候，系统会进入等待状态。用户输入并且回车之后结束等待，继续执行 文件先最好申明编码格式 # -*- coding: UTF-8 -*- 打开和关闭文件举个栗子 1234567891011121314151617# -*- coding: UTF-8 -*-# 打开, wb为打开模式（可写，二进制">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Python3]010_文件IO_异常处理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Python3]010_文件IO_异常处理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-16T12:58:53.000Z" itemprop="datePublished" class="page-time">
+  2017-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#打开和关闭文件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">打开和关闭文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#write-方法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">write()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#read-方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">read()方法</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Python3/[Python3]010_文件IO_异常处理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Python3]010_文件IO_异常处理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-16 20:58:53" datetime="2017-04-16T12:58:53.000Z"  itemprop="datePublished">2017-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>首先最简单的是交互环境下键盘输入</p>
+<p><code>raw_input(&#39;请输入：&#39;)</code></p>
+<p>当执行到这一行的时候，系统会进入等待状态。用户输入并且回车之后结束等待，继续执行</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>先最好申明编码格式</p>
+<p><code># -*- coding: UTF-8 -*-</code></p>
+<h3 id="打开和关闭文件"><a href="#打开和关闭文件" class="headerlink" title="打开和关闭文件"></a>打开和关闭文件</h3><p>举个栗子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"># 打开, wb为打开模式（可写，二进制）</span><br><span class="line">fo = open(&quot;foo.txt&quot;, &quot;wb&quot;)</span><br><span class="line">print(&quot;文件名:&quot;,fo.name)</span><br><span class="line">print(&quot;是否已关闭:&quot;,fo.closed)</span><br><span class="line">print(&quot;访问模式:&quot;,fo.mode)</span><br><span class="line">print(&quot;末尾是否强制加空格:&quot;,fo.softspace)</span><br><span class="line">#关闭电影</span><br><span class="line">fo.close()</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line"></span><br><span class="line"> 文件名:  foo.txt</span><br><span class="line">是否已关闭 :  False</span><br><span class="line">访问模式 :  wb</span><br><span class="line">末尾是否强制加空格 :  0</span><br></pre></td></tr></table></figure>
+<h3 id="write-方法"><a href="#write-方法" class="headerlink" title="write()方法"></a>write()方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line"></span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line"># 打开一个文件</span><br><span class="line"># w+:写权限，不存在则创建该文件</span><br><span class="line">fo = open(&quot;foo.txt&quot;, &quot;w+&quot;)</span><br><span class="line">fo.write( &quot;hello\nworld!&quot;);</span><br><span class="line"></span><br><span class="line"># 关闭打开的文件</span><br><span class="line">fo.close()</span><br></pre></td></tr></table></figure>
+<h3 id="read-方法"><a href="#read-方法" class="headerlink" title="read()方法"></a>read()方法</h3><p><code>fileObject.read([num])</code>: num为读取的总字节数，不传则读到最后一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line"></span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line"># 打开一个文件,r权限</span><br><span class="line">fo = open(&quot;foo.txt&quot;, &quot;r&quot;)</span><br><span class="line"></span><br><span class="line">#读取文件</span><br><span class="line">str1 = fo.read()</span><br><span class="line">print(str1)</span><br><span class="line"></span><br><span class="line"># 关闭打开的文件</span><br><span class="line">fo.close()</span><br><span class="line">   </span><br><span class="line">#运行结果</span><br><span class="line"></span><br><span class="line">hello</span><br><span class="line">world!</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Python3/[Python3]010_文件IO_异常处理.html" target="_blank" rel="external">https://willon.cn/Lang/Python3/[Python3]010_文件IO_异常处理.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python3/">python3</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Python3/[scrapy]scrapy基本使用.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[scrapy]基本使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Python3/[Python3]009_正则表达式.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Python3]009_正则表达式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

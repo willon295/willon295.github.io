@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Design_Pattern]04_原型模式 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="原型模式简单的说就是，通过 克隆 的方式创建对象，适用于当某个类的 对象创建过程非常复杂 或者 非常消耗资源 原型模式的创建 实现 Cloneable 接口 重写 Object 的 clone()方法 在需要多次创建该类实例的地方使用克隆创建对象  举个例子这个类的实例在创建时会加载驱动并且连接数据库。  创建实例比较消耗资源的类 123456789101112131415161718192021">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Design_Pattern]04_原型模式">
+<meta property="og:url" content="https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]04_原型模式.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="原型模式简单的说就是，通过 克隆 的方式创建对象，适用于当某个类的 对象创建过程非常复杂 或者 非常消耗资源 原型模式的创建 实现 Cloneable 接口 重写 Object 的 clone()方法 在需要多次创建该类实例的地方使用克隆创建对象  举个例子这个类的实例在创建时会加载驱动并且连接数据库。  创建实例比较消耗资源的类 123456789101112131415161718192021">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Design_Pattern]04_原型模式">
+<meta name="twitter:description" content="原型模式简单的说就是，通过 克隆 的方式创建对象，适用于当某个类的 对象创建过程非常复杂 或者 非常消耗资源 原型模式的创建 实现 Cloneable 接口 重写 Object 的 clone()方法 在需要多次创建该类实例的地方使用克隆创建对象  举个例子这个类的实例在创建时会加载驱动并且连接数据库。  创建实例比较消耗资源的类 123456789101112131415161718192021">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Design_Pattern]04_原型模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Design_Pattern]04_原型模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-09T16:04:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原型模式的创建"><span class="post-toc-number">1.</span> <span class="post-toc-text">原型模式的创建</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#举个例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">举个例子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思考"><span class="post-toc-number">3.</span> <span class="post-toc-text">思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/DesignPattern/[Design_Pattern]04_原型模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Design_Pattern]04_原型模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-10 00:04:00" datetime="2018-06-09T16:04:00.000Z"  itemprop="datePublished">2018-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>原型模式简单的说就是，<br>通过 <code>克隆</code> 的方式创建对象，适用于当某个类的 <code>对象创建过程非常复杂</code> 或者 <code>非常消耗资源</code></p>
+<h1 id="原型模式的创建"><a href="#原型模式的创建" class="headerlink" title="原型模式的创建"></a>原型模式的创建</h1><ol>
+<li>实现 <code>Cloneable</code> 接口</li>
+<li>重写 Object 的 <code>clone()</code>方法</li>
+<li>在需要多次创建该类实例的地方使用克隆创建对象</li>
+</ol>
+<h1 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h1><p>这个类的实例在创建时会加载驱动并且连接数据库。</p>
+<ol>
+<li><p>创建实例比较消耗资源的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBConnection</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String url = <span class="string">"jdbc:mysql://localhost"</span>;</span><br><span class="line">    <span class="keyword">private</span> String username = <span class="string">"root"</span>;</span><br><span class="line">    <span class="keyword">private</span> String driver = <span class="string">"com.mysql.jdbc.Driver"</span>;</span><br><span class="line">    <span class="keyword">private</span> String password = <span class="string">"root"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Connection conn;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DBConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class.forName(driver);</span><br><span class="line">        conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Object o = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            o = <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"克隆失败"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取这个类的实例  是一个非常消耗资源的操作，所以一般会克隆</span></span><br><span class="line">    DBConnection dbConnection = <span class="keyword">new</span> DBConnection();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        DBConnection c = (DBConnection) dbConnection.clone();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>如果需要 <code>深度拷贝</code> , 可以使用 <code>序列化</code> ,  <code>反序列化</code>生成克隆对象</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/DesignPattern/[Design_Pattern]04_原型模式.html" target="_blank" rel="external">https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]04_原型模式.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]05_适配器模式.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Design_Pattern]05_适配器模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]03_Builder建造者模式.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Design_Pattern]03_Builder建造者模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

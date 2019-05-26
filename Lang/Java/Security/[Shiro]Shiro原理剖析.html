@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Shiro]Shiro架构理解及源码走读 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Shiro">
+    <meta name="description" content="通用名词 认证(authentication):  你是谁?  授权(authorization):  你可以做什么? 角色(role)的定义: 开发者自定义的角色 , 如 admin , vip , user 权限(permission)  Shiro 架构shiro结构中的名词:   Subject :  主体, 需要被验证/发起操作者 SecurityManager: 安全管理器, 对 Su">
+<meta name="keywords" content="Shiro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Shiro]Shiro架构理解及源码走读">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Security/[Shiro]Shiro原理剖析.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="通用名词 认证(authentication):  你是谁?  授权(authorization):  你可以做什么? 角色(role)的定义: 开发者自定义的角色 , 如 admin , vip , user 权限(permission)  Shiro 架构shiro结构中的名词:   Subject :  主体, 需要被验证/发起操作者 SecurityManager: 安全管理器, 对 Su">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/shiro_arc.png">
+<meta property="og:image" content="https://willon.cn/images/shiro_authentication.png">
+<meta property="og:image" content="https://willon.cn/images/shiro_authorizer.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Shiro]Shiro架构理解及源码走读">
+<meta name="twitter:description" content="通用名词 认证(authentication):  你是谁?  授权(authorization):  你可以做什么? 角色(role)的定义: 开发者自定义的角色 , 如 admin , vip , user 权限(permission)  Shiro 架构shiro结构中的名词:   Subject :  主体, 需要被验证/发起操作者 SecurityManager: 安全管理器, 对 Su">
+<meta name="twitter:image" content="https://willon.cn/images/shiro_arc.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Shiro]Shiro架构理解及源码走读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Shiro]Shiro架构理解及源码走读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-12T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通用名词"><span class="post-toc-number">1.</span> <span class="post-toc-text">通用名词</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Shiro-架构"><span class="post-toc-number">2.</span> <span class="post-toc-text">Shiro 架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工作原理"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">工作原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#认证流程"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">认证流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#授权流程"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">授权流程</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#权限规则定义"><span class="post-toc-number">3.</span> <span class="post-toc-text">权限规则定义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Realm"><span class="post-toc-number">4.</span> <span class="post-toc-text">Realm</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IniRealm"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">IniRealm</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义Realm"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">自定义Realm</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何使用Realm"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">如何使用Realm</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Shiro注解"><span class="post-toc-number">5.</span> <span class="post-toc-text">Shiro注解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启用注解要注意的坑"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">启用注解要注意的坑</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#完整Spring-Boot-Shiro-Demo"><span class="post-toc-number">6.</span> <span class="post-toc-text">完整Spring Boot Shiro Demo</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Security/[Shiro]Shiro原理剖析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Shiro]Shiro架构理解及源码走读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-13 00:00:00" datetime="2018-12-12T16:00:00.000Z"  itemprop="datePublished">2018-12-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="通用名词"><a href="#通用名词" class="headerlink" title="通用名词"></a>通用名词</h1><ol>
+<li>认证(authentication):  你是谁? </li>
+<li>授权(authorization):  你可以做什么?</li>
+<li>角色(role)的定义: 开发者自定义的角色 , 如 <code>admin</code> , <code>vip</code> , <code>user</code></li>
+<li>权限(permission)</li>
+</ol>
+<h1 id="Shiro-架构"><a href="#Shiro-架构" class="headerlink" title="Shiro 架构"></a>Shiro 架构</h1><p>shiro结构中的名词: </p>
+<ol>
+<li>Subject :  主体, 需要被验证/发起操作者</li>
+<li>SecurityManager: 安全管理器, 对 Subject 的进行安全操作</li>
+<li>Authenticator : 认证器, 认证Subject身份</li>
+<li>Authorizor:  授权器, 给 Subject 授权</li>
+<li>SessionManager</li>
+<li>CacheManager</li>
+<li>SessionDAO:  管理session数据</li>
+<li>Realm: 数据源, 决定 <code>认证信息</code> 和 <code>授权信息</code> 来源</li>
+</ol>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://willon.cn/images/shiro_arc.png" alt="shiro架构图" title="">
+                </div>
+                <div class="image-caption">shiro架构图</div>
+            </figure>
+<ol>
+<li>SecurityManager 是整个框架的核心 , 包含 <code>Authenticator</code>  ,  <code>Authorizor</code> , <code>SessionManager</code> , <code>CacheManager</code> , <code>Realm</code>  ,  <code>SessioinDAO</code></li>
+<li>Realm 提供  Authenticator 的 认证需要的信息源 , 提供  Authorizor 授权信息源</li>
+<li>SessionManager管理session,  SessionDAO管理session数据</li>
+</ol>
+<h3 id="认证流程"><a href="#认证流程" class="headerlink" title="认证流程"></a>认证流程</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://willon.cn/images/shiro_authentication.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>获取用户的token信息</li>
+<li>Subject.login() , 底层是在 realm 中比较信息差异</li>
+<li>如果登录成功, 返回认证信息</li>
+</ol>
+<h3 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://willon.cn/images/shiro_authorizer.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>获取用户的认证信息</li>
+<li>获取用户的授权信息</li>
+<li>检查用户是否有权限</li>
+</ol>
+<h1 id="权限规则定义"><a href="#权限规则定义" class="headerlink" title="权限规则定义"></a>权限规则定义</h1><ol>
+<li>Permission 定义</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * the permission string</span></span><br><span class="line"><span class="comment"> * in separate columns (e.g. 'domain', 'actions' and 'targets' columns)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DomainPermission</span> <span class="keyword">extends</span> <span class="title">WildcardPermission</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String domain;</span><br><span class="line">    <span class="keyword">private</span> Set&lt;String&gt; actions;</span><br><span class="line">    <span class="keyword">private</span> Set&lt;String&gt; targets;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WildcardPermission</span> <span class="keyword">implements</span> <span class="title">Permission</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String WILDCARD_TOKEN = <span class="string">"*"</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String PART_DIVIDER_TOKEN = <span class="string">":"</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String SUBPART_DIVIDER_TOKEN = <span class="string">","</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEFAULT_CASE_SENSITIVE = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Set&lt;String&gt;&gt; parts;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuilder buffer = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (Set&lt;String&gt; part : parts) &#123;</span><br><span class="line">            <span class="keyword">if</span> (buffer.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                buffer.append(PART_DIVIDER_TOKEN);</span><br><span class="line">            &#125;</span><br><span class="line">            Iterator&lt;String&gt; partIt = part.iterator();</span><br><span class="line">            <span class="keyword">while</span>(partIt.hasNext()) &#123;</span><br><span class="line">                buffer.append(partIt.next());</span><br><span class="line">                <span class="keyword">if</span> (partIt.hasNext()) &#123;</span><br><span class="line">                    buffer.append(SUBPART_DIVIDER_TOKEN);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> buffer.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看完源码之后才发现定义应该是这样</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">资源标识 : 动作... : 资源Id...</span><br><span class="line">domain :  action1,action2,action3  : target1,target2,target3</span><br><span class="line">domain :  * : target1,target2</span><br><span class="line">domain : action1 : *</span><br><span class="line">domain: *</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>具体匹配算法和流程 org.apache.shiro.authz.permission.WildcardPermission#implies 方法</p>
+</blockquote>
+<h1 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h1><p>Realm 是认证信息、授权信息数据来源的组件</p>
+<h2 id="IniRealm"><a href="#IniRealm" class="headerlink" title="IniRealm"></a>IniRealm</h2><p>简单的 <code>ini</code> 文件 , 按照一定的规则定义  用户, 角色, 权限 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span>   <span class="comment">#写死的</span></span><br><span class="line">用户=密码,角色...</span><br><span class="line"></span><br><span class="line"><span class="section">[roles]</span>   <span class="comment">#写死的</span></span><br><span class="line">角色=权限...</span><br></pre></td></tr></table></figure>
+<h2 id="自定义Realm"><a href="#自定义Realm" class="headerlink" title="自定义Realm"></a>自定义Realm</h2><ol>
+<li>继承 <code>org.apache.shiro.realm.AuthorizingRealm</code> </li>
+<li>重写  <code>doGetAuthenticationInfo</code>  获取认证信息</li>
+<li>重写 <code>doGetAuthorizationInfo</code>    获取授权信息</li>
+</ol>
+<h2 id="如何使用Realm"><a href="#如何使用Realm" class="headerlink" title="如何使用Realm"></a>如何使用Realm</h2><p>在自定义的 <code>ShiroConfig</code> 类中添加:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CustomRealm <span class="title">customRealm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> CustomRealm();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> WebSecurityManager <span class="title">securityManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	DefaultWebSecurityManager securityManager = <span class="keyword">new</span> DefaultWebSecurityManager();</span><br><span class="line">	securityManager.setRealm(customRealm());</span><br><span class="line">	<span class="keyword">return</span> securityManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Shiro注解"><a href="#Shiro注解" class="headerlink" title="Shiro注解"></a>Shiro注解</h1><ol>
+<li><p><code>@RequiresAuthentication</code> : 表明这个接口的访问需要经过认证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//the current Subject to have been authenticated during their current session</span></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RequiresAuthentication &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@RequiresPermissions</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RequiresPermissions &#123;</span><br><span class="line">    String[] value(); <span class="comment">// 权限列表</span></span><br><span class="line">    <span class="function">Logical <span class="title">logical</span><span class="params">()</span> <span class="keyword">default</span> Logical.AND</span>;  <span class="comment">//验证权限,满足的逻辑关系, and/or</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>@RequiresPermissions(value={“admin”,”vip”}, logical=Logical.OR)    admin/vip  可以访问</p>
+</blockquote>
+</li>
+<li><p><code>@RequiresRoles</code> : 表明接口访问需要角色</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RequiresRoles &#123;</span><br><span class="line">    String[] value(); <span class="comment">//角色列表</span></span><br><span class="line">    <span class="function">Logical <span class="title">logical</span><span class="params">()</span> <span class="keyword">default</span> Logical.AND</span>; <span class="comment">//验证角色, 满足的逻辑关系 and/or</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@RequiresUser</code>   , <code>@RequiresGuest</code> : 就是用户和访客的区别</p>
+</li>
+</ol>
+<h2 id="启用注解要注意的坑"><a href="#启用注解要注意的坑" class="headerlink" title="启用注解要注意的坑"></a>启用注解要注意的坑</h2><ol>
+<li><p>maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shiro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shiro-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shiro-bean 生命周期管理 , AOP 配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 管理shiroBean的生命周期 , 这个方法必须是静态的,</span></span><br><span class="line"><span class="comment"> * 在类加载之前就完成实例化,  否则Spring启动异常, 属性注入异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LifecycleBeanPostProcessor <span class="title">lifecycleBeanPostProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> LifecycleBeanPostProcessor();</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 解决 Shiro注解不生效</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultAdvisorAutoProxyCreator <span class="title">defaultAdvisorAutoProxyCreator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator =</span><br><span class="line">        <span class="keyword">new</span> DefaultAdvisorAutoProxyCreator();</span><br><span class="line">    defaultAdvisorAutoProxyCreator.setProxyTargetClass(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span> defaultAdvisorAutoProxyCreator;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 开启shiro aop支持</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> AuthorizationAttributeSourceAdvisor <span class="title">authorizationAttributeSourceAdvisor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor =</span><br><span class="line">        <span class="keyword">new</span> AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());</span><br><span class="line">    <span class="keyword">return</span> authorizationAttributeSourceAdvisor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="完整Spring-Boot-Shiro-Demo"><a href="#完整Spring-Boot-Shiro-Demo" class="headerlink" title="完整Spring Boot Shiro Demo"></a>完整Spring Boot Shiro Demo</h1><p>git地址：</p>
+<ol>
+<li><a href="https://github.com/willon295/spring-boot-shiro-demo" target="_blank" rel="noopener">https://github.com/willon295/spring-boot-shiro-demo</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Security/[Shiro]Shiro原理剖析.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Security/[Shiro]Shiro原理剖析.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shiro/">Shiro</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[YAML]YAML文件详解.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[YAML]YAML文件详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]线程池管理.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]线程池管理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

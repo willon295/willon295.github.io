@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Python3]011_面向对象 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="python3">
+    <meta name="description" content="Python也是一门面向对象的语言 类定义用保留字class 定义一个类。  属性： 属性可以在类中定义，也可以在实例中扩展。 方法：包括内置的方法和用户定义的方法，而且方法的第一个参数必须是self，当然亦可以改成其他的名字.  123456789101112#举个栗子   class FClass:       #定义一个成员a       a=78       #定义一个方法setdata(">
+<meta name="keywords" content="python3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python3]011_面向对象">
+<meta property="og:url" content="https://willon.cn/Lang/Python3/[Python3]011_面向对象.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Python也是一门面向对象的语言 类定义用保留字class 定义一个类。  属性： 属性可以在类中定义，也可以在实例中扩展。 方法：包括内置的方法和用户定义的方法，而且方法的第一个参数必须是self，当然亦可以改成其他的名字.  123456789101112#举个栗子   class FClass:       #定义一个成员a       a=78       #定义一个方法setdata(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Python3]011_面向对象">
+<meta name="twitter:description" content="Python也是一门面向对象的语言 类定义用保留字class 定义一个类。  属性： 属性可以在类中定义，也可以在实例中扩展。 方法：包括内置的方法和用户定义的方法，而且方法的第一个参数必须是self，当然亦可以改成其他的名字.  123456789101112#举个栗子   class FClass:       #定义一个成员a       a=78       #定义一个方法setdata(">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Python3]011_面向对象</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Python3]011_面向对象</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-16T12:59:50.000Z" itemprop="datePublished" class="page-time">
+  2017-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">类定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类对象"><span class="post-toc-number">2.</span> <span class="post-toc-text">类对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">类方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#继承"><span class="post-toc-number">4.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问权限"><span class="post-toc-number">5.</span> <span class="post-toc-text">访问权限</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Python3/[Python3]011_面向对象"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Python3]011_面向对象</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-16 20:59:50" datetime="2017-04-16T12:59:50.000Z"  itemprop="datePublished">2017-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Python也是一门面向对象的语言</p>
+<h3 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h3><p>用保留字<code>class</code> 定义一个类。</p>
+<ul>
+<li>属性： 属性可以在类中定义，也可以在实例中扩展。</li>
+<li>方法：包括<code>内置的方法</code>和<code>用户定义的方法</code>，而且方法的第一个参数必须是<code>self</code>，当然亦可以改成其他的名字.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line">   class FClass:</span><br><span class="line">       #定义一个成员a</span><br><span class="line">       a=78</span><br><span class="line"></span><br><span class="line">       #定义一个方法setdata()</span><br><span class="line">       def setdata(self,value):</span><br><span class="line">           self.data=value</span><br><span class="line"></span><br><span class="line">       #定义一个方法display()</span><br><span class="line">       def display(self):</span><br><span class="line">           print(self.data)</span><br></pre></td></tr></table></figure>
+<p>还有世界上最简单的python类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class C:</span><br><span class="line">	pass</span><br></pre></td></tr></table></figure>
+<h3 id="类对象"><a href="#类对象" class="headerlink" title="类对象"></a>类对象</h3><p>类的对象是类的实例，类的实例可以调用类的方法，可以访问成员。<code>还可以创建一个新的属性并且赋值</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line"></span><br><span class="line">class FClass:</span><br><span class="line">    #定义一个成员a</span><br><span class="line">    a=78</span><br><span class="line"></span><br><span class="line">    #定义一个方法setdata()</span><br><span class="line">    def setdata(self,value):</span><br><span class="line">        self.data=value</span><br><span class="line"></span><br><span class="line">    #定义一个方法display()</span><br><span class="line">    def display(self):</span><br><span class="line">        print(self.data)</span><br><span class="line"></span><br><span class="line">#实例化对象</span><br><span class="line">aa=FClass()</span><br><span class="line"></span><br><span class="line">#打印aa的a属性</span><br><span class="line">print(aa.a)</span><br><span class="line"></span><br><span class="line">#调用方法，进行赋值</span><br><span class="line">aa.setdata(&quot;a data&quot;)</span><br><span class="line">aa.display()</span><br><span class="line"></span><br><span class="line">#创建一个新的属性，并且进行赋值</span><br><span class="line">aa.another=&quot;another&quot;</span><br><span class="line">print(aa.another)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line"></span><br><span class="line">78</span><br><span class="line">a data</span><br><span class="line">another</span><br></pre></td></tr></table></figure>
+<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>类的方法包括<code>内置的方法</code>和<code>用户定义的方法</code>，而且方法的第一个参数必须是<code>self</code>，当然亦可以改成其他的名字.</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>类的继承：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class SubClass(BaseClass1,BaseClass2...)`</span><br></pre></td></tr></table></figure>
+<p>举个栗子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> #这是一个基类</span><br><span class="line">class BaseClass:</span><br><span class="line">    a=66</span><br><span class="line">    def f(self):</span><br><span class="line">        print(&quot;baseclass&quot;)</span><br><span class="line"></span><br><span class="line">#继承基类</span><br><span class="line">class SubClass(BaseClass):</span><br><span class="line">    b=33</span><br><span class="line">    def f2(self):</span><br><span class="line">        print(&quot;subclass&quot;)</span><br></pre></td></tr></table></figure>
+<p>那么，<code>Subclass</code>的 <code>实例</code>会有所有父类属性和方法。并且方法是可以重写。</p>
+<h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><ol>
+<li><p><code>私有成员</code>： <code>__private_attrs</code>:<br> 两个下划线开头，声明该属性为私有，不能在类地外部被使用或直接访问。在类内部的方法中使用时 <code>self.__private_attrs</code>。</p>
+</li>
+<li><p><code>私有方法</code>：<code>__private_method()</code>:<br> 两个下划线开头，声明该方法为私有方法，不能在类地外部调用。在类的内部调用。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line">class ClassOne:</span><br><span class="line">    #定义一个共有成员</span><br><span class="line">    aa=&quot;public aa&quot;</span><br><span class="line">	</span><br><span class="line">    #定义一个私有成员</span><br><span class="line">    __bb=&quot;private bb&quot;</span><br><span class="line">	</span><br><span class="line">    #定义一个共有方法</span><br><span class="line">    def func(self):</span><br><span class="line">        print(&quot;public method&quot;)</span><br><span class="line">	</span><br><span class="line">    #定义一个私有方法</span><br><span class="line">    def __func(self):</span><br><span class="line">        print(&quot;private method&quot;)</span><br><span class="line">	</span><br><span class="line">#实例化</span><br><span class="line">demo=ClassOne()</span><br><span class="line">	</span><br><span class="line">#访问</span><br><span class="line">print(demo.aa)</span><br><span class="line">demo.func()</span><br><span class="line">#上面的会正常运行，下面的两个会报错</span><br><span class="line">	</span><br><span class="line">print(demo.__bb)</span><br><span class="line">demo.__func()</span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line">	</span><br><span class="line">public aa</span><br><span class="line">public method</span><br><span class="line">#报错</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">File &quot;E:\桌面内容\Python笔记\test.py&quot;, line 25, in &amp;lt;module&amp;gt;</span><br><span class="line">print(demo.__bb)</span><br><span class="line">AttributeError: &apos;ClassOne&apos; object has no attribute &apos;__bb&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>###　类的专有方法</p>
+<ol>
+<li><code>__init__</code> : 构造函数，在生成对象时调用</li>
+<li><code>__del__</code> : 析构函数，释放对象时使用</li>
+<li><code>__repr__</code> : 打印，转换</li>
+<li><code>__setitem__</code>: 按照索引赋值</li>
+<li><code>__getitem__</code>: 按照索引获取值</li>
+<li><code>__len__</code>: 获得长度</li>
+<li><code>__cmp__</code>: 比较运算</li>
+<li><code>__call__</code>: 函数调用</li>
+<li><code>__name__</code>:类的名字</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Python3/[Python3]011_面向对象.html" target="_blank" rel="external">https://willon.cn/Lang/Python3/[Python3]011_面向对象.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python3/">python3</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Linux/[Nginx]01_反向代理.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Nginx]01_反向代理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Python3/[scrapy]scrapy基本使用.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[scrapy]基本使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

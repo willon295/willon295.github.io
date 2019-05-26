@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringBoot]05_基于TOPIC的消息队列 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringBoot,RabbitMQ">
+    <meta name="description" content="利用消息队列实现的功能：  生产者：  用户产生日志、订单产生日志、产品产生日志 消费者： 接受INFO日志、接受ERROR日志、接受全部日志   生产者 能生成不同级别的日志 实现所有生产者的日志分类  12345678用户   --                            --INFO日志      --                     --订单 ------[交换器]-">
+<meta name="keywords" content="SpringBoot,RabbitMQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringBoot]05_基于TOPIC的消息队列">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]05_基于TOPIC的消息队列.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="利用消息队列实现的功能：  生产者：  用户产生日志、订单产生日志、产品产生日志 消费者： 接受INFO日志、接受ERROR日志、接受全部日志   生产者 能生成不同级别的日志 实现所有生产者的日志分类  12345678用户   --                            --INFO日志      --                     --订单 ------[交换器]-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringBoot]05_基于TOPIC的消息队列">
+<meta name="twitter:description" content="利用消息队列实现的功能：  生产者：  用户产生日志、订单产生日志、产品产生日志 消费者： 接受INFO日志、接受ERROR日志、接受全部日志   生产者 能生成不同级别的日志 实现所有生产者的日志分类  12345678用户   --                            --INFO日志      --                     --订单 ------[交换器]-">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringBoot]05_基于TOPIC的消息队列</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringBoot]05_基于TOPIC的消息队列</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-19T16:05:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">2.</span> <span class="post-toc-text">Coding</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成路由器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">生成路由器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生产者"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">生产者</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消费者"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">消费者</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行结果"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">运行结果</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[SpringBoot]05_基于TOPIC的消息队列"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringBoot]05_基于TOPIC的消息队列</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-20 00:05:00" datetime="2018-06-19T16:05:00.000Z"  itemprop="datePublished">2018-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>利用消息队列实现的功能：</p>
+<ul>
+<li>生产者：  用户产生日志、订单产生日志、产品产生日志</li>
+<li>消费者： 接受INFO日志、接受ERROR日志、接受全部日志</li>
+</ul>
+<ol>
+<li>生产者 能生成不同级别的日志</li>
+<li>实现所有生产者的日志分类</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用户</span><br><span class="line">   --                            --INFO日志</span><br><span class="line">      --                     --</span><br><span class="line">订单 ------[交换器]---[队列]-----全部日志</span><br><span class="line">      --                    --</span><br><span class="line">    --                         --</span><br><span class="line">产品                                ERROR日志</span><br></pre></td></tr></table></figure>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ol>
+<li>生产者发送的 <code>消息</code> 包含： <code>交换器名称</code>、 <code>路由键</code>、<code>文本内容</code></li>
+<li><code>路由器</code> 接收到 消息之后， 根据其 <code>路由键</code> 将消息 <code>路由</code> 给对应的 <code>消息队列</code></li>
+<li>消费者 从队列读取消息时，也会绑定信息， 包括 <code>路由器</code>、<code>路由的类型</code> 、<code>路由键</code>、<code>消息队列</code>，从完全相符的队列中获取消息</li>
+</ol>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><h2 id="生成路由器"><a href="#生成路由器" class="headerlink" title="生成路由器"></a>生成路由器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.amqp.core.TopicExchange;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class TopicConf &#123;</span><br><span class="line">    @Value(&quot;$&#123;mq.config.exchange&#125;&quot;)</span><br><span class="line">    private String exchange;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 生成相应的路由器</span><br><span class="line">     * @return 生成的路由器</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public TopicExchange exchange() &#123;</span><br><span class="line">        return new TopicExchange(this.exchange);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><p>1.配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server.port=9999</span><br><span class="line"></span><br><span class="line">spring.rabbitmq.host=127.0.0.1</span><br><span class="line">spring.rabbitmq.port=5672</span><br><span class="line">spring.rabbitmq.username=willon</span><br><span class="line">spring.rabbitmq.password=willon</span><br><span class="line"></span><br><span class="line">#交换器的名称</span><br><span class="line">mq.config.exchange=log.topic</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>具体生产者<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.amqp.core.AmqpTemplate;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class OrderSender &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private AmqpTemplate template;</span><br><span class="line"></span><br><span class="line">    @Value( &quot;$&#123;mq.config.exchange&#125;&quot;) //从配置文件读取路由器名称</span><br><span class="line">    private String exchange;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 发送消息的方法</span><br><span class="line">     */</span><br><span class="line">    public void send() &#123;</span><br><span class="line">        //参数：  路由七名称、 路由键、 文本内容</span><br><span class="line">        this.template.convertAndSend(this.exchange, &quot;order.log.debug&quot;, &quot;order log debug....&quot;);</span><br><span class="line">        this.template.convertAndSend(this.exchange, &quot;order.log.info&quot;, &quot;order log info&quot;);</span><br><span class="line">        this.template.convertAndSend(this.exchange, &quot;order.log.warn&quot;, &quot;order log warn&quot;);</span><br><span class="line">        this.template.convertAndSend(this.exchange, &quot;order.log.error&quot;, &quot;order log error&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><ol>
+<li><p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server.port=8080</span><br><span class="line"></span><br><span class="line">spring.rabbitmq.host=127.0.0.1</span><br><span class="line">spring.rabbitmq.port=5672</span><br><span class="line">spring.rabbitmq.username=willon</span><br><span class="line">spring.rabbitmq.password=willon</span><br><span class="line"></span><br><span class="line">mq.config.exchange=log.topic</span><br><span class="line"></span><br><span class="line">#三个消息队列 info、error、logs</span><br><span class="line">mq.config.queue.info=log.info</span><br><span class="line">mq.config.queue.error=log.error</span><br><span class="line">mq.config.queue.logs=log.message</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>具体消费者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.amqp.core.ExchangeTypes;</span><br><span class="line">import org.springframework.amqp.rabbit.annotation.Exchange;</span><br><span class="line">import org.springframework.amqp.rabbit.annotation.Queue;</span><br><span class="line">import org.springframework.amqp.rabbit.annotation.QueueBinding;</span><br><span class="line">import org.springframework.amqp.rabbit.annotation.RabbitListener;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class ErrorReceiver &#123;</span><br><span class="line">    @RabbitListener(</span><br><span class="line">            bindings = @QueueBinding(value = @Queue(value = &quot;$&#123;mq.config.queue.error&#125;&quot;, autoDelete = &quot;true&quot;),</span><br><span class="line">                    exchange = @Exchange(value = &quot;$&#123;mq.config.exchange&#125;&quot;, type = ExchangeTypes.TOPIC),</span><br><span class="line">                    key = &quot;*.log.error&quot;</span><br><span class="line">            ))</span><br><span class="line">    public void process(String msg) &#123;</span><br><span class="line">        System.out.println(&quot;ERROR------日志------&quot; + msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ol>
+<li><p>消费者先监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产者发送消息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest(classes = Application.class)</span><br><span class="line">public class ApplicationTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserSender userSender;</span><br><span class="line">    @Autowired</span><br><span class="line">    private OrderSender orderSender;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ProductSender productSender;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void send() &#123;</span><br><span class="line">        userSender.send();</span><br><span class="line">        orderSender.send();</span><br><span class="line">        productSender.send();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ALL------日志------ : user log debug....</span><br><span class="line">ALL------日志------ : user log info</span><br><span class="line">ALL------日志------ : user log warn</span><br><span class="line">ALL------日志------ : user log error</span><br><span class="line">ALL------日志------ : order log debug....</span><br><span class="line">ALL------日志------ : order log info</span><br><span class="line">ALL------日志------ : order log warn</span><br><span class="line">ALL------日志------ : order log error</span><br><span class="line">ALL------日志------ : product log debug....</span><br><span class="line">ALL------日志------ : product log info</span><br><span class="line">ALL------日志------ : product log warn</span><br><span class="line">ALL------日志------ : product log error</span><br><span class="line"></span><br><span class="line">INFO------日志------ user log info</span><br><span class="line">INFO------日志------ order log info</span><br><span class="line">INFO------日志------ product log info</span><br><span class="line"></span><br><span class="line">ERROR------日志------user log error</span><br><span class="line">ERROR------日志------order log error</span><br><span class="line">ERROR------日志------product log error</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]05_基于TOPIC的消息队列.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]05_基于TOPIC的消息队列.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]06_文件的上传下载.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringBoot]06_文件的上传下载</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]04_RabbitMQ_Install.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]04_RabbitMQ_Install</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

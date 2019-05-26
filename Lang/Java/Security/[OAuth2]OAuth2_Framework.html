@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[OAuth2]OAuth2 Framework | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="OAuth2">
+    <meta name="description" content="The OAuth 2.0 Authorization FrameworkThis article refers to https://tools.ietf.org/html/rfc6749 本文仅供学习交流使用 1.  Introduction   In the traditional client-server authentication model, the client   reques">
+<meta name="keywords" content="OAuth2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[OAuth2]OAuth2 Framework">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Security/[OAuth2]OAuth2_Framework.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="The OAuth 2.0 Authorization FrameworkThis article refers to https://tools.ietf.org/html/rfc6749 本文仅供学习交流使用 1.  Introduction   In the traditional client-server authentication model, the client   reques">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[OAuth2]OAuth2 Framework">
+<meta name="twitter:description" content="The OAuth 2.0 Authorization FrameworkThis article refers to https://tools.ietf.org/html/rfc6749 本文仅供学习交流使用 1.  Introduction   In the traditional client-server authentication model, the client   reques">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[OAuth2]OAuth2 Framework</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[OAuth2]OAuth2 Framework</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OAuth2/">OAuth2</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#The-OAuth-2-0-Authorization-Framework"><span class="post-toc-number">1.</span> <span class="post-toc-text">The OAuth 2.0 Authorization Framework</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-number">2.</span> <span class="post-toc-text">1.  Introduction</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-Roles"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.1.  Roles</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-Protocol-Flow"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">1.2.  Protocol Flow</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-Authorization-Grant"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">1.3.  Authorization Grant</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-1-Authorization-Code"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">1.3.1.  Authorization Code</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-2-Implicit"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">1.3.2.  Implicit</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-3-Resource-Owner-Password-Credentials"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">1.3.3.  Resource Owner Password Credentials</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-4-Client-Credentials"><span class="post-toc-number">2.3.4.</span> <span class="post-toc-text">1.3.4.  Client Credentials</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-Access-Token"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">1.4.  Access Token</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-Refresh-Token"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">1.5.  Refresh Token</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-6-TLS-Version"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">1.6.  TLS Version</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-7-HTTP-Redirections"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">1.7.  HTTP Redirections</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-8-Interoperability"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">1.8.  Interoperability</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-9-Notational-Conventions"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">1.9.  Notational Conventions</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Client-Registration"><span class="post-toc-number">3.</span> <span class="post-toc-text">2.  Client Registration</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-Client-Types"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1.  Client Types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-Client-Identifier"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2.  Client Identifier</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-Client-Authentication"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">2.3.  Client Authentication</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-1-Client-Password"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">2.3.1.  Client Password</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-2-Other-Authentication-Methods"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">2.3.2.  Other Authentication Methods</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-Unregistered-Clients"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">2.4.  Unregistered Clients</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Protocol-Endpoints"><span class="post-toc-number">4.</span> <span class="post-toc-text">3.  Protocol Endpoints</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-Authorization-Endpoint"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">3.1.  Authorization Endpoint</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-1-Response-Type"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">3.1.1.  Response Type</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-2-Redirection-Endpoint"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">3.1.2.  Redirection Endpoint</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-1-Endpoint-Request-Confidentiality"><span class="post-toc-number">4.1.2.1.</span> <span class="post-toc-text">3.1.2.1.  Endpoint Request Confidentiality</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-2-Registration-Requirements"><span class="post-toc-number">4.1.2.2.</span> <span class="post-toc-text">3.1.2.2.  Registration Requirements</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-3-Dynamic-Configuration"><span class="post-toc-number">4.1.2.3.</span> <span class="post-toc-text">3.1.2.3.  Dynamic Configuration</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-4-Invalid-Endpoint"><span class="post-toc-number">4.1.2.4.</span> <span class="post-toc-text">3.1.2.4.  Invalid Endpoint</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-2-5-Endpoint-Content"><span class="post-toc-number">4.1.2.5.</span> <span class="post-toc-text">3.1.2.5.  Endpoint Content</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-Token-Endpoint"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">3.2.  Token Endpoint</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-1-Client-Authentication"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">3.2.1.  Client Authentication</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-Access-Token-Scope"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.3.  Access Token Scope</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-Obtaining-Authorization"><span class="post-toc-number">5.</span> <span class="post-toc-text">4.  Obtaining Authorization</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-Authorization-Code-Grant"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">4.1.  Authorization Code Grant</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-2-Authorization-Response"><span class="post-toc-number">5.1.1.</span> <span class="post-toc-text">4.1.2.  Authorization Response</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1-2-1-Error-Response"><span class="post-toc-number">5.1.1.1.</span> <span class="post-toc-text">4.1.2.1.  Error Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-3-Access-Token-Request"><span class="post-toc-number">5.1.2.</span> <span class="post-toc-text">4.1.3.  Access Token Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-4-Access-Token-Response"><span class="post-toc-number">5.1.3.</span> <span class="post-toc-text">4.1.4.  Access Token Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-Implicit-Grant"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">4.2.  Implicit Grant</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-1-Authorization-Request"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">4.2.1.  Authorization Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-2-Access-Token-Response"><span class="post-toc-number">5.2.2.</span> <span class="post-toc-text">4.2.2.  Access Token Response</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-2-1-Error-Response"><span class="post-toc-number">5.2.3.</span> <span class="post-toc-text">4.2.2.1.  Error Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-3-Resource-Owner-Password-Credentials-Grant"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">4.3.  Resource Owner Password Credentials Grant</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-1-Authorization-Request-and-Response"><span class="post-toc-number">5.3.1.</span> <span class="post-toc-text">4.3.1.  Authorization Request and Response</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-2-Access-Token-Request"><span class="post-toc-number">5.3.2.</span> <span class="post-toc-text">4.3.2.  Access Token Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-3-Access-Token-Response"><span class="post-toc-number">5.3.3.</span> <span class="post-toc-text">4.3.3.  Access Token Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-4-Client-Credentials-Grant"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">4.4.  Client Credentials Grant</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-1-Authorization-Request-and-Response"><span class="post-toc-number">5.4.1.</span> <span class="post-toc-text">4.4.1.  Authorization Request and Response</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-2-Access-Token-Request"><span class="post-toc-number">5.4.2.</span> <span class="post-toc-text">4.4.2.  Access Token Request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-3-Access-Token-Response"><span class="post-toc-number">5.4.3.</span> <span class="post-toc-text">4.4.3.  Access Token Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-5-Extension-Grants"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">4.5.  Extension Grants</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-Issuing-an-Access-Token"><span class="post-toc-number">6.</span> <span class="post-toc-text">5.  Issuing an Access Token</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-1-Successful-Response"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">5.1.  Successful Response</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-2-Error-Response"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">5.2.  Error Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-Refreshing-an-Access-Token"><span class="post-toc-number">7.</span> <span class="post-toc-text">6.  Refreshing an Access Token</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#7-Accessing-Protected-Resources"><span class="post-toc-number">8.</span> <span class="post-toc-text">7.  Accessing Protected Resources</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-1-Access-Token-Types"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">7.1.  Access Token Types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-2-Error-Response"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">7.2.  Error Response</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#8-Extensibility"><span class="post-toc-number">9.</span> <span class="post-toc-text">8.  Extensibility</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-1-Defining-Access-Token-Types"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">8.1.  Defining Access Token Types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-2-Defining-New-Endpoint-Parameters"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">8.2.  Defining New Endpoint Parameters</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-3-Defining-New-Authorization-Grant-Types"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">8.3.  Defining New Authorization Grant Types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-4-Defining-New-Authorization-Endpoint-Response-Types"><span class="post-toc-number">9.4.</span> <span class="post-toc-text">8.4.  Defining New Authorization Endpoint Response Types</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-5-Defining-Additional-Error-Codes"><span class="post-toc-number">9.5.</span> <span class="post-toc-text">8.5.  Defining Additional Error Codes</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#9-Native-Applications"><span class="post-toc-number">10.</span> <span class="post-toc-text">9.  Native Applications</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#10-Security-Considerations"><span class="post-toc-number">11.</span> <span class="post-toc-text">10.  Security Considerations</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-1-Client-Authentication"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">10.1.  Client Authentication</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-2-Client-Impersonation"><span class="post-toc-number">11.2.</span> <span class="post-toc-text">10.2.  Client Impersonation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-3-Access-Tokens"><span class="post-toc-number">11.3.</span> <span class="post-toc-text">10.3.  Access Tokens</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-4-Refresh-Tokens"><span class="post-toc-number">11.4.</span> <span class="post-toc-text">10.4.  Refresh Tokens</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-5-Authorization-Codes"><span class="post-toc-number">11.5.</span> <span class="post-toc-text">10.5.  Authorization Codes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-6-Authorization-Code-Redirection-URI-Manipulation"><span class="post-toc-number">11.6.</span> <span class="post-toc-text">10.6.  Authorization Code Redirection URI Manipulation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-7-Resource-Owner-Password-Credentials"><span class="post-toc-number">11.7.</span> <span class="post-toc-text">10.7.  Resource Owner Password Credentials</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-8-Request-Confidentiality"><span class="post-toc-number">11.8.</span> <span class="post-toc-text">10.8.  Request Confidentiality</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-9-Ensuring-Endpoint-Authenticity"><span class="post-toc-number">11.9.</span> <span class="post-toc-text">10.9.  Ensuring Endpoint Authenticity</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-10-Credentials-Guessing-Attacks"><span class="post-toc-number">11.10.</span> <span class="post-toc-text">10.10.  Credentials-Guessing Attacks</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-11-Phishing-Attacks"><span class="post-toc-number">11.11.</span> <span class="post-toc-text">10.11.  Phishing Attacks</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-12-Cross-Site-Request-Forgery"><span class="post-toc-number">11.12.</span> <span class="post-toc-text">10.12.  Cross-Site Request Forgery</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-13-Clickjacking"><span class="post-toc-number">11.13.</span> <span class="post-toc-text">10.13.  Clickjacking</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-14-Code-Injection-and-Input-Validation"><span class="post-toc-number">11.14.</span> <span class="post-toc-text">10.14.  Code Injection and Input Validation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-15-Open-Redirectors"><span class="post-toc-number">11.15.</span> <span class="post-toc-text">10.15.  Open Redirectors</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-16-Misuse-of-Access-Token-to-Impersonate-Resource-Owner-in-Implicit-Flow"><span class="post-toc-number">11.16.</span> <span class="post-toc-text">10.16.  Misuse of Access Token to Impersonate Resource Owner in Implicit Flow</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Security/[OAuth2]OAuth2_Framework"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[OAuth2]OAuth2 Framework</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-21 00:00:00" datetime="2018-12-20T16:00:00.000Z"  itemprop="datePublished">2018-12-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OAuth2/">OAuth2</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="The-OAuth-2-0-Authorization-Framework"><a href="#The-OAuth-2-0-Authorization-Framework" class="headerlink" title="The OAuth 2.0 Authorization Framework"></a>The OAuth 2.0 Authorization Framework</h1><p>This article refers to <a href="https://tools.ietf.org/html/rfc6749" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc6749</a></p>
+<p>本文仅供学习交流使用</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.  Introduction"></a>1.  Introduction</h1><p>   In the traditional client-server authentication model, the client<br>   requests an access-restricted resource (protected resource) on the<br>   server by authenticating with the server using the resource owner’s<br>   credentials.  In order to provide third-party applications access to<br>   restricted resources, the resource owner shares its credentials with<br>   the third party.  This creates several problems and limitations:</p>
+<p>   o  Third-party applications are required to store the resource<br>​       owner’s credentials for future use, typically a password in<br>​       clear-text.</p>
+<p>   o  Servers are required to support password authentication, despite<br>​       the security weaknesses inherent in passwords.</p>
+<p>   o  Third-party applications gain overly broad access to the resource<br>​       owner’s protected resources, leaving resource owners without any<br>​       ability to restrict duration or access to a limited subset of<br>​       resources.</p>
+<p>   o  Resource owners cannot revoke access to an individual third party<br>​       without revoking access to all third parties, and must do so by<br>​       changing the third party’s password.</p>
+<p>   o  Compromise of any third-party application results in compromise of<br>​       the end-user’s password and all of the data protected by that<br>​       password.</p>
+<p>   OAuth addresses these issues by introducing an authorization layer<br>   and separating the role of the client from that of the resource<br>   owner.  In OAuth, the client requests access to resources controlled<br>   by the resource owner and hosted by the resource server, and is<br>   issued a different set of credentials than those of the resource<br>   owner.</p>
+<p>   Instead of using the resource owner’s credentials to access protected<br>   resources, the client obtains an access token – a string denoting a<br>   specific scope, lifetime, and other access attributes.  Access tokens<br>   are issued to third-party clients by an authorization server with the<br>   approval of the resource owner.  The client uses the access token to<br>   access the protected resources hosted by the resource server.</p>
+<p>   For example, an end-user (resource owner) can grant a printing<br>   service (client) access to her protected photos stored at a photo-<br>   sharing service (resource server), without sharing her username and<br>   password with the printing service.  Instead, she authenticates<br>   directly with a server trusted by the photo-sharing service<br>   (authorization server), which issues the printing service delegation-<br>   specific credentials (access token).</p>
+<p>   This specification is designed for use with HTTP ([RFC2616]).  The<br>   use of OAuth over any protocol other than HTTP is out of scope.</p>
+<p>   The OAuth 1.0 protocol ([RFC5849]), published as an informational<br>   document, was the result of a small ad hoc community effort.  This<br>   Standards Track specification builds on the OAuth 1.0 deployment<br>   experience, as well as additional use cases and extensibility<br>   requirements gathered from the wider IETF community.  The OAuth 2.0<br>   protocol is not backward compatible with OAuth 1.0.  The two versions<br>   may co-exist on the network, and implementations may choose to<br>   support both.  However, it is the intention of this specification<br>   that new implementations support OAuth 2.0 as specified in this<br>   document and that OAuth 1.0 is used only to support existing<br>   deployments.  The OAuth 2.0 protocol shares very few implementation<br>   details with the OAuth 1.0 protocol.  Implementers familiar with<br>   OAuth 1.0 should approach this document without any assumptions as to<br>   its structure and details.</p>
+<h2 id="1-1-Roles"><a href="#1-1-Roles" class="headerlink" title="1.1.  Roles"></a>1.1.  Roles</h2><p>   OAuth defines four roles:</p>
+<p>   resource owner<br>​       An entity capable of granting access to a protected resource.<br>​       When the resource owner is a person, it is referred to as an<br>​       end-user.</p>
+<p>   resource server<br>​       The server hosting the protected resources, capable of accepting<br>​       and responding to protected resource requests using access tokens.</p>
+<p>   client<br>​       An application making protected resource requests on behalf of the<br>​       resource owner and with its authorization.  The term “client” does<br>​       not imply any particular implementation characteristics (e.g.,<br>​       whether the application executes on a server, a desktop, or other<br>​       devices).</p>
+<p>   authorization server<br>​       The server issuing access tokens to the client after successfully<br>​       authenticating the resource owner and obtaining authorization.</p>
+<p>   The interaction between the authorization server and resource server<br>   is beyond the scope of this specification.  The authorization server<br>   may be the same server as the resource server or a separate entity.<br>   A single authorization server may issue access tokens accepted by<br>   multiple resource servers.</p>
+<h2 id="1-2-Protocol-Flow"><a href="#1-2-Protocol-Flow" class="headerlink" title="1.2.  Protocol Flow"></a>1.2.  Protocol Flow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">|        |--(A)- Authorization Request -&gt;|   Resource    |</span><br><span class="line">|        |                               |     Owner     |</span><br><span class="line">|        |&lt;-(B)-- Authorization Grant ---|               |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |--(C)-- Authorization Grant --&gt;| Authorization |</span><br><span class="line">| Client |                               |     Server    |</span><br><span class="line">|        |&lt;-(D)----- Access Token -------|               |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |--(E)----- Access Token ------&gt;|    Resource   |</span><br><span class="line">|        |                               |     Server    |</span><br><span class="line">|        |&lt;-(F)--- Protected Resource ---|               |</span><br><span class="line">+--------+                               +---------------+</span><br><span class="line"></span><br><span class="line">                Figure 1: Abstract Protocol Flow</span><br></pre></td></tr></table></figure>
+<p>   The abstract OAuth 2.0 flow illustrated in Figure 1 describes the<br>   interaction between the four roles and includes the following steps:</p>
+<p>   (A)  The client requests authorization from the resource owner.  The<br>​         authorization request can be made directly to the resource owner<br>​         (as shown), or preferably indirectly via the authorization<br>​         server as an intermediary.</p>
+<p>   (B)  The client receives an authorization grant, which is a<br>​         credential representing the resource owner’s authorization,<br>​         expressed using one of four grant types defined in this<br>​         specification or using an extension grant type.  The<br>​         authorization grant type depends on the method used by the<br>​         client to request authorization and the types supported by the<br>​         authorization server.</p>
+<p>   (C)  The client requests an access token by authenticating with the<br>​         authorization server and presenting the authorization grant.</p>
+<p>   (D)  The authorization server authenticates the client and validates<br>​         the authorization grant, and if valid, issues an access token.</p>
+<p>   (E)  The client requests the protected resource from the resource<br>​         server and authenticates by presenting the access token.</p>
+<p>   (F)  The resource server validates the access token, and if valid,<br>​         serves the request.</p>
+<p>   The preferred method for the client to obtain an authorization grant<br>   from the resource owner (depicted in steps (A) and (B)) is to use the<br>   authorization server as an intermediary, which is illustrated in<br>   Figure 3 in Section 4.1.</p>
+<h2 id="1-3-Authorization-Grant"><a href="#1-3-Authorization-Grant" class="headerlink" title="1.3.  Authorization Grant"></a>1.3.  Authorization Grant</h2><p>   An authorization grant is a credential representing the resource<br>   owner’s authorization (to access its protected resources) used by the<br>   client to obtain an access token.  This specification defines four<br>   grant types – authorization code, implicit, resource owner password<br>   credentials, and client credentials – as well as an extensibility<br>   mechanism for defining additional types.</p>
+<h3 id="1-3-1-Authorization-Code"><a href="#1-3-1-Authorization-Code" class="headerlink" title="1.3.1.  Authorization Code"></a>1.3.1.  Authorization Code</h3><p>   The authorization code is obtained by using an authorization server<br>   as an intermediary between the client and resource owner.  Instead of<br>   requesting authorization directly from the resource owner, the client<br>   directs the resource owner to an authorization server (via its<br>   user-agent as defined in [RFC2616]), which in turn directs the<br>   resource owner back to the client with the authorization code.</p>
+<p>   Before directing the resource owner back to the client with the<br>   authorization code, the authorization server authenticates the<br>   resource owner and obtains authorization.  Because the resource owner<br>   only authenticates with the authorization server, the resource<br>   owner’s credentials are never shared with the client.</p>
+<p>   The authorization code provides a few important security benefits,<br>   such as the ability to authenticate the client, as well as the<br>   transmission of the access token directly to the client without<br>   passing it through the resource owner’s user-agent and potentially<br>   exposing it to others, including the resource owner.</p>
+<h3 id="1-3-2-Implicit"><a href="#1-3-2-Implicit" class="headerlink" title="1.3.2.  Implicit"></a>1.3.2.  Implicit</h3><p>   The implicit grant is a simplified authorization code flow optimized<br>   for clients implemented in a browser using a scripting language such<br>   as JavaScript.  In the implicit flow, instead of issuing the client<br>   an authorization code, the client is issued an access token directly<br>   (as the result of the resource owner authorization).  The grant type<br>   is implicit, as no intermediate credentials (such as an authorization<br>   code) are issued (and later used to obtain an access token).</p>
+<p>   When issuing an access token during the implicit grant flow, the<br>   authorization server does not authenticate the client.  In some<br>   cases, the client identity can be verified via the redirection URI<br>   used to deliver the access token to the client.  The access token may<br>   be exposed to the resource owner or other applications with access to<br>   the resource owner’s user-agent.</p>
+<p>   Implicit grants improve the responsiveness and efficiency of some<br>   clients (such as a client implemented as an in-browser application),<br>   since it reduces the number of round trips required to obtain an<br>   access token.  However, this convenience should be weighed against<br>   the security implications of using implicit grants, such as those<br>   described in Sections 10.3 and 10.16, especially when the<br>   authorization code grant type is available.</p>
+<h3 id="1-3-3-Resource-Owner-Password-Credentials"><a href="#1-3-3-Resource-Owner-Password-Credentials" class="headerlink" title="1.3.3.  Resource Owner Password Credentials"></a>1.3.3.  Resource Owner Password Credentials</h3><p>   The resource owner password credentials (i.e., username and password)<br>   can be used directly as an authorization grant to obtain an access<br>   token.  The credentials should only be used when there is a high<br>   degree of trust between the resource owner and the client (e.g., the<br>   client is part of the device operating system or a highly privileged<br>   application), and when other authorization grant types are not<br>   available (such as an authorization code).</p>
+<p>   Even though this grant type requires direct client access to the<br>   resource owner credentials, the resource owner credentials are used<br>   for a single request and are exchanged for an access token.  This<br>   grant type can eliminate the need for the client to store the<br>   resource owner credentials for future use, by exchanging the<br>   credentials with a long-lived access token or refresh token.</p>
+<h3 id="1-3-4-Client-Credentials"><a href="#1-3-4-Client-Credentials" class="headerlink" title="1.3.4.  Client Credentials"></a>1.3.4.  Client Credentials</h3><p>   The client credentials (or other forms of client authentication) can<br>   be used as an authorization grant when the authorization scope is<br>   limited to the protected resources under the control of the client,<br>   or to protected resources previously arranged with the authorization<br>   server.  Client credentials are used as an authorization grant<br>   typically when the client is acting on its own behalf (the client is<br>   also the resource owner) or is requesting access to protected<br>   resources based on an authorization previously arranged with the<br>   authorization server.</p>
+<h2 id="1-4-Access-Token"><a href="#1-4-Access-Token" class="headerlink" title="1.4.  Access Token"></a>1.4.  Access Token</h2><p>   Access tokens are credentials used to access protected resources.  An<br>   access token is a string representing an authorization issued to the<br>   client.  The string is usually opaque to the client.  Tokens<br>   represent specific scopes and durations of access, granted by the<br>   resource owner, and enforced by the resource server and authorization<br>   server.</p>
+<p>   The token may denote an identifier used to retrieve the authorization<br>   information or may self-contain the authorization information in a<br>   verifiable manner (i.e., a token string consisting of some data and a<br>   signature).  Additional authentication credentials, which are beyond<br>   the scope of this specification, may be required in order for the<br>   client to use a token.</p>
+<p>   The access token provides an abstraction layer, replacing different<br>   authorization constructs (e.g., username and password) with a single<br>   token understood by the resource server.  This abstraction enables<br>   issuing access tokens more restrictive than the authorization grant<br>   used to obtain them, as well as removing the resource server’s need<br>   to understand a wide range of authentication methods.</p>
+<p>   Access tokens can have different formats, structures, and methods of<br>   utilization (e.g., cryptographic properties) based on the resource<br>   server security requirements.  Access token attributes and the<br>   methods used to access protected resources are beyond the scope of<br>   this specification and are defined by companion specifications such<br>   as [RFC6750].</p>
+<h2 id="1-5-Refresh-Token"><a href="#1-5-Refresh-Token" class="headerlink" title="1.5.  Refresh Token"></a>1.5.  Refresh Token</h2><p>   Refresh tokens are credentials used to obtain access tokens.  Refresh<br>   tokens are issued to the client by the authorization server and are<br>   used to obtain a new access token when the current access token<br>   becomes invalid or expires, or to obtain additional access tokens<br>   with identical or narrower scope (access tokens may have a shorter<br>   lifetime and fewer permissions than authorized by the resource<br>   owner).  Issuing a refresh token is optional at the discretion of the<br>   authorization server.  If the authorization server issues a refresh<br>   token, it is included when issuing an access token (i.e., step (D) in<br>   Figure 1).</p>
+<p>   A refresh token is a string representing the authorization granted to<br>   the client by the resource owner.  The string is usually opaque to<br>   the client.  The token denotes an identifier used to retrieve the<br>   authorization information.  Unlike access tokens, refresh tokens are<br>   intended for use only with authorization servers and are never sent<br>   to resource servers.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">+--------+                                           +---------------+</span><br><span class="line">|        |--(A)------- Authorization Grant ---------&gt;|               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |&lt;-(B)----------- Access Token -------------|               |</span><br><span class="line">|        |               &amp; Refresh Token             |               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |                            +----------+   |               |</span><br><span class="line">|        |--(C)---- Access Token ----&gt;|          |   |               |</span><br><span class="line">|        |                            |          |   |               |</span><br><span class="line">|        |&lt;-(D)- Protected Resource --| Resource |   | Authorization |</span><br><span class="line">| Client |                            |  Server  |   |     Server    |</span><br><span class="line">|        |--(E)---- Access Token ----&gt;|          |   |               |</span><br><span class="line">|        |                            |          |   |               |</span><br><span class="line">|        |&lt;-(F)- Invalid Token Error -|          |   |               |</span><br><span class="line">|        |                            +----------+   |               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |--(G)----------- Refresh Token -----------&gt;|               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |&lt;-(H)----------- Access Token -------------|               |</span><br><span class="line">+--------+           &amp; Optional Refresh Token        +---------------+</span><br><span class="line"></span><br><span class="line">             Figure 2: Refreshing an Expired Access Token</span><br></pre></td></tr></table></figure>
+<p>   The flow illustrated in Figure 2 includes the following steps:</p>
+<p>   (A)  The client requests an access token by authenticating with the<br>​         authorization server and presenting an authorization grant.</p>
+<p>   (B)  The authorization server authenticates the client and validates<br>​         the authorization grant, and if valid, issues an access token<br>​         and a refresh token.</p>
+<p>   (C)  The client makes a protected resource request to the resource<br>​         server by presenting the access token.</p>
+<p>   (D)  The resource server validates the access token, and if valid,<br>​         serves the request.</p>
+<p>   (E)  Steps (C) and (D) repeat until the access token expires.  If the<br>​         client knows the access token expired, it skips to step (G);<br>​         otherwise, it makes another protected resource request.</p>
+<p>   (F)  Since the access token is invalid, the resource server returns<br>​         an invalid token error.</p>
+<p>   (G)  The client requests a new access token by authenticating with<br>​         the authorization server and presenting the refresh token.  The<br>​         client authentication requirements are based on the client type<br>​         and on the authorization server policies.</p>
+<p>   (H)  The authorization server authenticates the client and validates<br>​         the refresh token, and if valid, issues a new access token (and,<br>​         optionally, a new refresh token).</p>
+<p>   Steps (C), (D), (E), and (F) are outside the scope of this<br>   specification, as described in Section 7.</p>
+<h2 id="1-6-TLS-Version"><a href="#1-6-TLS-Version" class="headerlink" title="1.6.  TLS Version"></a>1.6.  TLS Version</h2><p>   Whenever Transport Layer Security (TLS) is used by this<br>   specification, the appropriate version (or versions) of TLS will vary<br>   over time, based on the widespread deployment and known security<br>   vulnerabilities.  At the time of this writing, TLS version 1.2<br>   [RFC5246] is the most recent version, but has a very limited<br>   deployment base and might not be readily available for<br>   implementation.  TLS version 1.0 [RFC2246] is the most widely<br>   deployed version and will provide the broadest interoperability.</p>
+<p>   Implementations MAY also support additional transport-layer security<br>   mechanisms that meet their security requirements.</p>
+<h2 id="1-7-HTTP-Redirections"><a href="#1-7-HTTP-Redirections" class="headerlink" title="1.7.  HTTP Redirections"></a>1.7.  HTTP Redirections</h2><p>   This specification makes extensive use of HTTP redirections, in which<br>   the client or the authorization server directs the resource owner’s<br>   user-agent to another destination.  While the examples in this<br>   specification show the use of the HTTP 302 status code, any other<br>   method available via the user-agent to accomplish this redirection is<br>   allowed and is considered to be an implementation detail.</p>
+<h2 id="1-8-Interoperability"><a href="#1-8-Interoperability" class="headerlink" title="1.8.  Interoperability"></a>1.8.  Interoperability</h2><p>   OAuth 2.0 provides a rich authorization framework with well-defined<br>   security properties.  However, as a rich and highly extensible<br>   framework with many optional components, on its own, this<br>   specification is likely to produce a wide range of non-interoperable<br>   implementations.</p>
+<p>   In addition, this specification leaves a few required components<br>   partially or fully undefined (e.g., client registration,<br>   authorization server capabilities, endpoint discovery).  Without<br>   these components, clients must be manually and specifically<br>   configured against a specific authorization server and resource<br>   server in order to interoperate.</p>
+<p>   This framework was designed with the clear expectation that future<br>   work will define prescriptive profiles and extensions necessary to<br>   achieve full web-scale interoperability.</p>
+<h2 id="1-9-Notational-Conventions"><a href="#1-9-Notational-Conventions" class="headerlink" title="1.9.  Notational Conventions"></a>1.9.  Notational Conventions</h2><p>   The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”,<br>   “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this<br>   specification are to be interpreted as described in [RFC2119].</p>
+<p>   This specification uses the Augmented Backus-Naur Form (ABNF)<br>   notation of [RFC5234].  Additionally, the rule URI-reference is<br>   included from “Uniform Resource Identifier (URI): Generic Syntax”<br>   [RFC3986].</p>
+<p>   Certain security-related terms are to be understood in the sense<br>   defined in [RFC4949].  These terms include, but are not limited to,<br>   “attack”, “authentication”, “authorization”, “certificate”,<br>   “confidentiality”, “credential”, “encryption”, “identity”, “sign”,<br>   “signature”, “trust”, “validate”, and “verify”.</p>
+<p>   Unless otherwise noted, all the protocol parameter names and values<br>   are case sensitive.</p>
+<h1 id="2-Client-Registration"><a href="#2-Client-Registration" class="headerlink" title="2.  Client Registration"></a>2.  Client Registration</h1><p>   Before initiating the protocol, the client registers with the<br>   authorization server.  The means through which the client registers<br>   with the authorization server are beyond the scope of this<br>   specification but typically involve end-user interaction with an HTML<br>   registration form.</p>
+<p>   Client registration does not require a direct interaction between the<br>   client and the authorization server.  When supported by the<br>   authorization server, registration can rely on other means for<br>   establishing trust and obtaining the required client properties<br>   (e.g., redirection URI, client type).  For example, registration can<br>   be accomplished using a self-issued or third-party-issued assertion,<br>   or by the authorization server performing client discovery using a<br>   trusted channel.<br>   When registering a client, the client developer SHALL:</p>
+<p>   o  specify the client type as described in Section 2.1,</p>
+<p>   o  provide its client redirection URIs as described in Section 3.1.2,<br>​       and</p>
+<p>   o  include any other information required by the authorization server<br>​       (e.g., application name, website, description, logo image, the<br>​       acceptance of legal terms).</p>
+<h2 id="2-1-Client-Types"><a href="#2-1-Client-Types" class="headerlink" title="2.1.  Client Types"></a>2.1.  Client Types</h2><p>   OAuth defines two client types, based on their ability to<br>   authenticate securely with the authorization server (i.e., ability to<br>   maintain the confidentiality of their client credentials):</p>
+<p>   confidential<br>​       Clients capable of maintaining the confidentiality of their<br>​       credentials (e.g., client implemented on a secure server with<br>​       restricted access to the client credentials), or capable of secure<br>​       client authentication using other means.</p>
+<p>   public<br>​       Clients incapable of maintaining the confidentiality of their<br>​       credentials (e.g., clients executing on the device used by the<br>​       resource owner, such as an installed native application or a web<br>​       browser-based application), and incapable of secure client<br>​       authentication via any other means.</p>
+<p>   The client type designation is based on the authorization server’s<br>   definition of secure authentication and its acceptable exposure<br>   levels of client credentials.  The authorization server SHOULD NOT<br>   make assumptions about the client type.</p>
+<p>   A client may be implemented as a distributed set of components, each<br>   with a different client type and security context (e.g., a<br>   distributed client with both a confidential server-based component<br>   and a public browser-based component).  If the authorization server<br>   does not provide support for such clients or does not provide<br>   guidance with regard to their registration, the client SHOULD<br>   register each component as a separate client.<br>   This specification has been designed around the following client<br>   profiles:</p>
+<ol>
+<li><p>web application<br>A web application is a confidential client running on a web<br>server.  Resource owners access the client via an HTML user<br>interface rendered in a user-agent on the device used by the<br>resource owner.  The client credentials as well as any access<br>token issued to the client are stored on the web server and are<br>not exposed to or accessible by the resource owner.</p>
+</li>
+<li><p>user-agent-based application<br>A user-agent-based application is a public client in which the<br>client code is downloaded from a web server and executes within a<br>user-agent (e.g., web browser) on the device used by the resource<br>owner.  Protocol data and credentials are easily accessible (and<br>often visible) to the resource owner.  Since such applications<br>reside within the user-agent, they can make seamless use of the<br>user-agent capabilities when requesting authorization.</p>
+</li>
+<li><p>native application<br>A native application is a public client installed and executed on<br>the device used by the resource owner.  Protocol data and<br>credentials are accessible to the resource owner.  It is assumed<br>that any client authentication credentials included in the<br>application can be extracted.  On the other hand, dynamically<br>issued credentials such as access tokens or refresh tokens can<br>receive an acceptable level of protection.  At a minimum, these<br>credentials are protected from hostile servers with which the<br>application may interact.  On some platforms, these credentials<br>might be protected from other applications residing on the same<br>device.</p>
+</li>
+</ol>
+<h2 id="2-2-Client-Identifier"><a href="#2-2-Client-Identifier" class="headerlink" title="2.2.  Client Identifier"></a>2.2.  Client Identifier</h2><p>   The authorization server issues the registered client a client<br>   identifier – a unique string representing the registration<br>   information provided by the client.  The client identifier is not a<br>   secret; it is exposed to the resource owner and MUST NOT be used<br>   alone for client authentication.  The client identifier is unique to<br>   the authorization server.</p>
+<p>   The client identifier string size is left undefined by this<br>   specification.  The client should avoid making assumptions about the<br>   identifier size.  The authorization server SHOULD document the size<br>   of any identifier it issues.</p>
+<h2 id="2-3-Client-Authentication"><a href="#2-3-Client-Authentication" class="headerlink" title="2.3.  Client Authentication"></a>2.3.  Client Authentication</h2><p>   If the client type is confidential, the client and authorization<br>   server establish a client authentication method suitable for the<br>   security requirements of the authorization server.  The authorization<br>   server MAY accept any form of client authentication meeting its<br>   security requirements.</p>
+<p>   Confidential clients are typically issued (or establish) a set of<br>   client credentials used for authenticating with the authorization<br>   server (e.g., password, public/private key pair).</p>
+<p>   The authorization server MAY establish a client authentication method<br>   with public clients.  However, the authorization server MUST NOT rely<br>   on public client authentication for the purpose of identifying the<br>   client.</p>
+<p>   The client MUST NOT use more than one authentication method in each<br>   request.</p>
+<h3 id="2-3-1-Client-Password"><a href="#2-3-1-Client-Password" class="headerlink" title="2.3.1.  Client Password"></a>2.3.1.  Client Password</h3><p>   Clients in possession of a client password MAY use the HTTP Basic<br>   authentication scheme as defined in [RFC2617] to authenticate with<br>   the authorization server.  The client identifier is encoded using the<br>   “application/x-www-form-urlencoded” encoding algorithm per<br>   Appendix B, and the encoded value is used as the username; the client<br>   password is encoded using the same algorithm and used as the<br>   password.  The authorization server MUST support the HTTP Basic<br>   authentication scheme for authenticating clients that were issued a<br>   client password.</p>
+<p>   For example (with extra line breaks for display purposes only):</p>
+<pre><code>Authorization: Basic czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3
+</code></pre><p>   Alternatively, the authorization server MAY support including the<br>   client credentials in the request-body using the following<br>   parameters:</p>
+<p>   client_id<br>​          REQUIRED.  The client identifier issued to the client during<br>​          the registration process described by Section 2.2.</p>
+<p>   client_secret<br>​          REQUIRED.  The client secret.  The client MAY omit the<br>​          parameter if the client secret is an empty string.</p>
+<p>   Including the client credentials in the request-body using the two<br>   parameters is NOT RECOMMENDED and SHOULD be limited to clients unable<br>   to directly utilize the HTTP Basic authentication scheme (or other<br>   password-based HTTP authentication schemes).  The parameters can only<br>   be transmitted in the request-body and MUST NOT be included in the<br>   request URI.</p>
+<p>   For example, a request to refresh an access token (Section 6) using<br>   the body parameters (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>POST /token HTTP/1.1
+Host: server.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token&amp;refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
+&amp;client_id=s6BhdRkqt3&amp;client_secret=7Fjfp0ZBr1KtDRbnfVdmIw
+</code></pre><p>   The authorization server MUST require the use of TLS as described in<br>   Section 1.6 when sending requests using password authentication.</p>
+<p>   Since this client authentication method involves a password, the<br>   authorization server MUST protect any endpoint utilizing it against<br>   brute force attacks.</p>
+<h3 id="2-3-2-Other-Authentication-Methods"><a href="#2-3-2-Other-Authentication-Methods" class="headerlink" title="2.3.2.  Other Authentication Methods"></a>2.3.2.  Other Authentication Methods</h3><p>   The authorization server MAY support any suitable HTTP authentication<br>   scheme matching its security requirements.  When using other<br>   authentication methods, the authorization server MUST define a<br>   mapping between the client identifier (registration record) and<br>   authentication scheme.</p>
+<h2 id="2-4-Unregistered-Clients"><a href="#2-4-Unregistered-Clients" class="headerlink" title="2.4.  Unregistered Clients"></a>2.4.  Unregistered Clients</h2><p>   This specification does not exclude the use of unregistered clients.<br>   However, the use of such clients is beyond the scope of this<br>   specification and requires additional security analysis and review of<br>   its interoperability impact.</p>
+<h1 id="3-Protocol-Endpoints"><a href="#3-Protocol-Endpoints" class="headerlink" title="3.  Protocol Endpoints"></a>3.  Protocol Endpoints</h1><p>   The authorization process utilizes two authorization server endpoints<br>   (HTTP resources):</p>
+<p>   o  Authorization endpoint - used by the client to obtain<br>​       authorization from the resource owner via user-agent redirection.</p>
+<p>   o  Token endpoint - used by the client to exchange an authorization<br>​       grant for an access token, typically with client authentication.</p>
+<p>   As well as one client endpoint:</p>
+<p>   o  Redirection endpoint - used by the authorization server to return<br>​       responses containing authorization credentials to the client via<br>​       the resource owner user-agent.</p>
+<p>   Not every authorization grant type utilizes both endpoints.<br>   Extension grant types MAY define additional endpoints as needed.</p>
+<h2 id="3-1-Authorization-Endpoint"><a href="#3-1-Authorization-Endpoint" class="headerlink" title="3.1.  Authorization Endpoint"></a>3.1.  Authorization Endpoint</h2><p>   The authorization endpoint is used to interact with the resource<br>   owner and obtain an authorization grant.  The authorization server<br>   MUST first verify the identity of the resource owner.  The way in<br>   which the authorization server authenticates the resource owner<br>   (e.g., username and password login, session cookies) is beyond the<br>   scope of this specification.</p>
+<p>   The means through which the client obtains the location of the<br>   authorization endpoint are beyond the scope of this specification,<br>   but the location is typically provided in the service documentation.</p>
+<p>   The endpoint URI MAY include an “application/x-www-form-urlencoded”<br>   formatted (per Appendix B) query component ([RFC3986] Section 3.4),<br>   which MUST be retained when adding additional query parameters.  The<br>   endpoint URI MUST NOT include a fragment component.</p>
+<p>   Since requests to the authorization endpoint result in user<br>   authentication and the transmission of clear-text credentials (in the<br>   HTTP response), the authorization server MUST require the use of TLS<br>   as described in Section 1.6 when sending requests to the<br>   authorization endpoint.</p>
+<p>   The authorization server MUST support the use of the HTTP “GET”<br>   method [RFC2616] for the authorization endpoint and MAY support the<br>   use of the “POST” method as well.</p>
+<p>   Parameters sent without a value MUST be treated as if they were<br>   omitted from the request.  The authorization server MUST ignore<br>   unrecognized request parameters.  Request and response parameters<br>   MUST NOT be included more than once.</p>
+<h3 id="3-1-1-Response-Type"><a href="#3-1-1-Response-Type" class="headerlink" title="3.1.1.  Response Type"></a>3.1.1.  Response Type</h3><p>   The authorization endpoint is used by the authorization code grant<br>   type and implicit grant type flows.  The client informs the<br>   authorization server of the desired grant type using the following<br>   parameter:</p>
+<p>   response_type<br>​          REQUIRED.  The value MUST be one of “code” for requesting an<br>​          authorization code as described by Section 4.1.1, “token” for<br>​          requesting an access token (implicit grant) as described by<br>​          Section 4.2.1, or a registered extension value as described by<br>​          Section 8.4.</p>
+<p>   Extension response types MAY contain a space-delimited (%x20) list of<br>   values, where the order of values does not matter (e.g., response<br>   type “a b” is the same as “b a”).  The meaning of such composite<br>   response types is defined by their respective specifications.</p>
+<p>   If an authorization request is missing the “response_type” parameter,<br>   or if the response type is not understood, the authorization server<br>   MUST return an error response as described in Section 4.1.2.1.</p>
+<h3 id="3-1-2-Redirection-Endpoint"><a href="#3-1-2-Redirection-Endpoint" class="headerlink" title="3.1.2.  Redirection Endpoint"></a>3.1.2.  Redirection Endpoint</h3><p>   After completing its interaction with the resource owner, the<br>   authorization server directs the resource owner’s user-agent back to<br>   the client.  The authorization server redirects the user-agent to the<br>   client’s redirection endpoint previously established with the<br>   authorization server during the client registration process or when<br>   making the authorization request.</p>
+<p>   The redirection endpoint URI MUST be an absolute URI as defined by<br>   [RFC3986] Section 4.3.  The endpoint URI MAY include an<br>   “application/x-www-form-urlencoded” formatted (per Appendix B) query<br>   component ([RFC3986] Section 3.4), which MUST be retained when adding<br>   additional query parameters.  The endpoint URI MUST NOT include a<br>   fragment component.</p>
+<h4 id="3-1-2-1-Endpoint-Request-Confidentiality"><a href="#3-1-2-1-Endpoint-Request-Confidentiality" class="headerlink" title="3.1.2.1.  Endpoint Request Confidentiality"></a>3.1.2.1.  Endpoint Request Confidentiality</h4><p>   The redirection endpoint SHOULD require the use of TLS as described<br>   in Section 1.6 when the requested response type is “code” or “token”,<br>   or when the redirection request will result in the transmission of<br>   sensitive credentials over an open network.  This specification does<br>   not mandate the use of TLS because at the time of this writing,<br>   requiring clients to deploy TLS is a significant hurdle for many<br>   client developers.  If TLS is not available, the authorization server<br>   SHOULD warn the resource owner about the insecure endpoint prior to<br>   redirection (e.g., display a message during the authorization<br>   request).</p>
+<p>   Lack of transport-layer security can have a severe impact on the<br>   security of the client and the protected resources it is authorized<br>   to access.  The use of transport-layer security is particularly<br>   critical when the authorization process is used as a form of<br>   delegated end-user authentication by the client (e.g., third-party<br>   sign-in service).</p>
+<h4 id="3-1-2-2-Registration-Requirements"><a href="#3-1-2-2-Registration-Requirements" class="headerlink" title="3.1.2.2.  Registration Requirements"></a>3.1.2.2.  Registration Requirements</h4><p>   The authorization server MUST require the following clients to<br>   register their redirection endpoint:</p>
+<p>   o  Public clients.</p>
+<p>   o  Confidential clients utilizing the implicit grant type.</p>
+<p>   The authorization server SHOULD require all clients to register their<br>   redirection endpoint prior to utilizing the authorization endpoint.</p>
+<p>   The authorization server SHOULD require the client to provide the<br>   complete redirection URI (the client MAY use the “state” request<br>   parameter to achieve per-request customization).  If requiring the<br>   registration of the complete redirection URI is not possible, the<br>   authorization server SHOULD require the registration of the URI<br>   scheme, authority, and path (allowing the client to dynamically vary<br>   only the query component of the redirection URI when requesting<br>   authorization).</p>
+<p>   The authorization server MAY allow the client to register multiple<br>   redirection endpoints.</p>
+<p>   Lack of a redirection URI registration requirement can enable an<br>   attacker to use the authorization endpoint as an open redirector as<br>   described in Section 10.15.</p>
+<h4 id="3-1-2-3-Dynamic-Configuration"><a href="#3-1-2-3-Dynamic-Configuration" class="headerlink" title="3.1.2.3.  Dynamic Configuration"></a>3.1.2.3.  Dynamic Configuration</h4><p>   If multiple redirection URIs have been registered, if only part of<br>   the redirection URI has been registered, or if no redirection URI has<br>   been registered, the client MUST include a redirection URI with the<br>   authorization request using the “redirect_uri” request parameter.</p>
+<p>   When a redirection URI is included in an authorization request, the<br>   authorization server MUST compare and match the value received<br>   against at least one of the registered redirection URIs (or URI<br>   components) as defined in [RFC3986] Section 6, if any redirection<br>   URIs were registered.  If the client registration included the full<br>   redirection URI, the authorization server MUST compare the two URIs<br>   using simple string comparison as defined in [RFC3986] Section 6.2.1.</p>
+<h4 id="3-1-2-4-Invalid-Endpoint"><a href="#3-1-2-4-Invalid-Endpoint" class="headerlink" title="3.1.2.4.  Invalid Endpoint"></a>3.1.2.4.  Invalid Endpoint</h4><p>   If an authorization request fails validation due to a missing,<br>   invalid, or mismatching redirection URI, the authorization server<br>   SHOULD inform the resource owner of the error and MUST NOT<br>   automatically redirect the user-agent to the invalid redirection URI.</p>
+<h4 id="3-1-2-5-Endpoint-Content"><a href="#3-1-2-5-Endpoint-Content" class="headerlink" title="3.1.2.5.  Endpoint Content"></a>3.1.2.5.  Endpoint Content</h4><p>   The redirection request to the client’s endpoint typically results in<br>   an HTML document response, processed by the user-agent.  If the HTML<br>   response is served directly as the result of the redirection request,<br>   any script included in the HTML document will execute with full<br>   access to the redirection URI and the credentials it contains.</p>
+<p>   The client SHOULD NOT include any third-party scripts (e.g., third-<br>   party analytics, social plug-ins, ad networks) in the redirection<br>   endpoint response.  Instead, it SHOULD extract the credentials from<br>   the URI and redirect the user-agent again to another endpoint without<br>   exposing the credentials (in the URI or elsewhere).  If third-party<br>   scripts are included, the client MUST ensure that its own scripts<br>   (used to extract and remove the credentials from the URI) will<br>   execute first.</p>
+<h2 id="3-2-Token-Endpoint"><a href="#3-2-Token-Endpoint" class="headerlink" title="3.2.  Token Endpoint"></a>3.2.  Token Endpoint</h2><p>   The token endpoint is used by the client to obtain an access token by<br>   presenting its authorization grant or refresh token.  The token<br>   endpoint is used with every authorization grant except for the<br>   implicit grant type (since an access token is issued directly).<br>   The means through which the client obtains the location of the token<br>   endpoint are beyond the scope of this specification, but the location<br>   is typically provided in the service documentation.</p>
+<p>   The endpoint URI MAY include an “application/x-www-form-urlencoded”<br>   formatted (per Appendix B) query component ([RFC3986] Section 3.4),<br>   which MUST be retained when adding additional query parameters.  The<br>   endpoint URI MUST NOT include a fragment component.</p>
+<p>   Since requests to the token endpoint result in the transmission of<br>   clear-text credentials (in the HTTP request and response), the<br>   authorization server MUST require the use of TLS as described in<br>   Section 1.6 when sending requests to the token endpoint.</p>
+<p>   The client MUST use the HTTP “POST” method when making access token<br>   requests.</p>
+<p>   Parameters sent without a value MUST be treated as if they were<br>   omitted from the request.  The authorization server MUST ignore<br>   unrecognized request parameters.  Request and response parameters<br>   MUST NOT be included more than once.</p>
+<h3 id="3-2-1-Client-Authentication"><a href="#3-2-1-Client-Authentication" class="headerlink" title="3.2.1.  Client Authentication"></a>3.2.1.  Client Authentication</h3><p>   Confidential clients or other clients issued client credentials MUST<br>   authenticate with the authorization server as described in<br>   Section 2.3 when making requests to the token endpoint.  Client<br>   authentication is used for:</p>
+<p>   o  Enforcing the binding of refresh tokens and authorization codes to<br>​       the client they were issued to.  Client authentication is critical<br>​       when an authorization code is transmitted to the redirection<br>​       endpoint over an insecure channel or when the redirection URI has<br>​       not been registered in full.</p>
+<p>   o  Recovering from a compromised client by disabling the client or<br>​       changing its credentials, thus preventing an attacker from abusing<br>​       stolen refresh tokens.  Changing a single set of client<br>​       credentials is significantly faster than revoking an entire set of<br>​       refresh tokens.</p>
+<p>   o  Implementing authentication management best practices, which<br>​       require periodic credential rotation.  Rotation of an entire set<br>​       of refresh tokens can be challenging, while rotation of a single<br>​       set of client credentials is significantly easier.</p>
+<p>   A client MAY use the “client_id” request parameter to identify itself<br>   when sending requests to the token endpoint.  In the<br>   “authorization_code” “grant_type” request to the token endpoint, an<br>   unauthenticated client MUST send its “client_id” to prevent itself<br>   from inadvertently accepting a code intended for a client with a<br>   different “client_id”.  This protects the client from substitution of<br>   the authentication code.  (It provides no additional security for the<br>   protected resource.)</p>
+<h2 id="3-3-Access-Token-Scope"><a href="#3-3-Access-Token-Scope" class="headerlink" title="3.3.  Access Token Scope"></a>3.3.  Access Token Scope</h2><p>   The authorization and token endpoints allow the client to specify the<br>   scope of the access request using the “scope” request parameter.  In<br>   turn, the authorization server uses the “scope” response parameter to<br>   inform the client of the scope of the access token issued.</p>
+<p>   The value of the scope parameter is expressed as a list of space-<br>   delimited, case-sensitive strings.  The strings are defined by the<br>   authorization server.  If the value contains multiple space-delimited<br>   strings, their order does not matter, and each string adds an<br>   additional access range to the requested scope.</p>
+<pre><code>scope       = scope-token *( SP scope-token )
+scope-token = 1*( %x21 / %x23-5B / %x5D-7E )
+</code></pre><p>   The authorization server MAY fully or partially ignore the scope<br>   requested by the client, based on the authorization server policy or<br>   the resource owner’s instructions.  If the issued access token scope<br>   is different from the one requested by the client, the authorization<br>   server MUST include the “scope” response parameter to inform the<br>   client of the actual scope granted.</p>
+<p>   If the client omits the scope parameter when requesting<br>   authorization, the authorization server MUST either process the<br>   request using a pre-defined default value or fail the request<br>   indicating an invalid scope.  The authorization server SHOULD<br>   document its scope requirements and default value (if defined).</p>
+<h1 id="4-Obtaining-Authorization"><a href="#4-Obtaining-Authorization" class="headerlink" title="4.  Obtaining Authorization"></a>4.  Obtaining Authorization</h1><p>   To request an access token, the client obtains authorization from the<br>   resource owner.  The authorization is expressed in the form of an<br>   authorization grant, which the client uses to request the access<br>   token.  OAuth defines four grant types: authorization code, implicit,<br>   resource owner password credentials, and client credentials.  It also<br>   provides an extension mechanism for defining additional grant types.</p>
+<h2 id="4-1-Authorization-Code-Grant"><a href="#4-1-Authorization-Code-Grant" class="headerlink" title="4.1.  Authorization Code Grant"></a>4.1.  Authorization Code Grant</h2><p>   The authorization code grant type is used to obtain both access<br>   tokens and refresh tokens and is optimized for confidential clients.<br>   Since this is a redirection-based flow, the client must be capable of<br>   interacting with the resource owner’s user-agent (typically a web<br>   browser) and capable of receiving incoming requests (via redirection)<br>   from the authorization server.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  +----------+</span><br><span class="line">  | Resource |</span><br><span class="line">  |   Owner  |</span><br><span class="line">  |          |</span><br><span class="line">  +----------+</span><br><span class="line">       ^</span><br><span class="line">       |</span><br><span class="line">      (B)</span><br><span class="line">  +----|-----+          Client Identifier      +---------------+</span><br><span class="line">  |         -+----(A)-- &amp; Redirection URI ----&gt;|               |</span><br><span class="line">  |  User-   |                                 | Authorization |</span><br><span class="line">  |  Agent  -+----(B)-- User authenticates ---&gt;|     Server    |</span><br><span class="line">  |          |                                 |               |</span><br><span class="line">  |         -+----(C)-- Authorization Code ---&lt;|               |</span><br><span class="line">  +-|----|---+                                 +---------------+</span><br><span class="line">    |    |                                         ^      v</span><br><span class="line">   (A)  (C)                                        |      |</span><br><span class="line">    |    |                                         |      |</span><br><span class="line">    ^    v                                         |      |</span><br><span class="line">  +---------+                                      |      |</span><br><span class="line">  |         |&gt;---(D)-- Authorization Code ---------&apos;      |</span><br><span class="line">  |  Client |          &amp; Redirection URI                  |</span><br><span class="line">  |         |                                             |</span><br><span class="line">  |         |&lt;---(E)----- Access Token -------------------&apos;</span><br><span class="line">  +---------+       (w/ Optional Refresh Token)</span><br><span class="line"></span><br><span class="line">Note: The lines illustrating steps (A), (B), and (C) are broken into</span><br><span class="line">two parts as they pass through the user-agent.</span><br><span class="line"></span><br><span class="line">                  Figure 3: Authorization Code Flow</span><br></pre></td></tr></table></figure>
+<p>   The flow illustrated in Figure 3 includes the following steps:</p>
+<p>   (A)  The client initiates the flow by directing the resource owner’s<br>​         user-agent to the authorization endpoint.  The client includes<br>​         its client identifier, requested scope, local state, and a<br>​         redirection URI to which the authorization server will send the<br>​         user-agent back once access is granted (or denied).</p>
+<p>   (B)  The authorization server authenticates the resource owner (via<br>​         the user-agent) and establishes whether the resource owner<br>​         grants or denies the client’s access request.</p>
+<p>   (C)  Assuming the resource owner grants access, the authorization<br>​         server redirects the user-agent back to the client using the<br>​         redirection URI provided earlier (in the request or during<br>​         client registration).  The redirection URI includes an<br>​         authorization code and any local state provided by the client<br>​         earlier.</p>
+<p>   (D)  The client requests an access token from the authorization<br>​         server’s token endpoint by including the authorization code<br>​         received in the previous step.  When making the request, the<br>​         client authenticates with the authorization server.  The client<br>​         includes the redirection URI used to obtain the authorization<br>​         code for verification.</p>
+<p>   (E)  The authorization server authenticates the client, validates the<br>​         authorization code, and ensures that the redirection URI<br>​         received matches the URI used to redirect the client in<br>​         step (C).  If valid, the authorization server responds back with<br>​         an access token and, optionally, a refresh token.</p>
+<p>4.1.1.  Authorization Request</p>
+<p>   The client constructs the request URI by adding the following<br>   parameters to the query component of the authorization endpoint URI<br>   using the “application/x-www-form-urlencoded” format, per Appendix B:</p>
+<p>   response_type<br>​          REQUIRED.  Value MUST be set to “code”.</p>
+<p>   client_id<br>​          REQUIRED.  The client identifier as described in Section 2.2.</p>
+<p>   redirect_uri<br>​          OPTIONAL.  As described in Section 3.1.2.</p>
+<p>   scope<br>​          OPTIONAL.  The scope of the access request as described by<br>​          Section 3.3.</p>
+<p>   state<br>​          RECOMMENDED.  An opaque value used by the client to maintain<br>​          state between the request and callback.  The authorization<br>​          server includes this value when redirecting the user-agent back<br>​          to the client.  The parameter SHOULD be used for preventing<br>​          cross-site request forgery as described in Section 10.12.</p>
+<p>   The client directs the resource owner to the constructed URI using an<br>   HTTP redirection response, or by other means available to it via the<br>   user-agent.</p>
+<p>   For example, the client directs the user-agent to make the following<br>   HTTP request using TLS (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>GET /authorize?response_type=code&amp;client_id=s6BhdRkqt3&amp;state=xyz
+    &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
+Host: server.example.com
+</code></pre><p>   The authorization server validates the request to ensure that all<br>   required parameters are present and valid.  If the request is valid,<br>   the authorization server authenticates the resource owner and obtains<br>   an authorization decision (by asking the resource owner or by<br>   establishing approval via other means).</p>
+<p>   When a decision is established, the authorization server directs the<br>   user-agent to the provided client redirection URI using an HTTP<br>   redirection response, or by other means available to it via the<br>   user-agent.</p>
+<h3 id="4-1-2-Authorization-Response"><a href="#4-1-2-Authorization-Response" class="headerlink" title="4.1.2.  Authorization Response"></a>4.1.2.  Authorization Response</h3><p>   If the resource owner grants the access request, the authorization<br>   server issues an authorization code and delivers it to the client by<br>   adding the following parameters to the query component of the<br>   redirection URI using the “application/x-www-form-urlencoded” format,<br>   per Appendix B:</p>
+<p>   code<br>​          REQUIRED.  The authorization code generated by the<br>​          authorization server.  The authorization code MUST expire<br>​          shortly after it is issued to mitigate the risk of leaks.  A<br>​          maximum authorization code lifetime of 10 minutes is<br>​          RECOMMENDED.  The client MUST NOT use the authorization code<br>​          more than once.  If an authorization code is used more than<br>​          once, the authorization server MUST deny the request and SHOULD<br>​          revoke (when possible) all tokens previously issued based on<br>​          that authorization code.  The authorization code is bound to<br>​          the client identifier and redirection URI.</p>
+<p>   state<br>​          REQUIRED if the “state” parameter was present in the client<br>​          authorization request.  The exact value received from the<br>​          client.</p>
+<p>   For example, the authorization server redirects the user-agent by<br>   sending the following HTTP response:</p>
+<pre><code>HTTP/1.1 302 Found
+Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA
+          &amp;state=xyz
+</code></pre><p>   The client MUST ignore unrecognized response parameters.  The<br>   authorization code string size is left undefined by this<br>   specification.  The client should avoid making assumptions about code<br>   value sizes.  The authorization server SHOULD document the size of<br>   any value it issues.</p>
+<h4 id="4-1-2-1-Error-Response"><a href="#4-1-2-1-Error-Response" class="headerlink" title="4.1.2.1.  Error Response"></a>4.1.2.1.  Error Response</h4><p>   If the request fails due to a missing, invalid, or mismatching<br>   redirection URI, or if the client identifier is missing or invalid,<br>   the authorization server SHOULD inform the resource owner of the<br>   error and MUST NOT automatically redirect the user-agent to the<br>   invalid redirection URI.</p>
+<p>   If the resource owner denies the access request or if the request<br>   fails for reasons other than a missing or invalid redirection URI,<br>   the authorization server informs the client by adding the following<br>   parameters to the query component of the redirection URI using the<br>   “application/x-www-form-urlencoded” format, per Appendix B:</p>
+<p>   error<br>​          REQUIRED.  A single ASCII [USASCII] error code from the<br>​          following:</p>
+<pre><code>invalid_request
+      The request is missing a required parameter, includes an
+      invalid parameter value, includes a parameter more than
+      once, or is otherwise malformed.
+
+unauthorized_client
+      The client is not authorized to request an authorization
+      code using this method.
+
+access_denied
+      The resource owner or authorization server denied the
+      request.
+
+unsupported_response_type
+      The authorization server does not support obtaining an
+      authorization code using this method.
+
+invalid_scope
+      The requested scope is invalid, unknown, or malformed.
+
+server_error
+      The authorization server encountered an unexpected
+      condition that prevented it from fulfilling the request.
+      (This error code is needed because a 500 Internal Server
+      Error HTTP status code cannot be returned to the client
+      via an HTTP redirect.)
+
+temporarily_unavailable
+      The authorization server is currently unable to handle
+      the request due to a temporary overloading or maintenance
+      of the server.  (This error code is needed because a 503
+      Service Unavailable HTTP status code cannot be returned
+      to the client via an HTTP redirect.)
+
+Values for the &quot;error&quot; parameter MUST NOT include characters
+outside the set %x20-21 / %x23-5B / %x5D-7E.
+</code></pre><p>   error_description<br>​          OPTIONAL.  Human-readable ASCII [USASCII] text providing<br>​          additional information, used to assist the client developer in<br>​          understanding the error that occurred.<br>​          Values for the “error_description” parameter MUST NOT include<br>​          characters outside the set %x20-21 / %x23-5B / %x5D-7E.</p>
+<p>   error_uri<br>​          OPTIONAL.  A URI identifying a human-readable web page with<br>​          information about the error, used to provide the client<br>​          developer with additional information about the error.<br>​          Values for the “error_uri” parameter MUST conform to the<br>​          URI-reference syntax and thus MUST NOT include characters<br>​          outside the set %x21 / %x23-5B / %x5D-7E.<br>   state<br>​          REQUIRED if a “state” parameter was present in the client<br>​          authorization request.  The exact value received from the<br>​          client.</p>
+<p>   For example, the authorization server redirects the user-agent by<br>   sending the following HTTP response:</p>
+<p>   HTTP/1.1 302 Found<br>   Location: <a href="https://client.example.com/cb?error=access_denied&amp;state=xyz" target="_blank" rel="noopener">https://client.example.com/cb?error=access_denied&amp;state=xyz</a></p>
+<h3 id="4-1-3-Access-Token-Request"><a href="#4-1-3-Access-Token-Request" class="headerlink" title="4.1.3.  Access Token Request"></a>4.1.3.  Access Token Request</h3><p>   The client makes a request to the token endpoint by sending the<br>   following parameters using the “application/x-www-form-urlencoded”<br>   format per Appendix B with a character encoding of UTF-8 in the HTTP<br>   request entity-body:</p>
+<p>   grant_type<br>​          REQUIRED.  Value MUST be set to “authorization_code”.</p>
+<p>   code<br>​          REQUIRED.  The authorization code received from the<br>​          authorization server.</p>
+<p>   redirect_uri<br>​          REQUIRED, if the “redirect_uri” parameter was included in the<br>​          authorization request as described in Section 4.1.1, and their<br>​          values MUST be identical.</p>
+<p>   client_id<br>​          REQUIRED, if the client is not authenticating with the<br>​          authorization server as described in Section 3.2.1.</p>
+<p>   If the client type is confidential or the client was issued client<br>   credentials (or assigned other authentication requirements), the<br>   client MUST authenticate with the authorization server as described<br>   in Section 3.2.1.</p>
+<p>   For example, the client makes the following HTTP request using TLS<br>   (with extra line breaks for display purposes only):</p>
+<pre><code>POST /token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&amp;code=SplxlOBeZQQYbYS6WxSbIA
+&amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
+</code></pre><p>   The authorization server MUST:</p>
+<p>   o  require client authentication for confidential clients or for any<br>​       client that was issued client credentials (or with other<br>​       authentication requirements),</p>
+<p>   o  authenticate the client if client authentication is included,</p>
+<p>   o  ensure that the authorization code was issued to the authenticated<br>​       confidential client, or if the client is public, ensure that the<br>​       code was issued to “client_id” in the request,</p>
+<p>   o  verify that the authorization code is valid, and</p>
+<p>   o  ensure that the “redirect_uri” parameter is present if the<br>​       “redirect_uri” parameter was included in the initial authorization<br>​       request as described in Section 4.1.1, and if included ensure that<br>​       their values are identical.</p>
+<h3 id="4-1-4-Access-Token-Response"><a href="#4-1-4-Access-Token-Response" class="headerlink" title="4.1.4.  Access Token Response"></a>4.1.4.  Access Token Response</h3><p>   If the access token request is valid and authorized, the<br>   authorization server issues an access token and optional refresh<br>   token as described in Section 5.1.  If the request client<br>   authentication failed or is invalid, the authorization server returns<br>   an error response as described in Section 5.2.</p>
+<p>   An example successful response:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Cache-Control: no-store</span><br><span class="line">Pragma: no-cache</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,</span><br><span class="line">  &quot;token_type&quot;:&quot;example&quot;,</span><br><span class="line">  &quot;expires_in&quot;:3600,</span><br><span class="line">  &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,</span><br><span class="line">  &quot;example_parameter&quot;:&quot;example_value&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-Implicit-Grant"><a href="#4-2-Implicit-Grant" class="headerlink" title="4.2.  Implicit Grant"></a>4.2.  Implicit Grant</h2><p>   The implicit grant type is used to obtain access tokens (it does not<br>   support the issuance of refresh tokens) and is optimized for public<br>   clients known to operate a particular redirection URI.  These clients<br>   are typically implemented in a browser using a scripting language<br>   such as JavaScript.</p>
+<p>   Since this is a redirection-based flow, the client must be capable of<br>   interacting with the resource owner’s user-agent (typically a web<br>   browser) and capable of receiving incoming requests (via redirection)<br>   from the authorization server.</p>
+<p>   Unlike the authorization code grant type, in which the client makes<br>   separate requests for authorization and for an access token, the<br>   client receives the access token as the result of the authorization<br>   request.</p>
+<p>   The implicit grant type does not include client authentication, and<br>   relies on the presence of the resource owner and the registration of<br>   the redirection URI.  Because the access token is encoded into the<br>   redirection URI, it may be exposed to the resource owner and other<br>   applications residing on the same device.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  +----------+</span><br><span class="line">  | Resource |</span><br><span class="line">  |  Owner   |</span><br><span class="line">  |          |</span><br><span class="line">  +----------+</span><br><span class="line">       ^</span><br><span class="line">       |</span><br><span class="line">      (B)</span><br><span class="line">  +----|-----+          Client Identifier     +---------------+</span><br><span class="line">  |         -+----(A)-- &amp; Redirection URI ---&gt;|               |</span><br><span class="line">  |  User-   |                                | Authorization |</span><br><span class="line">  |  Agent  -|----(B)-- User authenticates --&gt;|     Server    |</span><br><span class="line">  |          |                                |               |</span><br><span class="line">  |          |&lt;---(C)--- Redirection URI ----&lt;|               |</span><br><span class="line">  |          |          with Access Token     +---------------+</span><br><span class="line">  |          |            in Fragment</span><br><span class="line">  |          |                                +---------------+</span><br><span class="line">  |          |----(D)--- Redirection URI ----&gt;|   Web-Hosted  |</span><br><span class="line">  |          |          without Fragment      |     Client    |</span><br><span class="line">  |          |                                |    Resource   |</span><br><span class="line">  |     (F)  |&lt;---(E)------- Script ---------&lt;|               |</span><br><span class="line">  |          |                                +---------------+</span><br><span class="line">  +-|--------+</span><br><span class="line">    |    |</span><br><span class="line">   (A)  (G) Access Token</span><br><span class="line">    |    |</span><br><span class="line">    ^    v</span><br><span class="line">  +---------+</span><br><span class="line">  |         |</span><br><span class="line">  |  Client |</span><br><span class="line">  |         |</span><br><span class="line">  +---------+</span><br><span class="line"></span><br><span class="line">Note: The lines illustrating steps (A) and (B) are broken into two</span><br><span class="line">parts as they pass through the user-agent.</span><br><span class="line"></span><br><span class="line">                    Figure 4: Implicit Grant Flow</span><br></pre></td></tr></table></figure></p>
+<p>   The flow illustrated in Figure 4 includes the following steps:</p>
+<p>   (A)  The client initiates the flow by directing the resource owner’s<br>​         user-agent to the authorization endpoint.  The client includes<br>​         its client identifier, requested scope, local state, and a<br>​         redirection URI to which the authorization server will send the<br>​         user-agent back once access is granted (or denied).</p>
+<p>   (B)  The authorization server authenticates the resource owner (via<br>​         the user-agent) and establishes whether the resource owner<br>​         grants or denies the client’s access request.</p>
+<p>   (C)  Assuming the resource owner grants access, the authorization<br>​         server redirects the user-agent back to the client using the<br>​         redirection URI provided earlier.  The redirection URI includes<br>​         the access token in the URI fragment.</p>
+<p>   (D)  The user-agent follows the redirection instructions by making a<br>​         request to the web-hosted client resource (which does not<br>​         include the fragment per [RFC2616]).  The user-agent retains the<br>​         fragment information locally.</p>
+<p>   (E)  The web-hosted client resource returns a web page (typically an<br>​         HTML document with an embedded script) capable of accessing the<br>​         full redirection URI including the fragment retained by the<br>​         user-agent, and extracting the access token (and other<br>​         parameters) contained in the fragment.</p>
+<p>   (F)  The user-agent executes the script provided by the web-hosted<br>​         client resource locally, which extracts the access token.</p>
+<p>   (G)  The user-agent passes the access token to the client.</p>
+<p>   See Sections 1.3.2 and 9 for background on using the implicit grant.<br>   See Sections 10.3 and 10.16 for important security considerations<br>   when using the implicit grant.</p>
+<h3 id="4-2-1-Authorization-Request"><a href="#4-2-1-Authorization-Request" class="headerlink" title="4.2.1.  Authorization Request"></a>4.2.1.  Authorization Request</h3><p>   The client constructs the request URI by adding the following<br>   parameters to the query component of the authorization endpoint URI<br>   using the “application/x-www-form-urlencoded” format, per Appendix B:</p>
+<p>   response_type<br>​          REQUIRED.  Value MUST be set to “token”.</p>
+<p>   client_id<br>​          REQUIRED.  The client identifier as described in Section 2.2.</p>
+<p>   redirect_uri<br>​          OPTIONAL.  As described in Section 3.1.2.</p>
+<p>   scope<br>​          OPTIONAL.  The scope of the access request as described by<br>​          Section 3.3.</p>
+<p>   state<br>​          RECOMMENDED.  An opaque value used by the client to maintain<br>​          state between the request and callback.  The authorization<br>​          server includes this value when redirecting the user-agent back<br>​          to the client.  The parameter SHOULD be used for preventing<br>​          cross-site request forgery as described in Section 10.12.</p>
+<p>   The client directs the resource owner to the constructed URI using an<br>   HTTP redirection response, or by other means available to it via the<br>   user-agent.</p>
+<p>   For example, the client directs the user-agent to make the following<br>   HTTP request using TLS (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>GET /authorize?response_type=token&amp;client_id=s6BhdRkqt3&amp;state=xyz
+    &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
+Host: server.example.com
+</code></pre><p>   The authorization server validates the request to ensure that all<br>   required parameters are present and valid.  The authorization server<br>   MUST verify that the redirection URI to which it will redirect the<br>   access token matches a redirection URI registered by the client as<br>   described in Section 3.1.2.</p>
+<p>   If the request is valid, the authorization server authenticates the<br>   resource owner and obtains an authorization decision (by asking the<br>   resource owner or by establishing approval via other means).</p>
+<p>   When a decision is established, the authorization server directs the<br>   user-agent to the provided client redirection URI using an HTTP<br>   redirection response, or by other means available to it via the<br>   user-agent.</p>
+<h3 id="4-2-2-Access-Token-Response"><a href="#4-2-2-Access-Token-Response" class="headerlink" title="4.2.2.  Access Token Response"></a>4.2.2.  Access Token Response</h3><p>   If the resource owner grants the access request, the authorization<br>   server issues an access token and delivers it to the client by adding<br>   the following parameters to the fragment component of the redirection<br>   URI using the “application/x-www-form-urlencoded” format, per<br>   Appendix B:</p>
+<p>   access_token<br>​          REQUIRED.  The access token issued by the authorization server.</p>
+<p>   token_type<br>​          REQUIRED.  The type of the token issued as described in<br>​          Section 7.1.  Value is case insensitive.</p>
+<p>   expires_in<br>​          RECOMMENDED.  The lifetime in seconds of the access token.  For<br>​          example, the value “3600” denotes that the access token will<br>​          expire in one hour from the time the response was generated.<br>​          If omitted, the authorization server SHOULD provide the<br>​          expiration time via other means or document the default value.</p>
+<p>   scope<br>​          OPTIONAL, if identical to the scope requested by the client;<br>​          otherwise, REQUIRED.  The scope of the access token as<br>​          described by Section 3.3.</p>
+<p>   state<br>​          REQUIRED if the “state” parameter was present in the client<br>​          authorization request.  The exact value received from the<br>​          client.</p>
+<p>   The authorization server MUST NOT issue a refresh token.</p>
+<p>   For example, the authorization server redirects the user-agent by<br>   sending the following HTTP response (with extra line breaks for<br>   display purposes only):</p>
+<pre><code>HTTP/1.1 302 Found
+Location: http://example.com/cb#access_token=2YotnFZFEjr1zCsicMWpAA
+          &amp;state=xyz&amp;token_type=example&amp;expires_in=3600
+</code></pre><p>   Developers should note that some user-agents do not support the<br>   inclusion of a fragment component in the HTTP “Location” response<br>   header field.  Such clients will require using other methods for<br>   redirecting the client than a 3xx redirection response – for<br>   example, returning an HTML page that includes a ‘continue’ button<br>   with an action linked to the redirection URI.</p>
+<p>   The client MUST ignore unrecognized response parameters.  The access<br>   token string size is left undefined by this specification.  The<br>   client should avoid making assumptions about value sizes.  The<br>   authorization server SHOULD document the size of any value it issues.</p>
+<h3 id="4-2-2-1-Error-Response"><a href="#4-2-2-1-Error-Response" class="headerlink" title="4.2.2.1.  Error Response"></a>4.2.2.1.  Error Response</h3><p>   If the request fails due to a missing, invalid, or mismatching<br>   redirection URI, or if the client identifier is missing or invalid,<br>   the authorization server SHOULD inform the resource owner of the<br>   error and MUST NOT automatically redirect the user-agent to the<br>   invalid redirection URI.</p>
+<p>   If the resource owner denies the access request or if the request<br>   fails for reasons other than a missing or invalid redirection URI,<br>   the authorization server informs the client by adding the following<br>   parameters to the fragment component of the redirection URI using the<br>   “application/x-www-form-urlencoded” format, per Appendix B:</p>
+<p>   error<br>​          REQUIRED.  A single ASCII [USASCII] error code from the<br>​          following:</p>
+<pre><code>invalid_request
+      The request is missing a required parameter, includes an
+      invalid parameter value, includes a parameter more than
+      once, or is otherwise malformed.
+
+unauthorized_client
+      The client is not authorized to request an access token
+      using this method.
+
+access_denied
+      The resource owner or authorization server denied the
+      request.
+
+unsupported_response_type
+      The authorization server does not support obtaining an
+      access token using this method.
+
+invalid_scope
+      The requested scope is invalid, unknown, or malformed.
+
+server_error
+      The authorization server encountered an unexpected
+      condition that prevented it from fulfilling the request.
+      (This error code is needed because a 500 Internal Server
+      Error HTTP status code cannot be returned to the client
+      via an HTTP redirect.)
+
+temporarily_unavailable
+      The authorization server is currently unable to handle
+      the request due to a temporary overloading or maintenance
+      of the server.  (This error code is needed because a 503
+      Service Unavailable HTTP status code cannot be returned
+      to the client via an HTTP redirect.)
+
+Values for the &quot;error&quot; parameter MUST NOT include characters
+outside the set %x20-21 / %x23-5B / %x5D-7E.
+</code></pre><p>   error_description<br>​          OPTIONAL.  Human-readable ASCII [USASCII] text providing<br>​          additional information, used to assist the client developer in<br>​          understanding the error that occurred.<br>​          Values for the “error_description” parameter MUST NOT include<br>​          characters outside the set %x20-21 / %x23-5B / %x5D-7E.</p>
+<p>   error_uri<br>​          OPTIONAL.  A URI identifying a human-readable web page with<br>​          information about the error, used to provide the client<br>​          developer with additional information about the error.<br>​          Values for the “error_uri” parameter MUST conform to the<br>​          URI-reference syntax and thus MUST NOT include characters<br>​          outside the set %x21 / %x23-5B / %x5D-7E.</p>
+<p>   state<br>​          REQUIRED if a “state” parameter was present in the client<br>​          authorization request.  The exact value received from the<br>​          client.</p>
+<p>   For example, the authorization server redirects the user-agent by<br>   sending the following HTTP response:</p>
+<p>   HTTP/1.1 302 Found<br>   Location: <a href="https://client.example.com/cb#error=access_denied&amp;state=xyz" target="_blank" rel="noopener">https://client.example.com/cb#error=access_denied&amp;state=xyz</a></p>
+<h2 id="4-3-Resource-Owner-Password-Credentials-Grant"><a href="#4-3-Resource-Owner-Password-Credentials-Grant" class="headerlink" title="4.3.  Resource Owner Password Credentials Grant"></a>4.3.  Resource Owner Password Credentials Grant</h2><p>   The resource owner password credentials grant type is suitable in<br>   cases where the resource owner has a trust relationship with the<br>   client, such as the device operating system or a highly privileged</p>
+<p>   application.  The authorization server should take special care when<br>   enabling this grant type and only allow it when other flows are not<br>   viable.</p>
+<p>   This grant type is suitable for clients capable of obtaining the<br>   resource owner’s credentials (username and password, typically using<br>   an interactive form).  It is also used to migrate existing clients<br>   using direct authentication schemes such as HTTP Basic or Digest<br>   authentication to OAuth by converting the stored credentials to an<br>   access token.</p>
+<pre><code>+----------+
+| Resource |
+|  Owner   |
+|          |
++----------+
+     v
+     |    Resource Owner
+    (A) Password Credentials
+     |
+     v
++---------+                                  +---------------+
+|         |&gt;--(B)---- Resource Owner -------&gt;|               |
+|         |         Password Credentials     | Authorization |
+| Client  |                                  |     Server    |
+|         |&lt;--(C)---- Access Token ---------&lt;|               |
+|         |    (w/ Optional Refresh Token)   |               |
++---------+                                  +---------------+
+
+       Figure 5: Resource Owner Password Credentials Flow
+</code></pre><p>   The flow illustrated in Figure 5 includes the following steps:</p>
+<p>   (A)  The resource owner provides the client with its username and<br>​         password.</p>
+<p>   (B)  The client requests an access token from the authorization<br>​         server’s token endpoint by including the credentials received<br>​         from the resource owner.  When making the request, the client<br>​         authenticates with the authorization server.</p>
+<p>   (C)  The authorization server authenticates the client and validates<br>​         the resource owner credentials, and if valid, issues an access<br>​         token.</p>
+<h3 id="4-3-1-Authorization-Request-and-Response"><a href="#4-3-1-Authorization-Request-and-Response" class="headerlink" title="4.3.1.  Authorization Request and Response"></a>4.3.1.  Authorization Request and Response</h3><p>   The method through which the client obtains the resource owner<br>   credentials is beyond the scope of this specification.  The client<br>   MUST discard the credentials once an access token has been obtained.</p>
+<h3 id="4-3-2-Access-Token-Request"><a href="#4-3-2-Access-Token-Request" class="headerlink" title="4.3.2.  Access Token Request"></a>4.3.2.  Access Token Request</h3><p>   The client makes a request to the token endpoint by adding the<br>   following parameters using the “application/x-www-form-urlencoded”<br>   format per Appendix B with a character encoding of UTF-8 in the HTTP<br>   request entity-body:</p>
+<p>   grant_type<br>​          REQUIRED.  Value MUST be set to “password”.</p>
+<p>   username<br>​          REQUIRED.  The resource owner username.</p>
+<p>   password<br>​          REQUIRED.  The resource owner password.</p>
+<p>   scope<br>​          OPTIONAL.  The scope of the access request as described by<br>​          Section 3.3.</p>
+<p>   If the client type is confidential or the client was issued client<br>   credentials (or assigned other authentication requirements), the<br>   client MUST authenticate with the authorization server as described<br>   in Section 3.2.1.</p>
+<p>   For example, the client makes the following HTTP request using<br>   transport-layer security (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>POST /token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
+</code></pre><p>   The authorization server MUST:</p>
+<p>   o  require client authentication for confidential clients or for any<br>​       client that was issued client credentials (or with other<br>​       authentication requirements),</p>
+<p>   o  authenticate the client if client authentication is included, and</p>
+<p>   o  validate the resource owner password credentials using its<br>​       existing password validation algorithm.</p>
+<p>   Since this access token request utilizes the resource owner’s<br>   password, the authorization server MUST protect the endpoint against<br>   brute force attacks (e.g., using rate-limitation or generating<br>   alerts).</p>
+<h3 id="4-3-3-Access-Token-Response"><a href="#4-3-3-Access-Token-Response" class="headerlink" title="4.3.3.  Access Token Response"></a>4.3.3.  Access Token Response</h3><p>   If the access token request is valid and authorized, the<br>   authorization server issues an access token and optional refresh<br>   token as described in Section 5.1.  If the request failed client<br>   authentication or is invalid, the authorization server returns an<br>   error response as described in Section 5.2.</p>
+<p>   An example successful response:</p>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;:&quot;example&quot;,
+  &quot;expires_in&quot;:3600,
+  &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
+  &quot;example_parameter&quot;:&quot;example_value&quot;
+}
+</code></pre><h2 id="4-4-Client-Credentials-Grant"><a href="#4-4-Client-Credentials-Grant" class="headerlink" title="4.4.  Client Credentials Grant"></a>4.4.  Client Credentials Grant</h2><p>   The client can request an access token using only its client<br>   credentials (or other supported means of authentication) when the<br>   client is requesting access to the protected resources under its<br>   control, or those of another resource owner that have been previously<br>   arranged with the authorization server (the method of which is beyond<br>   the scope of this specification).</p>
+<p>   The client credentials grant type MUST only be used by confidential<br>   clients.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+---------+                                  +---------------+</span><br><span class="line">|         |                                  |               |</span><br><span class="line">|         |&gt;--(A)- Client Authentication ---&gt;| Authorization |</span><br><span class="line">| Client  |                                  |     Server    |</span><br><span class="line">|         |&lt;--(B)---- Access Token ---------&lt;|               |</span><br><span class="line">|         |                                  |               |</span><br><span class="line">+---------+                                  +---------------+</span><br><span class="line">    </span><br><span class="line">                Figure 6: Client Credentials Flow</span><br></pre></td></tr></table></figure>
+<p>   The flow illustrated in Figure 6 includes the following steps:</p>
+<p>   (A)  The client authenticates with the authorization server and<br>​         requests an access token from the token endpoint.</p>
+<p>   (B)  The authorization server authenticates the client, and if valid,<br>​         issues an access token.</p>
+<h3 id="4-4-1-Authorization-Request-and-Response"><a href="#4-4-1-Authorization-Request-and-Response" class="headerlink" title="4.4.1.  Authorization Request and Response"></a>4.4.1.  Authorization Request and Response</h3><p>   Since the client authentication is used as the authorization grant,<br>   no additional authorization request is needed.</p>
+<h3 id="4-4-2-Access-Token-Request"><a href="#4-4-2-Access-Token-Request" class="headerlink" title="4.4.2.  Access Token Request"></a>4.4.2.  Access Token Request</h3><p>   The client makes a request to the token endpoint by adding the<br>   following parameters using the “application/x-www-form-urlencoded”<br>   format per Appendix B with a character encoding of UTF-8 in the HTTP<br>   request entity-body:</p>
+<p>   grant_type<br>​          REQUIRED.  Value MUST be set to “client_credentials”.</p>
+<p>   scope<br>​          OPTIONAL.  The scope of the access request as described by<br>​          Section 3.3.</p>
+<p>   The client MUST authenticate with the authorization server as<br>   described in Section 3.2.1.</p>
+<p>   For example, the client makes the following HTTP request using<br>   transport-layer security (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>POST /token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+</code></pre><p>   The authorization server MUST authenticate the client.</p>
+<h3 id="4-4-3-Access-Token-Response"><a href="#4-4-3-Access-Token-Response" class="headerlink" title="4.4.3.  Access Token Response"></a>4.4.3.  Access Token Response</h3><p>   If the access token request is valid and authorized, the<br>   authorization server issues an access token as described in<br>   Section 5.1.  A refresh token SHOULD NOT be included.  If the request<br>   failed client authentication or is invalid, the authorization server<br>   returns an error response as described in Section 5.2.</p>
+<p>   An example successful response:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Cache-Control: no-store</span><br><span class="line">Pragma: no-cache</span><br><span class="line">    </span><br><span class="line">&#123;</span><br><span class="line">  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,</span><br><span class="line">  &quot;token_type&quot;:&quot;example&quot;,</span><br><span class="line">  &quot;expires_in&quot;:3600,</span><br><span class="line">  &quot;example_parameter&quot;:&quot;example_value&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-5-Extension-Grants"><a href="#4-5-Extension-Grants" class="headerlink" title="4.5.  Extension Grants"></a>4.5.  Extension Grants</h2><p>   The client uses an extension grant type by specifying the grant type<br>   using an absolute URI (defined by the authorization server) as the<br>   value of the “grant_type” parameter of the token endpoint, and by<br>   adding any additional parameters necessary.</p>
+<p>   For example, to request an access token using a Security Assertion<br>   Markup Language (SAML) 2.0 assertion grant type as defined by<br>   [OAuth-SAML2], the client could make the following HTTP request using<br>   TLS (with extra line breaks for display purposes only):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /token HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">    </span><br><span class="line">grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Asaml2-</span><br><span class="line">bearer&amp;assertion=PEFzc2VydGlvbiBJc3N1ZUluc3RhbnQ9IjIwMTEtMDU</span><br><span class="line">[...omitted for brevity...]aG5TdGF0ZW1lbnQ-PC9Bc3NlcnRpb24-</span><br></pre></td></tr></table></figure></p>
+<p>   If the access token request is valid and authorized, the<br>   authorization server issues an access token and optional refresh<br>   token as described in Section 5.1.  If the request failed client<br>   authentication or is invalid, the authorization server returns an<br>   error response as described in Section 5.2.</p>
+<h1 id="5-Issuing-an-Access-Token"><a href="#5-Issuing-an-Access-Token" class="headerlink" title="5.  Issuing an Access Token"></a>5.  Issuing an Access Token</h1><p>   If the access token request is valid and authorized, the<br>   authorization server issues an access token and optional refresh<br>   token as described in Section 5.1.  If the request failed client<br>   authentication or is invalid, the authorization server returns an<br>   error response as described in Section 5.2.</p>
+<h2 id="5-1-Successful-Response"><a href="#5-1-Successful-Response" class="headerlink" title="5.1.  Successful Response"></a>5.1.  Successful Response</h2><p>   The authorization server issues an access token and optional refresh<br>   token, and constructs the response by adding the following parameters<br>   to the entity-body of the HTTP response with a 200 (OK) status code:</p>
+<p>   access_token<br>​          REQUIRED.  The access token issued by the authorization server.</p>
+<p>   token_type<br>​          REQUIRED.  The type of the token issued as described in<br>​          Section 7.1.  Value is case insensitive.</p>
+<p>   expires_in<br>​          RECOMMENDED.  The lifetime in seconds of the access token.  For<br>​          example, the value “3600” denotes that the access token will<br>​          expire in one hour from the time the response was generated.<br>​          If omitted, the authorization server SHOULD provide the<br>​          expiration time via other means or document the default value.</p>
+<p>   refresh_token<br>​          OPTIONAL.  The refresh token, which can be used to obtain new<br>​          access tokens using the same authorization grant as described<br>​          in Section 6.</p>
+<p>   scope<br>​          OPTIONAL, if identical to the scope requested by the client;<br>​          otherwise, REQUIRED.  The scope of the access token as<br>​          described by Section 3.3.</p>
+<p>   The parameters are included in the entity-body of the HTTP response<br>   using the “application/json” media type as defined by [RFC4627].  The<br>   parameters are serialized into a JavaScript Object Notation (JSON)<br>   structure by adding each parameter at the highest structure level.<br>   Parameter names and string values are included as JSON strings.<br>   Numerical values are included as JSON numbers.  The order of<br>   parameters does not matter and can vary.</p>
+<p>   The authorization server MUST include the HTTP “Cache-Control”<br>   response header field [RFC2616] with a value of “no-store” in any<br>   response containing tokens, credentials, or other sensitive<br>   information, as well as the “Pragma” response header field [RFC2616]<br>   with a value of “no-cache”.</p>
+<p>   For example:</p>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;:&quot;example&quot;,
+  &quot;expires_in&quot;:3600,
+  &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
+  &quot;example_parameter&quot;:&quot;example_value&quot;
+}
+</code></pre><p>   The client MUST ignore unrecognized value names in the response.  The<br>   sizes of tokens and other values received from the authorization<br>   server are left undefined.  The client should avoid making<br>   assumptions about value sizes.  The authorization server SHOULD<br>   document the size of any value it issues.</p>
+<h2 id="5-2-Error-Response"><a href="#5-2-Error-Response" class="headerlink" title="5.2.  Error Response"></a>5.2.  Error Response</h2><p>   The authorization server responds with an HTTP 400 (Bad Request)<br>   status code (unless specified otherwise) and includes the following<br>   parameters with the response:</p>
+<p>   error<br>​          REQUIRED.  A single ASCII [USASCII] error code from the<br>​          following:</p>
+<pre><code>invalid_request
+      The request is missing a required parameter, includes an
+      unsupported parameter value (other than grant type),
+      repeats a parameter, includes multiple credentials,
+      utilizes more than one mechanism for authenticating the
+      client, or is otherwise malformed.
+
+invalid_client
+      Client authentication failed (e.g., unknown client, no
+      client authentication included, or unsupported
+      authentication method).  The authorization server MAY
+      return an HTTP 401 (Unauthorized) status code to indicate
+      which HTTP authentication schemes are supported.  If the
+      client attempted to authenticate via the &quot;Authorization&quot;
+      request header field, the authorization server MUST
+      respond with an HTTP 401 (Unauthorized) status code and
+      include the &quot;WWW-Authenticate&quot; response header field
+      matching the authentication scheme used by the client.
+
+invalid_grant
+      The provided authorization grant (e.g., authorization
+      code, resource owner credentials) or refresh token is
+      invalid, expired, revoked, does not match the redirection
+      URI used in the authorization request, or was issued to
+      another client.
+
+unauthorized_client
+      The authenticated client is not authorized to use this
+      authorization grant type.
+
+unsupported_grant_type
+      The authorization grant type is not supported by the
+      authorization server.
+
+invalid_scope
+      The requested scope is invalid, unknown, malformed, or
+      exceeds the scope granted by the resource owner.
+
+Values for the &quot;error&quot; parameter MUST NOT include characters
+outside the set %x20-21 / %x23-5B / %x5D-7E.
+</code></pre><p>   error_description<br>​          OPTIONAL.  Human-readable ASCII [USASCII] text providing<br>​          additional information, used to assist the client developer in<br>​          understanding the error that occurred.<br>​          Values for the “error_description” parameter MUST NOT include<br>​          characters outside the set %x20-21 / %x23-5B / %x5D-7E.</p>
+<p>   error_uri<br>​          OPTIONAL.  A URI identifying a human-readable web page with<br>​          information about the error, used to provide the client<br>​          developer with additional information about the error.<br>​          Values for the “error_uri” parameter MUST conform to the<br>​          URI-reference syntax and thus MUST NOT include characters<br>​          outside the set %x21 / %x23-5B / %x5D-7E.</p>
+<p>   The parameters are included in the entity-body of the HTTP response<br>   using the “application/json” media type as defined by [RFC4627].  The<br>   parameters are serialized into a JSON structure by adding each<br>   parameter at the highest structure level.  Parameter names and string<br>   values are included as JSON strings.  Numerical values are included<br>   as JSON numbers.  The order of parameters does not matter and can<br>   vary.</p>
+<p>   For example:</p>
+<pre><code>HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+  &quot;error&quot;:&quot;invalid_request&quot;
+}
+</code></pre><h1 id="6-Refreshing-an-Access-Token"><a href="#6-Refreshing-an-Access-Token" class="headerlink" title="6.  Refreshing an Access Token"></a>6.  Refreshing an Access Token</h1><p>   If the authorization server issued a refresh token to the client, the<br>   client makes a refresh request to the token endpoint by adding the<br>   following parameters using the “application/x-www-form-urlencoded”<br>   format per Appendix B with a character encoding of UTF-8 in the HTTP<br>   request entity-body:</p>
+<p>   grant_type<br>​          REQUIRED.  Value MUST be set to “refresh_token”.</p>
+<p>   refresh_token<br>​          REQUIRED.  The refresh token issued to the client.</p>
+<p>   scope<br>​          OPTIONAL.  The scope of the access request as described by<br>​          Section 3.3.  The requested scope MUST NOT include any scope<br>​          not originally granted by the resource owner, and if omitted is<br>​          treated as equal to the scope originally granted by the<br>​          resource owner.</p>
+<p>   Because refresh tokens are typically long-lasting credentials used to<br>   request additional access tokens, the refresh token is bound to the<br>   client to which it was issued.  If the client type is confidential or<br>   the client was issued client credentials (or assigned other<br>   authentication requirements), the client MUST authenticate with the<br>   authorization server as described in Section 3.2.1.</p>
+<p>   For example, the client makes the following HTTP request using<br>   transport-layer security (with extra line breaks for display purposes<br>   only):</p>
+<pre><code>POST /token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token&amp;refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
+</code></pre><p>   The authorization server MUST:</p>
+<p>   o  require client authentication for confidential clients or for any<br>​       client that was issued client credentials (or with other<br>​       authentication requirements),</p>
+<p>   o  authenticate the client if client authentication is included and<br>​       ensure that the refresh token was issued to the authenticated<br>​       client, and</p>
+<p>   o  validate the refresh token.</p>
+<p>   If valid and authorized, the authorization server issues an access<br>   token as described in Section 5.1.  If the request failed<br>   verification or is invalid, the authorization server returns an error<br>   response as described in Section 5.2.</p>
+<p>   The authorization server MAY issue a new refresh token, in which case<br>   the client MUST discard the old refresh token and replace it with the<br>   new refresh token.  The authorization server MAY revoke the old<br>   refresh token after issuing a new refresh token to the client.  If a<br>   new refresh token is issued, the refresh token scope MUST be<br>   identical to that of the refresh token included by the client in the<br>   request.</p>
+<h1 id="7-Accessing-Protected-Resources"><a href="#7-Accessing-Protected-Resources" class="headerlink" title="7.  Accessing Protected Resources"></a>7.  Accessing Protected Resources</h1><p>   The client accesses protected resources by presenting the access<br>   token to the resource server.  The resource server MUST validate the<br>   access token and ensure that it has not expired and that its scope<br>   covers the requested resource.  The methods used by the resource<br>   server to validate the access token (as well as any error responses)<br>   are beyond the scope of this specification but generally involve an<br>   interaction or coordination between the resource server and the<br>   authorization server.</p>
+<p>   The method in which the client utilizes the access token to<br>   authenticate with the resource server depends on the type of access<br>   token issued by the authorization server.  Typically, it involves<br>   using the HTTP “Authorization” request header field [RFC2617] with an<br>   authentication scheme defined by the specification of the access<br>   token type used, such as [RFC6750].</p>
+<h2 id="7-1-Access-Token-Types"><a href="#7-1-Access-Token-Types" class="headerlink" title="7.1.  Access Token Types"></a>7.1.  Access Token Types</h2><p>   The access token type provides the client with the information<br>   required to successfully utilize the access token to make a protected<br>   resource request (along with type-specific attributes).  The client<br>   MUST NOT use an access token if it does not understand the token<br>   type.</p>
+<p>   For example, the “bearer” token type defined in [RFC6750] is utilized<br>   by simply including the access token string in the request:</p>
+<pre><code>GET /resource/1 HTTP/1.1
+Host: example.com
+Authorization: Bearer mF_9.B5f-4.1JqM
+</code></pre><p>   while the “mac” token type defined in [OAuth-HTTP-MAC] is utilized by<br>   issuing a Message Authentication Code (MAC) key together with the<br>   access token that is used to sign certain components of the HTTP<br>   requests:</p>
+<pre><code>GET /resource/1 HTTP/1.1
+Host: example.com
+Authorization: MAC id=&quot;h480djs93hd8&quot;,
+                   nonce=&quot;274312:dj83hs9s&quot;,
+                   mac=&quot;kDZvddkndxvhGRXZhvuDjEWhGeE=&quot;
+</code></pre><p>   The above examples are provided for illustration purposes only.<br>   Developers are advised to consult the [RFC6750] and [OAuth-HTTP-MAC]<br>   specifications before use.</p>
+<p>   Each access token type definition specifies the additional attributes<br>   (if any) sent to the client together with the “access_token” response<br>   parameter.  It also defines the HTTP authentication method used to<br>   include the access token when making a protected resource request.</p>
+<h2 id="7-2-Error-Response"><a href="#7-2-Error-Response" class="headerlink" title="7.2.  Error Response"></a>7.2.  Error Response</h2><p>   If a resource access request fails, the resource server SHOULD inform<br>   the client of the error.  While the specifics of such error responses<br>   are beyond the scope of this specification, this document establishes<br>   a common registry in Section 11.4 for error values to be shared among<br>   OAuth token authentication schemes.</p>
+<p>   New authentication schemes designed primarily for OAuth token<br>   authentication SHOULD define a mechanism for providing an error<br>   status code to the client, in which the error values allowed are<br>   registered in the error registry established by this specification.</p>
+<p>   Such schemes MAY limit the set of valid error codes to a subset of<br>   the registered values.  If the error code is returned using a named<br>   parameter, the parameter name SHOULD be “error”.</p>
+<p>   Other schemes capable of being used for OAuth token authentication,<br>   but not primarily designed for that purpose, MAY bind their error<br>   values to the registry in the same manner.</p>
+<p>   New authentication schemes MAY choose to also specify the use of the<br>   “error_description” and “error_uri” parameters to return error<br>   information in a manner parallel to their usage in this<br>   specification.</p>
+<h1 id="8-Extensibility"><a href="#8-Extensibility" class="headerlink" title="8.  Extensibility"></a>8.  Extensibility</h1><h2 id="8-1-Defining-Access-Token-Types"><a href="#8-1-Defining-Access-Token-Types" class="headerlink" title="8.1.  Defining Access Token Types"></a>8.1.  Defining Access Token Types</h2><p>   Access token types can be defined in one of two ways: registered in<br>   the Access Token Types registry (following the procedures in<br>   Section 11.1), or by using a unique absolute URI as its name.</p>
+<p>   Types utilizing a URI name SHOULD be limited to vendor-specific<br>   implementations that are not commonly applicable, and are specific to<br>   the implementation details of the resource server where they are<br>   used.</p>
+<p>   All other types MUST be registered.  Type names MUST conform to the<br>   type-name ABNF.  If the type definition includes a new HTTP<br>   authentication scheme, the type name SHOULD be identical to the HTTP<br>   authentication scheme name (as defined by [RFC2617]).  The token type<br>   “example” is reserved for use in examples.</p>
+<pre><code>type-name  = 1*name-char
+name-char  = &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / DIGIT / ALPHA
+</code></pre><h2 id="8-2-Defining-New-Endpoint-Parameters"><a href="#8-2-Defining-New-Endpoint-Parameters" class="headerlink" title="8.2.  Defining New Endpoint Parameters"></a>8.2.  Defining New Endpoint Parameters</h2><p>   New request or response parameters for use with the authorization<br>   endpoint or the token endpoint are defined and registered in the<br>   OAuth Parameters registry following the procedure in Section 11.2.</p>
+<p>   Parameter names MUST conform to the param-name ABNF, and parameter<br>   values syntax MUST be well-defined (e.g., using ABNF, or a reference<br>   to the syntax of an existing parameter).</p>
+<pre><code>param-name  = 1*name-char
+name-char   = &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / DIGIT / ALPHA
+</code></pre><p>   Unregistered vendor-specific parameter extensions that are not<br>   commonly applicable and that are specific to the implementation<br>   details of the authorization server where they are used SHOULD<br>   utilize a vendor-specific prefix that is not likely to conflict with<br>   other registered values (e.g., begin with ‘companyname_’).</p>
+<h2 id="8-3-Defining-New-Authorization-Grant-Types"><a href="#8-3-Defining-New-Authorization-Grant-Types" class="headerlink" title="8.3.  Defining New Authorization Grant Types"></a>8.3.  Defining New Authorization Grant Types</h2><p>   New authorization grant types can be defined by assigning them a<br>   unique absolute URI for use with the “grant_type” parameter.  If the<br>   extension grant type requires additional token endpoint parameters,<br>   they MUST be registered in the OAuth Parameters registry as described<br>   by Section 11.2.</p>
+<h2 id="8-4-Defining-New-Authorization-Endpoint-Response-Types"><a href="#8-4-Defining-New-Authorization-Endpoint-Response-Types" class="headerlink" title="8.4.  Defining New Authorization Endpoint Response Types"></a>8.4.  Defining New Authorization Endpoint Response Types</h2><p>   New response types for use with the authorization endpoint are<br>   defined and registered in the Authorization Endpoint Response Types<br>   registry following the procedure in Section 11.3.  Response type<br>   names MUST conform to the response-type ABNF.</p>
+<pre><code>response-type  = response-name *( SP response-name )
+response-name  = 1*response-char
+response-char  = &quot;_&quot; / DIGIT / ALPHA
+</code></pre><p>   If a response type contains one or more space characters (%x20), it<br>   is compared as a space-delimited list of values in which the order of<br>   values does not matter.  Only one order of values can be registered,<br>   which covers all other arrangements of the same set of values.</p>
+<p>   For example, the response type “token code” is left undefined by this<br>   specification.  However, an extension can define and register the<br>   “token code” response type.  Once registered, the same combination<br>   cannot be registered as “code token”, but both values can be used to<br>   denote the same response type.</p>
+<h2 id="8-5-Defining-Additional-Error-Codes"><a href="#8-5-Defining-Additional-Error-Codes" class="headerlink" title="8.5.  Defining Additional Error Codes"></a>8.5.  Defining Additional Error Codes</h2><p>   In cases where protocol extensions (i.e., access token types,<br>   extension parameters, or extension grant types) require additional<br>   error codes to be used with the authorization code grant error<br>   response (Section 4.1.2.1), the implicit grant error response<br>   (Section 4.2.2.1), the token error response (Section 5.2), or the<br>   resource access error response (Section 7.2), such error codes MAY be<br>   defined.<br>   Extension error codes MUST be registered (following the procedures in<br>   Section 11.4) if the extension they are used in conjunction with is a<br>   registered access token type, a registered endpoint parameter, or an<br>   extension grant type.  Error codes used with unregistered extensions<br>   MAY be registered.</p>
+<p>   Error codes MUST conform to the error ABNF and SHOULD be prefixed by<br>   an identifying name when possible.  For example, an error identifying<br>   an invalid value set to the extension parameter “example” SHOULD be<br>   named “example_invalid”.</p>
+<pre><code>error      = 1*error-char
+error-char = %x20-21 / %x23-5B / %x5D-7E
+</code></pre><h1 id="9-Native-Applications"><a href="#9-Native-Applications" class="headerlink" title="9.  Native Applications"></a>9.  Native Applications</h1><p>   Native applications are clients installed and executed on the device<br>   used by the resource owner (i.e., desktop application, native mobile<br>   application).  Native applications require special consideration<br>   related to security, platform capabilities, and overall end-user<br>   experience.</p>
+<p>   The authorization endpoint requires interaction between the client<br>   and the resource owner’s user-agent.  Native applications can invoke<br>   an external user-agent or embed a user-agent within the application.<br>   For example:</p>
+<p>   o  External user-agent - the native application can capture the<br>​       response from the authorization server using a redirection URI<br>​       with a scheme registered with the operating system to invoke the<br>​       client as the handler, manual copy-and-paste of the credentials,<br>​       running a local web server, installing a user-agent extension, or<br>​       by providing a redirection URI identifying a server-hosted<br>​       resource under the client’s control, which in turn makes the<br>​       response available to the native application.</p>
+<p>   o  Embedded user-agent - the native application obtains the response<br>​       by directly communicating with the embedded user-agent by<br>​       monitoring state changes emitted during the resource load, or<br>​       accessing the user-agent’s cookies storage.</p>
+<p>   When choosing between an external or embedded user-agent, developers<br>   should consider the following:</p>
+<p>   o  An external user-agent may improve completion rate, as the<br>​       resource owner may already have an active session with the<br>​       authorization server, removing the need to re-authenticate.  It<br>​       provides a familiar end-user experience and functionality.  The</p>
+<pre><code>resource owner may also rely on user-agent features or extensions
+to assist with authentication (e.g., password manager, 2-factor
+device reader).
+</code></pre><p>   o  An embedded user-agent may offer improved usability, as it removes<br>​       the need to switch context and open new windows.</p>
+<p>   o  An embedded user-agent poses a security challenge because resource<br>​       owners are authenticating in an unidentified window without access<br>​       to the visual protections found in most external user-agents.  An<br>​       embedded user-agent educates end-users to trust unidentified<br>​       requests for authentication (making phishing attacks easier to<br>​       execute).</p>
+<p>   When choosing between the implicit grant type and the authorization<br>   code grant type, the following should be considered:</p>
+<p>   o  Native applications that use the authorization code grant type<br>​       SHOULD do so without using client credentials, due to the native<br>​       application’s inability to keep client credentials confidential.</p>
+<p>   o  When using the implicit grant type flow, a refresh token is not<br>​       returned, which requires repeating the authorization process once<br>​       the access token expires.</p>
+<h1 id="10-Security-Considerations"><a href="#10-Security-Considerations" class="headerlink" title="10.  Security Considerations"></a>10.  Security Considerations</h1><p>   As a flexible and extensible framework, OAuth’s security<br>   considerations depend on many factors.  The following sections<br>   provide implementers with security guidelines focused on the three<br>   client profiles described in Section 2.1: web application,<br>   user-agent-based application, and native application.</p>
+<p>   A comprehensive OAuth security model and analysis, as well as<br>   background for the protocol design, is provided by<br>   [OAuth-THREATMODEL].</p>
+<h2 id="10-1-Client-Authentication"><a href="#10-1-Client-Authentication" class="headerlink" title="10.1.  Client Authentication"></a>10.1.  Client Authentication</h2><p>   The authorization server establishes client credentials with web<br>   application clients for the purpose of client authentication.  The<br>   authorization server is encouraged to consider stronger client<br>   authentication means than a client password.  Web application clients<br>   MUST ensure confidentiality of client passwords and other client<br>   credentials.</p>
+<p>   The authorization server MUST NOT issue client passwords or other<br>   client credentials to native application or user-agent-based<br>   application clients for the purpose of client authentication.  The<br>   authorization server MAY issue a client password or other credentials<br>   for a specific installation of a native application client on a<br>   specific device.</p>
+<p>   When client authentication is not possible, the authorization server<br>   SHOULD employ other means to validate the client’s identity – for<br>   example, by requiring the registration of the client redirection URI<br>   or enlisting the resource owner to confirm identity.  A valid<br>   redirection URI is not sufficient to verify the client’s identity<br>   when asking for resource owner authorization but can be used to<br>   prevent delivering credentials to a counterfeit client after<br>   obtaining resource owner authorization.</p>
+<p>   The authorization server must consider the security implications of<br>   interacting with unauthenticated clients and take measures to limit<br>   the potential exposure of other credentials (e.g., refresh tokens)<br>   issued to such clients.</p>
+<h2 id="10-2-Client-Impersonation"><a href="#10-2-Client-Impersonation" class="headerlink" title="10.2.  Client Impersonation"></a>10.2.  Client Impersonation</h2><p>   A malicious client can impersonate another client and obtain access<br>   to protected resources if the impersonated client fails to, or is<br>   unable to, keep its client credentials confidential.</p>
+<p>   The authorization server MUST authenticate the client whenever<br>   possible.  If the authorization server cannot authenticate the client<br>   due to the client’s nature, the authorization server MUST require the<br>   registration of any redirection URI used for receiving authorization<br>   responses and SHOULD utilize other means to protect resource owners<br>   from such potentially malicious clients.  For example, the<br>   authorization server can engage the resource owner to assist in<br>   identifying the client and its origin.</p>
+<p>   The authorization server SHOULD enforce explicit resource owner<br>   authentication and provide the resource owner with information about<br>   the client and the requested authorization scope and lifetime.  It is<br>   up to the resource owner to review the information in the context of<br>   the current client and to authorize or deny the request.</p>
+<p>   The authorization server SHOULD NOT process repeated authorization<br>   requests automatically (without active resource owner interaction)<br>   without authenticating the client or relying on other measures to<br>   ensure that the repeated request comes from the original client and<br>   not an impersonator.</p>
+<h2 id="10-3-Access-Tokens"><a href="#10-3-Access-Tokens" class="headerlink" title="10.3.  Access Tokens"></a>10.3.  Access Tokens</h2><p>   Access token credentials (as well as any confidential access token<br>   attributes) MUST be kept confidential in transit and storage, and<br>   only shared among the authorization server, the resource servers the<br>   access token is valid for, and the client to whom the access token is<br>   issued.  Access token credentials MUST only be transmitted using TLS<br>   as described in Section 1.6 with server authentication as defined by<br>   [RFC2818].</p>
+<p>   When using the implicit grant type, the access token is transmitted<br>   in the URI fragment, which can expose it to unauthorized parties.</p>
+<p>   The authorization server MUST ensure that access tokens cannot be<br>   generated, modified, or guessed to produce valid access tokens by<br>   unauthorized parties.</p>
+<p>   The client SHOULD request access tokens with the minimal scope<br>   necessary.  The authorization server SHOULD take the client identity<br>   into account when choosing how to honor the requested scope and MAY<br>   issue an access token with less rights than requested.</p>
+<p>   This specification does not provide any methods for the resource<br>   server to ensure that an access token presented to it by a given<br>   client was issued to that client by the authorization server.</p>
+<h2 id="10-4-Refresh-Tokens"><a href="#10-4-Refresh-Tokens" class="headerlink" title="10.4.  Refresh Tokens"></a>10.4.  Refresh Tokens</h2><p>   Authorization servers MAY issue refresh tokens to web application<br>   clients and native application clients.</p>
+<p>   Refresh tokens MUST be kept confidential in transit and storage, and<br>   shared only among the authorization server and the client to whom the<br>   refresh tokens were issued.  The authorization server MUST maintain<br>   the binding between a refresh token and the client to whom it was<br>   issued.  Refresh tokens MUST only be transmitted using TLS as<br>   described in Section 1.6 with server authentication as defined by<br>   [RFC2818].</p>
+<p>   The authorization server MUST verify the binding between the refresh<br>   token and client identity whenever the client identity can be<br>   authenticated.  When client authentication is not possible, the<br>   authorization server SHOULD deploy other means to detect refresh<br>   token abuse.</p>
+<p>   For example, the authorization server could employ refresh token<br>   rotation in which a new refresh token is issued with every access<br>   token refresh response.  The previous refresh token is invalidated</p>
+<p>   but retained by the authorization server.  If a refresh token is<br>   compromised and subsequently used by both the attacker and the<br>   legitimate client, one of them will present an invalidated refresh<br>   token, which will inform the authorization server of the breach.</p>
+<p>   The authorization server MUST ensure that refresh tokens cannot be<br>   generated, modified, or guessed to produce valid refresh tokens by<br>   unauthorized parties.</p>
+<h2 id="10-5-Authorization-Codes"><a href="#10-5-Authorization-Codes" class="headerlink" title="10.5.  Authorization Codes"></a>10.5.  Authorization Codes</h2><p>   The transmission of authorization codes SHOULD be made over a secure<br>   channel, and the client SHOULD require the use of TLS with its<br>   redirection URI if the URI identifies a network resource.  Since<br>   authorization codes are transmitted via user-agent redirections, they<br>   could potentially be disclosed through user-agent history and HTTP<br>   referrer headers.</p>
+<p>   Authorization codes operate as plaintext bearer credentials, used to<br>   verify that the resource owner who granted authorization at the<br>   authorization server is the same resource owner returning to the<br>   client to complete the process.  Therefore, if the client relies on<br>   the authorization code for its own resource owner authentication, the<br>   client redirection endpoint MUST require the use of TLS.</p>
+<p>   Authorization codes MUST be short lived and single-use.  If the<br>   authorization server observes multiple attempts to exchange an<br>   authorization code for an access token, the authorization server<br>   SHOULD attempt to revoke all access tokens already granted based on<br>   the compromised authorization code.</p>
+<p>   If the client can be authenticated, the authorization servers MUST<br>   authenticate the client and ensure that the authorization code was<br>   issued to the same client.</p>
+<h2 id="10-6-Authorization-Code-Redirection-URI-Manipulation"><a href="#10-6-Authorization-Code-Redirection-URI-Manipulation" class="headerlink" title="10.6.  Authorization Code Redirection URI Manipulation"></a>10.6.  Authorization Code Redirection URI Manipulation</h2><p>   When requesting authorization using the authorization code grant<br>   type, the client can specify a redirection URI via the “redirect_uri”<br>   parameter.  If an attacker can manipulate the value of the<br>   redirection URI, it can cause the authorization server to redirect<br>   the resource owner user-agent to a URI under the control of the<br>   attacker with the authorization code.</p>
+<p>   An attacker can create an account at a legitimate client and initiate<br>   the authorization flow.  When the attacker’s user-agent is sent to<br>   the authorization server to grant access, the attacker grabs the<br>   authorization URI provided by the legitimate client and replaces the</p>
+<p>   client’s redirection URI with a URI under the control of the<br>   attacker.  The attacker then tricks the victim into following the<br>   manipulated link to authorize access to the legitimate client.</p>
+<p>   Once at the authorization server, the victim is prompted with a<br>   normal, valid request on behalf of a legitimate and trusted client,<br>   and authorizes the request.  The victim is then redirected to an<br>   endpoint under the control of the attacker with the authorization<br>   code.  The attacker completes the authorization flow by sending the<br>   authorization code to the client using the original redirection URI<br>   provided by the client.  The client exchanges the authorization code<br>   with an access token and links it to the attacker’s client account,<br>   which can now gain access to the protected resources authorized by<br>   the victim (via the client).</p>
+<p>   In order to prevent such an attack, the authorization server MUST<br>   ensure that the redirection URI used to obtain the authorization code<br>   is identical to the redirection URI provided when exchanging the<br>   authorization code for an access token.  The authorization server<br>   MUST require public clients and SHOULD require confidential clients<br>   to register their redirection URIs.  If a redirection URI is provided<br>   in the request, the authorization server MUST validate it against the<br>   registered value.</p>
+<h2 id="10-7-Resource-Owner-Password-Credentials"><a href="#10-7-Resource-Owner-Password-Credentials" class="headerlink" title="10.7.  Resource Owner Password Credentials"></a>10.7.  Resource Owner Password Credentials</h2><p>   The resource owner password credentials grant type is often used for<br>   legacy or migration reasons.  It reduces the overall risk of storing<br>   usernames and passwords by the client but does not eliminate the need<br>   to expose highly privileged credentials to the client.</p>
+<p>   This grant type carries a higher risk than other grant types because<br>   it maintains the password anti-pattern this protocol seeks to avoid.<br>   The client could abuse the password, or the password could<br>   unintentionally be disclosed to an attacker (e.g., via log files or<br>   other records kept by the client).</p>
+<p>   Additionally, because the resource owner does not have control over<br>   the authorization process (the resource owner’s involvement ends when<br>   it hands over its credentials to the client), the client can obtain<br>   access tokens with a broader scope than desired by the resource<br>   owner.  The authorization server should consider the scope and<br>   lifetime of access tokens issued via this grant type.</p>
+<p>   The authorization server and client SHOULD minimize use of this grant<br>   type and utilize other grant types whenever possible.</p>
+<h2 id="10-8-Request-Confidentiality"><a href="#10-8-Request-Confidentiality" class="headerlink" title="10.8.  Request Confidentiality"></a>10.8.  Request Confidentiality</h2><p>   Access tokens, refresh tokens, resource owner passwords, and client<br>   credentials MUST NOT be transmitted in the clear.  Authorization<br>   codes SHOULD NOT be transmitted in the clear.</p>
+<p>   The “state” and “scope” parameters SHOULD NOT include sensitive<br>   client or resource owner information in plain text, as they can be<br>   transmitted over insecure channels or stored insecurely.</p>
+<h2 id="10-9-Ensuring-Endpoint-Authenticity"><a href="#10-9-Ensuring-Endpoint-Authenticity" class="headerlink" title="10.9.  Ensuring Endpoint Authenticity"></a>10.9.  Ensuring Endpoint Authenticity</h2><p>   In order to prevent man-in-the-middle attacks, the authorization<br>   server MUST require the use of TLS with server authentication as<br>   defined by [RFC2818] for any request sent to the authorization and<br>   token endpoints.  The client MUST validate the authorization server’s<br>   TLS certificate as defined by [RFC6125] and in accordance with its<br>   requirements for server identity authentication.</p>
+<h2 id="10-10-Credentials-Guessing-Attacks"><a href="#10-10-Credentials-Guessing-Attacks" class="headerlink" title="10.10.  Credentials-Guessing Attacks"></a>10.10.  Credentials-Guessing Attacks</h2><p>   The authorization server MUST prevent attackers from guessing access<br>   tokens, authorization codes, refresh tokens, resource owner<br>   passwords, and client credentials.</p>
+<p>   The probability of an attacker guessing generated tokens (and other<br>   credentials not intended for handling by end-users) MUST be less than<br>   or equal to 2^(-128) and SHOULD be less than or equal to 2^(-160).</p>
+<p>   The authorization server MUST utilize other means to protect<br>   credentials intended for end-user usage.</p>
+<h2 id="10-11-Phishing-Attacks"><a href="#10-11-Phishing-Attacks" class="headerlink" title="10.11.  Phishing Attacks"></a>10.11.  Phishing Attacks</h2><p>   Wide deployment of this and similar protocols may cause end-users to<br>   become inured to the practice of being redirected to websites where<br>   they are asked to enter their passwords.  If end-users are not<br>   careful to verify the authenticity of these websites before entering<br>   their credentials, it will be possible for attackers to exploit this<br>   practice to steal resource owners’ passwords.</p>
+<p>   Service providers should attempt to educate end-users about the risks<br>   phishing attacks pose and should provide mechanisms that make it easy<br>   for end-users to confirm the authenticity of their sites.  Client<br>   developers should consider the security implications of how they<br>   interact with the user-agent (e.g., external, embedded), and the<br>   ability of the end-user to verify the authenticity of the<br>   authorization server.</p>
+<p>   To reduce the risk of phishing attacks, the authorization servers<br>   MUST require the use of TLS on every endpoint used for end-user<br>   interaction.</p>
+<h2 id="10-12-Cross-Site-Request-Forgery"><a href="#10-12-Cross-Site-Request-Forgery" class="headerlink" title="10.12.  Cross-Site Request Forgery"></a>10.12.  Cross-Site Request Forgery</h2><p>   Cross-site request forgery (CSRF) is an exploit in which an attacker<br>   causes the user-agent of a victim end-user to follow a malicious URI<br>   (e.g., provided to the user-agent as a misleading link, image, or<br>   redirection) to a trusting server (usually established via the<br>   presence of a valid session cookie).</p>
+<p>   A CSRF attack against the client’s redirection URI allows an attacker<br>   to inject its own authorization code or access token, which can<br>   result in the client using an access token associated with the<br>   attacker’s protected resources rather than the victim’s (e.g., save<br>   the victim’s bank account information to a protected resource<br>   controlled by the attacker).</p>
+<p>   The client MUST implement CSRF protection for its redirection URI.<br>   This is typically accomplished by requiring any request sent to the<br>   redirection URI endpoint to include a value that binds the request to<br>   the user-agent’s authenticated state (e.g., a hash of the session<br>   cookie used to authenticate the user-agent).  The client SHOULD<br>   utilize the “state” request parameter to deliver this value to the<br>   authorization server when making an authorization request.</p>
+<p>   Once authorization has been obtained from the end-user, the<br>   authorization server redirects the end-user’s user-agent back to the<br>   client with the required binding value contained in the “state”<br>   parameter.  The binding value enables the client to verify the<br>   validity of the request by matching the binding value to the<br>   user-agent’s authenticated state.  The binding value used for CSRF<br>   protection MUST contain a non-guessable value (as described in<br>   Section 10.10), and the user-agent’s authenticated state (e.g.,<br>   session cookie, HTML5 local storage) MUST be kept in a location<br>   accessible only to the client and the user-agent (i.e., protected by<br>   same-origin policy).</p>
+<p>   A CSRF attack against the authorization server’s authorization<br>   endpoint can result in an attacker obtaining end-user authorization<br>   for a malicious client without involving or alerting the end-user.</p>
+<p>   The authorization server MUST implement CSRF protection for its<br>   authorization endpoint and ensure that a malicious client cannot<br>   obtain authorization without the awareness and explicit consent of<br>   the resource owner.</p>
+<h2 id="10-13-Clickjacking"><a href="#10-13-Clickjacking" class="headerlink" title="10.13.  Clickjacking"></a>10.13.  Clickjacking</h2><p>   In a clickjacking attack, an attacker registers a legitimate client<br>   and then constructs a malicious site in which it loads the<br>   authorization server’s authorization endpoint web page in a<br>   transparent iframe overlaid on top of a set of dummy buttons, which<br>   are carefully constructed to be placed directly under important<br>   buttons on the authorization page.  When an end-user clicks a<br>   misleading visible button, the end-user is actually clicking an<br>   invisible button on the authorization page (such as an “Authorize”<br>   button).  This allows an attacker to trick a resource owner into<br>   granting its client access without the end-user’s knowledge.</p>
+<p>   To prevent this form of attack, native applications SHOULD use<br>   external browsers instead of embedding browsers within the<br>   application when requesting end-user authorization.  For most newer<br>   browsers, avoidance of iframes can be enforced by the authorization<br>   server using the (non-standard) “x-frame-options” header.  This<br>   header can have two values, “deny” and “sameorigin”, which will block<br>   any framing, or framing by sites with a different origin,<br>   respectively.  For older browsers, JavaScript frame-busting<br>   techniques can be used but may not be effective in all browsers.</p>
+<h2 id="10-14-Code-Injection-and-Input-Validation"><a href="#10-14-Code-Injection-and-Input-Validation" class="headerlink" title="10.14.  Code Injection and Input Validation"></a>10.14.  Code Injection and Input Validation</h2><p>   A code injection attack occurs when an input or otherwise external<br>   variable is used by an application unsanitized and causes<br>   modification to the application logic.  This may allow an attacker to<br>   gain access to the application device or its data, cause denial of<br>   service, or introduce a wide range of malicious side-effects.</p>
+<p>   The authorization server and client MUST sanitize (and validate when<br>   possible) any value received – in particular, the value of the<br>   “state” and “redirect_uri” parameters.</p>
+<h2 id="10-15-Open-Redirectors"><a href="#10-15-Open-Redirectors" class="headerlink" title="10.15.  Open Redirectors"></a>10.15.  Open Redirectors</h2><p>   The authorization server, authorization endpoint, and client<br>   redirection endpoint can be improperly configured and operate as open<br>   redirectors.  An open redirector is an endpoint using a parameter to<br>   automatically redirect a user-agent to the location specified by the<br>   parameter value without any validation.</p>
+<p>   Open redirectors can be used in phishing attacks, or by an attacker<br>   to get end-users to visit malicious sites by using the URI authority<br>   component of a familiar and trusted destination.  In addition, if the<br>   authorization server allows the client to register only part of the<br>   redirection URI, an attacker can use an open redirector operated by</p>
+<p>   the client to construct a redirection URI that will pass the<br>   authorization server validation but will send the authorization code<br>   or access token to an endpoint under the control of the attacker.</p>
+<h2 id="10-16-Misuse-of-Access-Token-to-Impersonate-Resource-Owner-in-Implicit-Flow"><a href="#10-16-Misuse-of-Access-Token-to-Impersonate-Resource-Owner-in-Implicit-Flow" class="headerlink" title="10.16.  Misuse of Access Token to Impersonate Resource Owner in Implicit Flow"></a>10.16.  Misuse of Access Token to Impersonate Resource Owner in Implicit Flow</h2><p>   For public clients using implicit flows, this specification does not<br>   provide any method for the client to determine what client an access<br>   token was issued to.</p>
+<p>   A resource owner may willingly delegate access to a resource by<br>   granting an access token to an attacker’s malicious client.  This may<br>   be due to phishing or some other pretext.  An attacker may also steal<br>   a token via some other mechanism.  An attacker may then attempt to<br>   impersonate the resource owner by providing the access token to a<br>   legitimate public client.</p>
+<p>   In the implicit flow (response_type=token), the attacker can easily<br>   switch the token in the response from the authorization server,<br>   replacing the real access token with the one previously issued to the<br>   attacker.</p>
+<p>   Servers communicating with native applications that rely on being<br>   passed an access token in the back channel to identify the user of<br>   the client may be similarly compromised by an attacker creating a<br>   compromised application that can inject arbitrary stolen access<br>   tokens.</p>
+<p>   Any public client that makes the assumption that only the resource<br>   owner can present it with a valid access token for the resource is<br>   vulnerable to this type of attack.</p>
+<p>   This type of attack may expose information about the resource owner<br>   at the legitimate client to the attacker (malicious client).  This<br>   will also allow the attacker to perform operations at the legitimate<br>   client with the same permissions as the resource owner who originally<br>   granted the access token or authorization code.</p>
+<p>   Authenticating resource owners to clients is out of scope for this<br>   specification.  Any specification that uses the authorization process<br>   as a form of delegated end-user authentication to the client (e.g.,<br>   third-party sign-in service) MUST NOT use the implicit flow without<br>   additional security mechanisms that would enable the client to<br>   determine if the access token was issued for its use (e.g., audience-<br>   restricting the access token).</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Security/[OAuth2]OAuth2_Framework.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Security/[OAuth2]OAuth2_Framework.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OAuth2/">OAuth2</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Go/[Golang]基础入门.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Golang]基础入门.md</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Security/[OAuth2]入门篇_理论基础_架构理解.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[OAuth2]入门篇_理论基础与架构分析【待完善】</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

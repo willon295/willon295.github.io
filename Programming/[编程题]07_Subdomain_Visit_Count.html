@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[编程题]07_Subdomain_Visit_Count | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="编程题">
+    <meta name="description" content="Problemscount-paired domain ： 带有 访问次数 的域名 =&amp;gt; [“900 email.google.com” ] （次数与域名之间用 空格 隔开），当我们访问域名时 ， 像  email.google.com ，实际上会访问二级域名 google.com 以及顶级域名 com ,而且都是 900 次，现在有一个数组，包含多个 count-paired domain">
+<meta name="keywords" content="编程题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[编程题]07_Subdomain_Visit_Count">
+<meta property="og:url" content="https://willon.cn/Programming/[编程题]07_Subdomain_Visit_Count.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Problemscount-paired domain ： 带有 访问次数 的域名 =&amp;gt; [“900 email.google.com” ] （次数与域名之间用 空格 隔开），当我们访问域名时 ， 像  email.google.com ，实际上会访问二级域名 google.com 以及顶级域名 com ,而且都是 900 次，现在有一个数组，包含多个 count-paired domain">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[编程题]07_Subdomain_Visit_Count">
+<meta name="twitter:description" content="Problemscount-paired domain ： 带有 访问次数 的域名 =&amp;gt; [“900 email.google.com” ] （次数与域名之间用 空格 隔开），当我们访问域名时 ， 像  email.google.com ，实际上会访问二级域名 google.com 以及顶级域名 com ,而且都是 900 次，现在有一个数组，包含多个 count-paired domain">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[编程题]07_Subdomain_Visit_Count</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[编程题]07_Subdomain_Visit_Count</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-19T16:07:00.000Z" itemprop="datePublished" class="page-time">
+  2018-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Problems"><span class="post-toc-number">1.</span> <span class="post-toc-text">Problems</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Example"><span class="post-toc-number">2.</span> <span class="post-toc-text">Example</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">3.</span> <span class="post-toc-text">Coding</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Programming/[编程题]07_Subdomain_Visit_Count"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[编程题]07_Subdomain_Visit_Count</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-20 00:07:00" datetime="2018-03-19T16:07:00.000Z"  itemprop="datePublished">2018-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h1><p><code>count-paired domain</code> ： 带有 <code>访问次数</code> 的域名 =&gt; [“900 email.google.com” ] （次数与域名之间用 <code>空格</code> 隔开），当我们访问域名时 ， 像  <code>email.google.com</code> ，实际上会访问二级域名 <code>google.com</code> 以及顶级域名 <code>com</code> ,而且都是 900 次，现在有一个数组，包含多个 <code>count-paired domain</code>, 比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;900 google.mail.com&quot;, &quot;50 yahoo.com&quot;, &quot;1 intel.mail.com&quot;, &quot;5 wiki.org&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>实际各域名访问情况：以 <code>com</code> 访问次数举例  <code>com = 900+50+1</code>，得出新数列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;901 mail.com&quot;,&quot;50 yahoo.com&quot;,&quot;900 google.mail.com&quot;,&quot;5 wiki.org&quot;,&quot;5 org&quot;,&quot;1 intel.mail.com&quot;,&quot;951 com&quot;]</span><br></pre></td></tr></table></figure>
+<p>设计一个算法，输入为 <code>count-paired domain</code> 的数组，输出完整的访问情况的 <code>count-paired domain</code> 的 <code>List</code></p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p><strong>Input:</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&quot;9001 discuss.leetcode.com&quot;]</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p><strong>Output:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;9001 discuss.leetcode.com&quot;, &quot;9001 leetcode.com&quot;, &quot;9001 com&quot;]</span><br></pre></td></tr></table></figure></p>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><p>思路: </p>
+<ol>
+<li>单个 <code>count-paired domain</code> 用空格切割</li>
+<li>域名、访问次数用 Map 保存</li>
+<li>将三级域名遍历切割，从顶级域名开始，拼接成新的域名</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param cpdomains 输入 count-paired 域名</span><br><span class="line"> * @return 次数统计的集合</span><br><span class="line"> */</span><br><span class="line">public static List&lt;String&gt; subdomainVisits(String[] cpdomains) &#123;</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    int count; //用于记录访问次数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    for (String cpdomain : cpdomains) &#123;</span><br><span class="line">        String[] line = cpdomain.split(&quot; &quot;);</span><br><span class="line"></span><br><span class="line">        count = Integer.parseInt(line[0]);</span><br><span class="line"></span><br><span class="line">        String  [] domains =  line[1].split(&quot;\\.&quot;); //将原始域名按 。 切割</span><br><span class="line">        String tmp =&quot;&quot;;</span><br><span class="line">        for (int i = domains.length -1; i&gt;-1 ; i--) &#123;   //由短到长，从顶级域名开始，拼接域名， z ,  y.z  , x.y.z</span><br><span class="line">            tmp = domains[i] + (tmp.equals(&quot;&quot;) ? tmp:&quot;.&quot;+tmp);</span><br><span class="line">            map.put(tmp, map.containsKey(tmp)?map.get(tmp)+count:count);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; ls = new ArrayList&lt;&gt;();</span><br><span class="line">    for (Map.Entry&lt;String, Integer&gt; se : map.entrySet()) &#123;</span><br><span class="line">        ls.add(se.getValue()+&quot; &quot;+se.getKey());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return ls;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Programming/[编程题]07_Subdomain_Visit_Count.html" target="_blank" rel="external">https://willon.cn/Programming/[编程题]07_Subdomain_Visit_Count.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程题/">编程题</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Programming/[编程题]08_ZigZag_字符串Z字型变换.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[编程题]08_ZigZag_字符串Z字型变换</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Programming/[编程题]05_股票买卖最佳时机.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[编程题]05_股票买卖最佳时机</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

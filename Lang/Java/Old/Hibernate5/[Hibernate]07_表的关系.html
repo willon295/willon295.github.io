@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hibernate]07_表的关系 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hibernate">
+    <meta name="description" content="一对多比如：班级和学生，一个班级有多个学生。数据库实现是在学生表增加外键，指向班级的主键 一对多的映射配置实体类实体类之间要相互表示  Students  1234567891011public class Students &amp;#123;    private Integer id;    private String sid;    private String name;    private">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hibernate]07_表的关系">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]07_表的关系.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="一对多比如：班级和学生，一个班级有多个学生。数据库实现是在学生表增加外键，指向班级的主键 一对多的映射配置实体类实体类之间要相互表示  Students  1234567891011public class Students &amp;#123;    private Integer id;    private String sid;    private String name;    private">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hibernate]07_表的关系">
+<meta name="twitter:description" content="一对多比如：班级和学生，一个班级有多个学生。数据库实现是在学生表增加外键，指向班级的主键 一对多的映射配置实体类实体类之间要相互表示  Students  1234567891011public class Students &amp;#123;    private Integer id;    private String sid;    private String name;    private">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hibernate]07_表的关系</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hibernate]07_表的关系</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-12T04:22:33.000Z" itemprop="datePublished" class="page-time">
+  2016-10-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一对多"><span class="post-toc-number">1.</span> <span class="post-toc-text">一对多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一对多的映射配置"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一对多的映射配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实体类"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">实体类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#映射文件"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">映射文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一对多的级联保存"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">一对多的级联保存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码实战"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">代码实战</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一对多的级联删除和修改"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">一对多的级联删除和修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">修改</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多对多"><span class="post-toc-number">2.</span> <span class="post-toc-text">多对多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多对多的映射配置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">多对多的映射配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实体类-1"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">实体类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#映射文件-1"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">映射文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多对多的级联保存"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">多对多的级联保存</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三张表的维护"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">第三张表的维护</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Old/Hibernate5/[Hibernate]07_表的关系"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hibernate]07_表的关系</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-12 12:22:33" datetime="2016-10-12T04:22:33.000Z"  itemprop="datePublished">2016-10-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h1><p>比如：班级和学生，一个班级有多个学生。数据库实现是在学生表增加外键，指向班级的主键</p>
+<h2 id="一对多的映射配置"><a href="#一对多的映射配置" class="headerlink" title="一对多的映射配置"></a>一对多的映射配置</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><p>实体类之间要相互表示</p>
+<ol>
+<li>Students</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Students &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String sid;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">	</span><br><span class="line">	//学生添加一个班级属性</span><br><span class="line">    private  CourseClass courseClass;</span><br><span class="line"></span><br><span class="line">	//setter and  getter</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>CourseClass</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class CourseClass &#123;</span><br><span class="line"></span><br><span class="line">    private  Integer  ccid;</span><br><span class="line">    private  String  ccname;</span><br><span class="line">	</span><br><span class="line">	//一个班级有多个学生，用set 表示</span><br><span class="line">	//注意 ，一定要 new HashSet&lt;&gt;() 否则空指针异常</span><br><span class="line">    private Set&lt;Students&gt; students = new HashSet&lt;&gt;();</span><br><span class="line">	</span><br><span class="line">	//setter and  getter</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="映射文件"><a href="#映射文件" class="headerlink" title="映射文件"></a>映射文件</h3><p>映射文件之间也要相互表示</p>
+<ol>
+<li><p>CourseClass.hbm.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;class name=&quot;entity.CourseClass&quot; table=&quot;courseclass&quot; &gt;</span><br><span class="line">        &lt;id name=&quot;ccid&quot; column=&quot;ccid&quot;&gt;</span><br><span class="line">            &lt;generator class=&quot;native&quot;/&gt;</span><br><span class="line">        &lt;/id&gt;</span><br><span class="line">        &lt;property name=&quot;ccname&quot; column=&quot;ccname&quot;  /&gt;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">        &lt;!--使用set标签，name属性写实体类set集合的属性名，--&gt;</span><br><span class="line">        &lt;set name=&quot;students&quot; cascade=&quot;save-update&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!--一对多建表，key对应的是外键，column名称随意，但在多的那方必须是一样的--&gt;</span><br><span class="line">            &lt;key column=&quot;csid&quot;/&gt;</span><br><span class="line">			</span><br><span class="line">            &lt;!--一对多关系，class 写对应的多的那方类的全路径--&gt;</span><br><span class="line">            &lt;one-to-many class=&quot;entity.Students&quot;/&gt;</span><br><span class="line">			</span><br><span class="line">        &lt;/set&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Students.hbm.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;class name=&quot;entity.Students&quot; table=&quot;students&quot; &gt;</span><br><span class="line">        &lt;id name=&quot;id&quot;&gt;</span><br><span class="line">            &lt;generator class=&quot;native&quot;/&gt;</span><br><span class="line">        &lt;/id&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot; column=&quot;name&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;age&quot; column=&quot;age&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sid&quot; column=&quot;sid&quot;/&gt;</span><br><span class="line">		&lt;!-- 指定属性和其对应的类，并且指定列名，和一的那方保持一致 --&gt;</span><br><span class="line">        &lt;many-to-one name=&quot;courseClass&quot; class=&quot;entity.CourseClass&quot; column=&quot;csid&quot;/&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="一对多的级联保存"><a href="#一对多的级联保存" class="headerlink" title="一对多的级联保存"></a>一对多的级联保存</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在一的那方加入属性<code>cascade=&quot;save-update&quot;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;set name=&quot;students&quot; cascade=&quot;save-update&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--一对多建表，key对应的是外键，column名称随意，但在多的那方必须是一样的--&gt;</span><br><span class="line">    &lt;key column=&quot;csid&quot;/&gt;</span><br><span class="line">			</span><br><span class="line">    &lt;!--一对多关系，class 写对应的多的那方类的全路径--&gt;</span><br><span class="line">    &lt;one-to-many class=&quot;entity.Students&quot;/&gt;</span><br><span class="line">			</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="代码实战"><a href="#代码实战" class="headerlink" title="代码实战"></a>代码实战</h3><p>保存时只需将 <code>多的一方</code>添加进<code>一的那方</code>，然后<code>只需</code>保存<code>一的那方</code>就行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">      Session  session  = HibernateUtils.getSesion();</span><br><span class="line">      Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">//创建班级</span><br><span class="line">      CourseClass courseClass = new CourseClass();</span><br><span class="line">      courseClass.setCcname(&quot;软工2班&quot;);</span><br><span class="line"></span><br><span class="line">//创建学生对象</span><br><span class="line">      Students students = new Students();</span><br><span class="line">      students.setName(&quot;zhanss&quot;);</span><br><span class="line">      students.setSid(&quot;20155178786&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//将学生添加进班级</span><br><span class="line">      courseClass.getStudents().add(students);</span><br><span class="line"></span><br><span class="line">//保存班级</span><br><span class="line">      session.save(courseClass);</span><br><span class="line"></span><br><span class="line">      transaction.commit();</span><br></pre></td></tr></table></figure></p>
+<h2 id="一对多的级联删除和修改"><a href="#一对多的级联删除和修改" class="headerlink" title="一对多的级联删除和修改"></a>一对多的级联删除和修改</h2><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>默认情况下，删除 一 的这方，多的那方的外键会被设置成 null;<br>(删除某个班级，该班级学生的班级属性会被设置成null)。</p>
+<p>如果有一个需求，客户有多个联系人，删除客户之后，客户对应的所有联系人也删除，这个时候需要级联删除<br>在一的那方加入属性<code>cascade=&quot;delete&quot;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;set name=&quot;students&quot; cascade=&quot;save-update,delete&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>默认情况下，外键是双向维护，当多的那方发生修改时，一的那方也会对外键进行一次维护。这样就造成了效率性能的问题。<br>解决：让一的那方 放弃维护，<code>set</code> 标签里的 <code>inverse</code> 属性设置为<code>true</code>()意思是放弃维护</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;set name=&quot;students&quot; cascade=&quot;save-update,delete&quot; inverse=&quot;true&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h1><p>学 生  和 角 色</p>
+<h2 id="多对多的映射配置"><a href="#多对多的映射配置" class="headerlink" title="多对多的映射配置"></a>多对多的映射配置</h2><h3 id="实体类-1"><a href="#实体类-1" class="headerlink" title="实体类"></a>实体类</h3><ol>
+<li><p>Sudents</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Students &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Set&lt;Role&gt; roleSet =new HashSet&lt;&gt;();</span><br><span class="line">	//setter and getter</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Role</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Role &#123;</span><br><span class="line">    private  Integer  rid;</span><br><span class="line">    private  String rname ;</span><br><span class="line">    private Set&lt;Students&gt; studentsSet  = new HashSet&lt;&gt;();</span><br><span class="line">	//setter and getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="映射文件-1"><a href="#映射文件-1" class="headerlink" title="映射文件"></a>映射文件</h3><ol>
+<li>Students.hbm.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;class name=&quot;entity.Students&quot;&gt;</span><br><span class="line">        &lt;id name=&quot;id&quot;&gt;</span><br><span class="line">            &lt;generator class=&quot;native&quot;/&gt;</span><br><span class="line">        &lt;/id&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot; column=&quot;name&quot; /&gt;</span><br><span class="line">		</span><br><span class="line">        &lt;!--对应的属性 和第三张表的名称--&gt;</span><br><span class="line">        &lt;set name=&quot;roleSet&quot; table=&quot;t_rs&quot; cascade=&quot;save-update&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!--key 属性表示当前实体类Studets  在  第三张表的外键--&gt;</span><br><span class="line">            &lt;key column=&quot;sid&quot;/&gt;</span><br><span class="line">            </span><br><span class="line">            &lt;!--many  指定的class 为 role 对应的类和 在 第三张表的外键--&gt;</span><br><span class="line">            &lt;many-to-many class=&quot;entity.Role&quot; column=&quot;rid&quot;/&gt;</span><br><span class="line">        &lt;/set&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Role.hbm.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC</span><br><span class="line">    &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span><br><span class="line">    &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;class name=&quot;entity.Role&quot; table=&quot;role&quot; &gt;</span><br><span class="line">        &lt;id name=&quot;rid&quot;&gt;</span><br><span class="line">            &lt;generator class=&quot;native&quot;/&gt;</span><br><span class="line">        &lt;/id&gt;</span><br><span class="line">        &lt;property name=&quot;rname&quot;/&gt;</span><br><span class="line">		</span><br><span class="line">		  &lt;!--对应的属性 和第三张表的名称--&gt;</span><br><span class="line">        &lt;set name=&quot;studentsSet&quot; table=&quot;t_rs&quot;&gt;</span><br><span class="line">		</span><br><span class="line">			&lt;!--key 属性表示当前实体类 Role  在  第三张表的外键--&gt;</span><br><span class="line">            &lt;key column=&quot;rid&quot;/&gt;</span><br><span class="line">			</span><br><span class="line">			&lt;!--many  指定的 class 为 Students 对应的类和 在 第三张表的外键--&gt;</span><br><span class="line">            &lt;many-to-many class=&quot;entity.Students&quot; column=&quot;sid&quot;/&gt;</span><br><span class="line">        &lt;/set&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="多对多的级联保存"><a href="#多对多的级联保存" class="headerlink" title="多对多的级联保存"></a>多对多的级联保存</h2><p>在经常操作的那方加入属性<code>cascade=&quot;save-update&quot;</code></p>
+<blockquote>
+<p>多对多一般不会使用级联删除</p>
+</blockquote>
+<h2 id="第三张表的维护"><a href="#第三张表的维护" class="headerlink" title="第三张表的维护"></a>第三张表的维护</h2><ol>
+<li>让学生拥有某个角色</li>
+</ol>
+<ul>
+<li>通过id 查询出 学生 和角色</li>
+<li>将 角色 添加进 学生</li>
+<li>保存</li>
+</ul>
+<ol start="2">
+<li>让学生没有某个角色</li>
+</ol>
+<ul>
+<li>通过id 查询出 学生 和 角色</li>
+<li>把 角色 从 学生 set 中 remove 删除</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Old/Hibernate5/[Hibernate]07_表的关系.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]07_表的关系.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]06_一级缓存_事务规范.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hibernate]05_一级缓存_事务规范</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]08_常用的功能性查询.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hibernate]08_常用的功能性查询</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

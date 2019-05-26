@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Spark]00_环境搭建_安装.md | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Spark">
+    <meta name="description" content="基本集群搭建安装准备 JDK环境 Spark官网 下载相应的版本 SSh免密  开始搭建 进入 conf 文件夹，修改环境配置文件 cp spark-env.sh.template  spark-env.sh ,加入 123456#JDK环境export JAVA_HOME=/usr/local/jdk-1.8#Master主机地址export  SPARK_MASTER_IP=192.168.1">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Spark]00_环境搭建_安装.md">
+<meta property="og:url" content="https://willon.cn/Bigdata/Spark/[Spark]00_环境搭建_安装.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="基本集群搭建安装准备 JDK环境 Spark官网 下载相应的版本 SSh免密  开始搭建 进入 conf 文件夹，修改环境配置文件 cp spark-env.sh.template  spark-env.sh ,加入 123456#JDK环境export JAVA_HOME=/usr/local/jdk-1.8#Master主机地址export  SPARK_MASTER_IP=192.168.1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Spark]00_环境搭建_安装.md">
+<meta name="twitter:description" content="基本集群搭建安装准备 JDK环境 Spark官网 下载相应的版本 SSh免密  开始搭建 进入 conf 文件夹，修改环境配置文件 cp spark-env.sh.template  spark-env.sh ,加入 123456#JDK环境export JAVA_HOME=/usr/local/jdk-1.8#Master主机地址export  SPARK_MASTER_IP=192.168.1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Spark]00_环境搭建_安装.md</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Spark]00_环境搭建_安装.md</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-28T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-03-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spark/">Spark</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本集群搭建"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本集群搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装准备"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始搭建"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">开始搭建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">启动</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spark-HA集群搭建"><span class="post-toc-number">2.</span> <span class="post-toc-text">Spark-HA集群搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#规划"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">规划</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始搭建-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">开始搭建</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">遇到的问题</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Spark/[Spark]00_环境搭建_安装"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Spark]00_环境搭建_安装.md</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-01 00:00:00" datetime="2018-02-28T16:00:00.000Z"  itemprop="datePublished">2018-03-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spark/">Spark</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="基本集群搭建"><a href="#基本集群搭建" class="headerlink" title="基本集群搭建"></a>基本集群搭建</h1><h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ol>
+<li>JDK环境</li>
+<li><a href="http://spark.apache.org/downloads.html" target="_blank" rel="noopener">Spark官网</a> 下载相应的版本</li>
+<li>SSh免密</li>
+</ol>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><ol>
+<li><p>进入 <code>conf</code> 文件夹，修改环境配置文件 <code>cp spark-env.sh.template  spark-env.sh</code> ,加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#JDK环境</span><br><span class="line">export JAVA_HOME=/usr/local/jdk-1.8</span><br><span class="line">#Master主机地址</span><br><span class="line">export  SPARK_MASTER_IP=192.168.10.1</span><br><span class="line">#Master的RPC通信端口</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>slaves</code> 文件，写入从节点(Worker)主机地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.10.2</span><br><span class="line">192.168.10.3</span><br><span class="line">192.168.10.4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将配置好的 文件拷贝到其他节点</p>
+</li>
+</ol>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>在 Master 机器上启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-all.sh</span><br></pre></td></tr></table></figure></p>
+<p>jps查看进程，分别有 Master 、 Worker 进程，在 <code>8080</code> 端口可以查看集群的基本信息</p>
+<h1 id="Spark-HA集群搭建"><a href="#Spark-HA集群搭建" class="headerlink" title="Spark-HA集群搭建"></a>Spark-HA集群搭建</h1><p>基本集群搭建存在 <code>单点故障</code> 问题，要解决此问题就要借助  <code>zookeeper</code> ，启动最少 2 个Master</p>
+<h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>安装软件</th>
+<th>jps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node-00</td>
+<td>spark,scala</td>
+<td>Master</td>
+</tr>
+<tr>
+<td>node-01</td>
+<td>spark,scala</td>
+<td>Master</td>
+</tr>
+<tr>
+<td>node-10</td>
+<td>spark,scala,zookeeper</td>
+<td>Worker,QuorumPeerMain</td>
+</tr>
+<tr>
+<td>node-11</td>
+<td>spark,scala,zookeeper</td>
+<td>Worker,QuorumPeerMain</td>
+</tr>
+<tr>
+<td>node-12</td>
+<td>spark,scala,zookeeper</td>
+<td>Worker,QuorumPeerMain</td>
+</tr>
+</tbody>
+</table>
+<h2 id="开始搭建-1"><a href="#开始搭建-1" class="headerlink" title="开始搭建"></a>开始搭建</h2><ol>
+<li><p><code>spark-env.sh</code> ,删掉 <code>SPARK_MASTER_IP</code>，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk-1.8</span><br><span class="line">#Master的RPC通信端口，如果是 7077可以省略</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">#zk集群的主机地址，spark在zk中的文件存储路径</span><br><span class="line">export SPARK_DAEMON_JAVA_OPTS=&quot;-Dspark.deploy.recoveryMode=ZOOKEEPER  -Dspark.deploy.zookeeper.url=node-10,node-11,node-12 -Dspark.deploy.zookeeper.dir=/spark&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node1 节点上 修改该 slaves 为 Worker 节点地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node-10</span><br><span class="line">node-11</span><br><span class="line">node-12</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝 配置文件到所有节点</p>
+</li>
+<li><p>启动所有 zookeeper 节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node-00 上执行 <code>start-all.sh</code>, 会启动整个集群</p>
+</li>
+<li>node-01 上启动执行 <code>start-master.sh</code></li>
+</ol>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><ol>
+<li>刚启动集群时，两个Master都是 standby <blockquote>
+<p>解决： 没有启动zookeeper，启动zk集群就好了</p>
+</blockquote>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Spark/[Spark]00_环境搭建_安装.html" target="_blank" rel="external">https://willon.cn/Bigdata/Spark/[Spark]00_环境搭建_安装.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringData/[SpringJpa]JPA基本使用.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Spring]SpringDataJPA的基本使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/MySQL/[MySQL]CPU爆满问题排查.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[MySQL]问题排查_优化</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

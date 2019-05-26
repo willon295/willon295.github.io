@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Maven]项目打包最佳实践 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Maven">
+    <meta name="description" content="最初的打包方式、问题在项目不大的情况下， 我们通常会将SpringBoot项目整个项目打成一个jar包， 这个jar包里面包括  编译后的 class 文件 yml、properties 配置文件 依赖的jar包  那么这这么做有几个问题  jar 包会十分臃肿 一旦涉及修改配置， 需要修改jar包， 重新打包  改变传统现在我们想要的结果是 1234└── test-app-final">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Maven]项目打包最佳实践">
+<meta property="og:url" content="https://willon.cn/Tools/Maven/[Maven]项目打包最佳实践.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="最初的打包方式、问题在项目不大的情况下， 我们通常会将SpringBoot项目整个项目打成一个jar包， 这个jar包里面包括  编译后的 class 文件 yml、properties 配置文件 依赖的jar包  那么这这么做有几个问题  jar 包会十分臃肿 一旦涉及修改配置， 需要修改jar包， 重新打包  改变传统现在我们想要的结果是 1234└── test-app-final">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Maven]项目打包最佳实践">
+<meta name="twitter:description" content="最初的打包方式、问题在项目不大的情况下， 我们通常会将SpringBoot项目整个项目打成一个jar包， 这个jar包里面包括  编译后的 class 文件 yml、properties 配置文件 依赖的jar包  那么这这么做有几个问题  jar 包会十分臃肿 一旦涉及修改配置， 需要修改jar包， 重新打包  改变传统现在我们想要的结果是 1234└── test-app-final">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Maven]项目打包最佳实践</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Maven]项目打包最佳实践</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Maven/">Maven</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#最初的打包方式、问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">最初的打包方式、问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#改变传统"><span class="post-toc-number">2.</span> <span class="post-toc-text">改变传统</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#动手实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">动手实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pom文件修改"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">pom文件修改</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件打包插件assembly"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">文件打包插件assembly</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Tools/Maven/[Maven]项目打包最佳实践"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Maven]项目打包最佳实践</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-22 00:00:00" datetime="2018-12-21T16:00:00.000Z"  itemprop="datePublished">2018-12-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Maven/">Maven</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="最初的打包方式、问题"><a href="#最初的打包方式、问题" class="headerlink" title="最初的打包方式、问题"></a>最初的打包方式、问题</h1><p>在项目不大的情况下， 我们通常会将SpringBoot项目整个项目打成一个jar包， 这个jar包里面包括</p>
+<ol>
+<li>编译后的 class 文件</li>
+<li>yml、properties 配置文件</li>
+<li>依赖的jar包</li>
+</ol>
+<p>那么这这么做有几个问题</p>
+<ol>
+<li>jar 包会十分臃肿</li>
+<li>一旦涉及修改配置， 需要修改jar包， 重新打包</li>
+</ol>
+<h1 id="改变传统"><a href="#改变传统" class="headerlink" title="改变传统"></a>改变传统</h1><p>现在我们想要的结果是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└── <span class="built_in">test</span>-app-final       <span class="comment">#项目</span></span><br><span class="line">    ├── conf/            <span class="comment">#存放SpringBoot的yml配置文件,logback配置文件</span></span><br><span class="line">    ├── lib/             <span class="comment">#存放项目依赖jar包</span></span><br><span class="line">    └── <span class="built_in">test</span>-app-final.jar   <span class="comment">#只存放编译的class文件</span></span><br></pre></td></tr></table></figure>
+<p>并且实现程序运行时： </p>
+<ol>
+<li>自动加载  <code>conf</code>  目录的配置文件 </li>
+<li>自动加载 <code>lib</code> 目录 的依赖包</li>
+</ol>
+<h1 id="动手实现"><a href="#动手实现" class="headerlink" title="动手实现"></a>动手实现</h1><h2 id="pom文件修改"><a href="#pom文件修改" class="headerlink" title="pom文件修改"></a>pom文件修改</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--jar包插件--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--设置程序启动： 入口类，加载lib下jar包 ，加载conf配置文件--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>cn.willon.test.Application<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">class-path</span>&gt;</span>conf/<span class="tag">&lt;/<span class="name">class-path</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.yml<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>*.xml<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!--文件打包assembly插件--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">descriptor</span>&gt;</span>src/main/assembly/assembly.xml<span class="tag">&lt;/<span class="name">descriptor</span>&gt;</span></span><br><span class="line">                    <span class="comment">&lt;!--项目文件夹名称--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>test-app-final<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">appendAssemblyId</span>&gt;</span>false<span class="tag">&lt;/<span class="name">appendAssemblyId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>../<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tarLongFileMode</span>&gt;</span>posix<span class="tag">&lt;/<span class="name">tarLongFileMode</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>make-assembly<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>single<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--这个插件需要放在最后--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件打包插件assembly"><a href="#文件打包插件assembly" class="headerlink" title="文件打包插件assembly"></a>文件打包插件assembly</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">assembly</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>assembly<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">formats</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 最终文件为 tar.gz 格式 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">format</span>&gt;</span>tar.gz<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">formats</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includeBaseDirectory</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeBaseDirectory</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fileSets</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 文件主体jar包 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">fileSet</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;basedir&#125;/$&#123;project.build.directory&#125;/<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.$&#123;project.packaging&#125;<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>/<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">fileSet</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 将resources目录下的所有配置文件放在 conf目录 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">fileSet</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;basedir&#125;/$&#123;project.build.directory&#125;/classes<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>*.yml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>/conf<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">fileSet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">fileSets</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencySets</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>$&#123;groupId&#125;:$&#123;artifactId&#125;<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>/lib<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependencySet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencySets</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">assembly</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Tools/Maven/[Maven]项目打包最佳实践.html" target="_blank" rel="external">https://willon.cn/Tools/Maven/[Maven]项目打包最佳实践.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Other/Photography/[摄影] 「年俗」故土随拍.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[摄影] 「年俗」故土随拍_2019</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Go/[Golang]函数.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Golang]函数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

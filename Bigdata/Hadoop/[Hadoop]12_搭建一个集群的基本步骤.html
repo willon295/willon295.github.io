@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]12_搭建一个集群的基本步骤 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="搭建前注意事项用户组、用户名与密码 所有节点最好创建一个名为 hadoop-cluster 的用户组 ， 该组下创建一个 hadoop 用户，密码统一如 hadooppwd 这样做的好处： 用户名统一：方便免密登录时统一使用 hadoop 用户登录 密码统一： 方便后期维护，统一操作    系统选择最好选择  centos6.5或者 centos7.X ，稳定 节点分配 namenode ， re">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]12_搭建一个集群的基本步骤">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]12_搭建一个集群的基本步骤.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="搭建前注意事项用户组、用户名与密码 所有节点最好创建一个名为 hadoop-cluster 的用户组 ， 该组下创建一个 hadoop 用户，密码统一如 hadooppwd 这样做的好处： 用户名统一：方便免密登录时统一使用 hadoop 用户登录 密码统一： 方便后期维护，统一操作    系统选择最好选择  centos6.5或者 centos7.X ，稳定 节点分配 namenode ， re">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]12_搭建一个集群的基本步骤">
+<meta name="twitter:description" content="搭建前注意事项用户组、用户名与密码 所有节点最好创建一个名为 hadoop-cluster 的用户组 ， 该组下创建一个 hadoop 用户，密码统一如 hadooppwd 这样做的好处： 用户名统一：方便免密登录时统一使用 hadoop 用户登录 密码统一： 方便后期维护，统一操作    系统选择最好选择  centos6.5或者 centos7.X ，稳定 节点分配 namenode ， re">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]12_搭建一个集群的基本步骤</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]12_搭建一个集群的基本步骤</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:12:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#搭建前注意事项"><span class="post-toc-number">1.</span> <span class="post-toc-text">搭建前注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户组、用户名与密码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">用户组、用户名与密码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统选择"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">系统选择</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#节点分配"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">节点分配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">配置文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置免密登录"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置免密登录</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JDK环境准备"><span class="post-toc-number">3.</span> <span class="post-toc-text">JDK环境准备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HADOOP集群搭建"><span class="post-toc-number">4.</span> <span class="post-toc-text">HADOOP集群搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本环境准备"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">基本环境准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HDFS集群配置"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">HDFS集群配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#YARN集群配置"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">YARN集群配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动集群"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">启动集群</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HBase的搭建"><span class="post-toc-number">5.</span> <span class="post-toc-text">HBase的搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Zookeeper的安装和配置"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Zookeeper的安装和配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HBase配置"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">HBase配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hbase-env-sh"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">hbase-env.sh</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hbase-site-xml"><span class="post-toc-number">5.2.2.</span> <span class="post-toc-text">hbase-site.xml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#regionservers"><span class="post-toc-number">5.2.3.</span> <span class="post-toc-text">regionservers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分发安装包"><span class="post-toc-number">5.2.4.</span> <span class="post-toc-text">分发安装包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动测试"><span class="post-toc-number">5.2.5.</span> <span class="post-toc-text">启动测试</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#搭建结束"><span class="post-toc-number">6.</span> <span class="post-toc-text">搭建结束</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]12_搭建一个集群的基本步骤"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]12_搭建一个集群的基本步骤</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:12:33" datetime="2017-08-27T16:12:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="搭建前注意事项"><a href="#搭建前注意事项" class="headerlink" title="搭建前注意事项"></a>搭建前注意事项</h1><h2 id="用户组、用户名与密码"><a href="#用户组、用户名与密码" class="headerlink" title="用户组、用户名与密码"></a>用户组、用户名与密码</h2><ol>
+<li>所有节点最好创建一个名为 <code>hadoop-cluster</code> 的用户组 ， 该组下创建一个 <code>hadoop</code> 用户，密码统一如 <code>hadooppwd</code></li>
+<li>这样做的好处：<ul>
+<li>用户名统一：方便免密登录时统一使用 <code>hadoop</code> 用户登录</li>
+<li>密码统一： 方便后期维护，统一操作</li>
+</ul>
+</li>
+</ol>
+<h2 id="系统选择"><a href="#系统选择" class="headerlink" title="系统选择"></a>系统选择</h2><p>最好选择  <code>centos6.5</code>或者 <code>centos7.X</code> ，稳定</p>
+<h2 id="节点分配"><a href="#节点分配" class="headerlink" title="节点分配"></a>节点分配</h2><ol>
+<li>namenode ， resoucemanager 用一台</li>
+<li>secondarynamenode 一台</li>
+<li>datanode 若干台</li>
+</ol>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ol>
+<li>所有节点的所有配置文件相同</li>
+<li><code>slaves</code> 文件只写 <code>从节点</code> 地址</li>
+</ol>
+<h1 id="配置免密登录"><a href="#配置免密登录" class="headerlink" title="配置免密登录"></a>配置免密登录</h1><p>方便服务器集群管理， 配置免密十分必要。</p>
+<ol>
+<li><p>生成 ssh-key<br>一般此密钥只在主节点生成，然后分发公钥给其他节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen  -t rsa</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分发公钥脚本编写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#! /usr/bin/bash</span><br><span class="line"></span><br><span class="line">#所有服务器的地址/域名</span><br><span class="line">SERVERS=&quot;hdp0 hdp1 hdp2&quot;;</span><br><span class="line"></span><br><span class="line"># 其他服务器的密码</span><br><span class="line">PASSWORD=hadoop</span><br><span class="line"></span><br><span class="line"># 实现输入密码登录</span><br><span class="line">auto_ssh_copy_id()&#123;</span><br><span class="line">	expect -c &quot;set timeout -1;</span><br><span class="line">	spawn ssh-copy-id $1;</span><br><span class="line">	expect &#123;</span><br><span class="line">		*yes/no* &#123;send -- yes\r;exp_continue;&#125;</span><br><span class="line">		*assword:* &#123;send -- $2\r;exp_continue;&#125;</span><br><span class="line">		eof &#123;exit 0;&#125;</span><br><span class="line">	&#125;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"># 分发公钥到所有服务器</span><br><span class="line">ssh_copy_id_to_all()&#123;</span><br><span class="line">	for SERVER in $SERVERS</span><br><span class="line">	do</span><br><span class="line">		auto_ssh_copy_id $SERVER $PASSWORD</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 开始执行</span><br><span class="line">ssh_copy_id_to_all</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="JDK环境准备"><a href="#JDK环境准备" class="headerlink" title="JDK环境准备"></a>JDK环境准备</h1><ol>
+<li>下载 <code>jdk8</code> 版本的压缩包</li>
+<li>解压到 <code>/usr/local/lib/jdk8</code></li>
+<li>配置 <code>$JAVA_HOME</code>环境变量，编辑 <code>/etc/profile</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/lib/jdk8</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="HADOOP集群搭建"><a href="#HADOOP集群搭建" class="headerlink" title="HADOOP集群搭建"></a>HADOOP集群搭建</h1><h2 id="基本环境准备"><a href="#基本环境准备" class="headerlink" title="基本环境准备"></a>基本环境准备</h2><p>主要配置环境变量</p>
+<ol>
+<li>下载 <code>Hadoop-XXX-bin.tagr.gz</code>包，解压到 <code>/usr/local/apps/hadoop</code></li>
+<li><p>配置 <code>$HADOOP_HOME</code> 环境变量,编辑 <code>/etc/profile</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/local/apps/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 HADDOOP 环境变量，编辑 <code>$HADOOP_HOME/etc/hadoop/hadoop-env.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#set hadoop environment</span><br><span class="line">export HADOOP_HOME=/usr/local/lib/hadoop3</span><br><span class="line">export HADOOP_INSTALL=$HADOOP_HOME</span><br><span class="line">export HADOOP_MAPRED_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_HDFS_HOME=$HADOOP_HOME</span><br><span class="line">export YARN_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native</span><br><span class="line">export HADOOP_OPTS=&quot;-Djava.library.path=$&#123;HADOOP_HOME&#125;/lib/native/&quot;</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="HDFS集群配置"><a href="#HDFS集群配置" class="headerlink" title="HDFS集群配置"></a>HDFS集群配置</h2><ol>
+<li><p><code>core-site.xml</code> ,配置缓存目录，主节点通信地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">		&lt;!-- 主节点的 IP 和端口 --&gt;</span><br><span class="line">		&lt;value&gt;hdfs://hdpnn0:9000&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">		&lt;!-- 缓存目录 --&gt;</span><br><span class="line">		&lt;value&gt;/root/hadooptmp&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>hdfs-site.xnml</code>,配置 <code>SecondaryNamenode</code>地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- secondaryNamenode节点的 IP 和端口 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;hdpnn0:50090&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--  副本数 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;3&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--  块大小 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.blocksize&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;128M&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--  Namenode的文件地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;file:////usr/local/lib/hadoop/hdfs/nn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--  SecondaryNamenode的本地文件地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.checkpoint.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;file:////usr/local/lib/hadoop/hdfs/snn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.checkpoint.edits.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;file:////usr/local/lib/hadoop/hdfs/snn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--  datanode的文件地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;file:////usr/local/lib/hadoop/hdfs/dn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>slaves</code> ,配置所有从节点的IP地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hdpdn0</span><br><span class="line">hdpdn1</span><br><span class="line">...</span><br><span class="line">hdpdn2000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝当前 <code>hadoop</code> 文件夹到所有字节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SERVERS=<span class="string">'hdpdn0 hdpdn1 hdpdn2'</span></span><br><span class="line"><span class="keyword">for</span> SERVER <span class="keyword">in</span> <span class="variable">$SERVER</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	scp /etc/profile  root@<span class="variable">$SERVER</span>:/etc</span><br><span class="line">	scp -r /usr/<span class="built_in">local</span>/apps/hadoop root@<span class="variable">$SERVER</span>:/usr/<span class="built_in">local</span>/</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化 HDFS集群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs  namenode -format</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动HDFS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="YARN集群配置"><a href="#YARN集群配置" class="headerlink" title="YARN集群配置"></a>YARN集群配置</h2><p>YARN 集群负责任务调度，作业分发</p>
+<ol>
+<li><p><code>mapred-site.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>yarn-site.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--  resourcemanager主机地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hdpnn0<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--  reduce接收的map数据源 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--  nodemanager的文件缓存目录 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.local-dirs<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///usr/local/lib/hadoop/yarn/nm<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h2><ol>
+<li><p>一键启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-all.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br><span class="line">start-yarn.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="HBase的搭建"><a href="#HBase的搭建" class="headerlink" title="HBase的搭建"></a>HBase的搭建</h1><p>一般HBase会是哟该默认的 <code>zookeeper</code>,此处使用自定义的</p>
+<h2 id="Zookeeper的安装和配置"><a href="#Zookeeper的安装和配置" class="headerlink" title="Zookeeper的安装和配置"></a>Zookeeper的安装和配置</h2><ol>
+<li><p>下载解压之后，删除无用目录，保留</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bin</span><br><span class="line">conf</span><br><span class="line">lib</span><br><span class="line">zookeeper-3.4.10.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv conf/zoo_simple.cfg  conf/zoo.cfg</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/root/zkdata</span><br><span class="line">clientPort=2181</span><br><span class="line">server.1=hdpdn0:2888:38888</span><br><span class="line">server.2=hdpdn1:2888:38888</span><br><span class="line">server.3=hdpdn2:2888:38888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>每个节点上 <code>/root/zkdata</code> 内添加文件 <code>myid</code> ,内容是 1 ，2，3 等id</p>
+</li>
+<li>快速启动所有节点 <code>zookeeper</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for SERVER in hdpdn0 hdpdn1 hdpdn2</span><br><span class="line">do</span><br><span class="line">echo &quot;Starting Server $SERVER.....&quot;</span><br><span class="line">ssh $SERVER &quot;source /etc/profile ; /usr/local/zookeeper-3.4.10/bin/zkServer.sh start&quot;</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for SERVER in hdpdn0 hdpdn1 hdpdn2</span><br><span class="line">do</span><br><span class="line">echo &quot;Checking Status $SERVER....&quot;</span><br><span class="line">ssh $SERVER &quot;source /etc/profile ; /usr/local/zookeeper-3.4.10/bin/zkServer.sh status&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="HBase配置"><a href="#HBase配置" class="headerlink" title="HBase配置"></a>HBase配置</h2><h3 id="hbase-env-sh"><a href="#hbase-env-sh" class="headerlink" title="hbase-env.sh"></a>hbase-env.sh</h3><p>修改 <code>JAVA_HOME</code>,不使用自带的 <code>zookeeper</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk-8</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure></p>
+<h3 id="hbase-site-xml"><a href="#hbase-site-xml" class="headerlink" title="hbase-site.xml"></a>hbase-site.xml</h3><p>修改 <code>默认的文件的储存路径</code>，是否使用集群，配置所有的zookeeper的 <code>通信地址</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://hdpnn0:9000/hbasedata&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdpdn0:2181,hdpdn1:2181,hdpdn2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="regionservers"><a href="#regionservers" class="headerlink" title="regionservers"></a>regionservers</h3><p>修改这个文件的作用是： 让 <code>主节点</code> 知道 <code>和哪些节点通信</code>.配置IP或者是主机名即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdpdn0</span><br><span class="line">hdpdn1</span><br><span class="line">hdpdn2</span><br></pre></td></tr></table></figure></p>
+<h3 id="分发安装包"><a href="#分发安装包" class="headerlink" title="分发安装包"></a>分发安装包</h3><p>将配置好的 <code>hbase 文件夹</code> 发送给所有节点</p>
+<h3 id="启动测试"><a href="#启动测试" class="headerlink" title="启动测试"></a>启动测试</h3><p>注意：在这之前先启动 hadoop</p>
+<ol>
+<li><p>启动Hbase</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/start-hbase.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>jps</code>查看<br>主节点会有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1187 NameNode</span><br><span class="line">3642 Jps</span><br><span class="line">3339 HMaster</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>从节点会有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2801 HRegionServer</span><br><span class="line">2151 DataNode</span><br><span class="line">2999 Jps</span><br><span class="line">1933 QuorumPeerMain</span><br></pre></td></tr></table></figure></p>
+<h1 id="搭建结束"><a href="#搭建结束" class="headerlink" title="搭建结束"></a>搭建结束</h1>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]12_搭建一个集群的基本步骤.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]12_搭建一个集群的基本步骤.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]13_HDFS的JavaAPI编程.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]13_HDFS的JavaAPI编程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]11_自定义分区规则.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]11_自定义分区规则</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

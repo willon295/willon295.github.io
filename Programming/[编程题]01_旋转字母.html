@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[编程题]01_旋转字母 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="编程题">
+    <meta name="description" content="题目给定两个整数M，N，生成一个M*N的矩阵，矩阵中元素取值为A至Z的26个字母中的一个，A在左上角，其余各数按顺时针方向旋转前进，依次递增放置，当超过26时又从A开始填充。例如，当M=5，N=8时，矩阵中的内容如下： 123456789A   B   C   D   E   F   G   HV   W   X   Y   Z   A   B   IU   J   K   L   M   N">
+<meta name="keywords" content="编程题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[编程题]01_旋转字母">
+<meta property="og:url" content="https://willon.cn/Programming/[编程题]01_旋转字母.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="题目给定两个整数M，N，生成一个M*N的矩阵，矩阵中元素取值为A至Z的26个字母中的一个，A在左上角，其余各数按顺时针方向旋转前进，依次递增放置，当超过26时又从A开始填充。例如，当M=5，N=8时，矩阵中的内容如下： 123456789A   B   C   D   E   F   G   HV   W   X   Y   Z   A   B   IU   J   K   L   M   N">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[编程题]01_旋转字母">
+<meta name="twitter:description" content="题目给定两个整数M，N，生成一个M*N的矩阵，矩阵中元素取值为A至Z的26个字母中的一个，A在左上角，其余各数按顺时针方向旋转前进，依次递增放置，当超过26时又从A开始填充。例如，当M=5，N=8时，矩阵中的内容如下： 123456789A   B   C   D   E   F   G   HV   W   X   Y   Z   A   B   IU   J   K   L   M   N">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[编程题]01_旋转字母</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[编程题]01_旋转字母</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-19T16:01:00.000Z" itemprop="datePublished" class="page-time">
+  2018-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Input"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Input</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Output"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Output</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">2.</span> <span class="post-toc-text">Coding</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Programming/[编程题]01_旋转字母"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[编程题]01_旋转字母</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-20 00:01:00" datetime="2018-03-19T16:01:00.000Z"  itemprop="datePublished">2018-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个整数M，N，生成一个M*N的矩阵，矩阵中元素取值为A至Z的26个字母中的一个，A在左上角，其余各数按顺时针方向旋转前进，依次递增放置，当超过26时又从A开始填充。例如，当M=5，N=8时，矩阵中的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">A   B   C   D   E   F   G   H</span><br><span class="line"></span><br><span class="line">V   W   X   Y   Z   A   B   I</span><br><span class="line"></span><br><span class="line">U   J   K   L   M   N   C   J</span><br><span class="line"></span><br><span class="line">T   I   H   G   F   E   D   K</span><br><span class="line"></span><br><span class="line">S   R   Q   P   O   N   M   L</span><br></pre></td></tr></table></figure>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 9</span><br></pre></td></tr></table></figure>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A   B   C   D   E   F   G   H   I</span><br><span class="line">V   W   X   Y   Z   A   B   C   J</span><br><span class="line">U   J   I   H   G   F   E   D   K</span><br><span class="line">T   S   R   Q   P   O   N   M   L</span><br></pre></td></tr></table></figure>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><p>用面向对象的思想思考这道题就很费劲了，想是一回事，实现又是另一回事了，逻辑要十分严密，复杂度不可过高，可以使用递归</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class XuanZhuanZiMu2 &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /*1. 输入  R * C 的矩阵</span><br><span class="line">      2. A 在 左上角 ，起点， 其他字母按  顺时针 顺序排列</span><br><span class="line">      3. 当字母到达 Z 之后， 从 A 重新开始</span><br><span class="line">      */</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Scanner s = new Scanner(System.in);</span><br><span class="line">        int R = s.nextInt();</span><br><span class="line">        int C = s.nextInt();</span><br><span class="line">        go(R, C);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //方法重载，简化输入</span><br><span class="line">    public static void go(int R, int C) &#123;</span><br><span class="line">        String[][] ele = new String[R][C];</span><br><span class="line">        ele[0][0] =&quot;A&quot;;</span><br><span class="line">        go(0, 1, R, C, 0, ele, 1);</span><br><span class="line">        </span><br><span class="line">        //输出矩阵内的元素</span><br><span class="line">        for (int i = 0; i &lt; R; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; C; j++) &#123;</span><br><span class="line"></span><br><span class="line">                System.out.print(ele[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 递归遍历每个元素， 第 n 次 循环结束， 起始点边界 +n ，结束点边界 -n。 当不满足任意方向时，代表下一轮循环开始，round++</span><br><span class="line">     *</span><br><span class="line">     * @param i        当前行 索引</span><br><span class="line">     * @param j        当前列索引</span><br><span class="line">     * @param R        矩阵行数</span><br><span class="line">     * @param C        矩阵列数</span><br><span class="line">     * @param round    第几轮循环</span><br><span class="line">     * @param elements 矩阵</span><br><span class="line">     * @param step     一共走的步数</span><br><span class="line">     */</span><br><span class="line">    public static void go(int i, int j, int R, int C, int round, String[][] elements, int step) &#123;</span><br><span class="line">        //定义数据字典</span><br><span class="line">        String[] sa = &#123;</span><br><span class="line">                &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;,</span><br><span class="line">                &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;, &quot;L&quot;, &quot;M&quot;, &quot;N&quot;,</span><br><span class="line">                &quot;O&quot;, &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;, &quot;W&quot;, &quot;X&quot;,</span><br><span class="line">                &quot;Y&quot;, &quot;Z&quot;&#125;;</span><br><span class="line">        List&lt;String&gt; l = new ArrayList&lt;&gt;(Arrays.asList(sa));</span><br><span class="line">        //排序</span><br><span class="line">        Collections.sort(l);</span><br><span class="line">        if (i == round &amp;&amp; j &lt; C - (round + 1)) &#123;</span><br><span class="line">            //在 i==round 说明在空闲区 起始位置 ，向右移动，可移动到列 C -(round+1) 位置</span><br><span class="line">            //System.out.println(&quot;当前位置：&quot; + i + &quot;--&quot; + j + &quot;\t: 向右走&quot;);</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            j++;</span><br><span class="line">            step++;</span><br><span class="line">            if (step &gt;= R * C) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            go(i, j, R, C, round, elements, step);</span><br><span class="line">        &#125; else if (i == R - (round + 1) &amp;&amp; j &gt; round) &#123;</span><br><span class="line"></span><br><span class="line">            //在 i = R-(round+1) 时 ，说明在 空闲区 最后一行 最后一列 ，可 向左  移动 round 列</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            j--;</span><br><span class="line">            step++;</span><br><span class="line">            if (step &gt;= R * C) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            go(i, j, R, C, round, elements, step);</span><br><span class="line">        &#125; else if (i &lt; R - (round + 1) &amp;&amp; j == C - (round + 1)) &#123;</span><br><span class="line"></span><br><span class="line">            //在  j == C - (round + 1) 时，说明在空闲区 第一行 最后 一列，可  向下   移动至  R - (round + 1) 行</span><br><span class="line">            //System.out.println(&quot;当前位置：&quot; + i + &quot;--&quot; + j + &quot;\t: 向下走&quot;);</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            i++;</span><br><span class="line">            step++;</span><br><span class="line">            if (step &gt;= R * C) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            go(i, j, R, C, round, elements, step);</span><br><span class="line">        &#125; else if (i &gt; round + 1 &amp;&amp; j == round) &#123;</span><br><span class="line"></span><br><span class="line">            //当前处于空闲区第一列，最后一行，可以  向上  移动 至 round + 1 行</span><br><span class="line">            //System.out.println(&quot;当前位置：&quot; + i + &quot;--&quot; + j + &quot;\t: 向上走&quot;);</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            i--;</span><br><span class="line">            step++;</span><br><span class="line">            if (step &gt;= R * C) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            elements[i][j] = l.get(step % 26);</span><br><span class="line">            go(i, j, R, C, round, elements, step);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">            //不满足任何方向移动，说明下一轮循环开始 ， round++, 再递归</span><br><span class="line">            round++;</span><br><span class="line">            if (step &gt;= R * C - 1) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            go(i, j, R, C, round, elements, step);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Programming/[编程题]01_旋转字母.html" target="_blank" rel="external">https://willon.cn/Programming/[编程题]01_旋转字母.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程题/">编程题</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Programming/[编程题]03_二进制.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[编程题]03_数字二进制比较</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Programming/[编程题]02_括号匹配.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[编程题]02_括号匹配</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

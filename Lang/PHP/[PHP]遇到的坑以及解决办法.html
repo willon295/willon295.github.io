@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[PHP]遇到的坑以及解决办法 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="PHP">
+    <meta name="description" content="主要实现 PhpStorm 写代码 浏览器输入URL,直接在 wamp 环境运行php 点PhpStorm的chrome，打开，并在wamp的环境运行php  wamp 的坑启动0x0007b,0x000142报错解决：重装软件，或者重装系统，大部分是电脑系统问题。直接重装 403解决：找到apache配置文件httpd.conf , 在&amp;lt;Directory&amp;gt;里面加上: 123&amp;lt;">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[PHP]遇到的坑以及解决办法">
+<meta property="og:url" content="https://willon.cn/Lang/PHP/[PHP]遇到的坑以及解决办法.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="主要实现 PhpStorm 写代码 浏览器输入URL,直接在 wamp 环境运行php 点PhpStorm的chrome，打开，并在wamp的环境运行php  wamp 的坑启动0x0007b,0x000142报错解决：重装软件，或者重装系统，大部分是电脑系统问题。直接重装 403解决：找到apache配置文件httpd.conf , 在&amp;lt;Directory&amp;gt;里面加上: 123&amp;lt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[PHP]遇到的坑以及解决办法">
+<meta name="twitter:description" content="主要实现 PhpStorm 写代码 浏览器输入URL,直接在 wamp 环境运行php 点PhpStorm的chrome，打开，并在wamp的环境运行php  wamp 的坑启动0x0007b,0x000142报错解决：重装软件，或者重装系统，大部分是电脑系统问题。直接重装 403解决：找到apache配置文件httpd.conf , 在&amp;lt;Directory&amp;gt;里面加上: 123&amp;lt;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[PHP]遇到的坑以及解决办法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[PHP]遇到的坑以及解决办法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-15T10:22:27.000Z" itemprop="datePublished" class="page-time">
+  2017-03-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主要实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">主要实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#wamp-的坑"><span class="post-toc-number">2.</span> <span class="post-toc-text">wamp 的坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动0x0007b-0x000142报错"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">启动0x0007b,0x000142报错</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#403"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">403</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多站点配置"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">多站点配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#PhpStorm的坑"><span class="post-toc-number">3.</span> <span class="post-toc-text">PhpStorm的坑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#phpstorm设置"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">phpstorm设置</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/PHP/[PHP]遇到的坑以及解决办法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[PHP]遇到的坑以及解决办法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-03-15 18:22:27" datetime="2017-03-15T10:22:27.000Z"  itemprop="datePublished">2017-03-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="主要实现"><a href="#主要实现" class="headerlink" title="主要实现"></a>主要实现</h1><ol>
+<li><code>PhpStorm</code> 写代码</li>
+<li>浏览器输入URL,直接在 <code>wamp</code> 环境运行php</li>
+<li>点PhpStorm的<code>chrome</code>，打开，并在wamp的环境运行php</li>
+</ol>
+<h1 id="wamp-的坑"><a href="#wamp-的坑" class="headerlink" title="wamp 的坑"></a>wamp 的坑</h1><h2 id="启动0x0007b-0x000142报错"><a href="#启动0x0007b-0x000142报错" class="headerlink" title="启动0x0007b,0x000142报错"></a>启动<code>0x0007b</code>,<code>0x000142</code>报错</h2><p>解决：重装软件，或者重装系统，大部分是电脑系统问题。直接重装</p>
+<h2 id="403"><a href="#403" class="headerlink" title="403"></a>403</h2><p>解决：找到<code>apache</code>配置文件<code>httpd.conf</code> , 在<code>&lt;Directory&gt;</code>里面加上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory&gt;</span><br><span class="line">	Allow from all</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>重启 wamp;</p>
+<h2 id="多站点配置"><a href="#多站点配置" class="headerlink" title="多站点配置"></a>多站点配置</h2><ol>
+<li><code>httpd.conf</code>找到<code>Include extra/httpd-vhosts.conf</code>,删掉<code>#</code>注释。</li>
+<li><p>打开<code>httpd-vhosts.conf</code>,添加：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">   	DocumentRoot &quot;E:/MyProject/PhpProjects/www.php1.com&quot;</span><br><span class="line">   	ServerName www.php1.com</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加 <code>host</code> 解析</p>
+</li>
+</ol>
+<h1 id="PhpStorm的坑"><a href="#PhpStorm的坑" class="headerlink" title="PhpStorm的坑"></a>PhpStorm的坑</h1><ol>
+<li>默认服务启动，端口为<code>65442</code></li>
+<li>无法获取<code>post</code>提交的数据，<code>get</code>可以.</li>
+</ol>
+<blockquote>
+<p>解决办法： </p>
+<ol>
+<li>使用<code>wamp</code> 作为运行环境，<code>phpstorm</code> 只用作开发环境</li>
+<li>抛弃 <code>phpstorm</code>,直接用<code>sublime</code>敲代码（效率明显低一点</li>
+</ol>
+</blockquote>
+<h2 id="phpstorm设置"><a href="#phpstorm设置" class="headerlink" title="phpstorm设置"></a>phpstorm设置</h2><ol>
+<li>找到<code>Settings-&gt;Deployment</code></li>
+<li>点 <code>+</code>号，填入名称，选择<code>In place</code>.</li>
+<li>点击刚配置的名称<code>Web Server root URL</code> 填入host解析的域名</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/PHP/[PHP]遇到的坑以及解决办法.html" target="_blank" rel="external">https://willon.cn/Lang/PHP/[PHP]遇到的坑以及解决办法.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/PHP/[PHP]07_简单实现较完整登录验证.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[PHP]简单实现较为完整的身份验证</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/PHP/[PHP]02_PHP变量作用域.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[PHP]02_PHP 变量作用域</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

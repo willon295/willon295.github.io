@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringMVC]04_各种注解 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringMVC">
+    <meta name="description" content="类注解 @RequestMapping  限制请求路径，参数，请求类型，处理数据类型等属性： | 名称     | 作用                                                         || ——– | ———————————————————— || value    | 指定请求的路径 可以用正则表达式 value = “/get/{name:^[">
+<meta name="keywords" content="SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringMVC]04_各种注解">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringMVC/[SpringMVC]04_类注解_方法注解_参数注解概览.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="类注解 @RequestMapping  限制请求路径，参数，请求类型，处理数据类型等属性： | 名称     | 作用                                                         || ——– | ———————————————————— || value    | 指定请求的路径 可以用正则表达式 value = “/get/{name:^[">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringMVC]04_各种注解">
+<meta name="twitter:description" content="类注解 @RequestMapping  限制请求路径，参数，请求类型，处理数据类型等属性： | 名称     | 作用                                                         || ——– | ———————————————————— || value    | 指定请求的路径 可以用正则表达式 value = “/get/{name:^[">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringMVC]04_各种注解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringMVC]04_各种注解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-22T16:04:00.000Z" itemprop="datePublished" class="page-time">
+  2017-10-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringMVC/">SpringMVC</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类注解"><span class="post-toc-number">1.</span> <span class="post-toc-text">类注解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#方法注解"><span class="post-toc-number">2.</span> <span class="post-toc-text">方法注解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参数注解"><span class="post-toc-number">3.</span> <span class="post-toc-text">参数注解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件的上传下载"><span class="post-toc-number">4.</span> <span class="post-toc-text">文件的上传下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">上传</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#下载"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Demo"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">Demo</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">问题</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringMVC/[SpringMVC]04_类注解_方法注解_参数注解概览"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringMVC]04_各种注解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-23 00:04:00" datetime="2017-10-22T16:04:00.000Z"  itemprop="datePublished">2017-10-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringMVC/">SpringMVC</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类注解"><a href="#类注解" class="headerlink" title="类注解"></a>类注解</h1><ol>
+<li><p><code>@RequestMapping</code>  限制请求路径，参数，请求类型，处理数据类型等<br>属性：</p>
+<p>| 名称     | 作用                                                         |<br>| ——– | ———————————————————— |<br>| value    | 指定请求的路径 可以用正则表达式 value = “/get/{name:^[A-Za-z][A-Za-z1-9_-]+$}” |<br>| path     | 和value作用姓同，但是如果path，value同时存在，程序运行报错   |<br>| params   | 指定请求的参数必须包含/不包含哪些参数，参数满足什么条件      |<br>| headers  | 限制请求头里的内容                                           |<br>| consumes | 消费：即能处理什么 <code>Content-type</code> 的数据                     |<br>| produces | 生产：即返回的数据类型  <code>Content-type</code>                       |</p>
+</li>
+<li><p><code>@Controller</code> : 指定这个类是Controller</p>
+</li>
+<li><p><code>@RestController</code> ： 指定它是返回 JSON格式的Controller</p>
+</li>
+<li><p><code>@ResponseBody</code>: 指定它是返回 JSON格式的类</p>
+</li>
+<li><p><code>@CrossOrigin</code> : 允许跨域</p>
+</li>
+<li><p><code>@ResponseStatus</code> ： 该类返回响应状态</p>
+</li>
+<li><p><code>@ControllerAdvice</code> ： 异常通知类，可以在此类中处理全局异常</p>
+</li>
+<li><p><code>@RestControllerAdvice</code> ： 返回JSON的异常通知类</p>
+</li>
+</ol>
+<h1 id="方法注解"><a href="#方法注解" class="headerlink" title="方法注解"></a>方法注解</h1><ol>
+<li><code>@XXXMapping</code> : 各种请求的映射</li>
+<li><code>@CrossOrigin</code>  : 该方法返回值允许跨域</li>
+<li><code>@ModelAttribute</code> ： 绑定方法的返回值给一个 model</li>
+<li><code>@ResponseBody</code>： 返回JSON格式数据</li>
+<li><code>@ResponseStatus</code>： 返回状态信息</li>
+<li><code>@ExceptionHandler</code> ： 指定该方法能处理的错误类型 <code>@ExceptionHandler（value = MyException.class）</code>  </li>
+</ol>
+<h1 id="参数注解"><a href="#参数注解" class="headerlink" title="参数注解"></a>参数注解</h1><ol>
+<li><p><code>@CookieValue</code> ： 绑定请求 Cookie的值 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CookieValue</span>(name = <span class="string">"cart"</span>,required = <span class="keyword">false</span>,defaultValue = <span class="string">"null"</span>)String  cart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@PathVariable</code> ： 将 URL 占位符的参数作为参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL :  /get/&#123;id&#125;</span></span><br><span class="line"><span class="meta">@PathVariable</span>(name=<span class="string">"id"</span>) <span class="keyword">int</span> id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@RequestParam</code> : 指定要绑定的参数名 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestParam</span>(name=<span class="string">"username"</span>) String name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@RequestHeader</code> : 绑定请求头信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestHeader</span>(name=<span class="string">"id"</span>) <span class="keyword">int</span>  id</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@RequestBody</code> : 当请求的内容是JSON格式，需要绑定自定义类型的参数时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestBody</span> User user</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="6">
+<li><p><code>@RequestPart</code> : 绑定文件参数,即表单使用 <code>multipart/form-data</code>  且有文件类型参数时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestPart</span>(<span class="string">"photo"</span>) MultipartFile file</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 具体如何操作文件  <code>上传 /下载</code>  </p>
+</blockquote>
+</li>
+</ol>
+<h1 id="文件的上传下载"><a href="#文件的上传下载" class="headerlink" title="文件的上传下载"></a>文件的上传下载</h1><h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><ol>
+<li><p>在方法注解处 使用 <code>consumes</code>   指定 处理的 <code>Content-type</code> 为  <code>multipart/form-data</code></p>
+</li>
+<li><p>使用  <code>MutipartFile</code>  接收文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@PostMapping</span>(name = <span class="string">"/upload/photos"</span></span><br><span class="line">            , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">upload</span><span class="params">(@RequestPart(name = <span class="string">"photo"</span>)</span> MultipartFile photo) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//常量定义如下</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String MULTIPART_FORM_DATA_VALUE = <span class="string">"multipart/form-data"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ol>
+<li><p>将方法返回类型改成 <code>byte[]</code>  字节数组</p>
+</li>
+<li><p>使用 <code>produces</code>  指定返回的 <code>Content-type</code> 为具体的文件类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(value = <span class="string">"/get/&#123;id&#125;"</span>,produces = MediaType.IMAGE_JPEG_VALUE)</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">byte</span>[] download(<span class="meta">@PathVariable</span>(<span class="string">"id"</span>) <span class="keyword">int</span> id) &#123;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件上传</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> file 传入的文件</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException 异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping</span>(value = <span class="string">"/&#123;id&#125;/photos"</span>, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">upload</span><span class="params">(@PathVariable <span class="keyword">int</span> id, @RequestParam(<span class="string">"photo"</span>)</span> MultipartFile file) <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file.getOriginalFilename());</span><br><span class="line">    System.out.println(<span class="string">"接收到文件： "</span> + file.getOriginalFilename());</span><br><span class="line">    IOUtils.copy(file.getInputStream(), fos);</span><br><span class="line">    fos.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文加的下载</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 文件的字节数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException 异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(value = <span class="string">"/&#123;id&#125;/icon"</span>, produces = MediaType.IMAGE_JPEG_VALUE)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">byte</span>[] download(<span class="meta">@PathVariable</span> <span class="keyword">int</span> id) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    InputStream is = <span class="keyword">this</span>.getClass().getClassLoader().getResourceAsStream(<span class="string">"icon.jpg"</span>);</span><br><span class="line">    <span class="keyword">return</span> IOUtils.toByteArray(is);<span class="comment">//使用的是 apache common io 包</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>文件的上传 使用注解 <code>@RequestParam</code>  和 <code>@RequestPart</code> 都行</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringMVC/[SpringMVC]04_类注解_方法注解_参数注解概览.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringMVC/[SpringMVC]04_类注解_方法注解_参数注解概览.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[zookeeper]01_安装配置.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[zookeeper]01_安装_基本使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringMVC/[SpringMVC]01_开始使用.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringMVC]01_开始使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

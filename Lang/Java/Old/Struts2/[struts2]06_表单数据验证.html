@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Struts2]06_表单验证 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Struts2">
+    <meta name="description" content="手工Java代码数据验证验证所有的方法 用法：重写 Action 里面的 validate() 方法 在 execute() 内不需要调用此方法，validate() 方法会自动调用，在方法体内写验证的逻辑。   注意：此方法默认会验证Action里的所有方法（即Action内的所有方法都会自动调用validate()法.   举个例子  12345678910111213141516171819">
+<meta name="keywords" content="Struts2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Struts2]06_表单验证">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Old/Struts2/[struts2]06_表单数据验证.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="手工Java代码数据验证验证所有的方法 用法：重写 Action 里面的 validate() 方法 在 execute() 内不需要调用此方法，validate() 方法会自动调用，在方法体内写验证的逻辑。   注意：此方法默认会验证Action里的所有方法（即Action内的所有方法都会自动调用validate()法.   举个例子  12345678910111213141516171819">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Struts2]06_表单验证">
+<meta name="twitter:description" content="手工Java代码数据验证验证所有的方法 用法：重写 Action 里面的 validate() 方法 在 execute() 内不需要调用此方法，validate() 方法会自动调用，在方法体内写验证的逻辑。   注意：此方法默认会验证Action里的所有方法（即Action内的所有方法都会自动调用validate()法.   举个例子  12345678910111213141516171819">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Struts2]06_表单验证</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Struts2]06_表单验证</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-13T04:22:33.000Z" itemprop="datePublished" class="page-time">
+  2016-10-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Struts2/">Struts2</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#手工Java代码数据验证"><span class="post-toc-number">1.</span> <span class="post-toc-text">手工Java代码数据验证</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证所有的方法"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">验证所有的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证指定方法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">验证指定方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证错误结果处理"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">验证错误结果处理</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#XML文件进行数据验证"><span class="post-toc-number">2.</span> <span class="post-toc-text">XML文件进行数据验证</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证所有方法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">验证所有方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证指定方法-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">验证指定方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">注意事项</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Old/Struts2/[struts2]06_表单数据验证"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Struts2]06_表单验证</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-13 12:22:33" datetime="2016-10-13T04:22:33.000Z"  itemprop="datePublished">2016-10-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Struts2/">Struts2</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="手工Java代码数据验证"><a href="#手工Java代码数据验证" class="headerlink" title="手工Java代码数据验证"></a>手工Java代码数据验证</h1><h2 id="验证所有的方法"><a href="#验证所有的方法" class="headerlink" title="验证所有的方法"></a>验证所有的方法</h2><ol>
+<li>用法：重写 Action 里面的 <code>validate()</code> 方法<br> 在 <code>execute()</code> 内不需要调用此方法，<code>validate()</code> 方法会自动调用，在方法体内写验证的逻辑。</li>
+</ol>
+<blockquote>
+<p>注意：此方法默认会验证Action里的所有方法（即Action内的所有方法都会<code>自动</code>调用<code>validate()</code>法.</p>
+</blockquote>
+<ol start="2">
+<li>举个例子</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package action;</span><br><span class="line">import com.opensymphony.xwork2.ActionContext;</span><br><span class="line">import com.opensymphony.xwork2.ActionSupport;</span><br><span class="line">import com.opensymphony.xwork2.ModelDriven;</span><br><span class="line">import entity.User;</span><br><span class="line"></span><br><span class="line">import java.util.Objects;</span><br><span class="line"></span><br><span class="line">public class UserAction extends ActionSupport  implements ModelDriven&#123;</span><br><span class="line">    private User user;</span><br><span class="line">    @Override</span><br><span class="line">    public Object getModel() &#123;</span><br><span class="line">        if (this.user==null)&#123;</span><br><span class="line">            user =new User();</span><br><span class="line">        &#125;</span><br><span class="line">        return  user;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">    public String execute() throws Exception &#123;</span><br><span class="line">        return super.execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public  String  login()&#123;</span><br><span class="line">        System.out.println(&quot;login方法调用&quot;);</span><br><span class="line">        if (Objects.equals(this.user.getPassword(), &quot;admin&quot;) &amp;&amp; Objects.equals(this.user.getPassword(), &quot;admin&quot;))&#123;</span><br><span class="line">            ActionContext.getContext().getSession().put(&quot;userState&quot;,&quot;yes&quot;);</span><br><span class="line">            return &quot;logined&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;fail&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void validate() &#123;</span><br><span class="line">        if (Objects.equals(this.user.getUserName(), &quot;&quot;))&#123;</span><br><span class="line">			//抛出一个错误，在转发后的界面可以显示 </span><br><span class="line">            addFieldError(&quot;name&quot;,&quot;用户名不能为空&quot;);</span><br><span class="line">        &#125;else if(this.user.getPassword().equals(&quot;&quot;))&#123;</span><br><span class="line">            addFieldError(&quot;password&quot;,&quot;密码不能为空&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="验证指定方法"><a href="#验证指定方法" class="headerlink" title="验证指定方法"></a>验证指定方法</h2><ol>
+<li>用法：将 <code>validate</code> 重命名为 <code>validate+要验证的方法名</code></li>
+</ol>
+<blockquote>
+<p>注意：这个方法的也会被自动调用，但只是在指定的方法内调用</p>
+</blockquote>
+<ol start="2">
+<li><p>举个例子</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//只验证 login方法内的数据</span><br><span class="line">public void validateLogin() &#123;</span><br><span class="line">      if (Objects.equals(this.user.getUserName(), &quot;&quot;))&#123;</span><br><span class="line">          addFieldError(&quot;name&quot;,&quot;用户名不能为空&quot;);</span><br><span class="line">      &#125;else if(this.user.getPassword().equals(&quot;&quot;))&#123;</span><br><span class="line">          addFieldError(&quot;password&quot;,&quot;密码不能为空&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="验证错误结果处理"><a href="#验证错误结果处理" class="headerlink" title="验证错误结果处理"></a>验证错误结果处理</h2><p>上面的代码中出现了使用了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addFieldError(&quot;name&quot;,&quot;用户名不能为空&quot;);</span><br></pre></td></tr></table></figure>
+<p>这句话是抛出错误，先指定一个 <code>result</code> 处理它，<code>name</code>指定为 <code>input</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;result name=&quot;input&quot; &gt;/error.jsp&lt;/result&gt;</span><br></pre></td></tr></table></figure>
+<p>在 <code>error.jsp</code> 中写入一下代码,可以显示抛出的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;s:fielderror /&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="XML文件进行数据验证"><a href="#XML文件进行数据验证" class="headerlink" title="XML文件进行数据验证"></a>XML文件进行数据验证</h1><h2 id="验证所有方法"><a href="#验证所有方法" class="headerlink" title="验证所有方法"></a>验证所有方法</h2><p>如果需要使用XML进行数据验证，假如验证 <code>UserAction</code> 这个文件</p>
+<ol>
+<li>新建  <code>UserAction-validation.xml</code> (命名一定是<code>ActionClassName-validation.xml</code>)</li>
+<li><code>UserAction-validation.xml</code> 代码如下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE validators PUBLIC</span><br><span class="line">        &quot;-//Apache Struts//XWork Validator 1.0.3//EN&quot;</span><br><span class="line">        &quot;http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd&quot;&gt;</span><br><span class="line">&lt;validators&gt;</span><br><span class="line">    &lt;field name=&quot;user.userName&quot;&gt;</span><br><span class="line">        &lt;field-validator type=&quot;requiredstring&quot;&gt;</span><br><span class="line">            &lt;message&gt;名字不能为空&lt;/message&gt;</span><br><span class="line">        &lt;/field-validator&gt;</span><br><span class="line">    &lt;/field&gt;</span><br><span class="line">&lt;field name=&quot;user.password&quot;&gt;</span><br><span class="line">    &lt;field-validator type=&quot;regex&quot;&gt;</span><br><span class="line">        &lt;param name=&quot;regexExpression&quot;&gt;&lt;![CDATA[^1[358]\d&#123;9&#125;]]&gt;&lt;/param&gt;</span><br><span class="line">        &lt;message&gt;密码号不正确&lt;/message&gt;</span><br><span class="line">    &lt;/field-validator&gt;</span><br><span class="line">&lt;/field&gt;</span><br><span class="line">&lt;/validators&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="验证指定方法-1"><a href="#验证指定方法-1" class="headerlink" title="验证指定方法"></a>验证指定方法</h2><p>与验证所有的方法的XML配置文件相似，只需将文件名称改为</p>
+<p><code>UserAction-login-validation.xml</code> (命名一定是<code>ActionClassName-ActionMethodName-validation.xml</code></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>XML文件中字符串的赋值必须用  <code>&lt;![CDATA[^1[358]\d{9}]]&gt;</code> 中括号内的字符串数据才会被正确解析</li>
+<li>xml 文件的定义可以查看dtd文件，注释里有代码</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Old/Struts2/[struts2]06_表单数据验证.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Old/Struts2/[struts2]06_表单数据验证.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Struts2/">Struts2</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Old/Struts2/[struts2]05_获取ServletAPI.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Struts2]05_获取ServletAPI</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Old/Struts2/[struts2]07_防止表单重复提交.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Struts2]07_防止表单重复提交</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

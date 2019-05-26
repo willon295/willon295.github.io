@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringCloud]02_Hystrix_断路器 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringCloud,Hystrix">
+    <meta name="description" content="是什么， 能干什么？Hystrix 相当于一个断路器，或者说是 电闸，它的熔断机制就像保险丝，可以在服务发生 雪崩 时，对服务进行 熔断 ，即不再请求，而是返回相应的错误信息。从而避免发生 雪崩效应雪崩效应  理解：  A服务 调用B服务， 由于A服务请求过多，从而占用B资源，导致B服务不可用 服务间调用是 强依赖 ，其中一个 最底层服务 ，导致其 所有依赖的高层服务 不可用,发生大面积服务等待/">
+<meta name="keywords" content="SpringCloud,Hystrix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringCloud]02_Hystrix_断路器">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]02_Hystrix_断路器.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="是什么， 能干什么？Hystrix 相当于一个断路器，或者说是 电闸，它的熔断机制就像保险丝，可以在服务发生 雪崩 时，对服务进行 熔断 ，即不再请求，而是返回相应的错误信息。从而避免发生 雪崩效应雪崩效应  理解：  A服务 调用B服务， 由于A服务请求过多，从而占用B资源，导致B服务不可用 服务间调用是 强依赖 ，其中一个 最底层服务 ，导致其 所有依赖的高层服务 不可用,发生大面积服务等待/">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/spring-cloud-hystrix-dashboard.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringCloud]02_Hystrix_断路器">
+<meta name="twitter:description" content="是什么， 能干什么？Hystrix 相当于一个断路器，或者说是 电闸，它的熔断机制就像保险丝，可以在服务发生 雪崩 时，对服务进行 熔断 ，即不再请求，而是返回相应的错误信息。从而避免发生 雪崩效应雪崩效应  理解：  A服务 调用B服务， 由于A服务请求过多，从而占用B资源，导致B服务不可用 服务间调用是 强依赖 ，其中一个 最底层服务 ，导致其 所有依赖的高层服务 不可用,发生大面积服务等待/">
+<meta name="twitter:image" content="https://willon.cn/images/spring-cloud-hystrix-dashboard.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringCloud]02_Hystrix_断路器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringCloud]02_Hystrix_断路器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-28T16:02:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hystrix/">Hystrix</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hystrix/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#是什么，-能干什么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">是什么， 能干什么？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hystrix-客户端添加断路器"><span class="post-toc-number">2.</span> <span class="post-toc-text">Hystrix_客户端添加断路器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rest-Ribbon-方式设置断路器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Rest+Ribbon 方式设置断路器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Feign方式设置断路器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Feign方式设置断路器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思考"><span class="post-toc-number">3.</span> <span class="post-toc-text">思考</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hystrix-Dashboard-监控面板"><span class="post-toc-number">4.</span> <span class="post-toc-text">Hystrix_Dashboard 监控面板</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置面板"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">配置面板</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单使用"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">简单使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Turbine-聚合监控"><span class="post-toc-number">5.</span> <span class="post-toc-text">Turbine 聚合监控</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">配置</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringCloud/[SpringCloud]02_Hystrix_断路器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringCloud]02_Hystrix_断路器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-29 00:02:00" datetime="2018-06-28T16:02:00.000Z"  itemprop="datePublished">2018-06-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hystrix/">Hystrix</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hystrix/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="是什么，-能干什么？"><a href="#是什么，-能干什么？" class="headerlink" title="是什么， 能干什么？"></a>是什么， 能干什么？</h1><p>Hystrix 相当于一个断路器，或者说是 电闸，它的熔断机制就像保险丝，可以在服务发生 <code>雪崩</code> 时，对服务进行 <code>熔断</code> ，即不再请求，而是返回相应的错误信息。从而避免发生 <code>雪崩效应</code><br><strong><code>雪崩效应</code></strong>  理解：</p>
+<ol>
+<li>A服务 调用B服务， 由于A服务请求过多，从而占用B资源，导致B服务不可用</li>
+<li>服务间调用是 <code>强依赖</code> ，其中一个 <code>最底层服务</code> ，导致其 <code>所有依赖的高层服务</code> 不可用,发生大面积服务等待/不可用</li>
+</ol>
+<p><strong><code>断路器</code></strong>  :  当客户端访问服务器, 发现服务器 <code>异常不能访问</code> ,那么客户端执行一个</p>
+<p><code>fallback</code> 方法, fallback如何处理由需求决定.</p>
+<blockquote>
+<p>注意:  Hystrix 是在消费者客户端基础之上的</p>
+</blockquote>
+<h1 id="Hystrix-客户端添加断路器"><a href="#Hystrix-客户端添加断路器" class="headerlink" title="Hystrix_客户端添加断路器"></a>Hystrix_客户端添加断路器</h1><h2 id="Rest-Ribbon-方式设置断路器"><a href="#Rest-Ribbon-方式设置断路器" class="headerlink" title="Rest+Ribbon 方式设置断路器"></a>Rest+Ribbon 方式设置断路器</h2><ol>
+<li><p>引入 <code>hystrix</code>   依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>在service处 <code>注解业务方法</code> , 定义 <code>fallback</code> 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConsumerService</span><span class="params">(RestTemplate restTemplate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.restTemplate = restTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//指定fallback方法名</span></span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"getError"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        String forObject = restTemplate</span><br><span class="line">                .getForObject(<span class="string">"http://SERVICE-PROVIDER/get?name="</span> + name, String.class);</span><br><span class="line">        <span class="keyword">return</span> forObject;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义fallback方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getError</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"服务器出现异常...请求的参数是: "</span> + name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>入口处启用断路器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//启用断路器和仪表盘</span></span><br><span class="line"><span class="meta">@EnableHystrix</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(HystrixApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Feign方式设置断路器"><a href="#Feign方式设置断路器" class="headerlink" title="Feign方式设置断路器"></a>Feign方式设置断路器</h2><ol>
+<li><p><code>不需要</code> 引入 <code>hystrix</code> 依赖,自带断路器</p>
+</li>
+<li><p>自定义一个 <code>处理器</code> 实现 <code>业务接口</code> , 重写其中的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义处理器, 实现业务接口, 重写方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignServiceHystrix</span> <span class="keyword">implements</span> <span class="title">FeignService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"访问服务器异常...请求参数"</span>+name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>在业务接口处指定处理此接口的 <code>处理器</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定  回调处理器</span></span><br><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"SERVICE-PROVIDER"</span>,fallback = FeignServiceHystrix.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FeignService</span> </span>&#123;</span><br><span class="line">    <span class="comment">//指定 服务的 接口</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get"</span>)</span><br><span class="line">    <span class="comment">//指定参数 并且绑定</span></span><br><span class="line">    <span class="function">String <span class="title">get</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">feign:</span><br><span class="line">  hystrix:</span><br><span class="line">    enabled: true</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里 ide 没有提示,但是要加上才能生效</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><ol>
+<li>断路器相当于预留了一个 <code>访问服务异常</code> 的 <code>回调接口</code>, 真正如何处理需要手动处理.</li>
+<li>那么 如果是真的在现实的生产环境, 应该尝试访问其他提供同样功能的服务而不是手动处理, 这个就是一个运维的问题.</li>
+<li>综合考虑: 使用 <code>Feign</code>  方式访问业务接口, 处理异常比较方便 </li>
+</ol>
+<h1 id="Hystrix-Dashboard-监控面板"><a href="#Hystrix-Dashboard-监控面板" class="headerlink" title="Hystrix_Dashboard 监控面板"></a>Hystrix_Dashboard 监控面板</h1><p>前提是 <code>客户端使用了断路器</code> ，  监控面板可以使用在任何 eureka 客户端 ， 监控所有的请求。</p>
+<h2 id="配置面板"><a href="#配置面板" class="headerlink" title="配置面板"></a>配置面板</h2><ol>
+<li><p>添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--断路器仪表盘配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>暴露接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &quot;*&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>入口处使用 <code>@EnableHystrix</code> 、 <code>@EnableHystrixDashboard</code></p>
+</li>
+</ol>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>访问 <code>http://localhost:8763/hystrix</code>  即可看到控制面板， 填写的信息可以如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/spring-cloud-hystrix-dashboard.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="Turbine-聚合监控"><a href="#Turbine-聚合监控" class="headerlink" title="Turbine 聚合监控"></a>Turbine 聚合监控</h1><p>独立开启一个服务用来监控其他的服务断路情况。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>新建一个spring boot工程， 需要 <code>turbine</code> 、<code>hystrix</code> 、 <code>hystrix-dashboard</code> 依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-turbine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8888</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      # 指定注册中心的地址</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">turbine:</span><br><span class="line">  combine-host-port: true</span><br><span class="line">  app-config: service-consumer # 要监听的服务</span><br><span class="line">management:</span><br><span class="line">  server:</span><br><span class="line">    port: 8889</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &quot;*&quot;</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: turbine-test</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>入口文件，使用以下注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableTurbine</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableHystrix</span></span><br><span class="line"><span class="meta">@EnableHystrixDashboard</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TurbineTestApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(TurbineTestApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>## </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]02_Hystrix_断路器.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]02_Hystrix_断路器.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hystrix/">Hystrix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]03_Zuul路由.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringCloud]03_Zuul网关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]01_01_HA注册中心.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringCloud]01_01_HA注册中心</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

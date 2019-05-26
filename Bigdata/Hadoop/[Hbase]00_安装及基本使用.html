@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hbase]安装及基本使用 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hbase">
+    <meta name="description" content="简介hbase是nosql一种，不支持sql语句。 表–&amp;gt; 行–&amp;gt;列族 一个表有多个行，,行有 行键（不可相同）， 一行 可以有 多个列族，一个 列族 可以插入许多 不同记录， 安装注意，hbase 启动依赖 zookeeper 和 hdfs，所以启动hbase前必须先启动这两个可以所有的集群节点上 都安装 hbase去apache官网或者 阿里镜像站 下载 hbase安装包，删除无用">
+<meta name="keywords" content="Hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hbase]安装及基本使用">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hbase]00_安装及基本使用.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="简介hbase是nosql一种，不支持sql语句。 表–&amp;gt; 行–&amp;gt;列族 一个表有多个行，,行有 行键（不可相同）， 一行 可以有 多个列族，一个 列族 可以插入许多 不同记录， 安装注意，hbase 启动依赖 zookeeper 和 hdfs，所以启动hbase前必须先启动这两个可以所有的集群节点上 都安装 hbase去apache官网或者 阿里镜像站 下载 hbase安装包，删除无用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hbase]安装及基本使用">
+<meta name="twitter:description" content="简介hbase是nosql一种，不支持sql语句。 表–&amp;gt; 行–&amp;gt;列族 一个表有多个行，,行有 行键（不可相同）， 一行 可以有 多个列族，一个 列族 可以插入许多 不同记录， 安装注意，hbase 启动依赖 zookeeper 和 hdfs，所以启动hbase前必须先启动这两个可以所有的集群节点上 都安装 hbase去apache官网或者 阿里镜像站 下载 hbase安装包，删除无用">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hbase]安装及基本使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hbase]安装及基本使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-01T03:24:33.000Z" itemprop="datePublished" class="page-time">
+  2017-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hbase/">Hbase</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hbase-env-sh"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">hbase-env.sh</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hbase-site-xml"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">hbase-site.xml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#regionservers"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">regionservers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分发安装包"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">分发安装包</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动及测试"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">启动及测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本命令"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本命令</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hbase]00_安装及基本使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hbase]安装及基本使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-01 11:24:33" datetime="2017-11-01T03:24:33.000Z"  itemprop="datePublished">2017-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hbase/">Hbase</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>hbase是nosql一种，不支持sql语句。</p>
+<p>表–&gt; 行–&gt;列族</p>
+<p>一个表有多个行，,行有 <code>行键</code>（不可相同）， <code>一行</code> 可以有 <code>多个列族</code>，一个 <code>列族</code> 可以插入许多 <code>不同记录</code>，</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>注意，hbase 启动依赖 <code>zookeeper</code> 和 <code>hdfs</code>，所以启动hbase前必须先启动这两个<br>可以所有的集群节点上 都安装 hbase<br>去apache官网或者 阿里镜像站 下载 hbase安装包，删除无用的 txt和doc文档</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="hbase-env-sh"><a href="#hbase-env-sh" class="headerlink" title="hbase-env.sh"></a>hbase-env.sh</h3><p>修改 <code>JavaHOme</code>,不使用自带的 <code>zookeeper</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk-8</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure></p>
+<h3 id="hbase-site-xml"><a href="#hbase-site-xml" class="headerlink" title="hbase-site.xml"></a>hbase-site.xml</h3><p>修改默认的文件的储存路径，是否使用集群，配置所有的zookeeper的通信地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://hdpnn0:9000/hbasedata&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdpdn0:2181,hdpdn1:2181,hdpdn2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="regionservers"><a href="#regionservers" class="headerlink" title="regionservers"></a>regionservers</h3><p>修改这个文件的作用是： 让主节点知道和哪些节点通信.配置IP或者是主机名即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdpdn0</span><br><span class="line">hdpdn1</span><br><span class="line">hdpdn2</span><br></pre></td></tr></table></figure></p>
+<h3 id="分发安装包"><a href="#分发安装包" class="headerlink" title="分发安装包"></a>分发安装包</h3><p>将配置好的 <code>hbase</code> 文件夹发送给所有节点</p>
+<h2 id="启动及测试"><a href="#启动及测试" class="headerlink" title="启动及测试"></a>启动及测试</h2><ol>
+<li><p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/start-hbase.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Jps查看是否成功<br>主节点会显示以下进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1187 NameNode</span><br><span class="line">3642 Jps</span><br><span class="line">3339 HMaster</span><br><span class="line">1388 SecondaryNameNode</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>从节点会显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2801 HRegionServer</span><br><span class="line">2151 DataNode</span><br><span class="line">2999 Jps</span><br><span class="line">1933 QuorumPeerMain</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>hbase是nosql的一种，所以不支持sql语句，但是默认使用 ruby语言</p>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p><code>bin/hbase  shell</code> 进入交互界面</p>
+<ol>
+<li>查看数据库： list</li>
+<li>查看表： scan ‘t_user’</li>
+<li>创建表： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create &apos;test:t_user&apos;,&apos;base_info&apos;,&apos;extra_info&apos;</span><br><span class="line">//或者是下面这样， </span><br><span class="line">create &apos;test:t_user&apos;,&#123;NAME=&apos;baseinfo&apos;,VERSIONS=1&#125;,&#123;NAME=&apos;extrainfo&apos;,VERSIONS=1&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>test是命名空间,t_user是表，base_info和extra_info是列族</p>
+<ol start="4">
+<li>创建名称空间 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create_namespace &apos;nas0001&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li><p>在指定名称空间创建表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create &apos;db0001:t_student&apos;,&apos;fam1&apos;,&apos;fam2&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>插入记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">put &apos;t_user&apos;,&apos;rowkey001&apos;,&apos;base_info:username&apos;,&apos;zhangsan&apos;</span><br><span class="line">//(rowkey001是行键，username是键，zhangsan是值)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除记录： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete &apos;t_user&apos;,&apos;rowkey001&apos;,&apos;base_info:username&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表(先屏蔽，再删除)： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disable &apos;t_user&apos;; drop &apos;t_user&apos;.</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>具体看表：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>表达</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建表</td>
+<td>create ‘表名称’, ‘列名称1’,’列名称2’,’列名称N’</td>
+</tr>
+<tr>
+<td>添加记录</td>
+<td>put ‘表名称’, ‘行名称’, ‘列名称:’, ‘值’</td>
+</tr>
+<tr>
+<td>查看记录</td>
+<td>get ‘表名称’, ‘行名称’</td>
+</tr>
+<tr>
+<td>查看表中的记录总数</td>
+<td>count  ‘表名称’</td>
+</tr>
+<tr>
+<td>删除记录</td>
+<td>delete  ‘表名’ ,’行名称’ , ‘列名称’</td>
+</tr>
+<tr>
+<td>删除一张表</td>
+<td>先要屏蔽该表，才能对该表进行删除，第一步 disable ‘表名称’ 第二步 drop ‘表名称’</td>
+</tr>
+<tr>
+<td>查看所有记录</td>
+<td>scan “表名称”  </td>
+</tr>
+<tr>
+<td>查看某个表某个列中所有数据</td>
+<td>scan “表名称” , [‘列名称:’]</td>
+</tr>
+<tr>
+<td>更新记录就是重写一遍进行覆盖</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hbase]00_安装及基本使用.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hbase]00_安装及基本使用.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hbase/">Hbase</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/[SSM]02_Mybatis逆向工程.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SSM]02_Mybatis逆向工程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[zookeeper]02_选举机制_工作原理.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[zookeeper]02_选举机制_Observer模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

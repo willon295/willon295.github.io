@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[AJAX]03_跨域问题的产生_解决办法 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Ajax">
+    <meta name="description" content="什么是跨域问题发生的条件 调用方   和 被调用方 不在同一域 浏览器会进行响应跨域校验 发送的是 XHR  （XML HttpRequest）类型请求   解决跨域问题 只要打破其中一个条件即可  产生的问题 被调用方 ： 正常响应  请求 调用方 ： 正常请求 ，不正常的数据响应  Access-Control-Allow-Origin Not allow  举个例子 ： http://loc">
+<meta name="keywords" content="Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[AJAX]03_跨域问题的产生_解决办法">
+<meta property="og:url" content="https://willon.cn/Frontend/[AJAX]03_跨域问题的产生_解决办法.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="什么是跨域问题发生的条件 调用方   和 被调用方 不在同一域 浏览器会进行响应跨域校验 发送的是 XHR  （XML HttpRequest）类型请求   解决跨域问题 只要打破其中一个条件即可  产生的问题 被调用方 ： 正常响应  请求 调用方 ： 正常请求 ，不正常的数据响应  Access-Control-Allow-Origin Not allow  举个例子 ： http://loc">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[AJAX]03_跨域问题的产生_解决办法">
+<meta name="twitter:description" content="什么是跨域问题发生的条件 调用方   和 被调用方 不在同一域 浏览器会进行响应跨域校验 发送的是 XHR  （XML HttpRequest）类型请求   解决跨域问题 只要打破其中一个条件即可  产生的问题 被调用方 ： 正常响应  请求 调用方 ： 正常请求 ，不正常的数据响应  Access-Control-Allow-Origin Not allow  举个例子 ： http://loc">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[AJAX]03_跨域问题的产生_解决办法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[AJAX]03_跨域问题的产生_解决办法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-13T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-07-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ajax/">Ajax</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是跨域问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是跨域问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发生的条件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">发生的条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#产生的问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">产生的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Why"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Why</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单请求"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">简单请求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非简单请求"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">非简单请求</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何解决"><span class="post-toc-number">2.</span> <span class="post-toc-text">如何解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器设置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">浏览器设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSONP方式"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">JSONP方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Spring-MVC方式"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Spring MVC方式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Nginx代理解决"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Nginx代理解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">配置文件</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Frontend/[AJAX]03_跨域问题的产生_解决办法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[AJAX]03_跨域问题的产生_解决办法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-14 00:00:00" datetime="2018-07-13T16:00:00.000Z"  itemprop="datePublished">2018-07-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ajax/">Ajax</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="什么是跨域问题"><a href="#什么是跨域问题" class="headerlink" title="什么是跨域问题"></a>什么是跨域问题</h1><h2 id="发生的条件"><a href="#发生的条件" class="headerlink" title="发生的条件"></a>发生的条件</h2><ol>
+<li><code>调用方</code>   和 <code>被调用方</code> 不在同一域</li>
+<li>浏览器会进行响应跨域校验</li>
+<li>发送的是 <code>XHR</code>  （XML HttpRequest）类型请求</li>
+</ol>
+<blockquote>
+<p>解决跨域问题 只要打破其中一个条件即可</p>
+</blockquote>
+<h2 id="产生的问题"><a href="#产生的问题" class="headerlink" title="产生的问题"></a>产生的问题</h2><ol>
+<li><code>被调用方</code> ： <code>正常响应</code>  请求</li>
+<li><code>调用方</code> ： <code>正常请求</code> ，不正常的数据响应  <code>Access-Control-Allow-Origin Not allow</code></li>
+</ol>
+<p>举个例子 ： <a href="http://localhost:63343" target="_blank" rel="noopener">http://localhost:63343</a> 请求  <a href="http://localhost:8080/get" target="_blank" rel="noopener">http://localhost:8080/get</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Failed to load http://localhost:8080/get: </span><br><span class="line">No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. Origin &apos;http://localhost:63343&apos; is therefore not allowed access.</span><br></pre></td></tr></table></figure>
+<p>发生跨域</p>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>说到底还是 <code>浏览器</code> 的锅， 每次浏览器发送 <code>请求</code> （简单请求，非简单请求）之后，浏览器会做以下几件事情：</p>
+<h3 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h3><p>简单请求就是 <code>get，post</code>， 浏览器是 <code>先执行</code>，<code>后校验</code> </p>
+<ol>
+<li>直接执行请求，多出一个Header ： <code>Access-Control-Allow-Origin</code></li>
+<li>得到返回数据， 进行数据验证，如果不是同一域， 报错</li>
+</ol>
+<h3 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h3><p>其他 <code>put</code> <code>delete</code> 等请求， 浏览器会 <code>先校验</code>  ，<code>再执行</code>， 如果跨域，直接报错</p>
+<h1 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h1><h2 id="浏览器设置"><a href="#浏览器设置" class="headerlink" title="浏览器设置"></a>浏览器设置</h2><p>这是一个 <code>不合理</code> 的解决办法，因为不是每位用户都会操作， 以chrome为例，启动时带上参数： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chrome --args --disable-web-security</span><br></pre></td></tr></table></figure>
+<h2 id="JSONP方式"><a href="#JSONP方式" class="headerlink" title="JSONP方式"></a>JSONP方式</h2><p>首先注意这也是一个 <code>不怎么友好</code> 的解决方式， 因为前端 请求数据类型需要改成 <code>jsonp</code> ， <code>被调用方</code> 需要 <code>全局过滤器</code>  设置 <code>callback</code> 方法名，注意的是：</p>
+<ol>
+<li>发送和返回的数据是 <code>js 回调函数</code> ， 不是简单的 JSON 数据</li>
+<li>发送的 <code>callback</code>  参数名称 必须和 被调用方 <code>相同</code> </li>
+<li>只能处理 get 方式请求</li>
+</ol>
+<h2 id="Spring-MVC方式"><a href="#Spring-MVC方式" class="headerlink" title="Spring MVC方式"></a>Spring MVC方式</h2><p>这个解决方式 <code>比较友好</code> ，在 每个 <code>Controller</code> 之上写 <code>@CrossOrigin(origins = &quot;*&quot;, maxAge = 3600)</code> ,释义：</p>
+<ol>
+<li>允许跨域，增加响应头，浏览器校验到允许跨域之后，请求方正常响应</li>
+<li>设置跨域校验时间： 在3600秒内浏览器不再校验</li>
+</ol>
+<p>举个实例： </p>
+<p><strong>后端代码</strong> : </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span>(allowedHeaders = <span class="string">"*"</span>, maxAge = <span class="number">3600</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">1</span>, <span class="string">"willon"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx代理解决"><a href="#Nginx代理解决" class="headerlink" title="Nginx代理解决"></a>Nginx代理解决</h2><p>这是一个比较好的解决凡是，具体解决则取决于整个 站点的 架构设计， 可以分为两种方式 </p>
+<ol>
+<li>显示跨域：  浏览器URL可以看到实际的请求地址</li>
+<li>隐式跨域： 浏览器URL还是当前域， 只是请求被Nginx转发</li>
+</ol>
+<p>这里介绍 <code>隐式跨域</code> ，请求的过程： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">请求 a.com/get </span><br><span class="line">--&gt; Nginx服务器 </span><br><span class="line">--&gt; 代理 a.com/get 请求到 b.com:8080/get</span><br><span class="line">--&gt; b.com:8080/get 处理并返回给 Nginx  </span><br><span class="line">--&gt;  Nginx响应给请求方</span><br></pre></td></tr></table></figure>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><ol>
+<li><p><code>a .com</code>  配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前台请求代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">"/get"</span>,</span><br><span class="line">            type: <span class="string">"GET"</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(res.id + <span class="string">"___"</span> + res.name);</span><br><span class="line">            &#125;,</span><br><span class="line">            error: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">console</span>.log(res)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx配置文件</span></span><br><span class="line"><span class="attribute">upstream</span> b.com&#123;</span><br><span class="line">    <span class="attribute">server</span> b.com:<span class="number">8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> a.com;</span><br><span class="line">    <span class="attribute">root</span>  /www/a_com;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#将本地的请求转发给 b.com/get</span></span><br><span class="line">    <span class="attribute">location</span> /get &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://b.com/get;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p><code>b.com</code> 配置文件,简单的配置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx配置</span></span><br><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> b.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后端处理</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">1</span>, <span class="string">"willon"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当 a.com 发送请求之后， b.com 会处理并且响应， 不会发生跨域带来的问题。</p>
+</li>
+</ol>
+<p>从调用者的角度看 ： 发送的请求是这样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Request URL: http:<span class="comment">//a.com/get</span></span><br><span class="line">Request Method: GET</span><br><span class="line">Status Code: <span class="number">200</span> </span><br><span class="line">Remote Address: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">80</span></span><br><span class="line">Referrer Policy: no-referrer-when-downgrade</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Frontend/[AJAX]03_跨域问题的产生_解决办法.html" target="_blank" rel="external">https://willon.cn/Frontend/[AJAX]03_跨域问题的产生_解决办法.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]15_搭建自己的Spring Initializr服务器.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title"> [SpringBoot]15_搭建自己的Spring Initializr服务器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]以简单电商系统看SpringBoot_SpringMVC_如何实现前后端分离.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]以简单电商系统看SpringBoot_SpringMVC_如何实现前后端分离</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

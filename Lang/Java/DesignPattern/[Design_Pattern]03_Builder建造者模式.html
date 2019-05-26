@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Design_Pattern]03_Builder建造者模式 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="Builder模式是一步一步创建一个复杂对象的创建型模式，它允许用户在不知道内部构建细节的情况下，可以更精细地控制对象的构造流程。该模式是为了将构建复杂对象的过程和它的部件解耦，使得构建过程和部件的表示隔离开来。 单/多职责Builder(简单)">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Design_Pattern]03_Builder建造者模式">
+<meta property="og:url" content="https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]03_Builder建造者模式.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Builder模式是一步一步创建一个复杂对象的创建型模式，它允许用户在不知道内部构建细节的情况下，可以更精细地控制对象的构造流程。该模式是为了将构建复杂对象的过程和它的部件解耦，使得构建过程和部件的表示隔离开来。 单/多职责Builder(简单)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/dp03_builder_01.png">
+<meta property="og:image" content="https://willon.cn/images/dp03_builder_00_01.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Design_Pattern]03_Builder建造者模式">
+<meta name="twitter:description" content="Builder模式是一步一步创建一个复杂对象的创建型模式，它允许用户在不知道内部构建细节的情况下，可以更精细地控制对象的构造流程。该模式是为了将构建复杂对象的过程和它的部件解耦，使得构建过程和部件的表示隔离开来。 单/多职责Builder(简单)">
+<meta name="twitter:image" content="https://willon.cn/images/dp03_builder_01.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Design_Pattern]03_Builder建造者模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Design_Pattern]03_Builder建造者模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-09T16:03:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#单-多职责Builder-简单"><span class="post-toc-number">1.</span> <span class="post-toc-text">单/多职责Builder(简单)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单一职责的Builder"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">单一职责的Builder</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多职责的，结果统一的Builder"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">多职责的，结果统一的Builder</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#职责分离的Builder模式"><span class="post-toc-number">2.</span> <span class="post-toc-text">职责分离的Builder模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举个例子"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">举个例子</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/DesignPattern/[Design_Pattern]03_Builder建造者模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Design_Pattern]03_Builder建造者模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-10 00:03:00" datetime="2018-06-09T16:03:00.000Z"  itemprop="datePublished">2018-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Builder模式是一步一步创建一个复杂对象的创建型模式，它允许用户在不知道内部构建细节的情况下，可以更精细地控制对象的构造流程。<br>该模式是为了将构建复杂对象的过程和它的部件解耦，使得构建过程和部件的表示隔离开来。</p>
+<h1 id="单-多职责Builder-简单"><a href="#单-多职责Builder-简单" class="headerlink" title="单/多职责Builder(简单)"></a>单/多职责Builder(简单)</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/dp03_builder_01.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h2 id="单一职责的Builder"><a href="#单一职责的Builder" class="headerlink" title="单一职责的Builder"></a>单一职责的Builder</h2><p>比如 <code>StringBuilder</code> ,就是无限的 <code>append()</code> ,好比堆积木。<br>手写一个StringBuilder<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created By willon</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> willon</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStringBuilder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String base = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyStringBuilder <span class="title">append</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        base += s;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyStringBuilder <span class="title">append</span><span class="params">(Integer i)</span> </span>&#123;</span><br><span class="line">        base += String.valueOf(i);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyStringBuilder <span class="title">append</span><span class="params">(Double d)</span> </span>&#123;</span><br><span class="line">        base += String.valueOf(d);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyStringBuilder <span class="title">append</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        base += o.toString();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> base;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        MyStringBuilder my = <span class="keyword">new</span> MyStringBuilder();</span><br><span class="line">        my.append(<span class="string">"sdfdsf"</span>)</span><br><span class="line">                .append(<span class="number">123</span>)</span><br><span class="line">                .append(<span class="number">456654.00</span>)</span><br><span class="line">                .append(<span class="string">"aaadf"</span>);</span><br><span class="line">        System.out.println(my);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="多职责的，结果统一的Builder"><a href="#多职责的，结果统一的Builder" class="headerlink" title="多职责的，结果统一的Builder"></a>多职责的，结果统一的Builder</h2><ol>
+<li><p>举个例子： 一部手机的建造过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmartPhone</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//手机编号</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ime;</span><br><span class="line">    <span class="comment">//手机型号</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">//生产日期</span></span><br><span class="line">    <span class="keyword">private</span> Date date;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该类实例只能 通过建造者生成</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> builder 建造器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SmartPhone</span><span class="params">(Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ime = builder.ime;</span><br><span class="line">        <span class="keyword">this</span>.name = builder.name;</span><br><span class="line">        <span class="keyword">this</span>.date = builder.date;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIme</span><span class="params">(<span class="keyword">int</span> ime)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ime = ime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getDate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> date;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDate</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.date = date;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"SmartPhone&#123;"</span> +</span><br><span class="line">                <span class="string">"ime="</span> + ime +</span><br><span class="line">                <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", date="</span> + date +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//内部建造者</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> ime;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> Date date;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setIme</span><span class="params">(<span class="keyword">int</span> ime)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.ime = ime;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setDate</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.date = date;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//提供build()方法，将自身作为参数传递</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> SmartPhone <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SmartPhone(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 可  链式调用</span></span><br><span class="line">        SmartPhone mi6 = <span class="keyword">new</span> SmartPhone.Builder()</span><br><span class="line">                .setIme(<span class="number">1001</span>)</span><br><span class="line">                .setDate(<span class="keyword">new</span> Date())</span><br><span class="line">                .setName(<span class="string">"MI6"</span>)</span><br><span class="line">                .build();</span><br><span class="line">        </span><br><span class="line">        SmartPhone vivo_nex = <span class="keyword">new</span> SmartPhone.Builder()</span><br><span class="line">                .setIme(<span class="number">1002</span>)</span><br><span class="line">                .setName(<span class="string">"VIVO Nex"</span>)</span><br><span class="line">                .setDate(<span class="keyword">new</span> Date())</span><br><span class="line">                .build();</span><br><span class="line">        </span><br><span class="line">        System.out.println(mi6);</span><br><span class="line">        System.out.println(vivo_nex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="职责分离的Builder模式"><a href="#职责分离的Builder模式" class="headerlink" title="职责分离的Builder模式"></a>职责分离的Builder模式</h1><ol>
+<li>具体的产品</li>
+<li>一个抽象建造者，声明有哪些建造的方法、一个build() 方法，返回类型是产品类型，不管内部如何实现（技术主管）</li>
+<li>一个具体的建造者，实现具体的建造方法、build()方法 （码农）</li>
+<li>一个指挥者,指挥具体的建造者，获得相应的产品 （产品经理）</li>
+</ol>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><ol>
+<li>产品： 手机</li>
+<li>产品经理： 我要 MI8 和 VIVO X21</li>
+<li>技术主管： 用什么技术，怎么造</li>
+<li>码农： 照着技术埋头造</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/dp03_builder_00_01.png" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<ol>
+<li><p>产品</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String  name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>  id;</span><br><span class="line">    <span class="keyword">private</span> String function;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> function;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFunction</span><span class="params">(String function)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.function = function;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Phone&#123;"</span> +</span><br><span class="line">                <span class="string">"id="</span> + id +</span><br><span class="line">                <span class="string">", name='"</span> + name  +</span><br><span class="line">                <span class="string">", function='"</span> + function + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽象建造者类（技术主管）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneBuilder</span> </span>&#123;</span><br><span class="line">	<span class="comment">//要设置手机名称</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> PhoneBuilder <span class="title">setName</span><span class="params">(String name)</span></span>;</span><br><span class="line">	<span class="comment">//要设置手机编号</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> PhoneBuilder <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">	<span class="comment">//要设置手机的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> PhoneBuilder <span class="title">setFunction</span><span class="params">(String  fuc)</span></span>;</span><br><span class="line">	<span class="comment">//最后组装手机</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> Phone <span class="title">build</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>具体建造者类(码农)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePhoneBuilder</span> <span class="keyword">extends</span> <span class="title">PhoneBuilder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Phone phone;</span><br><span class="line">    <span class="keyword">private</span> InnerProductCache cache  = <span class="keyword">new</span> InnerProductCache();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">PhoneBuilder <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        cache.setName(name);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">PhoneBuilder <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        cache.setId(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">PhoneBuilder <span class="title">setFunction</span><span class="params">(String func)</span> </span>&#123;</span><br><span class="line">        cache.setFunction(func);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//真正上线</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">Phone <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        phone= <span class="keyword">new</span> Phone();</span><br><span class="line">        phone.setId(cache.getId());</span><br><span class="line">        phone.setName(cache.getName());</span><br><span class="line">        phone.setFunction(cache.getFunction());</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment">//产品模型类（缓冲类）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerProductCache</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String  name;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span>  id;</span><br><span class="line">        <span class="keyword">private</span> String function;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> id;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> function;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFunction</span><span class="params">(String function)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.function = function;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Director(产品经理)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//喊一个码农过来做产品</span></span><br><span class="line">    <span class="keyword">private</span> PhoneBuilder builder = <span class="keyword">new</span> ConcretePhoneBuilder();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//告诉码农，我需要Mi8这个产品</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">getMi8</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> builder.setName(<span class="string">"Mi8"</span>).setId(<span class="number">4</span>).setFunction(<span class="string">"Play Games"</span>).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//再告诉码农，我要Vivo X21这个产品</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">getVIVOX21</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> builder.setId(<span class="number">2</span>).setName(<span class="string">"VIVO X21"</span>).setFunction(<span class="string">"so many"</span>).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//上来一位产品经理</span></span><br><span class="line">    Director director = <span class="keyword">new</span> Director();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//不管你怎么实现，反正我要的是产品</span></span><br><span class="line">    Phone mi8 = director.getMi8();</span><br><span class="line">    Phone vivox21 = director.getVIVOX21();</span><br><span class="line">    </span><br><span class="line">    System.out.println(mi8);</span><br><span class="line">    System.out.println(vivox21);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/DesignPattern/[Design_Pattern]03_Builder建造者模式.html" target="_blank" rel="external">https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]03_Builder建造者模式.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]04_原型模式.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Design_Pattern]04_原型模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]02_01_工厂模式.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Design_Pattern]02_01_工厂模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

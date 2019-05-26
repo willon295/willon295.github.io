@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Maven]管理多环境配置_属性注入 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Maven">
+    <meta name="description" content="现实项目中， 因为一些属性、参数在 不同的环境 下是不相同的。所以我们会把一个工程分为各种环境如： 开发环境， 预发环境， 生产环境等。在不同的环境下指定编译不同的配置文件， 达到动态注入不同的属性值。 需求分析需求应该是这样的：    user.phone 这个值在不同的环境中需要不同的值  123&amp;lt;users&amp;gt;    &amp;lt;user  value=&quot;$&amp;#123;user.pho">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Maven]管理多环境配置_属性注入">
+<meta property="og:url" content="https://willon.cn/Tools/Maven/[Maven]管理多环境配置_属性注入.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="现实项目中， 因为一些属性、参数在 不同的环境 下是不相同的。所以我们会把一个工程分为各种环境如： 开发环境， 预发环境， 生产环境等。在不同的环境下指定编译不同的配置文件， 达到动态注入不同的属性值。 需求分析需求应该是这样的：    user.phone 这个值在不同的环境中需要不同的值  123&amp;lt;users&amp;gt;    &amp;lt;user  value=&quot;$&amp;#123;user.pho">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Maven]管理多环境配置_属性注入">
+<meta name="twitter:description" content="现实项目中， 因为一些属性、参数在 不同的环境 下是不相同的。所以我们会把一个工程分为各种环境如： 开发环境， 预发环境， 生产环境等。在不同的环境下指定编译不同的配置文件， 达到动态注入不同的属性值。 需求分析需求应该是这样的：    user.phone 这个值在不同的环境中需要不同的值  123&amp;lt;users&amp;gt;    &amp;lt;user  value=&quot;$&amp;#123;user.pho">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Maven]管理多环境配置_属性注入</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Maven]管理多环境配置_属性注入</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-16T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Maven/">Maven</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需求分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">需求分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Maven-实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">Maven 实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置、激活多环境"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">配置、激活多环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态加载配置文件，-注入属性"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动态加载配置文件， 注入属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完整Demo"><span class="post-toc-number">3.</span> <span class="post-toc-text">完整Demo</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文档"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文档</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Tools/Maven/[Maven]管理多环境配置_属性注入"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Maven]管理多环境配置_属性注入</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-17 00:00:00" datetime="2018-12-16T16:00:00.000Z"  itemprop="datePublished">2018-12-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Maven/">Maven</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>现实项目中， 因为一些属性、参数在 <code>不同的环境</code> 下是不相同的。<br>所以我们会把一个工程分为各种环境如： 开发环境， 预发环境， 生产环境等。<br>在不同的环境下指定编译不同的配置文件， 达到动态注入不同的属性值。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>需求应该是这样的：  </p>
+<ol>
+<li><p><code>user.phone</code> 这个值在不同的环境中需要不同的值</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">users</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span>  <span class="attr">value</span>=<span class="string">"$&#123;user.phone&#125;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">users</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>那么这个值可以放在 <code>xx.properties</code> 配置文件中</p>
+</li>
+<li>不同的环境有不同的配置文件  –&gt;  配置文件有多个</li>
+<li>编译时指定环境 ，自动编译对应的环境配置文件 ， 注入相应的属性</li>
+</ol>
+<h2 id="Maven-实现"><a href="#Maven-实现" class="headerlink" title="Maven 实现"></a>Maven 实现</h2><p>实现需求首先要考虑几点：</p>
+<ol>
+<li>多环境配置</li>
+<li>环境激活、编译、启动</li>
+<li>配置文件加载</li>
+<li>值注入</li>
+</ol>
+<h3 id="配置、激活多环境"><a href="#配置、激活多环境" class="headerlink" title="配置、激活多环境"></a>配置、激活多环境</h3><p>使用maven可以简单的实现多环境的配置， 配置如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">env</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>pre<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">env</span>&gt;</span>pre<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>publish<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">env</span>&gt;</span>publish<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>配置说明： </p>
+<ul>
+<li>分为三个环境： <code>dev</code> ，<code>pre</code> ， <code>publish</code> 分别代表 <code>项目</code> ，<code>预发</code>， <code>生产</code> 环境</li>
+<li>dev 为默认激活的环境</li>
+</ul>
+<p><strong>激活不同的环境</strong><br>可以在编译时指定具体的环境： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn  compile -Ppublish</span><br></pre></td></tr></table></figure>
+<p><strong>如何工作</strong></p>
+<p>mvn 会根据  <code>-P</code> 参数找到  <code>prfile</code>  对应的 id</p>
+<ol>
+<li>如果 id 不存在, 加载默认的环境</li>
+<li>如果 id 存在， 加载对应的 <code>profile</code> 中的所有属性</li>
+</ol>
+<h3 id="动态加载配置文件，-注入属性"><a href="#动态加载配置文件，-注入属性" class="headerlink" title="动态加载配置文件， 注入属性"></a>动态加载配置文件， 注入属性</h3><p>配置如下： </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filters</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span>&gt;</span>src/main/filters/$&#123;env&#125;.properties<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filters</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>配置理解：<br><code>${....}</code>  这样的字段会被替换成相应的值</p>
+<ol>
+<li>过滤出 <code>src/main/filters/${env}.properties</code> 文件， <code>${env}</code> 这个值在上一步中会传入并注入</li>
+<li>加载了配置文件之后， 扫描 <code>src/main/resources</code> 所有文件（包括子目录）</li>
+<li>找到 <code>${...}</code> 与配置文件中的值进行匹配， 并且完成注入</li>
+</ol>
+<h2 id="完整Demo"><a href="#完整Demo" class="headerlink" title="完整Demo"></a>完整Demo</h2><ol>
+<li><p>项目架构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">── pom.xml</span><br><span class="line">── src</span><br><span class="line">   ├── main</span><br><span class="line">      ├── filters</span><br><span class="line">      │   ├── dev.properties</span><br><span class="line">      │   ├── pre.properties</span><br><span class="line">      │   └── publish.properties</span><br><span class="line">      ├── java</span><br><span class="line">      └── resources</span><br><span class="line">          └── conf</span><br><span class="line">              └── test.xml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pom文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">         http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.willon<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filters</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filter</span>&gt;</span>src/main/filters/$&#123;env&#125;.properties<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filters</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">env</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>pre<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">env</span>&gt;</span>pre<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>publish<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">env</span>&gt;</span>publish<span class="tag">&lt;/<span class="name">env</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>三个 <code>*.properties</code> 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#不同文件中这个值不同</span><br><span class="line">user.phone=111111</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>test.xml</code> 文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">users</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"$&#123;user.phone&#125;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">users</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译 <code>pre</code> 环境配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn  compile -Ppre</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<li><a href="http://maven.apache.org/plugins/maven-resources-plugin/examples/filter.html" target="_blank" rel="noopener">http://maven.apache.org/plugins/maven-resources-plugin/examples/filter.html</a></li>
+<li><a href="http://maven.apache.org/guides/introduction/introduction-to-profiles.html" target="_blank" rel="noopener">http://maven.apache.org/guides/introduction/introduction-to-profiles.html</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Tools/Maven/[Maven]管理多环境配置_属性注入.html" target="_blank" rel="external">https://willon.cn/Tools/Maven/[Maven]管理多环境配置_属性注入.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringSecurity/[SpringSecurity]入门.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringSecurity]简单入门_源码走读</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[YAML]YAML文件详解.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[YAML]YAML文件详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

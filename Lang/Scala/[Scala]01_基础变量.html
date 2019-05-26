@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Scala]01_基础变量 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Scala">
+    <meta name="description" content="变量的声明和引用单个变量的声明 第一种方式,手动声明类型 12var name: String = &amp;quot;willon&amp;quot;var age: Int = 23  第二种方式，系统自动识别类型 12var name = &amp;quot;willon&amp;quot;var age = 23  变量的引用 1print(&amp;quot;name:&amp;quot;+name+&amp;quot;----age:&amp;qu">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Scala]01_基础变量">
+<meta property="og:url" content="https://willon.cn/Lang/Scala/[Scala]01_基础变量.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="变量的声明和引用单个变量的声明 第一种方式,手动声明类型 12var name: String = &amp;quot;willon&amp;quot;var age: Int = 23  第二种方式，系统自动识别类型 12var name = &amp;quot;willon&amp;quot;var age = 23  变量的引用 1print(&amp;quot;name:&amp;quot;+name+&amp;quot;----age:&amp;qu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Scala]01_基础变量">
+<meta name="twitter:description" content="变量的声明和引用单个变量的声明 第一种方式,手动声明类型 12var name: String = &amp;quot;willon&amp;quot;var age: Int = 23  第二种方式，系统自动识别类型 12var name = &amp;quot;willon&amp;quot;var age = 23  变量的引用 1print(&amp;quot;name:&amp;quot;+name+&amp;quot;----age:&amp;qu">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Scala]01_基础变量</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Scala]01_基础变量</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-31T16:01:34.000Z" itemprop="datePublished" class="page-time">
+  2018-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#变量的声明和引用"><span class="post-toc-number">1.</span> <span class="post-toc-text">变量的声明和引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单个变量的声明"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">单个变量的声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多个变量声明"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">多个变量声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义集合"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">定义集合</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#val-和-var-的区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">val 和 var 的区别</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Scala/[Scala]01_基础变量"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Scala]01_基础变量</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-01 00:01:34" datetime="2017-12-31T16:01:34.000Z"  itemprop="datePublished">2018-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="变量的声明和引用"><a href="#变量的声明和引用" class="headerlink" title="变量的声明和引用"></a>变量的声明和引用</h1><h2 id="单个变量的声明"><a href="#单个变量的声明" class="headerlink" title="单个变量的声明"></a>单个变量的声明</h2><ol>
+<li><p>第一种方式,手动声明类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var name: String = &quot;willon&quot;</span><br><span class="line">var age: Int = 23</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种方式，系统自动识别类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;willon&quot;</span><br><span class="line">var age = 23</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变量的引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;name:&quot;+name+&quot;----age:&quot;+age)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="多个变量声明"><a href="#多个变量声明" class="headerlink" title="多个变量声明"></a>多个变量声明</h2><ol>
+<li>多个变量同时定义<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a,b,c,d = 100</span><br><span class="line">//声明a,b,c,d都为100</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="定义集合"><a href="#定义集合" class="headerlink" title="定义集合"></a>定义集合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var numbers = List(122,11,22,33,44)</span><br><span class="line">var user = (23,&quot;zhangsan&quot;,&quot;2018-01-01&quot;)</span><br></pre></td></tr></table></figure>
+<h1 id="val-和-var-的区别"><a href="#val-和-var-的区别" class="headerlink" title="val 和 var 的区别"></a>val 和 var 的区别</h1><ol>
+<li><p>val 定义的变量的引用不能变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val a  = Array(1,3,5,7)</span><br><span class="line">a = Array(1,2) //报错</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>var 定义的变量可以改变引用,但是数据类型不能变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a  = Array(1,3,5,7)</span><br><span class="line">a = Array(1,2) //可以</span><br><span class="line">a = Array(&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;) //报错</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Scala/[Scala]01_基础变量.html" target="_blank" rel="external">https://willon.cn/Lang/Scala/[Scala]01_基础变量.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Scala/[Scala]03_循环.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Scala]03_循环</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]00_安装以及使用.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]00_Scala安装</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

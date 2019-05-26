@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Android WebView]Android 浏览器的开发小结 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="Webviewwebview  是安卓自带的一个 加载网页的 组件，拿这个 开发浏览器还是挺麻烦的。主要开发步骤：  在xml布局文件中添加一个webview组件，给它一个 ID。  在activity中用 findViewById找到并初始化该组件。 webview.getSettings.setJavaScriptEnnable(true) //支持js webview.loadurl(&amp;qu">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android WebView]Android 浏览器的开发小结">
+<meta property="og:url" content="https://willon.cn/Other/Android/[Android]Android 浏览器的开发小结.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Webviewwebview  是安卓自带的一个 加载网页的 组件，拿这个 开发浏览器还是挺麻烦的。主要开发步骤：  在xml布局文件中添加一个webview组件，给它一个 ID。  在activity中用 findViewById找到并初始化该组件。 webview.getSettings.setJavaScriptEnnable(true) //支持js webview.loadurl(&amp;qu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Android WebView]Android 浏览器的开发小结">
+<meta name="twitter:description" content="Webviewwebview  是安卓自带的一个 加载网页的 组件，拿这个 开发浏览器还是挺麻烦的。主要开发步骤：  在xml布局文件中添加一个webview组件，给它一个 ID。  在activity中用 findViewById找到并初始化该组件。 webview.getSettings.setJavaScriptEnnable(true) //支持js webview.loadurl(&amp;qu">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Android WebView]Android 浏览器的开发小结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Android WebView]Android 浏览器的开发小结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-17T04:37:28.000Z" itemprop="datePublished" class="page-time">
+  2015-10-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Webview"><span class="post-toc-number">1.</span> <span class="post-toc-text">Webview</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android之WebViewClient与WebChromeClient的区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android之WebViewClient与WebChromeClient的区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#WebViewClient的方法说明"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">WebViewClient的方法说明</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TBS-X5内核"><span class="post-toc-number">3.</span> <span class="post-toc-text">TBS-X5内核</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Other/Android/[Android]Android 浏览器的开发小结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Android WebView]Android 浏览器的开发小结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-10-17 12:37:28" datetime="2015-10-17T04:37:28.000Z"  itemprop="datePublished">2015-10-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Webview"><a href="#Webview" class="headerlink" title="Webview"></a>Webview</h1><p>webview  是安卓自带的一个 加载网页的 组件，拿这个 开发浏览器还是挺麻烦的。主要开发步骤：</p>
+<ol>
+<li><p>在xml布局文件中添加一个webview组件，给它一个 ID。</p>
+</li>
+<li><p>在activity中用 findViewById找到并初始化该组件。</p>
+<pre><code>webview.getSettings.setJavaScriptEnnable(true)
+//支持js
+webview.loadurl(&quot;http://www.baidu.com/&quot;);
+//加载相应的网页
+webview.setWebViewClient(new  WebViewClient());
+webvie.setWebViewChromeClient(new  WebViewChromeClient());
+//本应用的webview中加载网页，而不会跳转至第三方浏览器加载
+</code></pre></li>
+<li><p>在清单文件中添加网络权限；</p>
+</li>
+<li><p>Run….你会发现他只会加载“百度”，如果想加载自定义的网页，加个EditText,把url地址换成EditText文本内容就行了。</p>
+</li>
+<li><p>如果想播放视频，自带的webview播放是特别卡的，所以这个时候要使用硬件加速，在清单文件&lt;application&gt;或者是<code>activity</code>中进行 配置</p>
+<pre><code>android:hardwareAccelerated=&quot;true&quot;
+</code></pre></li>
+<li><p>全屏播放貌似是个 问题，只会让视频窗口单独获得焦点，但是还是原来的比例，并没有横屏然后铺满屏幕。</p>
+</li>
+</ol>
+<h1 id="Android之WebViewClient与WebChromeClient的区别"><a href="#Android之WebViewClient与WebChromeClient的区别" class="headerlink" title="Android之WebViewClient与WebChromeClient的区别"></a>Android之WebViewClient与WebChromeClient的区别</h1><p><code>ANDROID</code>应用开发的时候可能会用到<code>WEBVIEW</code>这个组件，使用过程中可能会接触到<code>WEBVIEWCLIENT</code>与<code>WEBCHROMECLIENT</code>，那么这两个类到底有什么不同呢？WebViewClient主要帮助WebView处理各种通知、请求事件的，比如：    </p>
+<ul>
+<li>onLoadResource    </li>
+<li>onPageStart </li>
+</ul>
+<p>WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等比如    </p>
+<ul>
+<li>onCloseWindow(关闭WebView)    </li>
+<li>onCreateWindow()    </li>
+<li>onJsAlert (WebView上alert无效，需要定制WebChromeClient处理弹出)    </li>
+</ul>
+<p>看上去他们有很多不同，实际使用的话，如果你的WebView只是用来处理一些html的页面内容，只用WebViewClient就行了，如果需要更丰富的处理效果，比如JS、进度条等，就要用到WebChromeClient。<br>更多的时候，你可以这样 </p>
+<pre><code>WebView webView;    
+webView= (WebView) findViewById(R.id.webview);    
+webView.setWebChromeClient(new WebChromeClient());    
+webView.setWebViewClient(new WebViewClient());    
+webView.getSettings().setJavaScriptEnabled(true);    
+webView.loadUrl(url);    
+</code></pre><p>这样你的WebView理论上就能有大部分需要实现的特色了<br>当然，有些更精彩的内容还是需要你自己添加的    </p>
+<h3 id="WebViewClient的方法说明"><a href="#WebViewClient的方法说明" class="headerlink" title="WebViewClient的方法说明"></a>WebViewClient的方法说明</h3><pre><code>public boolean shouldOverrideUrlLoading(WebView view, String url) {
+view.loadUrl(url);
+return true;
+}
+</code></pre><p>在点击请求的是链接是才会调用，重写此方法返回true表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边。</p>
+<pre><code>public void onReceivedSslError(WebView view, SslErrorHandler handler, android.net.http.SslError error) {
+handler.proceed();
+}
+</code></pre><p>重写此方法可以让webview处理https请求。</p>
+<pre><code>public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
+return super.shouldOverrideKeyEvent(view, event);
+}
+}
+</code></pre><p>重写此方法才能够处理在浏览器中的按键事件。</p>
+<pre><code>public void onLoadResource(WebView view, String url) {
+if (DEBUG) {
+Log.d(TAG, &quot; onLoadResource &quot;);
+}
+super.onLoadResource(view, url);
+}
+</code></pre><p>在加载页面资源时会调用，每一个资源（比如图片）的加载都会调用一次。</p>
+<pre><code>public void onPageStarted(WebView view, String url, Bitmap favicon) {
+// TODO Auto-generated method stub
+if (DEBUG) {
+Log.d(TAG, &quot; onPageStarted &quot;);
+}
+if (url.endsWith(&quot;.apk&quot;)) {
+download(url);//下载处理
+}
+super.onPageStarted(view, url, favicon);
+}
+</code></pre><p>在页面加载开始时调用。</p>
+<pre><code>public void onPageFinished(WebView view, String url) {
+// TODO Auto-generated method stub
+if (DEBUG) {
+Log.d(TAG, &quot; onPageFinished &quot;);
+}
+super.onPageFinished(view, url);
+}
+</code></pre><p>在页面加载结束时调用。    </p>
+<h1 id="TBS-X5内核"><a href="#TBS-X5内核" class="headerlink" title="TBS-X5内核"></a>TBS-X5内核</h1><p><a href="http://x5.tencent.com/" target="_blank" rel="noopener">TBS-X5</a>是一款腾讯的浏览器内核；</p>
+<p>安卓自带的webkit有很多不足的地方，比如加载卡顿，html5网页游戏 fps 不稳定，还被曝光有安全漏洞。</p>
+<p>听说腾讯的x5内核不错，至少在腾讯app中都是用x5的，X5的使用简单步骤：</p>
+<ol>
+<li><p>下载jar包，<a href="http://res.imtt.qq.com/TES/tbs_sdk_thirdapp_v2.6.0.1045_36900.zip" target="_blank" rel="noopener">点这里</a>；然后申请接入账号-&gt;根据提示填写应用名称-&gt;复制APPkey</p>
+</li>
+<li><p>把jar包添加到项目</p>
+</li>
+<li><p>xml配置网络权限，添加&lt;meta andriod: APPSDKey:你的key&gt;</p>
+</li>
+<li><p>替换webview组件</p>
+<pre><code>com.tencent.smtt.sdk.WebView
+android:id=&quot;@+id/forum_context&quot;
+android:layout_width=&quot;fill_parent&quot;
+android:layout_height=&quot;fill_parent&quot;
+android:paddingLeft=&quot;5dp&quot;
+android:paddingRight=&quot;5dp&quot; 
+</code></pre></li>
+</ol>
+<p>5、修改导入的类为tbs的类</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Other/Android/[Android]Android 浏览器的开发小结.html" target="_blank" rel="external">https://willon.cn/Other/Android/[Android]Android 浏览器的开发小结.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Programming/[Java]Sort_RadixSort.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]Sort_RadixSort</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Other/Android/[Android]详解Activity.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Android]详解Activity</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

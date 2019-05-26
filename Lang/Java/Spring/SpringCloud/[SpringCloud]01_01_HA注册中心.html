@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringCloud]01_01_HA注册中心 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Eureka,SpringCloud">
+    <meta name="description" content="说白就是 多个注册中心 之间可以 相互注册 , 实现冗余备份的功能. 那么 服务提供者  就不能只向一台机器注册, 必须 同时指定多个注册中心  这样才能达到注册中心高可用的效果. 配置过程先说明架构, 三个注册中心, 两个服务提供者, 一个消费者    名称 端口     reg-node01 9001   reg-node02 9002   reg-node03 9003   provider">
+<meta name="keywords" content="Eureka,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringCloud]01_01_HA注册中心">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]01_01_HA注册中心.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="说白就是 多个注册中心 之间可以 相互注册 , 实现冗余备份的功能. 那么 服务提供者  就不能只向一台机器注册, 必须 同时指定多个注册中心  这样才能达到注册中心高可用的效果. 配置过程先说明架构, 三个注册中心, 两个服务提供者, 一个消费者    名称 端口     reg-node01 9001   reg-node02 9002   reg-node03 9003   provider">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringCloud]01_01_HA注册中心">
+<meta name="twitter:description" content="说白就是 多个注册中心 之间可以 相互注册 , 实现冗余备份的功能. 那么 服务提供者  就不能只向一台机器注册, 必须 同时指定多个注册中心  这样才能达到注册中心高可用的效果. 配置过程先说明架构, 三个注册中心, 两个服务提供者, 一个消费者    名称 端口     reg-node01 9001   reg-node02 9002   reg-node03 9003   provider">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringCloud]01_01_HA注册中心</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringCloud]01_01_HA注册中心</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-28T16:01:01.000Z" itemprop="datePublished" class="page-time">
+  2018-06-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/">Eureka</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置过程"><span class="post-toc-number">1.</span> <span class="post-toc-text">配置过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改hosts映射"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">修改hosts映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注册中心配置"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">注册中心配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#服务提供者配置"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">服务提供者配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试结果"><span class="post-toc-number">2.</span> <span class="post-toc-text">测试结果</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#思考"><span class="post-toc-number">4.</span> <span class="post-toc-text">思考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringCloud/[SpringCloud]01_01_HA注册中心"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringCloud]01_01_HA注册中心</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-29 00:01:01" datetime="2018-06-28T16:01:01.000Z"  itemprop="datePublished">2018-06-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/">Eureka</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>说白就是 <code>多个注册中心</code> 之间可以 <code>相互注册</code> , 实现冗余备份的功能.</p>
+<p>那么 <code>服务提供者</code>  就不能只向一台机器注册, 必须 <code>同时指定多个注册中心</code> </p>
+<p>这样才能达到注册中心高可用的效果.</p>
+<h1 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h1><p>先说明架构, 三个注册中心, 两个服务提供者, 一个消费者</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reg-node01</td>
+<td>9001</td>
+</tr>
+<tr>
+<td>reg-node02</td>
+<td>9002</td>
+</tr>
+<tr>
+<td>reg-node03</td>
+<td>9003</td>
+</tr>
+<tr>
+<td>provider-01</td>
+<td>8001</td>
+</tr>
+<tr>
+<td>provider-02</td>
+<td>8002</td>
+</tr>
+<tr>
+<td>consumer</td>
+<td>9999</td>
+</tr>
+</tbody>
+</table>
+<h2 id="修改hosts映射"><a href="#修改hosts映射" class="headerlink" title="修改hosts映射"></a>修改hosts映射</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 reg-node01</span><br><span class="line">127.0.0.1 reg-node02</span><br><span class="line">127.0.0.1 reg-node03</span><br></pre></td></tr></table></figure>
+<h2 id="注册中心配置"><a href="#注册中心配置" class="headerlink" title="注册中心配置"></a>注册中心配置</h2><ol>
+<li><p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 9001</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: reg-node01</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    #指定主机名</span><br><span class="line">    hostname: reg-node01</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    fetch-registry: false</span><br><span class="line">    service-url:</span><br><span class="line">      #指定其他注册中心地址</span><br><span class="line">      defaultZone: http://reg-node02:9002/eureka/,http://reg-node03:9003/eureka/</span><br><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &quot;*&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他的注册中心类似, 修改 <code>eureka.instance.hostname</code>  和 <code>端口</code> ,同样指定其他注册中心的地址</p>
+</li>
+</ol>
+<h2 id="服务提供者配置"><a href="#服务提供者配置" class="headerlink" title="服务提供者配置"></a>服务提供者配置</h2><ol>
+<li><p>指定所有注册中心的地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8001</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      # 指定多个中心的地址</span><br><span class="line">      defaultZone: http://reg-node01:9001/eureka/,http://reg-node02:9002/eureka/,http://reg-node03:9003/eureka/</span><br><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &quot;*&quot;</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: service-provider</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><ol>
+<li>当一个服务注册时,  <code>所有注册中心</code> 会发现服务,并且在本机注册</li>
+<li>当某一台注册中心宕机或者异常, 其他注册中心依然可以提供服务发现</li>
+<li>当机器重启之后,服务会自动注册</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>HA机制在大数据领域应用比较广泛, 比如 <code>HDFS</code> 的  <code>standby/secondaryNamenode</code> ,  <code>Spark</code> 的 <code>standby</code> , <code>YARN</code> 等等. </p>
+<p>但是注册中心的冗余备份似乎并不是特别友好, 体现在以下几点:</p>
+<ol>
+<li>注册中心之间, 需要相互注册, 这样势必会形成 N*N 的网状结构, 当然可以通过,先 纵向注册横、再横向注册,形成树状结构.</li>
+<li>每个服务提供方也必须指定所有注册中心</li>
+<li>只有同时满足 <code>1</code> , <code>2</code> 条件才能实现高可用.</li>
+</ol>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>显然这个高可用注册中心十分不友好, 分析一下:</p>
+<ol>
+<li><p>如果新增一台注册中心机器,我们要做什么?<br>如果是树状结构, 可以在某个叶子节点下追加；如果是网状结构,那就很麻烦,要修改所有的注册中心配置文件. </p>
+</li>
+<li><p>如果新增一个服务我们要做什么?</p>
+<p>每个服务提供者指定所有注册中心.</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]01_01_HA注册中心.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]01_01_HA注册中心.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]02_Hystrix_断路器.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringCloud]02_Hystrix_断路器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]01_00_服务消费者.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringCloud]01_服务消费者</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

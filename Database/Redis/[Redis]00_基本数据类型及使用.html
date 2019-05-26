@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Redis]00_基本数据类型及使用 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Redis">
+    <meta name="description" content="概述一个  K V  型 NoSQL  数据库, 可用于缓存 ,消息队列等等.   5 大数据类型   strings: 任意类型 , 可以是 integer ,string , 二进制数据等等  最大支持 521M lists :  列表数据类型, 默认使用双向链表实现 sets :  集合,内容不能重复 hashes :  由 key  ,   field ,   value  三部分组成,字">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Redis]00_基本数据类型及使用">
+<meta property="og:url" content="https://willon.cn/Database/Redis/[Redis]00_基本数据类型及使用.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="概述一个  K V  型 NoSQL  数据库, 可用于缓存 ,消息队列等等.   5 大数据类型   strings: 任意类型 , 可以是 integer ,string , 二进制数据等等  最大支持 521M lists :  列表数据类型, 默认使用双向链表实现 sets :  集合,内容不能重复 hashes :  由 key  ,   field ,   value  三部分组成,字">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Redis]00_基本数据类型及使用">
+<meta name="twitter:description" content="概述一个  K V  型 NoSQL  数据库, 可用于缓存 ,消息队列等等.   5 大数据类型   strings: 任意类型 , 可以是 integer ,string , 二进制数据等等  最大支持 521M lists :  列表数据类型, 默认使用双向链表实现 sets :  集合,内容不能重复 hashes :  由 key  ,   field ,   value  三部分组成,字">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Redis]00_基本数据类型及使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Redis]00_基本数据类型及使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-10T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-10-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本命令"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">基本命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#strings"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">strings</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hashes"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">hashes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lists"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">lists</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sets"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">sets</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sorted-sets"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">sorted sets</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Database/Redis/[Redis]00_基本数据类型及使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Redis]00_基本数据类型及使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-11 00:00:00" datetime="2017-10-10T16:00:00.000Z"  itemprop="datePublished">2017-10-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>一个  <code>K V</code>  型 <code>NoSQL</code>  数据库, 可用于缓存 ,消息队列等等.  </p>
+<p>5 大数据类型 </p>
+<ul>
+<li><code>strings</code>: 任意类型 , 可以是 integer ,string , 二进制数据等等  最大支持 521M</li>
+<li><code>lists</code> :  列表数据类型, 默认使用双向链表实现</li>
+<li><code>sets</code> :  集合,内容不能重复</li>
+<li><code>hashes</code> :  由 <code>key</code>  ,   <code>field</code> ,   <code>value</code>  三部分组成,字段和对应的值可以有多个, 可以想象成一个完整的JSON对象 <code>user:  {name: chen, age:23}</code></li>
+<li><code>sorted sets</code> : 包含一个分数一个成员的有序集合</li>
+</ul>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><ul>
+<li><code>DBSIZE</code>  : 查询当前数据库的 <code>key</code>  的个数</li>
+<li><code>KEYS</code><ul>
+<li><code>KEYS   *</code>: 查询所有的 key</li>
+<li><code>KEYS  us?</code>: 查询符合通配符条件的 key</li>
+</ul>
+</li>
+<li><code>FLUSHDB</code> : 清空 <code>当前</code> 数据库</li>
+<li><code>FLUSHALL</code>: 清空 <code>所有</code> 数据库</li>
+</ul>
+<h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>基本命令 <code>set</code> , <code>get</code> , <code>mset</code> , <code>mget</code> , <code>del</code>, <code>incrby</code></p>
+<ol>
+<li><p>新增普通  <code>k  --&gt; v</code> 数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1 nx <span class="comment">#如果不存在 k1 , 设置 k1 的 值为 v1;  如果存在,  不创建</span></span><br><span class="line"><span class="built_in">set</span> k1 v1 xx <span class="comment">#如果存在 k1 ,设置值为 v1 , 如果不存在, 则不创建</span></span><br><span class="line"><span class="built_in">set</span> k2 v2 ex 20 <span class="comment">#设置k2 , 设置其过期时间 20s</span></span><br><span class="line"><span class="built_in">set</span> k2 v2 ex -1 <span class="comment">#设置k2永不过期</span></span><br><span class="line">get k2 <span class="comment">#获取k2</span></span><br><span class="line">ttl k2 <span class="comment">#查看 time-to-live,还有多久过期</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>批量操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MSET k1 v1 k2 v2 k3 v3 k4 v4  <span class="comment">#批量设置</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; MGET k1 k2 k3 k4  <span class="comment">#批量获取</span></span><br><span class="line">1) <span class="string">"v1"</span></span><br><span class="line">2) <span class="string">"v2"</span></span><br><span class="line">3) <span class="string">"v3"</span></span><br><span class="line">4) <span class="string">"v4"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>整型数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 10  <span class="comment">#设置 k1 的值为 10</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> mi 10</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; INCRBY mi 20 <span class="comment">#设置自增,20</span></span><br><span class="line">(<span class="built_in">integer</span>) 30</span><br><span class="line">127.0.0.1:6379&gt; INCRBY mi 20</span><br><span class="line">(<span class="built_in">integer</span>) 50</span><br><span class="line">127.0.0.1:6379&gt; INCRBY mi 20</span><br><span class="line">(<span class="built_in">integer</span>) 70</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">del k1</span><br><span class="line"><span class="built_in">set</span> k2 ex -2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="hashes"><a href="#hashes" class="headerlink" title="hashes"></a>hashes</h2><p>基本命令:  <code>HSET</code>, <code>HGET</code> , <code>HGETALL</code> , <code>HDEL</code></p>
+<p>可以想象成 一个完整的 JSON 对象</p>
+<ol>
+<li><p>新增</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hset user name Willon <span class="comment">#设置用户名</span></span><br><span class="line">hset user age  23     <span class="comment">#设置用户age</span></span><br><span class="line">hset user gender male <span class="comment">#设置gender</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HGET user name   <span class="comment">#获取某个字段</span></span><br><span class="line"><span class="string">"chen"</span></span><br><span class="line">127.0.0.1:6379&gt; HGETALL user      <span class="comment">#获取所有字段信息</span></span><br><span class="line">1) <span class="string">"name"</span></span><br><span class="line">2) <span class="string">"chen"</span></span><br><span class="line">3) <span class="string">"id"</span></span><br><span class="line">4) <span class="string">"1001"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdel user  <span class="comment">#删除</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="lists"><a href="#lists" class="headerlink" title="lists"></a>lists</h2><p> 双向链表结构</p>
+<p>基本命令 <code>LPUSH</code> , <code>RPUSH</code> , <code>LRANGE</code> , <code>LREM</code></p>
+<ol>
+<li><p>左边为入口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">LPUSH lst01  1 2 3 4 5  <span class="comment">#向lst01中 插入 数字</span></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; LRANGE lst01  0 -1 <span class="comment">#获取所有数据</span></span><br><span class="line">1) <span class="string">"5"</span></span><br><span class="line">2) <span class="string">"4"</span></span><br><span class="line">3) <span class="string">"3"</span></span><br><span class="line">4) <span class="string">"2"</span></span><br><span class="line">5) <span class="string">"1"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; LPOP lst01  <span class="comment">#弹出一个元素</span></span><br><span class="line"><span class="string">"5"</span></span><br><span class="line"></span><br><span class="line">LREM lst 2 4  <span class="comment">#删除 2 个 4</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右边为入口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; RPUSH lst02 1 2 3 4 5 6</span><br><span class="line">(<span class="built_in">integer</span>) 6</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; LRANGE lst02 0 -1 <span class="comment">#注意仍然是 LRANGE</span></span><br><span class="line">1) <span class="string">"1"</span></span><br><span class="line">2) <span class="string">"2"</span></span><br><span class="line">3) <span class="string">"3"</span></span><br><span class="line">4) <span class="string">"4"</span></span><br><span class="line">5) <span class="string">"5"</span></span><br><span class="line">6) <span class="string">"6"</span></span><br><span class="line">127.0.0.1:6379&gt; RPOP lst02</span><br><span class="line"><span class="string">"6"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="sets"><a href="#sets" class="headerlink" title="sets"></a>sets</h2><p>基本命令 :  <code>SADD</code> , <code>SMEMBERS</code>  , <code>SREM</code> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SADD s1  1 2 2 3 3 3 4 4 5 6 <span class="comment">#新增set,设置成员</span></span><br><span class="line">(<span class="built_in">integer</span>) 6</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS s1  <span class="comment">#获取所有成员</span></span><br><span class="line">1) <span class="string">"1"</span></span><br><span class="line">2) <span class="string">"2"</span></span><br><span class="line">3) <span class="string">"3"</span></span><br><span class="line">4) <span class="string">"4"</span></span><br><span class="line">5) <span class="string">"5"</span></span><br><span class="line">6) <span class="string">"6"</span></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; SREM s1 2   <span class="comment">#删除一个成员</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+<h2 id="sorted-sets"><a href="#sorted-sets" class="headerlink" title="sorted sets"></a>sorted sets</h2><p>基本命令  <code>ZADD</code> , <code>ZRANGE</code>  , <code>ZREM</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加几个成员以及他们的分数</span></span><br><span class="line">127.0.0.1:6379&gt; ZADD games  70 tom 60 jack 74 rose</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line"></span><br><span class="line"><span class="comment">#查询</span></span><br><span class="line">127.0.0.1:6379&gt; ZRANGE games 0 -1</span><br><span class="line">1) <span class="string">"jack"</span></span><br><span class="line">2) <span class="string">"tom"</span></span><br><span class="line">3) <span class="string">"rose"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#带分数的查询,已经自动排序</span></span><br><span class="line">127.0.0.1:6379&gt; ZRANGE games 0 -1 withscores</span><br><span class="line">1) <span class="string">"jack"</span></span><br><span class="line">2) <span class="string">"60"</span></span><br><span class="line">3) <span class="string">"tom"</span></span><br><span class="line">4) <span class="string">"70"</span></span><br><span class="line">5) <span class="string">"rose"</span></span><br><span class="line">6) <span class="string">"74"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除 tom</span></span><br><span class="line">127.0.0.1:6379&gt; ZREM games tom</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Database/Redis/[Redis]00_基本数据类型及使用.html" target="_blank" rel="external">https://willon.cn/Database/Redis/[Redis]00_基本数据类型及使用.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Database/Redis/[Redis]01_基本配置.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Redis]01_基本配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Maven]02_ssm依赖.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Maven]02_ssm依赖</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

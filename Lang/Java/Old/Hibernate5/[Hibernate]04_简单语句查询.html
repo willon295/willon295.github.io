@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hibernate]04_简单语句查询 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hibernate">
+    <meta name="description" content="查询语言HQL是一种变相的语言，尽可能使用它，以免出现移植上的问题。特点  面向对象 关键字比如 SELECT ，FROM 和 WHERE 等不区分大小写 属性比如表名和列名是区分大小写的  FROM 语句其中 Employee 是类名12345678//指定类名String hql = &amp;quot;FROM Employee&amp;quot;;//也可以指定完整类名//String hql = &amp;qu">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hibernate]04_简单语句查询">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]04_简单语句查询.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="查询语言HQL是一种变相的语言，尽可能使用它，以免出现移植上的问题。特点  面向对象 关键字比如 SELECT ，FROM 和 WHERE 等不区分大小写 属性比如表名和列名是区分大小写的  FROM 语句其中 Employee 是类名12345678//指定类名String hql = &amp;quot;FROM Employee&amp;quot;;//也可以指定完整类名//String hql = &amp;qu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hibernate]04_简单语句查询">
+<meta name="twitter:description" content="查询语言HQL是一种变相的语言，尽可能使用它，以免出现移植上的问题。特点  面向对象 关键字比如 SELECT ，FROM 和 WHERE 等不区分大小写 属性比如表名和列名是区分大小写的  FROM 语句其中 Employee 是类名12345678//指定类名String hql = &amp;quot;FROM Employee&amp;quot;;//也可以指定完整类名//String hql = &amp;qu">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hibernate]04_简单语句查询</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hibernate]04_简单语句查询</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-12T04:22:33.000Z" itemprop="datePublished" class="page-time">
+  2016-10-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查询语言"><span class="post-toc-number">1.</span> <span class="post-toc-text">查询语言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FROM-语句"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">FROM 语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SELECT-AS-WHERE语句"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">SELECT,AS,WHERE语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ORDER-BY-GROUP-BY语句"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">ORDER BY,GROUP BY语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传参"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">传参</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UPDATE语句"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">UPDATE语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DELETE语句"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">DELETE语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#INSERT语句"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">INSERT语句</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分页查询"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">分页查询</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DISTINCT去重复"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">DISTINCT去重复</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用的方法"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">常用的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Criteria查询"><span class="post-toc-number">2.</span> <span class="post-toc-text">Criteria查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SQL查询"><span class="post-toc-number">3.</span> <span class="post-toc-text">SQL查询</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Old/Hibernate5/[Hibernate]04_简单语句查询"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hibernate]04_简单语句查询</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-12 12:22:33" datetime="2016-10-12T04:22:33.000Z"  itemprop="datePublished">2016-10-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="查询语言"><a href="#查询语言" class="headerlink" title="查询语言"></a>查询语言</h2><p>HQL是一种变相的语言，尽可能使用它，以免出现移植上的问题。特点</p>
+<ul>
+<li>面向对象</li>
+<li><code>关键字</code>比如 SELECT ，FROM 和 WHERE 等<code>不区分大小写</code></li>
+<li><code>属性</code>比如<code>表名</code>和<code>列名</code>是区分大小写的</li>
+</ul>
+<h3 id="FROM-语句"><a href="#FROM-语句" class="headerlink" title="FROM 语句"></a>FROM 语句</h3><p>其中 Employee 是类名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//指定类名</span><br><span class="line">String hql = &quot;FROM Employee&quot;;</span><br><span class="line"></span><br><span class="line">//也可以指定完整类名</span><br><span class="line">//String hql = &quot;FROM com.hibernatebook.criteria.Employee&quot;;</span><br><span class="line"></span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure></p>
+<h3 id="SELECT-AS-WHERE语句"><a href="#SELECT-AS-WHERE语句" class="headerlink" title="SELECT,AS,WHERE语句"></a>SELECT,AS,WHERE语句</h3><p>AS 用来给类分配别名[AS可以省略]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;FROM Employee AS E&quot;;</span><br><span class="line">//也可以这么写</span><br><span class="line">//String hql = &quot;FROM Employee  E&quot;;</span><br><span class="line"></span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure></p>
+<p>SELECT，WHERE用来限制查询结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//E.firstname的 firstname是属性，不是列名</span><br><span class="line">String hql = &quot;SELECT  E.firstname ,  E.salary  FROM Employee  E  WHERE  E.id=10&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure>
+<h3 id="ORDER-BY-GROUP-BY语句"><a href="#ORDER-BY-GROUP-BY语句" class="headerlink" title="ORDER BY,GROUP BY语句"></a>ORDER BY,GROUP BY语句</h3><p>ORDER BY 语句多属性进行排序，用逗号进行分割：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;FROM Employee E WHERE E.id &gt; 10 &quot; +</span><br><span class="line">             &quot;ORDER BY E.firstName DESC, E.salary DESC &quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure></p>
+<p>GROUP BY 语句的语法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;SELECT SUM(E.salary), E.firtName FROM Employee E &quot; +</span><br><span class="line">             &quot;GROUP BY E.firstName&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure></p>
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><p>类似于PrepareStateMent的传参，防 SQL 注入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//冒号 + 变量名</span><br><span class="line">String hql = &quot;FROM Employee E WHERE E.id = :e_id&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line"></span><br><span class="line">//setParameter方法传入参数的值</span><br><span class="line">query.setParameter(&quot;e_id&quot;,10);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure></p>
+<h3 id="UPDATE语句"><a href="#UPDATE语句" class="headerlink" title="UPDATE语句"></a>UPDATE语句</h3><p>query查询接口包含一个 executeUpdate() 方法，可以执行UPDATE 或 DELETE 或 INSERT语句。<br>UPDATE 可更新一个或多个对象的一个或多个属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;UPDATE Employee set salary = :salary &quot;  + </span><br><span class="line">             &quot;WHERE id = :employee_id&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">query.setParameter(&quot;salary&quot;, 1000);</span><br><span class="line">query.setParameter(&quot;employee_id&quot;, 10);</span><br><span class="line">int result = query.executeUpdate();</span><br></pre></td></tr></table></figure>
+<h3 id="DELETE语句"><a href="#DELETE语句" class="headerlink" title="DELETE语句"></a>DELETE语句</h3><p>DELETE 语句可以用来删除一个或多个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;DELETE FROM Employee &quot;  + </span><br><span class="line">             &quot;WHERE id = :employee_id&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">query.setParameter(&quot;employee_id&quot;, 10);</span><br><span class="line">int result = query.executeUpdate();</span><br></pre></td></tr></table></figure>
+<h3 id="INSERT语句"><a href="#INSERT语句" class="headerlink" title="INSERT语句"></a>INSERT语句</h3><p>只有当记录<code>从一个对象</code>插入到<code>另一个对象</code>时才支持 INSERT INTO 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;INSERT INTO Employee(firstName, lastName, salary)&quot;  + </span><br><span class="line">             &quot;SELECT firstName, lastName, salary FROM old_employee&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">int result = query.executeUpdate();</span><br></pre></td></tr></table></figure>
+<h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;FROM Employee&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">query.setFirstResult(1);</span><br><span class="line">query.setMaxResults(10);</span><br><span class="line">List results = query.list();</span><br></pre></td></tr></table></figure>
+<h3 id="DISTINCT去重复"><a href="#DISTINCT去重复" class="headerlink" title="DISTINCT去重复"></a>DISTINCT去重复</h3><p>有时候表中的某条数据可能有多条记录，distinct让它只出现一次<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String hql = &quot;SELECT count(distinct E.firstName) FROM Employee E&quot;;</span><br><span class="line">Query query = session.createQuery(hql);</span><br><span class="line">List results = query.list();</span><br><span class="line">//这里列出所有的姓氏，不重复</span><br></pre></td></tr></table></figure></p>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><ol>
+<li>avg(propertyName) : 属性的平均值</li>
+<li>count(propertyName or * )    : 属性在结果中出现的次数</li>
+<li>max(propertyName)    : 属性值的最大值</li>
+<li>min(propertyName )    : 属性值的最小值</li>
+<li>sum(propertyName)    : 属性值的总和</li>
+</ol>
+<h2 id="Criteria查询"><a href="#Criteria查询" class="headerlink" title="Criteria查询"></a>Criteria查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//已经不推荐使用了</span><br><span class="line">Criteria criteria =session.createCriteria(User.class);</span><br><span class="line">List&lt;User&gt;  list = criteria.list();</span><br></pre></td></tr></table></figure>
+<h2 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//已经不推荐使用了</span><br><span class="line">SQLQuery sqlQuery =session.createSQLQuery(&quot;select  * from  user;&quot;);</span><br><span class="line">sqlQuery.addEntity(User.class);</span><br><span class="line">List&lt;User&gt;  list = sqlQuery.list();</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Old/Hibernate5/[Hibernate]04_简单语句查询.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]04_简单语句查询.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]03_具体操作.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hibernate]03_具体操作</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]05_本地线程绑定的session.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hibernate]06_本地线程绑定的session</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

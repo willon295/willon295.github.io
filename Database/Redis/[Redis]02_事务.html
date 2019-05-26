@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Redis]02_事务 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Redis">
+    <meta name="description" content="命令:   MULTI : 标记一个事务块开始  DISCARD :  丢弃所有 MULTI 之后发的命令  EXEC:    执行所有 MULTI 之后发的命令 UNWATCH : 取消事务命令 WATCH key [key ...] : 锁定 key直到执行了 MULTI/EXEC命令  正常的执行没有异常的执行命令 1234567891011127.0.0.1:6379&amp;gt; MULTI">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Redis]02_事务">
+<meta property="og:url" content="https://willon.cn/Database/Redis/[Redis]02_事务.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="命令:   MULTI : 标记一个事务块开始  DISCARD :  丢弃所有 MULTI 之后发的命令  EXEC:    执行所有 MULTI 之后发的命令 UNWATCH : 取消事务命令 WATCH key [key ...] : 锁定 key直到执行了 MULTI/EXEC命令  正常的执行没有异常的执行命令 1234567891011127.0.0.1:6379&amp;gt; MULTI">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Redis]02_事务">
+<meta name="twitter:description" content="命令:   MULTI : 标记一个事务块开始  DISCARD :  丢弃所有 MULTI 之后发的命令  EXEC:    执行所有 MULTI 之后发的命令 UNWATCH : 取消事务命令 WATCH key [key ...] : 锁定 key直到执行了 MULTI/EXEC命令  正常的执行没有异常的执行命令 1234567891011127.0.0.1:6379&amp;gt; MULTI">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Redis]02_事务</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Redis]02_事务</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-10T16:02:00.000Z" itemprop="datePublished" class="page-time">
+  2017-10-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正常的执行"><span class="post-toc-number">1.</span> <span class="post-toc-text">正常的执行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非正常的执行"><span class="post-toc-number">2.</span> <span class="post-toc-text">非正常的执行</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交命令抛错"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">提交命令抛错</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行命令抛错"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">执行命令抛错</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#放弃事务"><span class="post-toc-number">3.</span> <span class="post-toc-text">放弃事务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Watch-监控"><span class="post-toc-number">4.</span> <span class="post-toc-text">Watch 监控</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Database/Redis/[Redis]02_事务"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Redis]02_事务</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-11 00:02:00" datetime="2017-10-10T16:02:00.000Z"  itemprop="datePublished">2017-10-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>命令: </p>
+<ul>
+<li><p><code>MULTI</code> : 标记一个事务块开始</p>
+</li>
+<li><p><code>DISCARD</code> :  丢弃所有 MULTI 之后发的命令</p>
+</li>
+<li><code>EXEC</code>:    执行所有 MULTI 之后发的命令</li>
+<li><code>UNWATCH</code> : 取消事务命令</li>
+<li><code>WATCH key [key ...]</code> : 锁定 key直到执行了 MULTI/EXEC命令</li>
+</ul>
+<h2 id="正常的执行"><a href="#正常的执行" class="headerlink" title="正常的执行"></a>正常的执行</h2><p>没有异常的执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MULTI  <span class="comment">#开启事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 vvvv <span class="comment">#执行命令, 命令会进入 QUEUE</span></span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span>  k2 sssss</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; EXEC   <span class="comment">#提交事务</span></span><br><span class="line">1) OK</span><br><span class="line">2) OK</span><br><span class="line">127.0.0.1:6379&gt; get k1</span><br><span class="line"><span class="string">"vvvv"</span></span><br></pre></td></tr></table></figure>
+<h2 id="非正常的执行"><a href="#非正常的执行" class="headerlink" title="非正常的执行"></a>非正常的执行</h2><h3 id="提交命令抛错"><a href="#提交命令抛错" class="headerlink" title="提交命令抛错"></a>提交命令抛错</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MULTI  <span class="comment">#开始事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 vvvvv  <span class="comment">#正常</span></span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k2 nnnnnn  <span class="comment">#正常</span></span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; getaaa  <span class="comment">#抛出异常</span></span><br><span class="line">(error) ERR unknown <span class="built_in">command</span> `getaaa`, with args beginning with: </span><br><span class="line">127.0.0.1:6379&gt;  <span class="built_in">set</span> k3 mmmmmm <span class="comment">#再执行其他</span></span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; EXEC   <span class="comment">#提交事务,所有命令不执行</span></span><br><span class="line">(error) EXECABORT Transaction discarded because of previous errors.</span><br><span class="line">127.0.0.1:6379&gt; get k2</span><br><span class="line"><span class="string">"sssss"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果: 所有命令都被抛弃, 没有执行</p>
+</blockquote>
+<h3 id="执行命令抛错"><a href="#执行命令抛错" class="headerlink" title="执行命令抛错"></a>执行命令抛错</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MULTI  <span class="comment">#开始事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 11111</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span>  k2 ssssss</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; INCR k2  <span class="comment">#提交执行后才出错</span></span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; get  k1</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; EXEC <span class="comment">#提交</span></span><br><span class="line">1) OK</span><br><span class="line">2) OK</span><br><span class="line">3) (error) ERR value is not an <span class="built_in">integer</span> or out of range</span><br><span class="line">4) <span class="string">"11111"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>仅出错的语句没有执行, 其他命令正常执行</p>
+</blockquote>
+<h2 id="放弃事务"><a href="#放弃事务" class="headerlink" title="放弃事务"></a>放弃事务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MULTI   <span class="comment">#开始事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 1111 </span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span>  k2 2222</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; DISCARD <span class="comment">#放弃事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get k1</span><br><span class="line"><span class="string">"vvvv"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Watch-监控"><a href="#Watch-监控" class="headerlink" title="Watch 监控"></a>Watch 监控</h2><p>当被Watch的 <code>key</code> 在 事务 <code>提交之前</code> 被 <code>修改</code> , <code>事务失败</code>   (相当于 数据库的 <code>乐观锁</code>)</p>
+<p>工作流程: </p>
+<ol>
+<li>线程A  <code>watch</code>  一个 <code>key</code> </li>
+<li>A 开始事务</li>
+<li>中间其他 线程B 修改key的值</li>
+<li>A 提交事务</li>
+<li>A发现 key 被修改了, 事务失败</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Database/Redis/[Redis]02_事务.html" target="_blank" rel="external">https://willon.cn/Database/Redis/[Redis]02_事务.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Logback]00_Logback通用配置.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Logback]00_Logback通用配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/Redis/[Redis]01_基本配置.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Redis]01_基本配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hibernate]01_开始_关系映射 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hibernate">
+    <meta name="description" content="框架介绍Hibernate将数据库的关系语句转换成面向对象语句，降低耦合。主要工作：  hibernate.cfg.xml  ：数据库连接信息，持久化类映射文件，其他全局配置 Model.hbm.xml : model 类和数据库表列的映射关系 session: 进行数据库访问的回话，所有的数据库操作语句由此对象完成  主要步骤 新建项目，导入jar 包 新建 hibernate.cfg.xml">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hibernate]01_开始_关系映射">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]02_映射.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="框架介绍Hibernate将数据库的关系语句转换成面向对象语句，降低耦合。主要工作：  hibernate.cfg.xml  ：数据库连接信息，持久化类映射文件，其他全局配置 Model.hbm.xml : model 类和数据库表列的映射关系 session: 进行数据库访问的回话，所有的数据库操作语句由此对象完成  主要步骤 新建项目，导入jar 包 新建 hibernate.cfg.xml">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hibernate]01_开始_关系映射">
+<meta name="twitter:description" content="框架介绍Hibernate将数据库的关系语句转换成面向对象语句，降低耦合。主要工作：  hibernate.cfg.xml  ：数据库连接信息，持久化类映射文件，其他全局配置 Model.hbm.xml : model 类和数据库表列的映射关系 session: 进行数据库访问的回话，所有的数据库操作语句由此对象完成  主要步骤 新建项目，导入jar 包 新建 hibernate.cfg.xml">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hibernate]01_开始_关系映射</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hibernate]01_开始_关系映射</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-12T04:22:33.000Z" itemprop="datePublished" class="page-time">
+  2016-10-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#框架介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">框架介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主要步骤"><span class="post-toc-number">2.</span> <span class="post-toc-text">主要步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Model映射"><span class="post-toc-number">4.</span> <span class="post-toc-text">Model映射</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xml-映射"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">xml 映射</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#User类代码"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">User类代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hibernate-cfg-xml配置"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">hibernate.cfg.xml配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#User-hbm-xml配置"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">User.hbm.xml配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注解映射"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">注解映射</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Students类"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">Students类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hibernate-cfg-xml配置-1"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">hibernate.cfg.xml配置</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Old/Hibernate5/[Hibernate]02_映射"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hibernate]01_开始_关系映射</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-12 12:22:33" datetime="2016-10-12T04:22:33.000Z"  itemprop="datePublished">2016-10-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hibernate/">Hibernate</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><p>Hibernate将数据库的关系语句转换成面向对象语句，降低耦合。主要工作：</p>
+<ol>
+<li><code>hibernate.cfg.xml</code>  ：数据库连接信息，持久化类映射文件，其他全局配置</li>
+<li><code>Model.hbm.xml</code> : model 类和数据库表列的映射关系</li>
+<li><code>session</code>: 进行数据库访问的回话，所有的数据库操作语句由此对象完成</li>
+</ol>
+<h1 id="主要步骤"><a href="#主要步骤" class="headerlink" title="主要步骤"></a>主要步骤</h1><ol>
+<li>新建项目，导入jar 包</li>
+<li>新建 <code>hibernate.cfg.xml</code> 配置文件（醒目配置等信息）</li>
+<li>新建 映射文件 <code>Model.hbm.xml</code> （实体类与数据库映射 ）</li>
+</ol>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;hibernate-configuration&gt;</span><br><span class="line">    &lt;session-factory&gt;</span><br><span class="line">        &lt;!--1. 驱动名--&gt;</span><br><span class="line">        &lt;property name=&quot;connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!--2. URL地址--&gt;</span><br><span class="line">        &lt;property name=&quot;connection.url&quot;&gt;jdbc:mysql://localhost/hibernate?useUnicode=true&amp;amp;characterEncoding=UTF-8&lt;/property&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!--3. 方言，用的什么数据库就指定什么--&gt;</span><br><span class="line">        &lt;property name=&quot;dialect&quot;&gt;org.hibernate.dialect.MySQL57Dialect&lt;/property&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!--4.  用户名 密码--&gt;</span><br><span class="line">        &lt;property name=&quot;connection.username&quot;&gt;root&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;connection.password&quot;&gt;root&lt;/property&gt;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        &lt;!--控制台输出 SQL语句 ，格式化SQL语句--&gt;</span><br><span class="line">        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;format_sql&quot;&gt;true&lt;/property&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;/session-factory&gt;</span><br><span class="line">&lt;/hibernate-configuration&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="Model映射"><a href="#Model映射" class="headerlink" title="Model映射"></a>Model映射</h1><h2 id="xml-映射"><a href="#xml-映射" class="headerlink" title="xml 映射"></a>xml 映射</h2><h3 id="User类代码"><a href="#User类代码" class="headerlink" title="User类代码"></a>User类代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package entity;</span><br><span class="line"></span><br><span class="line">public class User &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getUsername() &#123;</span><br><span class="line">        return username;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUsername(String username) &#123;</span><br><span class="line">        this.username = username;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hibernate-cfg-xml配置"><a href="#hibernate-cfg-xml配置" class="headerlink" title="hibernate.cfg.xml配置"></a>hibernate.cfg.xml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 同时配置 entity类  和 xml 文件 --&gt;</span><br><span class="line">&lt;mapping class=&quot;entity.User&quot;/&gt;</span><br><span class="line">&lt;mapping resource=&quot;entity/User.hbm.xml&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="User-hbm-xml配置"><a href="#User-hbm-xml配置" class="headerlink" title="User.hbm.xml配置"></a>User.hbm.xml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;class name=&quot;entity.User&quot; table=&quot;user&quot; schema=&quot;demo&quot;&gt;</span><br><span class="line">        &lt;id name=&quot;id&quot; column=&quot;id&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; column=&quot;username&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; column=&quot;password&quot;/&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="注解映射"><a href="#注解映射" class="headerlink" title="注解映射"></a>注解映射</h2><h3 id="Students类"><a href="#Students类" class="headerlink" title="Students类"></a>Students类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">package entity;</span><br><span class="line">import javax.persistence.*;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 1. 类名之前指定  表名</span><br><span class="line"> * 2. get方法前指定  列名</span><br><span class="line"> * 3. 也可以在属性前直接指定 列名，不推荐</span><br><span class="line"> */</span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;students&quot;)</span><br><span class="line">public class Students &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String sid;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">    private Date birthday;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @Column(name = &quot;id&quot;)</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Basic</span><br><span class="line">    @Column(name = &quot;sid&quot;)</span><br><span class="line">    public String getSid() &#123;</span><br><span class="line">        return sid;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setSid(String sid) &#123;</span><br><span class="line">        this.sid = sid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Basic</span><br><span class="line">    @Column(name = &quot;name&quot;)</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    @Basic</span><br><span class="line">    @Column(name = &quot;age&quot;)</span><br><span class="line">    public Integer getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(Integer age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    @Basic</span><br><span class="line">    @Column(name = &quot;birthday&quot;)</span><br><span class="line">    public Date getBirthday() &#123;</span><br><span class="line">        return birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBirthday(Date birthday) &#123;</span><br><span class="line">        this.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hibernate-cfg-xml配置-1"><a href="#hibernate-cfg-xml配置-1" class="headerlink" title="hibernate.cfg.xml配置"></a>hibernate.cfg.xml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 只需要配置entity 类 --&gt;</span><br><span class="line">&lt;mapping class=&quot;entity.Students&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Old/Hibernate5/[Hibernate]02_映射.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Old/Hibernate5/[Hibernate]02_映射.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]01_配置文件.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hibernate]配置文件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Old/Hibernate5/[Hibernate]03_具体操作.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hibernate]03_具体操作</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[MySQL]主从复制配置 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="MySQL">
+    <meta name="description" content="master配置 master修改配置文件 /etc/my.cnf  123456789[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.socksymbolic-links=0character-set-server=utf8server-id=1log-bin=logbinlog-do-db=test   #如果不指定， 则默认">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[MySQL]主从复制配置">
+<meta property="og:url" content="https://willon.cn/Database/MySQL/[MySQL]主从复制.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="master配置 master修改配置文件 /etc/my.cnf  123456789[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.socksymbolic-links=0character-set-server=utf8server-id=1log-bin=logbinlog-do-db=test   #如果不指定， 则默认">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[MySQL]主从复制配置">
+<meta name="twitter:description" content="master配置 master修改配置文件 /etc/my.cnf  123456789[mysqld]datadir=/var/lib/mysqlsocket=/var/lib/mysql/mysql.socksymbolic-links=0character-set-server=utf8server-id=1log-bin=logbinlog-do-db=test   #如果不指定， 则默认">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[MySQL]主从复制配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[MySQL]主从复制配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-01T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-02-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#master配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">master配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#slave配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">slave配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试"><span class="post-toc-number">3.</span> <span class="post-toc-text">测试</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Database/MySQL/[MySQL]主从复制"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[MySQL]主从复制配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-02 00:00:00" datetime="2018-02-01T16:00:00.000Z"  itemprop="datePublished">2018-02-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="master配置"><a href="#master配置" class="headerlink" title="master配置"></a>master配置</h1><ol>
+<li>master修改配置文件 <code>/etc/my.cnf</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">symbolic-links=0</span><br><span class="line">character-set-server=utf8</span><br><span class="line">server-id=1</span><br><span class="line">log-bin=log</span><br><span class="line">binlog-do-db=test   #如果不指定， 则默认会备份所有的库</span><br><span class="line">binlog-ignore-db=mysql #忽略哪些数据库</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>master授权slave并且刷新权限</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">REPLICATION</span> <span class="keyword">SLAVE</span>,<span class="keyword">FILE</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'willon'</span>@<span class="string">'10.0.0.14'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">flush</span>    <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>重新登陆master ， 查看master 状态</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; show  master  status  \G; </span><br><span class="line"></span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">            File: log.000002</span><br><span class="line">        Position: 245</span><br><span class="line">    Binlog_Do_DB: test</span><br><span class="line">Binlog_Ignore_DB: mysql</span><br></pre></td></tr></table></figure>
+<h1 id="slave配置"><a href="#slave配置" class="headerlink" title="slave配置"></a>slave配置</h1><ol>
+<li>slave修改配置文件 <code>/etc/my.cnf</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">symbolic-links=0</span><br><span class="line">character-set-server=utf8</span><br><span class="line">server-id=2  #配置server-id</span><br><span class="line">relay-log=/var/lib/mysql/relay-bin</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>指定master的备份文件， 以及登陆所需要的信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO MASTER_HOST=&apos;10.0.0.13&apos;,MASTER_USER=&apos;willon&apos;, MASTER_PASSWORD=&apos;123456&apos;, MASTER_LOG_FILE=&apos;log.000001&apos;, MASTER_LOG_POS= 245;</span><br><span class="line">start slave ;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li>在master的test库中新建表</li>
+<li>在slave中可以查询到新的表</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Database/MySQL/[MySQL]主从复制.html" target="_blank" rel="external">https://willon.cn/Database/MySQL/[MySQL]主从复制.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Database/MySQL/[MySQL]CPU爆满问题排查.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[MySQL]问题排查_优化</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]12_柯里化Currying.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]12_柯里化Currying</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

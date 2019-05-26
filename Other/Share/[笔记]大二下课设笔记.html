@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[笔记]大二下课设总结 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="笔记">
+    <meta name="description" content="数据库触发器 为什么要用触发器？ 主要是想要一个log的功能，当管理操作授权时，自动记录管理的操作的对象，时间，作了那些改动。如果用代码实现实在是太蠢了，费时费力。还会出bug。如果用数据库的触发器。当授权表发生改变时,触发器会生效，完成想要的功能。  怎么写？    添加授权触发器(addtrigger)  说明：添加授权时自动向日志表插入数据,   12345678DROP TRIGGER I">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[笔记]大二下课设总结">
+<meta property="og:url" content="https://willon.cn/Other/Share/[笔记]大二下课设笔记.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="数据库触发器 为什么要用触发器？ 主要是想要一个log的功能，当管理操作授权时，自动记录管理的操作的对象，时间，作了那些改动。如果用代码实现实在是太蠢了，费时费力。还会出bug。如果用数据库的触发器。当授权表发生改变时,触发器会生效，完成想要的功能。  怎么写？    添加授权触发器(addtrigger)  说明：添加授权时自动向日志表插入数据,   12345678DROP TRIGGER I">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215143_xtztjgt.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215040_xtgnjgt.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214826_usecase.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214858_ylgy.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214922_lct.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214958_e-r.jpg">
+<meta property="og:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215844_sxt.jpg">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[笔记]大二下课设总结">
+<meta name="twitter:description" content="数据库触发器 为什么要用触发器？ 主要是想要一个log的功能，当管理操作授权时，自动记录管理的操作的对象，时间，作了那些改动。如果用代码实现实在是太蠢了，费时费力。还会出bug。如果用数据库的触发器。当授权表发生改变时,触发器会生效，完成想要的功能。  怎么写？    添加授权触发器(addtrigger)  说明：添加授权时自动向日志表插入数据,   12345678DROP TRIGGER I">
+<meta name="twitter:image" content="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215143_xtztjgt.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[笔记]大二下课设总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[笔记]大二下课设总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-08T15:50:06.000Z" itemprop="datePublished" class="page-time">
+  2017-01-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/学习/">学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据库触发器"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据库触发器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#监听器"><span class="post-toc-number">2.</span> <span class="post-toc-text">监听器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#过滤器"><span class="post-toc-number">3.</span> <span class="post-toc-text">过滤器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文档整理"><span class="post-toc-number">4.</span> <span class="post-toc-text">文档整理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统总体架构图"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">系统总体架构图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统功能结构图"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">系统功能结构图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用例图"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">用例图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用例规约"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">用例规约</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#流程图"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">流程图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库E-R图"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">数据库E-R图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时序图"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">时序图</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Other/Share/[笔记]大二下课设笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[笔记]大二下课设总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-08 23:50:06" datetime="2017-01-08T15:50:06.000Z"  itemprop="datePublished">2017-01-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/学习/">学习</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="数据库触发器"><a href="#数据库触发器" class="headerlink" title="数据库触发器"></a>数据库触发器</h1><ol>
+<li><p>为什么要用触发器？<br> 主要是想要一个log的功能，当管理操作授权时，自动记录管理的操作的对象，时间，作了那些改动。如果用代码实现实在是太蠢了，费时费力。还会出bug。如果用数据库的触发器。当授权表发生改变时,触发器会生效，完成想要的功能。</p>
+</li>
+<li><p>怎么写？</p>
+</li>
+</ol>
+<ul>
+<li><p>添加授权触发器(addtrigger)<br>  说明：添加授权时自动向日志表插入数据,</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER IF EXISTS `addlog`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line">CREATE TRIGGER `addlog` </span><br><span class="line">AFTER INSERT ON `auth` FOR EACH ROW </span><br><span class="line">insert into logauth </span><br><span class="line">(operatetype,operatetime,username,userurl,authendtime)</span><br><span class="line"> values (&apos;add&apos;,now(),new.username,new.userurl,new.authendtime)</span><br><span class="line">;;DELIMITER ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除授权触发器(deletetrigger)<br>  说明：删除授权时自动向日志表插入数据。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER IF EXISTS `deletelog`;</span><br><span class="line">DELIMITER ;;</span><br><span class="line">CREATE TRIGGER `deletelog` BEFORE DELETE ON `auth` FOR EACH ROW</span><br><span class="line">insert into logauth </span><br><span class="line">(operatetype,operatetime,username,userurl,authendtime) </span><br><span class="line">   values</span><br><span class="line"> (&apos;delete&apos;,now(),old.username,old.userurl,old.authendtime)</span><br><span class="line">;;</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>new 表示新插入的的数据，old 表示原本的数据。before,after是触发的时间</p>
+</blockquote>
+<h1 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h1><ol>
+<li><p>为什么要监听器</p>
+<p> 想要这样一个功能：服务器的<code>项目启动时</code>，<code>自动定时</code>的扫描用户的到期时间，和当前时间进行对比，如果小于当前时间，将用户状态设置为无效。</p>
+</li>
+<li><p>实现</p>
+<ul>
+<li>创建一个<code>Timer</code> 对象，调用<code>timer.schedule(TimerTask  timertask)</code>方法</li>
+<li>方法传入一个<code>timertask</code>对象</li>
+<li>重写<code>timertask</code> 的<code>run()</code>方法,这里写自动处理的代码；</li>
+<li>创建一个<code>Listenner</code> ,在方法<code>contextInitialized(ServletContextEvent sce)</code>中调用执行方法</li>
+</ul>
+</li>
+<li><p>代码实现：</p>
+<p> 执行任务的工具类</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class ScheduleTask &#123;</span><br><span class="line">   /**</span><br><span class="line">    * 用于扫描用户授权 时间，如果时间小于当前时间，则将用户的状态改成无效</span><br><span class="line">    * @throws Exception</span><br><span class="line">    */</span><br><span class="line">   public void scannerUserState() throws Exception &#123;</span><br><span class="line">       SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">       AuthDAOImpl authDAO = new AuthDAOImpl();</span><br><span class="line">       TimerTask timerTask = new TimerTask() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line">               List authlist = null;</span><br><span class="line">               try &#123;</span><br><span class="line">                   authlist = authDAO.getActiveAuth();</span><br><span class="line">                   for (Object auths : authlist</span><br><span class="line">                           ) &#123;</span><br><span class="line">                       Auth auth = (Auth) auths;</span><br><span class="line">                           Date authdate = sdf.parse(auth.get_auth_end_time());</span><br><span class="line">                           if (authdate.before(new Date())) &#123;</span><br><span class="line">                               authDAO.changeAuthState(auth);</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">               &#125; catch (Exception e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;;</span><br><span class="line">       Timer timer = new Timer();</span><br><span class="line">	//参数：task 对象，开始时间，执行间隔</span><br><span class="line">       timer.schedule(timerTask, new Date(), 60000);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> Listenner的关键代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void contextInitialized(ServletContextEvent sce) &#123;</span><br><span class="line">    ScheduleTask s= new ScheduleTask();</span><br><span class="line">    try &#123;</span><br><span class="line">        s.scannerUserState();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        System.out.println(&quot;扫描启动失败&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h1><p>用于登录安全验证、防止url传参进行数据注入。 </p>
+<h1 id="文档整理"><a href="#文档整理" class="headerlink" title="文档整理"></a>文档整理</h1><h2 id="系统总体架构图"><a href="#系统总体架构图" class="headerlink" title="系统总体架构图"></a>系统总体架构图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215143_xtztjgt.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="系统功能结构图"><a href="#系统功能结构图" class="headerlink" title="系统功能结构图"></a>系统功能结构图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215040_xtgnjgt.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214826_usecase.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="用例规约"><a href="#用例规约" class="headerlink" title="用例规约"></a>用例规约</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214858_ylgy.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214922_lct.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="数据库E-R图"><a href="#数据库E-R图" class="headerlink" title="数据库E-R图"></a>数据库E-R图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621214958_e-r.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://blogimgs-1252094786.cossh.myqcloud.com/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E8%AF%BE%E8%AE%BE/20170621215844_sxt.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Other/Share/[笔记]大二下课设笔记.html" target="_blank" rel="external">https://willon.cn/Other/Share/[笔记]大二下课设笔记.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Other/Share/[小程序]ChromeExtension-CL云解析.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Chrome Extensions] CL云解析</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Linux/[Nginx]Nginx基本配置.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Nginx]Nginx基本配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

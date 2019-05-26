@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]03_01_运算符优先级_位运算_逻辑运算 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="Java运算符优先级 运算符优先级 ,从高到低1234567- 四则运算(包括++ ,--,~)- 移位- 判断(&amp;gt;,&amp;gt;=,&amp;lt;,&amp;lt;=,!=,==)- 位运算(^ | &amp;amp;)- 逻辑运算 ( ||,&amp;amp;&amp;amp; )- 三目( ? : )- 带有赋值的运算 (+=, &amp;gt;&amp;gt;=, &amp;amp;= ,=)   a++ , ++aa++ ,先运算，后++，给a赋">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]03_01_运算符优先级_位运算_逻辑运算">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]03_01_位运算_逻辑运算.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Java运算符优先级 运算符优先级 ,从高到低1234567- 四则运算(包括++ ,--,~)- 移位- 判断(&amp;gt;,&amp;gt;=,&amp;lt;,&amp;lt;=,!=,==)- 位运算(^ | &amp;amp;)- 逻辑运算 ( ||,&amp;amp;&amp;amp; )- 三目( ? : )- 带有赋值的运算 (+=, &amp;gt;&amp;gt;=, &amp;amp;= ,=)   a++ , ++aa++ ,先运算，后++，给a赋">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]03_01_运算符优先级_位运算_逻辑运算">
+<meta name="twitter:description" content="Java运算符优先级 运算符优先级 ,从高到低1234567- 四则运算(包括++ ,--,~)- 移位- 判断(&amp;gt;,&amp;gt;=,&amp;lt;,&amp;lt;=,!=,==)- 位运算(^ | &amp;amp;)- 逻辑运算 ( ||,&amp;amp;&amp;amp; )- 三目( ? : )- 带有赋值的运算 (+=, &amp;gt;&amp;gt;=, &amp;amp;= ,=)   a++ , ++aa++ ,先运算，后++，给a赋">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]03_01_运算符优先级_位运算_逻辑运算</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]03_01_运算符优先级_位运算_逻辑运算</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-11T16:03:01.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java运算符优先级"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java运算符优先级</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#a-a"><span class="post-toc-number">2.</span> <span class="post-toc-text">a++ , ++a</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逻辑运算"><span class="post-toc-number">3.</span> <span class="post-toc-text">逻辑运算</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#位运算符"><span class="post-toc-number">4.</span> <span class="post-toc-text">位运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#amp-与"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">&amp; 与</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#或"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">| 或</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#亦或"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">^ 亦或</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#取反"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">~ 取反</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gt-gt-lt-lt-移位"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">&gt;&gt;  &lt;&lt; 移位</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gt-gt-gt-无符号移位"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">&gt;&gt;&gt; 无符号移位</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]03_01_位运算_逻辑运算"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]03_01_运算符优先级_位运算_逻辑运算</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 00:03:01" datetime="2016-05-11T16:03:01.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Java运算符优先级"><a href="#Java运算符优先级" class="headerlink" title="Java运算符优先级"></a>Java运算符优先级</h1><ol>
+<li>运算符优先级 ,从高到低<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- 四则运算(包括++ ,--,~)</span><br><span class="line">- 移位</span><br><span class="line">- 判断(&gt;,&gt;=,&lt;,&lt;=,!=,==)</span><br><span class="line">- 位运算(^ | &amp;)</span><br><span class="line">- 逻辑运算 ( ||,&amp;&amp; )</span><br><span class="line">- 三目( ? : )</span><br><span class="line">- 带有赋值的运算 (+=, &gt;&gt;=, &amp;= ,=)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="a-a"><a href="#a-a" class="headerlink" title="a++ , ++a"></a>a++ , ++a</h1><p>a++ ,先运算，后++，给a赋值;<br>++a ,先++,给a赋值 ，后做其他运算;</p>
+<h1 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h1><p>逻辑运算符包括 <code>&amp;&amp;</code> ,  <code>||</code> ,<code>==</code> , <code>!=</code><br>返回的结果是 <code>true</code> 或者 <code>false</code> </p>
+<ol>
+<li><code>A &amp;&amp; B</code><br>当且仅当 A 、B都为 true 时，返回 true</li>
+<li><code>A || B</code><br>A或者B之一为 true，返回 true；<br>如果 A 为 true，则不处理B，直接返回 true</li>
+</ol>
+<h1 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h1><p>位运算符包括</p>
+<p><code>^</code> ,  <code>~</code> ,  <code>&amp;</code> , <code>|</code> ，<code>&gt;&gt;</code> , <code>&lt;&lt;</code> ,  <code>&gt;&gt;&gt;</code></p>
+<h2 id="amp-与"><a href="#amp-与" class="headerlink" title="&amp; 与"></a>&amp; 与</h2><p>可以理解为 &amp;&amp; 运算， 1 =&gt; true , 0 =&gt; false</p>
+<p>a &amp; b </p>
+<ol>
+<li>将 a , b 转换为 二进制</li>
+<li>对应位 都为 1， 结果 1； 其他情况，结果 0</li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8 &amp; 9</span><br><span class="line">=&gt; 1000 &amp; 1001 = 1000</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="或"><a href="#或" class="headerlink" title="| 或"></a>| 或</h2><p>可以理解为 || 运算  1 =&gt; true ,0 =&gt; false</p>
+<p>a | b</p>
+<ol>
+<li>将a，b转换成二进制</li>
+<li>对应位 都为 0，结果 0，否则 1</li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8 | 9</span><br><span class="line">=&gt; 1000 | 1001  = 1001</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="亦或"><a href="#亦或" class="headerlink" title="^ 亦或"></a>^ 亦或</h2><p>亦或运算，对应位相同，结果 0 ； 对应位不同，结果 1; 可以理解为同性相杀</p>
+<p>a ^ b</p>
+<ol>
+<li>将 a ， b 转化成 二进制</li>
+<li>亦或</li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8 ^ 9</span><br><span class="line">=&gt; 1000 ^ 1001 = 0001</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="取反"><a href="#取反" class="headerlink" title="~ 取反"></a>~ 取反</h2><p>按位取反</p>
+<p>~a</p>
+<ol>
+<li>将a 转化成二进制</li>
+<li>0变1，1变0</li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~8</span><br><span class="line">=&gt; ~ 00001000 = 11110111</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="gt-gt-lt-lt-移位"><a href="#gt-gt-lt-lt-移位" class="headerlink" title="&gt;&gt;  &lt;&lt; 移位"></a>&gt;&gt;  &lt;&lt; 移位</h2><p>看箭头方向，就是那样移位</p>
+<p>a &gt;&gt; i</p>
+<ol>
+<li>将 a 转化成二进制</li>
+<li>向右移 i 位</li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8 &gt;&gt; 2</span><br><span class="line"></span><br><span class="line">=&gt; 1000 &gt;&gt; 2 = 0010</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="gt-gt-gt-无符号移位"><a href="#gt-gt-gt-无符号移位" class="headerlink" title="&gt;&gt;&gt; 无符号移位"></a>&gt;&gt;&gt; 无符号移位</h2><p>用法与 &gt;&gt; 差不多，但是他会连 符号位一起移动</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]03_01_位运算_逻辑运算.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]03_01_位运算_逻辑运算.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Java]03_02_反码补码字节.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]03_02_反码补码字节</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]02_Java程序执行的顺序.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]02_Java程序执行的顺序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

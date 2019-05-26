@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SEO]Let-Encrypt实现Https | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SEO">
+    <meta name="description" content="Lets-Encrypt是什么一个推动全民 https 的良心组织。 说明 系统 ： Centos-7.2 x64 web服务器; Nginx  开始官网在 这里 生成证书 准备工作 123$ yum -y install yum-utils$ yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-s">
+<meta name="keywords" content="SEO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SEO]Let-Encrypt实现Https">
+<meta property="og:url" content="https://willon.cn/Frontend/[SEO] Lets-Encrypt实现https.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Lets-Encrypt是什么一个推动全民 https 的良心组织。 说明 系统 ： Centos-7.2 x64 web服务器; Nginx  开始官网在 这里 生成证书 准备工作 123$ yum -y install yum-utils$ yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-s">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SEO]Let-Encrypt实现Https">
+<meta name="twitter:description" content="Lets-Encrypt是什么一个推动全民 https 的良心组织。 说明 系统 ： Centos-7.2 x64 web服务器; Nginx  开始官网在 这里 生成证书 准备工作 123$ yum -y install yum-utils$ yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-s">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SEO]Let-Encrypt实现Https</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SEO]Let-Encrypt实现Https</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-06T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SEO/">SEO</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Lets-Encrypt是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">Lets-Encrypt是什么</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#说明"><span class="post-toc-number">2.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始"><span class="post-toc-number">3.</span> <span class="post-toc-text">开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成证书"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">生成证书</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置证书"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">配置证书</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自动更新证书"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">自动更新证书</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Frontend/[SEO] Lets-Encrypt实现https"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SEO]Let-Encrypt实现Https</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-07 00:00:00" datetime="2018-06-06T16:00:00.000Z"  itemprop="datePublished">2018-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SEO/">SEO</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Lets-Encrypt是什么"><a href="#Lets-Encrypt是什么" class="headerlink" title="Lets-Encrypt是什么"></a>Lets-Encrypt是什么</h1><p>一个推动全民 https 的良心组织。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ol>
+<li>系统 ： <code>Centos-7.2 x64</code></li>
+<li>web服务器; <code>Nginx</code></li>
+</ol>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>官网在 <a href="https://certbot.eff.org/lets-encrypt" target="_blank" rel="noopener">这里</a></p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><ol>
+<li><p>准备工作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install yum-utils</span><br><span class="line">$ yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional</span><br><span class="line">$ yum install python2-certbot-nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始生成，根据提示输入邮箱，域名等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ certbot --nginx certonly</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>出现一下内容表示成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">congratulations ！.....</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">ssl_certificate &quot;/etc/letsencrypt/live/willon.cn/fullchain.pem&quot;; #证书</span><br><span class="line">ssl_certificate_key &quot;/etc/letsencrypt/live/willon.cn/privkey.pem&quot;; #私钥</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="配置证书"><a href="#配置证书" class="headerlink" title="配置证书"></a>配置证书</h2><ol>
+<li>站点配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd /etc/nginx</span><br><span class="line">$ mkdir vhosts</span><br><span class="line">$ cd vhosts</span><br><span class="line">$ vi willon_cn.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>写入内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl http2 default_server;</span><br><span class="line">    listen       [::]:443 ssl http2 default_server;</span><br><span class="line">    server_name  willon.cn;</span><br><span class="line">    root         /www/willon_cn;</span><br><span class="line">    ssl_certificate &quot;/etc/letsencrypt/live/willon.cn/fullchain.pem&quot;;</span><br><span class="line">    ssl_certificate_key &quot;/etc/letsencrypt/live/willon.cn/privkey.pem&quot;;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  10m;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">        location = /40x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li><code>/etc/nginx/nginx.conf</code>，加载站点配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /etc/nginx/vhosts/*.conf</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>重启nginx<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="自动更新证书"><a href="#自动更新证书" class="headerlink" title="自动更新证书"></a>自动更新证书</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 1 * 1  certbot renew</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Frontend/[SEO] Lets-Encrypt实现https.html" target="_blank" rel="external">https://willon.cn/Frontend/[SEO] Lets-Encrypt实现https.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SEO/">SEO</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]00_设计模式介绍.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Design_Pattern]00_设计模式介绍</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/Oracle/[Oracle]07_JDBC.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Oracle]07_JDBC</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

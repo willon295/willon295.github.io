@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]ClassLoader类加载 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="类加载顺序                                                                                                           大致过程 1加载  -&amp;gt; 验证  -&amp;gt; 准备  -&amp;gt; 解析 -&amp;gt; 初始化  -&amp;gt;  使用  -&amp;gt; 卸载  加载  通过类的全限定名，获取其定">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]ClassLoader类加载">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]ClassLoader.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="类加载顺序                                                                                                           大致过程 1加载  -&amp;gt; 验证  -&amp;gt; 准备  -&amp;gt; 解析 -&amp;gt; 初始化  -&amp;gt;  使用  -&amp;gt; 卸载  加载  通过类的全限定名，获取其定">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/classloader.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]ClassLoader类加载">
+<meta name="twitter:description" content="类加载顺序                                                                                                           大致过程 1加载  -&amp;gt; 验证  -&amp;gt; 准备  -&amp;gt; 解析 -&amp;gt; 初始化  -&amp;gt;  使用  -&amp;gt; 卸载  加载  通过类的全限定名，获取其定">
+<meta name="twitter:image" content="https://willon.cn/images/classloader.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]ClassLoader类加载</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]ClassLoader类加载</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-01T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类加载顺序"><span class="post-toc-number">1.</span> <span class="post-toc-text">类加载顺序</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]ClassLoader"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]ClassLoader类加载</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-02-02 00:00:00" datetime="2017-02-01T16:00:00.000Z"  itemprop="datePublished">2017-02-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="类加载顺序"><a href="#类加载顺序" class="headerlink" title="类加载顺序"></a>类加载顺序</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/classloader.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>大致过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载  -&gt; 验证  -&gt; 准备  -&gt; 解析 -&gt; 初始化  -&gt;  使用  -&gt; 卸载</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>加载</p>
+<ul>
+<li>通过类的全限定名，获取其定义的二进制字节流</li>
+<li>将字节流代表的存储结构转化成方法区的运行时数据结构（还没有进入方法区）</li>
+<li>在 堆中生成一个代表类的对象， 作为对方法区中这些数据 的访问入口</li>
+</ul>
+</li>
+<li><p>验证<br>确保Class文件中的字节流信息符合当前虚拟机的要求，不会危害虚拟机的安全。大致验证： <code>文件格式的验证</code> 、<code>元数据的验证</code> 、<code>字节码验证</code> 和 <code>符号引用验证</code> 。</p>
+<ul>
+<li>文件格式验证： 验证 <code>字节流</code> 是否符合 <code>class</code> 文件规范</li>
+<li>元数据验证： 对数据进行 语法校验，保证其 符合 Java 语法规范</li>
+<li>字节码验证： 数据流、控制流分析，确保方法运行不会危害到 JVM</li>
+<li>符号引用验证： 对类之外的信息（常量池的各种符号引用） 进行匹配性的校验</li>
+</ul>
+</li>
+<li><p>准备</p>
+<p>正式为 <code>类变量 分配内存</code> 并且设置 <code>类变量初始值</code> 的阶段</p>
+<ul>
+<li><p>仅仅包含 static 变量， 不包含实例变量， 实例变量 会在类初始化时进入 <code>堆</code> </p>
+</li>
+<li><p>通常默认值是 <code>0 ， 0L , null , false</code> , <strong>不会</strong> 执行显示赋值,如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>a=3 会在 <code>初始化阶段</code>  执行， 此 准备阶段 <code>a=0</code> </p>
+</li>
+</ul>
+</li>
+<li><p>解析<br>虚拟机将 <code>常量池</code>  中的 <code>符号引用</code>  转化为 <code>直接引用</code> </p>
+<ul>
+<li>类和接口解析：  判断解析成直接引用还是数组类型</li>
+<li>字段解析： 会一直向上层父类解析，直到找到 引用为止，比如 <code>name</code> 属性， 如果子类没有， 会一直向上层父类查找</li>
+<li>方法解析： 判断该方法处于类还是接口，并且进行对应的解析</li>
+</ul>
+</li>
+<li><p>初始化<br>类加载的最后一步，真正开始执行 Java类中的各个实例的赋值，一个各种变量初始化</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]ClassLoader.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]ClassLoader.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Database/MySQL/[MySQL]MySql减少内存占用方法.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MySql减少内存占用方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]JVM_Memory_Model.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]JVM_JVM(待续)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]08_MapReduce准备及标准的任务编写 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="环境配置yarn 的工作是负责工作，内存调度mapreduce 负责运算 yarn-site.xml 设置 yarn 服务器的名称 设置 shuffle12345678910111213&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;        &amp;lt;name&amp;gt;yarn.resourcemanager.hostname&amp;lt;/name&amp;gt;">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]08_MapReduce准备及标准的任务编写">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]08_MapReduce准备及标准的任务编写.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="环境配置yarn 的工作是负责工作，内存调度mapreduce 负责运算 yarn-site.xml 设置 yarn 服务器的名称 设置 shuffle12345678910111213&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;        &amp;lt;name&amp;gt;yarn.resourcemanager.hostname&amp;lt;/name&amp;gt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]08_MapReduce准备及标准的任务编写">
+<meta name="twitter:description" content="环境配置yarn 的工作是负责工作，内存调度mapreduce 负责运算 yarn-site.xml 设置 yarn 服务器的名称 设置 shuffle12345678910111213&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;        &amp;lt;name&amp;gt;yarn.resourcemanager.hostname&amp;lt;/name&amp;gt;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]08_MapReduce准备及标准的任务编写</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]08_MapReduce准备及标准的任务编写</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:08:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#yarn-site-xml"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">yarn-site.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mapre-site-xml"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">mapre-site.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动服务"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">启动服务</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一个标准的mapreduce任务编写"><span class="post-toc-number">2.</span> <span class="post-toc-text">一个标准的mapreduce任务编写</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]08_MapReduce准备及标准的任务编写"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]08_MapReduce准备及标准的任务编写</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:08:33" datetime="2017-08-27T16:08:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p><code>yarn</code> 的工作是负责工作，内存调度<br><code>mapreduce</code> 负责运算</p>
+<h2 id="yarn-site-xml"><a href="#yarn-site-xml" class="headerlink" title="yarn-site.xml"></a>yarn-site.xml</h2><ol>
+<li>设置 yarn 服务器的名称</li>
+<li>设置 shuffle<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdpnn0&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="mapre-site-xml"><a href="#mapre-site-xml" class="headerlink" title="mapre-site.xml"></a>mapre-site.xml</h2><p>把所有的分布任务交给 <code>yarn</code> 处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><ol>
+<li>start-dfs.sh</li>
+<li>start-yarn.sh</li>
+</ol>
+<h1 id="一个标准的mapreduce任务编写"><a href="#一个标准的mapreduce任务编写" class="headerlink" title="一个标准的mapreduce任务编写"></a>一个标准的mapreduce任务编写</h1><p>该任务主要是切割字符，计算第二列字符的出现次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package cn.willon.hadoop.mapreduce;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.conf.Configured;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.LongWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line">import org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;</span><br><span class="line">import org.apache.hadoop.util.Tool;</span><br><span class="line">import org.apache.hadoop.util.ToolRunner;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public class Demo1 extends Configured implements Tool</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    static class MyMapper extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt; &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            String line = value.toString();</span><br><span class="line">            String[] lines = line.split(&quot;,&quot;);</span><br><span class="line">            context.write(new Text(lines[1]), new IntWritable(1));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class MyReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt; &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        protected void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            int sum = 0;</span><br><span class="line">            for (IntWritable value : values) &#123;</span><br><span class="line">                sum += value.get();</span><br><span class="line">            &#125;</span><br><span class="line">            context.write(key, new IntWritable(sum));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 程序执行时，在这里做一系列的作业配置</span><br><span class="line">     *</span><br><span class="line">     * @param strings 参数</span><br><span class="line">     * @return 程序的运行状态</span><br><span class="line">     * @throws Exception 运行异常</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int run(String[] strings) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        //获取配置信息</span><br><span class="line">        Configuration conf = getConf();</span><br><span class="line"></span><br><span class="line">        // 设置程序的输入输出路径 ，从输入的 参数获取， 运行程序时 ，需要指定单数  -Din=XXX   -Dout=XXX</span><br><span class="line">        Path input = new Path(conf.get(&quot;in&quot;));</span><br><span class="line">        Path output = new Path(conf.get(&quot;out&quot;));</span><br><span class="line"></span><br><span class="line">        //创建一个 任务</span><br><span class="line">        Job job = Job.getInstance(conf, &quot;cite-mapreduce&quot;);</span><br><span class="line">        job.setJarByClass(this.getClass());</span><br><span class="line"></span><br><span class="line">        //设置 Mapper 相关配置信息</span><br><span class="line">        job.setMapperClass(MyMapper.class);</span><br><span class="line">        job.setMapOutputKeyClass(Text.class);</span><br><span class="line">        job.setMapOutputValueClass(IntWritable.class);</span><br><span class="line">        job.setInputFormatClass(TextInputFormat.class);</span><br><span class="line">        TextInputFormat.addInputPath(job, input);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //设置 Reducer 相关配置信息</span><br><span class="line">        job.setReducerClass(MyReducer.class);</span><br><span class="line">        job.setOutputKeyClass(Text.class);</span><br><span class="line">        job.setOutputValueClass(IntWritable.class);</span><br><span class="line">        job.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line">        TextOutputFormat.setOutputPath(job, output);</span><br><span class="line"></span><br><span class="line">        //waitForCompletion() =&gt; 因为使用终端提交任务，该方法提交作业并询问 是否等待终端 ， true是等待，false不等待，返回值是程序是否提交成功，0：成功 1：失败</span><br><span class="line">        return job.waitForCompletion(true) ? 0 : 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        System.exit(ToolRunner.run(new Demo1(), args));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]08_MapReduce准备及标准的任务编写.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]08_MapReduce准备及标准的任务编写.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]09_WorcCount.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]09_WorcCount</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]07_动态扩容.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]07_动态扩容</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

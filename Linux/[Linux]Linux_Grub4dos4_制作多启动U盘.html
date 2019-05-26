@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Linux]Linux_Grub4dos4_制作多启动U盘 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="主要目的目的：Linux下制作WinPE和,Ubuntu16，（CDlinux可选）二合一启动U盘，这样一个U盘可以实现装Windows和Linux双系统，装Linux时也不用刻录 准备工作 grub4dos.7Z ：点击下载用于写入引导  TouchPE.iso:  WindowsPE镜像，用于重装Windows  Ubuntu16.04.iso： Ubuntu16镜像，用于装Linux   开">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Linux]Linux_Grub4dos4_制作多启动U盘">
+<meta property="og:url" content="https://willon.cn/Linux/[Linux]Linux_Grub4dos4_制作多启动U盘.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="主要目的目的：Linux下制作WinPE和,Ubuntu16，（CDlinux可选）二合一启动U盘，这样一个U盘可以实现装Windows和Linux双系统，装Linux时也不用刻录 准备工作 grub4dos.7Z ：点击下载用于写入引导  TouchPE.iso:  WindowsPE镜像，用于重装Windows  Ubuntu16.04.iso： Ubuntu16镜像，用于装Linux   开">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Linux]Linux_Grub4dos4_制作多启动U盘">
+<meta name="twitter:description" content="主要目的目的：Linux下制作WinPE和,Ubuntu16，（CDlinux可选）二合一启动U盘，这样一个U盘可以实现装Windows和Linux双系统，装Linux时也不用刻录 准备工作 grub4dos.7Z ：点击下载用于写入引导  TouchPE.iso:  WindowsPE镜像，用于重装Windows  Ubuntu16.04.iso： Ubuntu16镜像，用于装Linux   开">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Linux]Linux_Grub4dos4_制作多启动U盘</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Linux]Linux_Grub4dos4_制作多启动U盘</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-06-13T04:22:33.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主要目的"><span class="post-toc-number">1.</span> <span class="post-toc-text">主要目的</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始动手"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">开始动手</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#debian启动项注意"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">debian启动项注意</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux/[Linux]Linux_Grub4dos4_制作多启动U盘"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Linux]Linux_Grub4dos4_制作多启动U盘</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-06-13 12:22:33" datetime="2016-06-13T04:22:33.000Z"  itemprop="datePublished">2016-06-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="主要目的"><a href="#主要目的" class="headerlink" title="主要目的"></a>主要目的</h1><p><strong>目的</strong>：Linux下制作WinPE和,Ubuntu16，（CDlinux可选）二合一启动U盘，这样一个U盘可以实现装Windows和Linux双系统，装Linux时也不用刻录</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p><code>grub4dos.7Z</code> ：<a href="http://grub4dos.chenall.net/downloads/grub4dos-0.4.6a-2017-06-25/" target="_blank" rel="noopener">点击下载</a>用于写入引导</p>
+</li>
+<li><p><code>TouchPE.iso</code>:  WindowsPE镜像，用于重装Windows</p>
+</li>
+<li><p><code>Ubuntu16.04.iso</code>： Ubuntu16镜像，用于装Linux</p>
+</li>
+</ol>
+<h2 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h2><ol>
+<li><p>将 <code>grubdos.7Z</code> 解压,文件夹满权限</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod  -R 777 grubdosXXX</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以<code>FAT32</code>格式化U盘</p>
+</li>
+<li>使用 <code>df</code> 或 <code>fdisk</code> 查看U盘，我的U盘为 <code>/dev/sdc4</code></li>
+<li><p>cd到grub4dos目录，将其安装到U盘</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./bootlace.com  --floppy  /dev/sdc4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把 <code>grub4dos</code> 中的 <code>grldr</code> 和 <code>menu.lst</code> 复制到 U 盘根目录</p>
+</li>
+<li>把<code>ubuntu16.iso</code>镜像中 <code>casper</code> 下的 <code>vmlinuz.efi</code> 和 <code>initrd.lz</code> 复制到 U 盘根目录或子目录中</li>
+<li>把<code>TouchPE.iso</code>复制到 U 盘根目录</li>
+<li><p>编辑 <code>menu.lst</code>文件，制作启动菜单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#WindowsPE启动项</span><br><span class="line">title WindowsPE</span><br><span class="line">find --set-root --ignore-floppies --ignore-cd /TouchPE.iso</span><br><span class="line">map /TouchPE.iso (hd32)</span><br><span class="line">map --hook</span><br><span class="line">chainloader (hd32)</span><br><span class="line">boot</span><br><span class="line">savedefault --wait=2</span><br><span class="line"></span><br><span class="line">#CDLinux启动项（可选）</span><br><span class="line">title CDLinux</span><br><span class="line">find --set-root --ignore-floppies --ignore-cd /CDlinux/bzImage</span><br><span class="line">kernel /CDlinux/bzImage CDL_DEV=LABEL=CDLINUX CDL_LANG=zh_CN.UTF-8</span><br><span class="line">initrd /CDlinux/initrd</span><br><span class="line">boot</span><br><span class="line">savedefault --wait=2</span><br><span class="line"></span><br><span class="line">#Debian启动项，debianboot只是个空文件</span><br><span class="line">title Debian9 Installer</span><br><span class="line">find --set-root --ignore-floppies --ignore-cd  /myboot/debian/debianboot</span><br><span class="line">kernel   /myboot/debian/vmlinuz boot=casper noacpi iso-scan/filename=/myboot/debian/debian9.iso ro quiet splash </span><br><span class="line">initrd  /myboot/debian/initrd.gz</span><br><span class="line">boot</span><br><span class="line">savedefault --wait=2</span><br><span class="line"></span><br><span class="line">#Ubuntu16启动项</span><br><span class="line">title Ubuntu16</span><br><span class="line">kernel /vmlinuz.efi boot=casper iso-scan/filename=/ubuntu16.iso locale=zh_CN.UTF-8</span><br><span class="line">initrd  /initrd.lz</span><br><span class="line">boot</span><br><span class="line">savedefault --wait=2</span><br><span class="line"></span><br><span class="line">title reboot </span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line">title halt </span><br><span class="line">halt</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="debian启动项注意"><a href="#debian启动项注意" class="headerlink" title="debian启动项注意"></a>debian启动项注意</h2><ol>
+<li><p><code>vlinuxz</code> 和 <code>initrd.gz</code>文件不能直接从ISO中直接提取，否则找不到光驱，无法进行安装。从下面地址下载：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/current/images/hd-media/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>amd64</code>,<code>arm64</code>镜像文件不能下错，一般使用<code>amd64</code>(debian-9.1-amd64-CD.iso)</p>
+</li>
+<li><p><code>debianboot</code>只是空文件</p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Linux/[Linux]Linux_Grub4dos4_制作多启动U盘.html" target="_blank" rel="external">https://willon.cn/Linux/[Linux]Linux_Grub4dos4_制作多启动U盘.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Linux/[Linux]Grub2制作多启动U盘.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Linux]Grub2制作多启动U盘.md</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Linux/[Linux]wget_备忘录.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Linux]wget_备忘录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

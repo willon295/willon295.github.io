@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>SSL折腾 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SEO">
+    <meta name="description" content="SSL申请国内有很多的免费的SSL证书，比如腾讯云，比如阿里云，七牛云等等。申请下来之后会有不同几个版本，用与不同的环境                                                                                                            想我用的就是lnmp，自然使用Nginx的。 证书配置监听端口4">
+<meta name="keywords" content="SEO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSL折腾">
+<meta property="og:url" content="https://willon.cn/Frontend/[SSL]SSL折腾.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="SSL申请国内有很多的免费的SSL证书，比如腾讯云，比如阿里云，七牛云等等。申请下来之后会有不同几个版本，用与不同的环境                                                                                                            想我用的就是lnmp，自然使用Nginx的。 证书配置监听端口4">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/ssl1.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSL折腾">
+<meta name="twitter:description" content="SSL申请国内有很多的免费的SSL证书，比如腾讯云，比如阿里云，七牛云等等。申请下来之后会有不同几个版本，用与不同的环境                                                                                                            想我用的就是lnmp，自然使用Nginx的。 证书配置监听端口4">
+<meta name="twitter:image" content="http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/ssl1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SSL折腾</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SSL折腾</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-21T12:33:03.000Z" itemprop="datePublished" class="page-time">
+  2016-12-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SEO/">SEO</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSL申请"><span class="post-toc-number">1.</span> <span class="post-toc-text">SSL申请</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#证书配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">证书配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#监听端口443"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">监听端口443</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">修改配置文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">遇到的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#301重定向"><span class="post-toc-number">4.</span> <span class="post-toc-text">301重定向</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#伪静态"><span class="post-toc-number">5.</span> <span class="post-toc-text">伪静态</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Frontend/[SSL]SSL折腾"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SSL折腾</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-21 20:33:03" datetime="2016-12-21T12:33:03.000Z"  itemprop="datePublished">2016-12-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SEO/">SEO</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="SSL申请"><a href="#SSL申请" class="headerlink" title="SSL申请"></a>SSL申请</h2><p>国内有很多的免费的SSL证书，比如腾讯云，比如阿里云，七牛云等等。申请下来之后会有不同几个版本，用与不同的环境</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://oic1wftgk.bkt.clouddn.com/wp-content/uploads/ssl1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>想我用的就是lnmp，自然使用Nginx的。</p>
+<h2 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h2><h3 id="监听端口443"><a href="#监听端口443" class="headerlink" title="监听端口443"></a>监听端口443</h3><p>SSL默认监听的是443端口，所以得先开启443端口。</p>
+<p>命令：</p>
+<pre><code>iptables -A INPUT -ptcp --dport 443 -j ACCEPT
+</code></pre><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>先把发下来的证书文件<code>crt</code>和<code>key</code>上传到服务器，记住目录。接下来如果是<code>nginx</code> ，需要在文件 <code>/nginx/conf/nginx.conf</code>文件中进行配置，修改以下内容：</p>
+<pre><code>server
+{
+listen 80;
+listen 443 ssl;
+server_name www.codexz.cn;
+index index.php index.html index.htm default.html;
+root /www/web/www.codexz.cn;
+#error_page 404/404.html;
+ssl_certificate key/www.codexz.cn/key.csr;
+ssl_certificate_key key/www.codexz.cn/key.key;
+if ($server_port !~ 443){
+rewrite ^/.*$ https://$host$uri;
+}
+error_page 497 https://$host$uri;
+error_page 404 /404.html;
+error_page 502 /502.html;
+include enable-php-70.conf;
+include rewrite/www.codexz.cn.conf;
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+{
+expires 30d;
+access_log on;
+}
+location ~ .*\.(js|css)?$
+{
+expires 12h;
+access_log on;
+}
+access_log /www/wwwlogs/www.codexz.cn.log;
+}.
+#重启nginx服务
+</code></pre><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>其实这个东西遇到的问题还是很多的。</p>
+<ol>
+<li><p>配置文件之后你的 nginx 会无法重启，提醒你 can”t find xxxx.so</p>
+</li>
+<li><p>打开网站 404 ，或者500，或者403.</p>
+</li>
+<li><p>访问的不是 https ,而是http。</p>
+</li>
+</ol>
+<p>出现以上所有的问题根据提示操作，一个个排错。</p>
+<h2 id="301重定向"><a href="#301重定向" class="headerlink" title="301重定向"></a>301重定向</h2><p>比如想让访问你的<a href="http://codexz.cn" target="_blank" rel="noopener">http://codexz.cn</a> 自动跳转到<a href="https://www.codexz.cn,则需要将cl95.cc重定向：" target="_blank" rel="noopener">https://www.codexz.cn,则需要将cl95.cc重定向：</a></p>
+<pre><code>if ($host ~ &apos;^codexz.cn&apos;){
+ return 301 https://www.codexz.cn$uri;
+}
+</code></pre><h2 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h2><p>使用不同的建站程序需要不同的规则，比如<code>wordpress</code>则需要在<code>conf</code>文件中<code>include  wordpress.conf</code>文件，伪静态的文件一般安装的时候就会自动生成，保存在<code>rewrite</code>文件夹中。如果没有，百度，手动添加。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Frontend/[SSL]SSL折腾.html" target="_blank" rel="external">https://willon.cn/Frontend/[SSL]SSL折腾.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SEO/">SEO</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Other/Share/[教程]支付宝扫码接口.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[教程]支付宝扫码接口</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/MySQL/[Mysql]MySQL底层实现.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Mysql]MySQL底层实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

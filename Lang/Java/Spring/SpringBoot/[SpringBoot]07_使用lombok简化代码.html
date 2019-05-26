@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringBoot]07_使用lombok简化代码 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringBoot,lombok">
+    <meta name="description" content="安装 lombok 插件以 idea 的 安装为例： settings –&amp;gt; plugins –&amp;gt; browse from repository –&amp;gt; 搜索并且安装 lombok 配置文件 pom.xml 添加依赖 12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;">
+<meta name="keywords" content="SpringBoot,lombok">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringBoot]07_使用lombok简化代码">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]07_使用lombok简化代码.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="安装 lombok 插件以 idea 的 安装为例： settings –&amp;gt; plugins –&amp;gt; browse from repository –&amp;gt; 搜索并且安装 lombok 配置文件 pom.xml 添加依赖 12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringBoot]07_使用lombok简化代码">
+<meta name="twitter:description" content="安装 lombok 插件以 idea 的 安装为例： settings –&amp;gt; plugins –&amp;gt; browse from repository –&amp;gt; 搜索并且安装 lombok 配置文件 pom.xml 添加依赖 12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt;    &amp;lt;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringBoot]07_使用lombok简化代码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringBoot]07_使用lombok简化代码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-19T16:07:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装-lombok-插件"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装 lombok 插件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基本使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">基本使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意"><span class="post-toc-number">4.</span> <span class="post-toc-text">注意</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[SpringBoot]07_使用lombok简化代码"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringBoot]07_使用lombok简化代码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-20 00:07:00" datetime="2018-06-19T16:07:00.000Z"  itemprop="datePublished">2018-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="安装-lombok-插件"><a href="#安装-lombok-插件" class="headerlink" title="安装 lombok 插件"></a>安装 lombok 插件</h1><p>以 idea 的 安装为例：</p>
+<p>settings –&gt; plugins –&gt; browse from repository –&gt; 搜索并且安装 lombok</p>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><ol>
+<li><p>pom.xml 添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>logback.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration&gt;</span><br><span class="line">&lt;configuration scan=&quot;true&quot;&gt;</span><br><span class="line">    &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;%d&#123;HH:mm:ss.SSS&#125; ---[%thread] %-5level %logger&#123;36&#125; - %msg%n</span><br><span class="line">            &lt;/pattern&gt;</span><br><span class="line">        &lt;/encoder&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line">    &lt;appender name=&quot;RollingFile&quot;</span><br><span class="line">              class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;</span><br><span class="line">            &lt;level&gt;TRACE&lt;/level&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line"></span><br><span class="line">        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;</span><br><span class="line">            &lt;fileNamePattern&gt;logs/log-%d&#123;yyyy-MM-dd&#125;.log</span><br><span class="line">            &lt;/fileNamePattern&gt;</span><br><span class="line">            &lt;maxHistory&gt;10&lt;/maxHistory&gt;</span><br><span class="line">        &lt;/rollingPolicy&gt;</span><br><span class="line"></span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; ---[%thread] %-5level %logger - %msg%n</span><br><span class="line">            &lt;/pattern&gt;</span><br><span class="line">        &lt;/encoder&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line">    &lt;logger name=&quot;com.log.agent&quot; level=&quot;DEBUG&quot; /&gt;</span><br><span class="line">    &lt;logger name=&quot;com.log&quot; level=&quot;INFO&quot; /&gt;</span><br><span class="line">    &lt;root level=&quot;INFO&quot;&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;RollingFile&quot; /&gt;</span><br><span class="line">    &lt;/root&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Setter</td>
+<td>生成setter，注解 类、字段</td>
+</tr>
+<tr>
+<td>@Getter</td>
+<td>生成getter，注解 类、字段</td>
+</tr>
+<tr>
+<td>@ToString</td>
+<td>生成toString，注解 类、字段</td>
+</tr>
+<tr>
+<td>@EqulsAndHashCode</td>
+<td>同</td>
+</tr>
+<tr>
+<td>@Data</td>
+<td>相当于生成上面的所有</td>
+</tr>
+<tr>
+<td>@NoArgsConstructor/@RequiredArgsConstructor /@AllArgsConstructor</td>
+<td>三种构造器</td>
+</tr>
+<tr>
+<td>@Cleanup</td>
+<td>自动释放资源，注解在实例的声明/构建 处</td>
+</tr>
+<tr>
+<td>@Synchronized</td>
+<td>同步锁，一般用在方法之上，实际生成的代码中，锁的是代码块</td>
+</tr>
+<tr>
+<td>@Nonnull</td>
+<td>判断不为空，否则抛出空指针异常</td>
+</tr>
+<tr>
+<td>@SneakyThrows</td>
+<td>相当于try-catch包裹方法异常，传入参数为自定义的异常</td>
+</tr>
+<tr>
+<td>@Slf4j</td>
+<td>注入一个名为 <code>log</code> 的 Logger 实例</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>Bean，自动生成setter、getter、toStrng方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Setter</span><br><span class="line">@Getter</span><br><span class="line">@ToString</span><br><span class="line">public class User &#123;</span><br><span class="line"></span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(Integer id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*  原理: 字节码 ams技术，修改字节码文件，生成对应的方法  */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@Slf4j、注入日志工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@Slf4j</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class User &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        User willon = new User(1001, &quot;willon&quot;);</span><br><span class="line">        log.info(willon.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@Cleanup，释放资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Cleanup  InputStream in = new FileInputStream(&quot;file&quot;);</span><br><span class="line"></span><br><span class="line">//相当于</span><br><span class="line">InputStream in=null;</span><br><span class="line">try&#123;</span><br><span class="line">     in = new FileInputStream(&quot;file&quot;);</span><br><span class="line">&#125;catch(Excption e)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;finaly&#123;</span><br><span class="line">    if(in!=null)&#123;</span><br><span class="line">      in.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>如果不是SpringBoot项目需要引入 <code>logback</code> 的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]07_使用lombok简化代码.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]07_使用lombok简化代码.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lombok/">lombok</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]08_使用APO实现全局日志管理.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringBoot]08_使用APO实现全局日志管理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]06_文件的上传下载.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]06_文件的上传下载</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

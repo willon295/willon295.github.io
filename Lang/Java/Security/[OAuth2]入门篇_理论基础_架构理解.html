@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[OAuth2]入门篇_理论基础与架构分析【待完善】 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="OAuth2">
+    <meta name="description" content="使用场景用微信注册钉钉账号：  用微信账号注册钉钉 钉钉会唤起微信账号授权页面 用户确定授权 返回钉钉注册页面 钉钉读取用户微信基本信息  大前提这个场景的发生前提是：  微信有开放的第三方授权服务器，授权接口，资源服务器 钉钉 作为客户端 在 微信授权服务器 注册 , 且微信授权服务器给钉钉发放了唯一身份id （client_id）  角色划分那么我们对以上场景进行  角色划分   用户 （Us">
+<meta name="keywords" content="OAuth2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[OAuth2]入门篇_理论基础与架构分析【待完善】">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Security/[OAuth2]入门篇_理论基础_架构理解.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="使用场景用微信注册钉钉账号：  用微信账号注册钉钉 钉钉会唤起微信账号授权页面 用户确定授权 返回钉钉注册页面 钉钉读取用户微信基本信息  大前提这个场景的发生前提是：  微信有开放的第三方授权服务器，授权接口，资源服务器 钉钉 作为客户端 在 微信授权服务器 注册 , 且微信授权服务器给钉钉发放了唯一身份id （client_id）  角色划分那么我们对以上场景进行  角色划分   用户 （Us">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[OAuth2]入门篇_理论基础与架构分析【待完善】">
+<meta name="twitter:description" content="使用场景用微信注册钉钉账号：  用微信账号注册钉钉 钉钉会唤起微信账号授权页面 用户确定授权 返回钉钉注册页面 钉钉读取用户微信基本信息  大前提这个场景的发生前提是：  微信有开放的第三方授权服务器，授权接口，资源服务器 钉钉 作为客户端 在 微信授权服务器 注册 , 且微信授权服务器给钉钉发放了唯一身份id （client_id）  角色划分那么我们对以上场景进行  角色划分   用户 （Us">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[OAuth2]入门篇_理论基础与架构分析【待完善】</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[OAuth2]入门篇_理论基础与架构分析【待完善】</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T02:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OAuth2/">OAuth2</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">使用场景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#大前提"><span class="post-toc-number">2.</span> <span class="post-toc-text">大前提</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#角色划分"><span class="post-toc-number">3.</span> <span class="post-toc-text">角色划分</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#流程分析"><span class="post-toc-number">4.</span> <span class="post-toc-text">流程分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#授权方式"><span class="post-toc-number">5.</span> <span class="post-toc-text">授权方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Authorization-Code-Grant-授权码模式"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Authorization Code Grant (授权码模式)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Implicit-Grant（简化隐式授权模式）"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">Implicit Grant（简化隐式授权模式）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Resource-Owner-Password-Credentials-Grant-用户密码授权模式"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">Resource Owner Password Credentials Grant(用户密码授权模式)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Client-Credentials-Grant-客户端授权模式"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">Client Credentials Grant (客户端授权模式)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Refresh-Token"><span class="post-toc-number">6.</span> <span class="post-toc-text">Refresh Token</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Security/[OAuth2]入门篇_理论基础_架构理解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[OAuth2]入门篇_理论基础与架构分析【待完善】</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-20 10:00:00" datetime="2018-12-20T02:00:00.000Z"  itemprop="datePublished">2018-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OAuth2/">OAuth2</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>用微信注册钉钉账号：</p>
+<ol>
+<li>用微信账号注册钉钉</li>
+<li>钉钉会唤起微信账号授权页面</li>
+<li>用户确定授权</li>
+<li>返回钉钉注册页面</li>
+<li>钉钉读取用户微信基本信息</li>
+</ol>
+<h1 id="大前提"><a href="#大前提" class="headerlink" title="大前提"></a>大前提</h1><p>这个场景的发生前提是：</p>
+<ol>
+<li>微信有开放的第三方授权服务器，授权接口，资源服务器</li>
+<li>钉钉 <code>作为客户端</code> 在 <code>微信授权服务器</code> 注册 , 且微信授权服务器给钉钉发放了唯一身份id （client_id）</li>
+</ol>
+<h1 id="角色划分"><a href="#角色划分" class="headerlink" title="角色划分"></a>角色划分</h1><p>那么我们对以上场景进行  <strong>角色划分</strong> </p>
+<ul>
+<li>用户 （User、Resource Owner）： 微信账号的拥有者（如：张三）</li>
+<li>资源服务器 （Resource Server）： 微信存放用户信息的服务器</li>
+<li>客户端 （Client）： 钉钉</li>
+<li>授权服务器 （Authorization Server）： 微信控制客户端访问授权的服务器，负责授权码、token管理</li>
+</ul>
+<p>那么使用 <code>OAuth2</code> ， 上面的交互场景工作流程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">|        |----A--是否授权 --------------&gt;|   用户确认    |</span><br><span class="line">|        |                               |   微信授权    |</span><br><span class="line">|        |&lt;---B---授权码code-------------|               |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |-----C----授权码code----------&gt;|    微信授权   |</span><br><span class="line">| 钉钉   |                               |     服务器    |</span><br><span class="line">|        |&lt;----D---发放Token-------------|               |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |</span><br><span class="line">|        |                               +---------------+</span><br><span class="line">|        |----E------Token--------------&gt;|    微信资源   |</span><br><span class="line">|        |                               |     服务器    |</span><br><span class="line">|        |&lt;---F------用户信息------------|               |</span><br><span class="line">+--------+                               +---------------+</span><br></pre></td></tr></table></figure>
+<h1 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h1><p>对以上流程每步进行分析</p>
+<p><strong>A流程</strong> ：  用户点击钉钉上的 <code>用微信注册</code> ， 钉钉唤起微信， 发出授权请求携带以下信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">client_id: dingdingxxxxxxx           #表明请求来自钉钉</span><br><span class="line">response_type: authorization_code    #表明返回类型是授权码</span><br><span class="line">scope: user                          #表明需要的授权范围为user</span><br><span class="line">redirect_uri: https://dingtalk.com/register/callback  #表明用户确认后回调的URL</span><br></pre></td></tr></table></figure>
+<p><strong>B流程</strong> : 用户在微信上确定授权后， 微信携带 <code>授权码code</code>  向  <code>redirect_uri</code> 发起 请求， 其他参数封不动的返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://dingtalk.com/register/callback?code=AAA123456&amp;scope=user</span><br></pre></td></tr></table></figure>
+<p>此时微信会唤起钉钉， 并且钉钉已获取到授权code， A、B流程结束</p>
+<p><strong>C流程</strong> ： 钉钉携带授权code再次向微信 <code>授权服务器</code> 发起请求， 发起的请求数据大致：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client_id: dingdingxxxxxxx           #表明请求来自钉钉</span><br><span class="line">client_secret: dingdingXXXXX         #客户端加密信息 【可选】</span><br><span class="line">grant_type: authorization_code       #表明凭证类型是授权码</span><br><span class="line">code: AAA123456							 #授权code</span><br><span class="line">scope: user                          #表明需要的授权范围为user</span><br></pre></td></tr></table></figure>
+<p><strong>D流程</strong> ： 微信授权服务器返回授权信息，包括</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access_token: er2rsersdf4534sds     #授权token</span><br><span class="line">refresh_token: 9834892sfsdfsf324    #刷新token </span><br><span class="line">expire_in: 864000						#失效时间</span><br></pre></td></tr></table></figure>
+<p><strong>E流程</strong>： 钉钉拿着token请求微信资源服务器 </p>
+<p><strong>F流程</strong>： 微信资源服务器返回钉钉用户信息</p>
+<p> refresh_token 作用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">+--------+                                           +---------------+</span><br><span class="line">|        |--(A)------- Authorization Grant ---------&gt;|               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |&lt;-(B)----------- Access Token -------------|               |</span><br><span class="line">|        |               &amp; Refresh Token             |               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |                            +----------+   |               |</span><br><span class="line">|        |--(C)---- Access Token ----&gt;|          |   |               |</span><br><span class="line">|        |                            |          |   |               |</span><br><span class="line">|        |&lt;-(D)- Protected Resource --| Resource |   | Authorization |</span><br><span class="line">| Client |                            |  Server  |   |     Server    |</span><br><span class="line">|        |--(E)---- Access Token ----&gt;|          |   |               |</span><br><span class="line">|        |                            |          |   |               |</span><br><span class="line">|        |&lt;-(F)- Invalid Token Error -|          |   |               |</span><br><span class="line">|        |                            +----------+   |               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |--(G)----------- Refresh Token -----------&gt;|               |</span><br><span class="line">|        |                                           |               |</span><br><span class="line">|        |&lt;-(H)----------- Access Token -------------|               |</span><br><span class="line">+--------+           &amp; Optional Refresh Token        +---------------+</span><br></pre></td></tr></table></figure>
+<h1 id="授权方式"><a href="#授权方式" class="headerlink" title="授权方式"></a>授权方式</h1><h2 id="Authorization-Code-Grant-授权码模式"><a href="#Authorization-Code-Grant-授权码模式" class="headerlink" title="Authorization Code Grant (授权码模式)"></a>Authorization Code Grant (授权码模式)</h2><p>本中上方例子就是授权码模式</p>
+<h2 id="Implicit-Grant（简化隐式授权模式）"><a href="#Implicit-Grant（简化隐式授权模式）" class="headerlink" title="Implicit Grant（简化隐式授权模式）"></a>Implicit Grant（简化隐式授权模式）</h2><p>省略 <code>授权码模式</code> 中的获取 <code>code</code> 步骤，  客户端直接向  授权服务器请求 token</p>
+<ul>
+<li><p>客户端发起获取授权请求： 参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">client_id: dingdingxxxxxxx           #表明请求来自钉钉</span><br><span class="line">response_type: token               #表明返回类型是token</span><br><span class="line">scope: user                          #表明需要的授权范围为user</span><br><span class="line">redirect_uri: https://dingtalk.com/register/callback  #表明用户确认后回调的URL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权服务端， 根据 <code>redirect_uri</code>  返回数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access_token: er2rsersdf4534sds     #授权token</span><br><span class="line">refresh_token: 9834892sfsdfsf324    #刷新token </span><br><span class="line">expire_in: 864000						#失效时间</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Resource-Owner-Password-Credentials-Grant-用户密码授权模式"><a href="#Resource-Owner-Password-Credentials-Grant-用户密码授权模式" class="headerlink" title="Resource Owner Password Credentials Grant(用户密码授权模式)"></a>Resource Owner Password Credentials Grant(用户密码授权模式)</h2><ol>
+<li><p>客户端向用户索要账号密码</p>
+</li>
+<li><p>客户端根据此凭证向  <code>授权服务器</code>  请求授权token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant_type: password</span><br><span class="line">username:tom</span><br><span class="line">password=A3ddj3w</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权服务器返回token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access_token: er2rsersdf4534sds     #授权token</span><br><span class="line">refresh_token: 9834892sfsdfsf324    #刷新token </span><br><span class="line">expire_in: 864000						#失效时间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Client-Credentials-Grant-客户端授权模式"><a href="#Client-Credentials-Grant-客户端授权模式" class="headerlink" title="Client Credentials Grant (客户端授权模式)"></a>Client Credentials Grant (客户端授权模式)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+---------+                                  +---------------+</span><br><span class="line">|         |                                  |               |</span><br><span class="line">|         |&gt;--(A)- Client Authentication ---&gt;| Authorization |</span><br><span class="line">| Client  |                                  |     Server    |</span><br><span class="line">|         |&lt;--(B)---- Access Token ---------&lt;|               |</span><br><span class="line">|         |                                  |               |</span><br><span class="line">+---------+                                  +---------------+</span><br></pre></td></tr></table></figure>
+<p>如图， 客户端直接与授权服务器交互</p>
+<blockquote>
+<p>前提是client 是绝对信任的</p>
+</blockquote>
+<ol>
+<li><p>客户端发起的请求参数如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant_type: client_credentials</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授权服务器返回token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">access_token: er2rsersdf4534sds     #授权token</span><br><span class="line">refresh_token: 9834892sfsdfsf324    #刷新token </span><br><span class="line">expire_in: 864000				   #失效时间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Refresh-Token"><a href="#Refresh-Token" class="headerlink" title="Refresh Token"></a>Refresh Token</h1><p>当 <code>client</code> 的 <code>access_token</code> 过期、失效时， 凭借 <code>refresh_token</code> 向授权服务器请求新的 <code>access_token</code>,  请求数据如下</p>
+<ol>
+<li>Client 请求参数如下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant_type: refresh_token</span><br><span class="line">refresh_token=tGzv3JOkF0XG5Qx2TlKWIA</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>授权服务器返回新的token信息</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Security/[OAuth2]入门篇_理论基础_架构理解.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Security/[OAuth2]入门篇_理论基础_架构理解.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OAuth2/">OAuth2</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Security/[OAuth2]OAuth2_Framework.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[OAuth2]OAuth2 Framework</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]多环境配置管理.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]多环境配置管理分析与实践</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

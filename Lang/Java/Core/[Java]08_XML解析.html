@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]08_XML解析 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="XML解析简介： 它是一种标记语言注意事项：  不能含有特殊符号，需要用实体符如 &amp;amp;amp; =&amp;gt; &amp;amp; 如果需要将特殊内容原样输出，使用 &amp;lt;![CDATA[ 特殊内容 ]]&amp;gt;  举个例子12345678910111213141516171819202122232425262728293031323334353637&amp;lt;?xml version=&quot;1.0&quot; en">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]08_XML解析">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]08_XML解析.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="XML解析简介： 它是一种标记语言注意事项：  不能含有特殊符号，需要用实体符如 &amp;amp;amp; =&amp;gt; &amp;amp; 如果需要将特殊内容原样输出，使用 &amp;lt;![CDATA[ 特殊内容 ]]&amp;gt;  举个例子12345678910111213141516171819202122232425262728293031323334353637&amp;lt;?xml version=&quot;1.0&quot; en">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]08_XML解析">
+<meta name="twitter:description" content="XML解析简介： 它是一种标记语言注意事项：  不能含有特殊符号，需要用实体符如 &amp;amp;amp; =&amp;gt; &amp;amp; 如果需要将特殊内容原样输出，使用 &amp;lt;![CDATA[ 特殊内容 ]]&amp;gt;  举个例子12345678910111213141516171819202122232425262728293031323334353637&amp;lt;?xml version=&quot;1.0&quot; en">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]08_XML解析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]08_XML解析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-11T16:08:00.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#XML解析"><span class="post-toc-number">1.</span> <span class="post-toc-text">XML解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举个例子"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">举个例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原生API-SAX解析"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">原生API__SAX解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原生API-DOM解析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">原生API__DOM解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DOM4J解析"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">DOM4J解析</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]08_XML解析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]08_XML解析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 00:08:00" datetime="2016-05-11T16:08:00.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="XML解析"><a href="#XML解析" class="headerlink" title="XML解析"></a>XML解析</h1><p>简介： 它是一种标记语言<br>注意事项：</p>
+<ol>
+<li>不能含有特殊符号，需要用实体符如 <code>&amp;amp;</code> =&gt; <code>&amp;</code></li>
+<li>如果需要将特殊内容原样输出，使用 <code>&lt;![CDATA[ 特殊内容 ]]&gt;</code></li>
+</ol>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">employees</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">employee</span> <span class="attr">id</span>=<span class="string">"1"</span> <span class="attr">deptName</span>=<span class="string">"教学部"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>tom<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>20<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>male<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">email</span>&gt;</span>tom@briup.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">salary</span>&gt;</span>2000<span class="tag">&lt;/<span class="name">salary</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">employee</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">employee</span> <span class="attr">id</span>=<span class="string">"2"</span> <span class="attr">deptName</span>=<span class="string">"教学部"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>jack<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>25<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>male<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">email</span>&gt;</span>jack@briup.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">salary</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">salary</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">employee</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">employee</span> <span class="attr">id</span>=<span class="string">"3"</span> <span class="attr">deptName</span>=<span class="string">"教学管理部"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>rose<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>22<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>female<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">email</span>&gt;</span>rose@briup.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">salary</span>&gt;</span>1000<span class="tag">&lt;/<span class="name">salary</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">employee</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">employee</span> <span class="attr">id</span>=<span class="string">"4"</span> <span class="attr">deptName</span>=<span class="string">"研发部"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mark<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>26<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>male<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">email</span>&gt;</span>mark@briup.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">salary</span>&gt;</span>4000<span class="tag">&lt;/<span class="name">salary</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">employee</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">employees</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="原生API-SAX解析"><a href="#原生API-SAX解析" class="headerlink" title="原生API__SAX解析"></a>原生API__SAX解析</h2><ol>
+<li>创建 saxReader对象： <code>SAXParserFactory.newInstance().newSAXParser();</code></li>
+<li>解析XML文件，指定自定义的 <code>Handler</code></li>
+<li>自定义 <code>Handler</code>：</li>
+</ol>
+<ul>
+<li>继承 <code>DefaultHandler</code></li>
+<li>重写 <code>characters()</code> 、 <code>startDocument()</code> 、 <code>startElement()</code> 、 <code>endElement()</code> 方法</li>
+</ul>
+<p><strong>举个例子</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.xml.sax.Attributes;</span><br><span class="line"><span class="keyword">import</span> org.xml.sax.SAXException;</span><br><span class="line"><span class="keyword">import</span> org.xml.sax.helpers.DefaultHandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.ParserConfigurationException;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.SAXParser;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.SAXParserFactory;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeeSax</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, SAXException, ParserConfigurationException </span>&#123;</span><br><span class="line">        SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();</span><br><span class="line"></span><br><span class="line">        EmployeeHandler handler = <span class="keyword">new</span> EmployeeHandler();</span><br><span class="line">        saxParser.parse(ClassLoader.getSystemResourceAsStream(<span class="string">"employee.xml"</span>), handler);</span><br><span class="line"></span><br><span class="line">        List&lt;Employee&gt; employeeList = handler.getEmployeeList();</span><br><span class="line">        <span class="keyword">for</span> (Employee employee : employeeList) &#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(employee);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//XML文件的处理器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EmployeeHandler</span> <span class="keyword">extends</span> <span class="title">DefaultHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Employee&gt; employeeList;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Employee employee;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String tagName;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Employee&gt; <span class="title">getEmployeeList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> employeeList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmployeeList</span><span class="params">(List&lt;Employee&gt; employeeList)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.employeeList = employeeList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文档开始读取时 相应的操作，一般用于初始化资源</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        employeeList = <span class="keyword">new</span> ArrayList&lt;Employee&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取到字符内容时要执行的逻辑</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ch 读取到的字符</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 开始索引</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length 长度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SAXException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line"></span><br><span class="line">        String text = String.valueOf(ch, start, length);</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"name"</span>.equals(tagName)) &#123;</span><br><span class="line">            employee.setName(text);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(tagName)) &#123;</span><br><span class="line">            employee.setAge(Integer.valueOf(text));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"gender"</span>.equals(tagName)) &#123;</span><br><span class="line">            employee.setGender(text);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"email"</span>.equals(tagName)) &#123;</span><br><span class="line">            employee.setEmail(text);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"salary"</span>.equals(tagName)) &#123;</span><br><span class="line">            employee.setSalary(Integer.valueOf(text));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取到 开始标签时  要处理的逻辑</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> uri 用不上</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> localName 本地空间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> qName  标签名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> attributes 属性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri, String localName, String qName, Attributes attributes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (qName.equals(<span class="string">"employee"</span>)) &#123;</span><br><span class="line">            employee = <span class="keyword">new</span> Employee();</span><br><span class="line">            <span class="keyword">int</span> id = Integer.parseInt(attributes.getValue(<span class="string">"id"</span>));</span><br><span class="line">            String deptName = attributes.getValue(<span class="string">"deptName"</span>);</span><br><span class="line">            employee.setId(id);</span><br><span class="line">            employee.setDeptName(deptName);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tagName = qName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 读取到 结束标签 要处理的逻辑</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> uri 用不上</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> localName 本地空间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> qName 标签名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri, String localName, String qName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (qName.equals(<span class="string">"employee"</span>)) &#123;</span><br><span class="line">            employeeList.add(employee);</span><br><span class="line">        &#125;</span><br><span class="line">        tagName = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="原生API-DOM解析"><a href="#原生API-DOM解析" class="headerlink" title="原生API__DOM解析"></a>原生API__DOM解析</h2><ol>
+<li>创建一个 DocumentBuilder 对象： <code>DocumentBuilderFactory.newInstance().newDocumentBuilder();</code> </li>
+<li>通过解析XML文件：<code>builder.parse(ClassLoader.getSystemResourceAsStream(&quot;employee.xml&quot;))</code>，获取 <code>Document</code> 对象。</li>
+<li>通过 <code>Document</code> 对象获取 <code>Element</code> 元素</li>
+<li>基本操作</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.w3c.dom.Document;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Element;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Node;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.NodeList;</span><br><span class="line"><span class="keyword">import</span> org.xml.sax.SAXException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilder;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilderFactory;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.ParserConfigurationException;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmployeeDOM</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ParserConfigurationException, IOException, SAXException </span>&#123;</span><br><span class="line">        List&lt;Employee&gt; employeeList = <span class="keyword">new</span> ArrayList&lt;Employee&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个 DocumentBuilder 对象</span></span><br><span class="line">        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解析XML文件</span></span><br><span class="line">        Document document = builder.parse(ClassLoader.getSystemResourceAsStream(<span class="string">"employee.xml"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取根节点</span></span><br><span class="line">        Element root = document.getDocumentElement();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过标签 获取所有该标签 子节点</span></span><br><span class="line">        NodeList employees = root.getElementsByTagName(<span class="string">"employee"</span>);</span><br><span class="line">        <span class="keyword">int</span> length = employees.getLength();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历子节点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            Employee employee = <span class="keyword">new</span> Employee();</span><br><span class="line">            Element e = (Element) employees.item(i);</span><br><span class="line">            Integer id = Integer.valueOf(e.getAttribute(<span class="string">"id"</span>));</span><br><span class="line">            String deptName = e.getAttribute(<span class="string">"deptName"</span>);</span><br><span class="line">            employee.setId(id);</span><br><span class="line">            employee.setDeptName(deptName);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//获取子节点</span></span><br><span class="line">            NodeList attrs = e.getChildNodes();</span><br><span class="line">            <span class="keyword">int</span> length1 = attrs.getLength();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; length1; j++) &#123;</span><br><span class="line">                Node item = attrs.item(j);</span><br><span class="line">                <span class="keyword">if</span> (Node.ELEMENT_NODE == item.getNodeType() ) &#123;</span><br><span class="line">                    String tagName = item.getNodeName();</span><br><span class="line">                    String text = item.getTextContent();</span><br><span class="line">                    <span class="keyword">if</span> (<span class="string">"name"</span>.equals(tagName)) &#123;</span><br><span class="line">                        employee.setName(text);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(tagName)) &#123;</span><br><span class="line">                        employee.setAge(Integer.valueOf(text));</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"gender"</span>.equals(tagName)) &#123;</span><br><span class="line">                        employee.setGender(text);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"email"</span>.equals(tagName)) &#123;</span><br><span class="line">                        employee.setEmail(text);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"salary"</span>.equals(tagName)) &#123;</span><br><span class="line">                        employee.setSalary(Integer.valueOf(text));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            employeeList.add(employee);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Employee employee1 : employeeList) &#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(employee1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="DOM4J解析"><a href="#DOM4J解析" class="headerlink" title="DOM4J解析"></a>DOM4J解析</h2><p><strong>套路</strong></p>
+<ol>
+<li><p>通过 <code>SAXReader</code> 对象读取XML,获取 <code>Document</code> 实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document document =  <span class="keyword">new</span> SAXReader().read(ClassLoader.getSystemResourceAsStream(<span class="string">"city.xml"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过 <code>document</code> 实例 获取根节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element root = document.getRootElement();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过root 节点获取所有子节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List elements = root.elements();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>element常用方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e.attribute(&quot;id&quot;).getValue(); //获取属性内容</span><br><span class="line">e.getText();  //获取开始、结束标签之间的文本内容</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]08_XML解析.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]08_XML解析.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Java]08_01_JSON的序列化和反序列.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]08_01_JSON的序列化和反序列.md</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]07_常用的数据生成类.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]07_常用的数据生成类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

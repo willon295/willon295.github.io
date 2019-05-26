@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Scala]07_对象_特质 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Scala">
+    <meta name="description" content="object 静态对象 123456789101112object Student()&amp;#123;	//对象里面的 变量为静态变量，可以通过对象直接调用	val CONSTANT=&amp;quot;demo&amp;quot;		//private修饰的变量 在其他对象中不可访问	private val PASSWORD = &amp;quot;333444&amp;quot;		//对象里面的方法为静态方法，可以通过对象直接">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Scala]07_对象_特质">
+<meta property="og:url" content="https://willon.cn/Lang/Scala/[Scala]07_对象.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="object 静态对象 123456789101112object Student()&amp;#123;	//对象里面的 变量为静态变量，可以通过对象直接调用	val CONSTANT=&amp;quot;demo&amp;quot;		//private修饰的变量 在其他对象中不可访问	private val PASSWORD = &amp;quot;333444&amp;quot;		//对象里面的方法为静态方法，可以通过对象直接">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Scala]07_对象_特质">
+<meta name="twitter:description" content="object 静态对象 123456789101112object Student()&amp;#123;	//对象里面的 变量为静态变量，可以通过对象直接调用	val CONSTANT=&amp;quot;demo&amp;quot;		//private修饰的变量 在其他对象中不可访问	private val PASSWORD = &amp;quot;333444&amp;quot;		//对象里面的方法为静态方法，可以通过对象直接">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Scala]07_对象_特质</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Scala]07_对象_特质</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-31T16:07:34.000Z" itemprop="datePublished" class="page-time">
+  2018-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#object"><span class="post-toc-number">1.</span> <span class="post-toc-text">object</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态对象的-apply-方法"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">静态对象的 apply 方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#特质-trait"><span class="post-toc-number">2.</span> <span class="post-toc-text">特质 trait</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贴代码"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">贴代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如果特质需要传递参数怎么办？"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">如果特质需要传递参数怎么办？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#super调用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">super调用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Scala/[Scala]07_对象"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Scala]07_对象_特质</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-01 00:07:34" datetime="2017-12-31T16:07:34.000Z"  itemprop="datePublished">2018-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="object"><a href="#object" class="headerlink" title="object"></a>object</h1><ol>
+<li><p>静态对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">object Student()&#123;</span><br><span class="line">	//对象里面的 变量为静态变量，可以通过对象直接调用</span><br><span class="line">	val CONSTANT=&quot;demo&quot;</span><br><span class="line">	</span><br><span class="line">	//private修饰的变量 在其他对象中不可访问</span><br><span class="line">	private val PASSWORD = &quot;333444&quot;</span><br><span class="line">	</span><br><span class="line">	//对象里面的方法为静态方法，可以通过对象直接调用</span><br><span class="line">	def sayHi()&#123;</span><br><span class="line">		println(&quot;Hi~&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>伴生对象<br>=&gt; 和类名相同，且在同一个文件中</p>
+</li>
+<li>单例对象，scala的对象就是单例对象</li>
+<li>当对象继承 <code>App</code> 对象时，不需要 <code>main</code> 方法即可执行</li>
+</ol>
+<h2 id="静态对象的-apply-方法"><a href="#静态对象的-apply-方法" class="headerlink" title="静态对象的 apply 方法"></a>静态对象的 apply 方法</h2><ol>
+<li>相当于类的构造方法，有返回值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//定义apply方法</span><br><span class="line">object Demo &#123;</span><br><span class="line"></span><br><span class="line">  def apply(): Unit = &#123;</span><br><span class="line">    println(&quot;run apply&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">  def apply(i:String  ): String  = &#123;</span><br><span class="line">    &quot;run apply&quot;+i</span><br><span class="line">  &#125;</span><br><span class="line">  def apply(i: Int, j: Int): Int  = &#123;</span><br><span class="line">    i + j</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//测试</span><br><span class="line">object HelloWorld &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line"></span><br><span class="line">    val a = Demo</span><br><span class="line">    val a1 =Demo(&quot;sss&quot;)</span><br><span class="line">    val a2 = Demo(1,5)</span><br><span class="line"></span><br><span class="line">    println(a)</span><br><span class="line">    println(a1)</span><br><span class="line">    println(a2)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="特质-trait"><a href="#特质-trait" class="headerlink" title="特质 trait"></a>特质 trait</h1><p>特质相当于java中的接口</p>
+<ol>
+<li>特质的所有方法和成员可以都是抽象的，不需要abstract</li>
+<li>特质可以混入 类、对象、特质、实例中</li>
+<li>实例混入特质的构造顺序<ul>
+<li>超特质 -&gt; 父特质 -&gt; 类 -&gt; 从左往右特质</li>
+</ul>
+</li>
+<li>如果 <code>多个特质</code> 重写 <code>同一个特质</code> 的 <code>同一个方法</code>，方法前必须要 <code>override</code></li>
+</ol>
+<h2 id="贴代码"><a href="#贴代码" class="headerlink" title="贴代码"></a>贴代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">trait Log &#123;</span><br><span class="line">  println(&quot;LOG&quot;)</span><br><span class="line">  def log()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">trait FileLog extends Log &#123;</span><br><span class="line">  println(&quot;FILE_LOG&quot;)</span><br><span class="line">  override def log(): Unit = &#123;</span><br><span class="line">    println(&quot;File log ...&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">trait ConsleLog extends Log &#123;</span><br><span class="line">  println(&quot;CONSLE_LOG&quot;)</span><br><span class="line">  override def log(): Unit = &#123;</span><br><span class="line">    println(&quot;Consle log ...&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">trait IOlog extends Log &#123;</span><br><span class="line">  println(&quot;IO_LOG&quot;)</span><br><span class="line">  override def log(): Unit = &#123;</span><br><span class="line">    println(&quot;IO log...&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class TestLog extends Log &#123;</span><br><span class="line">  println(&quot;INSTANCE ---  INIT&quot;)</span><br><span class="line">  override def log(): Unit = &#123;</span><br><span class="line">    println(&quot;IO  log&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object TestLog &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    val log = new TestLog with ConsleLog with FileLog</span><br><span class="line">    log.log()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当创建实例时，混入多个特质，那么那些特质中的相同方法名之前 override 关键字不能省略，省略会产生二异性</li>
+</ol>
+<h2 id="如果特质需要传递参数怎么办？"><a href="#如果特质需要传递参数怎么办？" class="headerlink" title="如果特质需要传递参数怎么办？"></a>如果特质需要传递参数怎么办？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.io.&#123;InputStream, PrintStream&#125;</span><br><span class="line"></span><br><span class="line">//父类特质</span><br><span class="line">trait Logger &#123;</span><br><span class="line">  def log()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//特质，需要传入两个参数 ， 一个文件名 ，一个文件内容</span><br><span class="line">trait FileLogger extends Logger &#123;</span><br><span class="line">  val fielname: String</span><br><span class="line">  val content:String</span><br><span class="line">  lazy val os = new PrintStream(fielname)</span><br><span class="line">  override def log(): Unit = &#123;</span><br><span class="line">    os.write(content.getBytes())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//没有任何东西的 类</span><br><span class="line">class DynamicClassExtention &#123;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">object DynamicClassExtention &#123;</span><br><span class="line">  def main(args: Array[String]): Unit = &#123;</span><br><span class="line">    //对 类进行功能扩展 ，传入参数</span><br><span class="line">    val d = new DynamicClassExtention with FileLogger &#123;</span><br><span class="line">      override val fielname: String = &quot;a.txt&quot;</span><br><span class="line">      override val content: String = &quot;file error&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    d.log()</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>为了避免特质构造时发生空指针异常，将其被调用处资源 申明为 <code>lazy</code></li>
+<li>在混入特质时，需要重写其属性，并且赋值</li>
+</ol>
+<h2 id="super调用"><a href="#super调用" class="headerlink" title="super调用"></a>super调用</h2><p>如果 <code>多个特质</code> 重写了 <code>同一个方法</code> ，且该方法中都调用了父类的方法， 那么具体的调用是 从右往左 开始</p>
+<p>举个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">//定义一个抽象类和子类</span><br><span class="line">abstract class CharBuffer &#123;</span><br><span class="line">  def get: Char</span><br><span class="line">  def put(c: Char)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Overlay extends CharBuffer&#123;</span><br><span class="line">  val buf = new ArrayBuffer[Char]</span><br><span class="line">  override def get: Char = &#123;</span><br><span class="line">    if (buf.length != 0) buf(0) else &apos;@&apos;</span><br><span class="line">  &#125;</span><br><span class="line">  override def put(c: Char): Unit = &#123;</span><br><span class="line">    buf.append(c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//定义两种对输入字符进行操作的特质:</span><br><span class="line">//此处继承了 CharBuffer ，只有CharBuffer子类菜可以使用 该特质</span><br><span class="line">trait ToUpper extends CharBuffer &#123;</span><br><span class="line">    // 特质中重写抽象方法  abstract override</span><br><span class="line">    abstract override def put(c: Char) = super.put(c.toUpper)</span><br><span class="line">&#125;</span><br><span class="line">trait ToLower extends CharBuffer &#123;</span><br><span class="line">    abstract override def put(c: Char) = super.put(c.toLower)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//测试</span><br><span class="line">object TestOverlay extends App &#123;</span><br><span class="line">  val cb1 = new Overlay with ToLower with ToUpper</span><br><span class="line">  val cb2 = new Overlay with ToUpper with ToLower</span><br><span class="line"></span><br><span class="line">  cb1.put(&apos;A&apos;)</span><br><span class="line">  println(cb1.get)</span><br><span class="line"></span><br><span class="line">  cb2.put(&apos;a&apos;)</span><br><span class="line">  println(cb2.get)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Scala/[Scala]07_对象.html" target="_blank" rel="external">https://willon.cn/Lang/Scala/[Scala]07_对象.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Scala/[Scala]08_继承与实现.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Scala]08_继承与实现</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]07_对象_特质.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]07_对象_trait</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

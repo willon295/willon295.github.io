@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Vue]Vuepress自动生成侧边栏目 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="vuepress 是当下又一个较为火热的项目,  主要的作用是类似于模板引擎 , 实现将 markdown 文档转化成 html 文件, 并构建一个较为完整的站点.对刚刚搭建博客的站长来说, 根据官网配置站点, 或许并不是一件麻烦事, 但是对于站点迁移的我来说, 配置各种导航是一项很蠢的事, 何其复杂的文件分类, 何其多的导航,文件归档.本文旨在使得 vuepress 根据文档目录结构, 自动生成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Vue]Vuepress自动生成侧边栏目">
+<meta property="og:url" content="https://willon.cn/Frontend/[Vuepress]Vuepress优化自动生成导航侧边.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="vuepress 是当下又一个较为火热的项目,  主要的作用是类似于模板引擎 , 实现将 markdown 文档转化成 html 文件, 并构建一个较为完整的站点.对刚刚搭建博客的站长来说, 根据官网配置站点, 或许并不是一件麻烦事, 但是对于站点迁移的我来说, 配置各种导航是一项很蠢的事, 何其复杂的文件分类, 何其多的导航,文件归档.本文旨在使得 vuepress 根据文档目录结构, 自动生成">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Vue]Vuepress自动生成侧边栏目">
+<meta name="twitter:description" content="vuepress 是当下又一个较为火热的项目,  主要的作用是类似于模板引擎 , 实现将 markdown 文档转化成 html 文件, 并构建一个较为完整的站点.对刚刚搭建博客的站长来说, 根据官网配置站点, 或许并不是一件麻烦事, 但是对于站点迁移的我来说, 配置各种导航是一项很蠢的事, 何其复杂的文件分类, 何其多的导航,文件归档.本文旨在使得 vuepress 根据文档目录结构, 自动生成">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Vue]Vuepress自动生成侧边栏目</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Vue]Vuepress自动生成侧边栏目</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-26T15:53:48.677Z" itemprop="datePublished" class="page-time">
+  2019-05-26
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Frontend/[Vuepress]Vuepress优化自动生成导航侧边"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Vue]Vuepress自动生成侧边栏目</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-26 23:53:48" datetime="2019-05-26T15:53:48.677Z"  itemprop="datePublished">2019-05-26</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>vuepress 是当下又一个较为火热的项目,  主要的作用是类似于模板引擎 , 实现将 markdown 文档转化成 html 文件, 并构建一个较为完整的站点.<br>对刚刚搭建博客的站长来说, 根据官网配置站点, 或许并不是一件麻烦事, 但是对于站点迁移的我来说, 配置各种导航是一项很蠢的事, 何其复杂的文件分类, 何其多的导航,文件归档.<br>本文旨在使得 vuepress 根据文档目录结构, 自动生成 <code>导航栏</code> , <code>侧边栏</code> .</p>
+<p>工程目录结构大概如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|--project</span><br><span class="line">	|--docs/       	 // 文档存放处</span><br><span class="line">	|----.vuepress/</span><br><span class="line">				|--config.js</span><br><span class="line">	|--package.json</span><br></pre></td></tr></table></figure></p>
+<p>本文件 <code>config.js</code> 位于  <code>工程/.vuepress/config.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * create by Willon</span></span><br><span class="line"><span class="comment"> * date: 2019-05-12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 主要实现:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1. 文件目录结构 --&gt; 导航栏结构  (每个顶级父目录为 nav 标题,  子目录为下拉列表)</span></span><br><span class="line"><span class="comment"> * 2. 文本文档 ---&gt; 侧边栏导航结构  (每个最低级子目录对应一个页面, 对应一个sidebar)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改配置, 直接修改 config 对象即可</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1. 站点LOGO</span></span><br><span class="line"><span class="comment"> * 2. 服务器端口</span></span><br><span class="line"><span class="comment"> * 3. 主题配置: 侧边栏 , 导航条</span></span><br><span class="line"><span class="comment"> * 4. Other ...</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> rootpath = path.dirname(__dirname);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> filehelper = &#123;</span><br><span class="line">    getAllFiles: <span class="function"><span class="keyword">function</span> (<span class="params">rpath</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> filenames = [];</span><br><span class="line">        fs.readdirSync(rpath).forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">            fullpath = rpath + <span class="string">"/"</span> + file;</span><br><span class="line">            <span class="keyword">var</span> fileinfo = fs.statSync(fullpath);</span><br><span class="line">            <span class="keyword">if</span> (fileinfo.isFile()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (file === <span class="string">'README.md'</span> || file === <span class="string">'readme.md'</span>) &#123;</span><br><span class="line">                    file = <span class="string">''</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    file = file.replace(<span class="string">'.md'</span>, <span class="string">''</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                filenames.push(file);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        filenames.sort();</span><br><span class="line">        <span class="keyword">return</span> filenames;</span><br><span class="line">    &#125;,</span><br><span class="line">    getAllDirs: <span class="function"><span class="keyword">function</span> <span class="title">getAllDirs</span>(<span class="params">mypath = <span class="string">'.'</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> items = fs.readdirSync(mypath);</span><br><span class="line">        <span class="keyword">let</span> result = [];</span><br><span class="line">        <span class="comment">// 遍历当前目录中所有文件夹</span></span><br><span class="line">        items.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> temp = path.join(mypath, item);</span><br><span class="line">            <span class="keyword">if</span> (fs.statSync(temp).isDirectory() &amp;&amp; !item.startsWith(<span class="string">"."</span>)) &#123;</span><br><span class="line">                <span class="keyword">let</span> path = mypath + <span class="string">"/"</span> + item + <span class="string">"/"</span>;</span><br><span class="line">                result.push(path);</span><br><span class="line">                result = result.concat(getAllDirs(temp));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// nav的链接路径</span></span><br><span class="line"><span class="keyword">var</span> navLinks = [];</span><br><span class="line"><span class="keyword">var</span> sidebar = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> nav = getNav();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">genSideBar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sidebars = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> allDirs = filehelper.getAllDirs(rootpath);</span><br><span class="line">    allDirs.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> dirFiles = filehelper.getAllFiles(item);</span><br><span class="line">        <span class="keyword">let</span> dirname = item.replace(rootpath, <span class="string">""</span>);</span><br><span class="line">        navLinks.push(dirname);</span><br><span class="line">        <span class="keyword">if</span> ((dirFiles.length &gt; <span class="number">1</span>)) &#123;</span><br><span class="line">            sidebars[dirname] = dirFiles;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    sidebar = sidebars</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 先生成所有nav文件链接;</span></span><br><span class="line"><span class="comment"> * @param filepaths</span></span><br><span class="line"><span class="comment"> * @returns &#123;Array&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">genNavLink</span>(<span class="params">filepaths</span>) </span>&#123;</span><br><span class="line">    genSideBar();</span><br><span class="line">    <span class="keyword">var</span> navLinks = [];</span><br><span class="line">    filepaths.forEach(<span class="function"><span class="params">p</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> ss = p.toString().split(<span class="string">"/"</span>);</span><br><span class="line">        <span class="keyword">var</span> name = ss[ss.length - <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">var</span> parent = p.replace(name + <span class="string">"/"</span>, <span class="string">""</span>);</span><br><span class="line">        navLinks.push(&#123;</span><br><span class="line">            text: name,</span><br><span class="line">            link: p,</span><br><span class="line">            items: [],</span><br><span class="line">            parent: parent</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> navLinks;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义排序文件夹</span></span><br><span class="line"><span class="comment"> * @param a</span></span><br><span class="line"><span class="comment"> * @param b</span></span><br><span class="line"><span class="comment"> * @returns &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortDir</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> al = a.parent.toString().split(<span class="string">"/"</span>).length;</span><br><span class="line">    <span class="keyword">let</span> bl = b.parent.toString().split(<span class="string">"/"</span>).length;</span><br><span class="line">    <span class="keyword">if</span> (al &gt; bl) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (al === bl) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (al &lt; bl) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成最终的 nav配置信息</span></span><br><span class="line"><span class="comment"> * @param navLinks</span></span><br><span class="line"><span class="comment"> * @returns &#123;Array&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNav</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nnavs = genNavLink(navLinks);</span><br><span class="line">    nnavs.sort(sortDir);</span><br><span class="line">    <span class="keyword">var</span> iniMap = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">var</span> delMap = &#123;&#125;;</span><br><span class="line">    nnavs.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">        iniMap[l.link] = l;</span><br><span class="line">    &#125;);</span><br><span class="line">    nnavs.forEach(<span class="function"><span class="params">l</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> parentLink = l.parent;</span><br><span class="line">        <span class="keyword">if</span> (parentLink !== <span class="string">"/"</span>) &#123;</span><br><span class="line">            iniMap[parentLink].items.push(l);</span><br><span class="line">            delMap[l.link] = l;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> iniMap) &#123;</span><br><span class="line">        <span class="keyword">if</span> (delMap[k] != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> iniMap[k];</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(iniMap[k])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = &#123;</span><br><span class="line">    title: <span class="string">'Willon'</span>,</span><br><span class="line">    themeConfig: &#123;</span><br><span class="line">        sidebar: sidebar,</span><br><span class="line">        nav: nav</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config;</span><br></pre></td></tr></table></figure>
+<p>为了方便调试 , 在 <code>工程目录</code> 配置 <code>package.json</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"docs:dev"</span>: <span class="string">"vuepress dev docs"</span>,</span><br><span class="line">    <span class="attr">"docs:build"</span>: <span class="string">"vuepress build docs"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Frontend/[Vuepress]Vuepress优化自动生成导航侧边.html" target="_blank" rel="external">https://willon.cn/Frontend/[Vuepress]Vuepress优化自动生成导航侧边.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringMVC/[SpringMVC]Mock接口测试.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringMVC]Mock接口测试</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

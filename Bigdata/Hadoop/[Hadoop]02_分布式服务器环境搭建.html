@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]02_分布式服务器网络环境搭建 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="简介笔记本模拟 分布式服务器环境 和 服务器局域网络环境 搭建，实现服务器与服务器、宿主机和服务器之间可以相互通信。服务器可以访问外网 准备环境准备 Linux操作系统宿主机 VirtualBox：创建多台服务器 Centos-server-minimal-x64.iso: 服务器操作系统  VirtualBox准备 安装三台服务器： hdp0 、 hdp1 、hdp2 网络设置为 桥接  服务器">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]02_分布式服务器网络环境搭建">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]02_分布式服务器环境搭建.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="简介笔记本模拟 分布式服务器环境 和 服务器局域网络环境 搭建，实现服务器与服务器、宿主机和服务器之间可以相互通信。服务器可以访问外网 准备环境准备 Linux操作系统宿主机 VirtualBox：创建多台服务器 Centos-server-minimal-x64.iso: 服务器操作系统  VirtualBox准备 安装三台服务器： hdp0 、 hdp1 、hdp2 网络设置为 桥接  服务器">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]02_分布式服务器网络环境搭建">
+<meta name="twitter:description" content="简介笔记本模拟 分布式服务器环境 和 服务器局域网络环境 搭建，实现服务器与服务器、宿主机和服务器之间可以相互通信。服务器可以访问外网 准备环境准备 Linux操作系统宿主机 VirtualBox：创建多台服务器 Centos-server-minimal-x64.iso: 服务器操作系统  VirtualBox准备 安装三台服务器： hdp0 、 hdp1 、hdp2 网络设置为 桥接  服务器">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]02_分布式服务器网络环境搭建</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]02_分布式服务器网络环境搭建</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:02:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">环境准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VirtualBox准备"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">VirtualBox准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#服务器网络环境配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">服务器网络环境配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分配并设置静态IP"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">分配并设置静态IP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码实现"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">代码实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#宿主机配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">宿主机配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试"><span class="post-toc-number">5.</span> <span class="post-toc-text">测试</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]02_分布式服务器环境搭建"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]02_分布式服务器网络环境搭建</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:02:33" datetime="2017-08-27T16:02:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>笔记本模拟 <code>分布式服务器环境</code> 和 <code>服务器局域网络环境</code> 搭建，实现服务器与服务器、宿主机和服务器之间可以相互通信。服务器可以访问外网</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
+<li><code>Linux操作系统宿主机</code></li>
+<li><code>VirtualBox</code>：创建多台服务器</li>
+<li><code>Centos-server-minimal-x64.iso</code>: 服务器操作系统</li>
+</ul>
+<h2 id="VirtualBox准备"><a href="#VirtualBox准备" class="headerlink" title="VirtualBox准备"></a>VirtualBox准备</h2><ol>
+<li>安装三台服务器： <code>hdp0 、 hdp1 、hdp2</code></li>
+<li>网络设置为 <code>桥接</code></li>
+</ol>
+<h1 id="服务器网络环境配置"><a href="#服务器网络环境配置" class="headerlink" title="服务器网络环境配置"></a>服务器网络环境配置</h1><h2 id="分配并设置静态IP"><a href="#分配并设置静态IP" class="headerlink" title="分配并设置静态IP"></a>分配并设置静态IP</h2><p>先 <code>ifconfig</code> 查看 <code>宿主机</code> 所处于的 <code>IP段</code>,如 <code>192.168.1.*</code>段。服务器最好和宿主机处于同一段</p>
+<ol>
+<li>分配IP: <code>hdp0--192.168.1.150</code> ， <code>hdp1--192.168.1.151</code> ， <code>hdp02-192.168.1.152</code></li>
+<li>子网掩码: <code>255.255.255.0</code></li>
+<li>网关: <code>192.168.1.1</code></li>
+<li>修改 <code>/etc/hosts</code> 文件，加入对应的映射</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cat  &gt;&gt;  /etc/sysconfig/network-scripts/ifcfg-enp0s3 &lt;&lt;EOF</span><br><span class="line">NETMASK=&quot;255.255.255.0&quot;</span><br><span class="line">GATEWAY=&quot;192.168.1.1&quot;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat  &gt; /etc/resolv.conf  &lt;&lt;EOF</span><br><span class="line">nameserver 192.168.1.1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &gt; /etc/hosts  &lt;&lt;EOF</span><br><span class="line">127.0.0.1 localhost</span><br><span class="line">::1 localhost</span><br><span class="line">192.168.1.150  hdp0</span><br><span class="line">192.168.1.151  hdp1</span><br><span class="line">192.168.1.152  hdp2</span><br><span class="line">192.168.1.153  hdp3</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h1 id="宿主机配置"><a href="#宿主机配置" class="headerlink" title="宿主机配置"></a>宿主机配置</h1><ol>
+<li>主要修改 <code>/etc/hosts</code> 文件，加入映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/hosts  &lt;&lt;EOF</span><br><span class="line">127.0.0.1 localhost</span><br><span class="line">::1 localhost</span><br><span class="line">192.168.1.150  hdp0</span><br><span class="line">192.168.1.151  hdp1</span><br><span class="line">192.168.1.152  hdp2</span><br><span class="line">192.168.1.153  hdp3</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
+<li>打开各主机，能相互 ping 通，并且都能 ping 到外网则成功</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]02_分布式服务器环境搭建.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]02_分布式服务器环境搭建.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]03_分布式服务器任务分发.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]03_分布式服务器任务分发</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]01_安装配置测试.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]01_安装配置测试</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

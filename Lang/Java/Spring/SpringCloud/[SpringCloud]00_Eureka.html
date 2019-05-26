@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringCloud]00_Eureka | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Eureka,SpringCloud">
+    <meta name="description" content="Eureka 是一个注册服务框架, 与其类似的还有  zookeeper  Consul ,Consul 是取中心化的架构, zookeeper 也是. Eureka-Server安装出现的问题因为使用的是最新的版本,所以坑非常多.  能正常访问,但是抛出异常1com.netflix.discovery.shared.transport.TransportException: Cannot exe">
+<meta name="keywords" content="Eureka,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringCloud]00_Eureka">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]00_Eureka.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Eureka 是一个注册服务框架, 与其类似的还有  zookeeper  Consul ,Consul 是取中心化的架构, zookeeper 也是. Eureka-Server安装出现的问题因为使用的是最新的版本,所以坑非常多.  能正常访问,但是抛出异常1com.netflix.discovery.shared.transport.TransportException: Cannot exe">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringCloud]00_Eureka">
+<meta name="twitter:description" content="Eureka 是一个注册服务框架, 与其类似的还有  zookeeper  Consul ,Consul 是取中心化的架构, zookeeper 也是. Eureka-Server安装出现的问题因为使用的是最新的版本,所以坑非常多.  能正常访问,但是抛出异常1com.netflix.discovery.shared.transport.TransportException: Cannot exe">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringCloud]00_Eureka</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringCloud]00_Eureka</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-28T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/">Eureka</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Eureka-Server安装出现的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">Eureka-Server安装出现的问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Eureka-client注册出现的问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">Eureka-client注册出现的问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多个服务注册Server出现问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">多个服务注册Server出现问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#完整的配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">完整的配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringCloud/[SpringCloud]00_Eureka"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringCloud]00_Eureka</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-29 00:00:00" datetime="2018-06-28T16:00:00.000Z"  itemprop="datePublished">2018-06-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/">Eureka</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Eureka/SpringCloud/">SpringCloud</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Eureka 是一个注册服务框架, 与其类似的还有  zookeeper  Consul ,Consul 是取中心化的架构, zookeeper 也是.</p>
+<h1 id="Eureka-Server安装出现的问题"><a href="#Eureka-Server安装出现的问题" class="headerlink" title="Eureka-Server安装出现的问题"></a>Eureka-Server安装出现的问题</h1><p>因为使用的是最新的版本,所以坑非常多.</p>
+<ol>
+<li>能正常访问,但是抛出异常<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>解决:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false #加入者两行配置即可</span><br><span class="line">    fetch-registry: false</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>能正常访问,但是 读取不了 <code>registered-replicas</code> ,    <code>unavailable-replicas</code><br><code>available-replicas</code> 信息</li>
+</ol>
+<p><strong>解决</strong>:  不用 <code>yml</code> 文件, 用 <code>properties</code> 配置就解决了.(玄学!!)</p>
+<h1 id="Eureka-client注册出现的问题"><a href="#Eureka-client注册出现的问题" class="headerlink" title="Eureka-client注册出现的问题"></a>Eureka-client注册出现的问题</h1><ol>
+<li>从官网下载下来的模板并不能成功启动,<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.ClassNotFoundException: org.springframework.http.ResponseEntity</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>解决:</strong>添加 <code>web依赖</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>不能注册<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">can&apos;t register for any know server</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>解决:</strong>把 服务端的端口 改成 <code>8761</code> 即可.</p>
+<ol start="3">
+<li>如果在同一台机器,客户端貌似不需要指定 eureka-server 的地址就能注册.</li>
+</ol>
+<h1 id="多个服务注册Server出现问题"><a href="#多个服务注册Server出现问题" class="headerlink" title="多个服务注册Server出现问题"></a>多个服务注册Server出现问题</h1><p>红色警告:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EMERGENCY! EUREKA MAY BE INCORRECTLY CLAIMING INSTANCES ARE UP WHEN THEY&apos;RE</span><br></pre></td></tr></table></figure></p>
+<p><strong>解决:</strong> 给每个服务客户端指定不同的 <code>instance.appname</code></p>
+<h1 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h1><ol>
+<li><p>eureka-server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">    appname: eureka-server-instance</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    fetch-registry: false</span><br><span class="line">    service-url:</span><br><span class="line">      defalutZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>eureka-client</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8888</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: eureka-client</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">  instance:</span><br><span class="line">    appname: eureka-client-instance</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动: 在入口处加上注解 <code>@EnableEurekaServer</code> 或者 <code>@EnableEurekaClient</code></p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>官方的 2.0.3 Eureka Quick Start Demo不靠普</li>
+<li>当本地有多个服务需要注册时,不需要指定 server的地址,如果是不同的机器那么客户端就要<code>指定server地址</code>, <code>自身实例名称</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 9999</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">  instance:</span><br><span class="line">    appname: member-service  #Application处显示的名称</span><br><span class="line">    hostname: member-service-hostName #Stutus 对应Url的真实连接主机名</span><br><span class="line">    ip-address: 127.0.0.1  # 该实例主机对应的 ip</span><br><span class="line">    prefer-ip-address: true  # 优先使用ip</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: member-service-appName # Status 处明文显示的名称</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]00_Eureka.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringCloud/[SpringCloud]00_Eureka.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringCloud/[SpringCloud]01_00_服务消费者.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringCloud]01_服务消费者</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]14_使用Quartz定时调度任务.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]14_使用Quartz定时调度任务</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]11_自定义分区规则 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="解决的问题默认情况下，reduce输出的结果只有一个文件 XXX-part-r-00000 , 比如现在有一个需求：要处理的用户数据 按电话号码所在区域进行划分， 不同的省份 存储在 不同的文件中。 Hadoop的处理逻辑 默认reduce数量为 1 默认分区规则是 HashPartitioner ， 源代码如下： 12345public  int  getPartition(K key,V va">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]11_自定义分区规则">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]11_自定义分区规则.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="解决的问题默认情况下，reduce输出的结果只有一个文件 XXX-part-r-00000 , 比如现在有一个需求：要处理的用户数据 按电话号码所在区域进行划分， 不同的省份 存储在 不同的文件中。 Hadoop的处理逻辑 默认reduce数量为 1 默认分区规则是 HashPartitioner ， 源代码如下： 12345public  int  getPartition(K key,V va">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]11_自定义分区规则">
+<meta name="twitter:description" content="解决的问题默认情况下，reduce输出的结果只有一个文件 XXX-part-r-00000 , 比如现在有一个需求：要处理的用户数据 按电话号码所在区域进行划分， 不同的省份 存储在 不同的文件中。 Hadoop的处理逻辑 默认reduce数量为 1 默认分区规则是 HashPartitioner ， 源代码如下： 12345public  int  getPartition(K key,V va">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]11_自定义分区规则</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]11_自定义分区规则</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:11:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">解决的问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hadoop的处理逻辑"><span class="post-toc-number">2.</span> <span class="post-toc-text">Hadoop的处理逻辑</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#自定义分区规则"><span class="post-toc-number">3.</span> <span class="post-toc-text">自定义分区规则</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]11_自定义分区规则"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]11_自定义分区规则</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:11:33" datetime="2017-08-27T16:11:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h1><p>默认情况下，reduce输出的结果只有一个文件 <code>XXX-part-r-00000</code> , 比如现在有一个需求：<br>要处理的用户数据 <code>按电话号码所在区域</code>进行划分， <code>不同的省份</code> 存储在 <code>不同的文件中</code>。</p>
+<h1 id="Hadoop的处理逻辑"><a href="#Hadoop的处理逻辑" class="headerlink" title="Hadoop的处理逻辑"></a>Hadoop的处理逻辑</h1><ol>
+<li>默认reduce数量为 1</li>
+<li><p>默认分区规则是 <code>HashPartitioner</code> ， 源代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public  int  getPartition(K key,V value,int  numReduceTasks)&#123;</span><br><span class="line"></span><br><span class="line">	//根据 key的 hashCode 模除 任务数，返回对应的分区</span><br><span class="line">	return (key.hashCode() &amp; Integer.MAX_VALUE) % numReduceTasks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>reduce处理结果生成的文件一般有 <code>numReduceTasks+1</code> 个，一个是 <code>_SUCCESS</code></p>
+</li>
+</ol>
+<h1 id="自定义分区规则"><a href="#自定义分区规则" class="headerlink" title="自定义分区规则"></a>自定义分区规则</h1><ol>
+<li><p>继承 <code>Partitioner</code>类，重写 <code>getPartition()</code> 方法（）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class ProvincePartitioner extends Partitioner&#123;</span><br><span class="line"></span><br><span class="line">	public  int  getPartition(K key,V value,int  numPartitions)&#123;</span><br><span class="line">	</span><br><span class="line">		//分出3个分区</span><br><span class="line">		pro=key.toString();</span><br><span class="line">		if(pro.equals(&quot;136&quot;))&#123;</span><br><span class="line">			return 0;</span><br><span class="line">		&#125;else if(ro.equals(&quot;138&quot;))&#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			return 2;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任务提交处，使用 <code>自定义的 分区规则</code>,设置 <code>numReduceTasks 任务数量</code></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job.setPatitionerClass(ProvincePartitioner.class);</span><br><span class="line">job.setNumReduceTasks(3);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>任务数量 <code>不能少于</code> 分区规则分出后的分区数量</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]11_自定义分区规则.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]11_自定义分区规则.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]12_搭建一个集群的基本步骤.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]12_搭建一个集群的基本步骤</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]10_自定义VALUE类型.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]10_自定义VALUE类型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

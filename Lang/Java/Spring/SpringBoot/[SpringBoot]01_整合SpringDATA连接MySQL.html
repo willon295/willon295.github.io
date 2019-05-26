@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringBoot]01_整合SpringDATA连接MYSQL | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringBoot">
+    <meta name="description" content="什么是Spring Data一个组件，可以让开发者快速实现各种数据库的操作，不用写多余的代码 入门案例 maven 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748&amp;lt;dependencies&amp;gt;	&amp;lt;!--1. Spring Boot--&amp;gt;	&amp;lt;de">
+<meta name="keywords" content="SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringBoot]01_整合SpringDATA连接MYSQL">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]01_整合SpringDATA连接MySQL.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="什么是Spring Data一个组件，可以让开发者快速实现各种数据库的操作，不用写多余的代码 入门案例 maven 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748&amp;lt;dependencies&amp;gt;	&amp;lt;!--1. Spring Boot--&amp;gt;	&amp;lt;de">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringBoot]01_整合SpringDATA连接MYSQL">
+<meta name="twitter:description" content="什么是Spring Data一个组件，可以让开发者快速实现各种数据库的操作，不用写多余的代码 入门案例 maven 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748&amp;lt;dependencies&amp;gt;	&amp;lt;!--1. Spring Boot--&amp;gt;	&amp;lt;de">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringBoot]01_整合SpringDATA连接MYSQL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringBoot]01_整合SpringDATA连接MYSQL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-19T16:01:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是Spring-Data"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是Spring Data</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#入门案例"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">入门案例</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[SpringBoot]01_整合SpringDATA连接MySQL"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringBoot]01_整合SpringDATA连接MYSQL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-20 00:01:00" datetime="2018-06-19T16:01:00.000Z"  itemprop="datePublished">2018-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="什么是Spring-Data"><a href="#什么是Spring-Data" class="headerlink" title="什么是Spring Data"></a>什么是Spring Data</h1><p>一个组件，可以让开发者快速实现各种数据库的操作，不用写多余的代码</p>
+<h2 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h2><ol>
+<li><p>maven</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line"></span><br><span class="line">	&lt;!--1. Spring Boot--&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;$&#123;boot.version&#125;&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;$&#123;boot.version&#125;&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;$&#123;boot.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       &lt;!--2. 数据库驱动--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;5.1.40&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">       &lt;!--3. Spring Data--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;$&#123;boot.version&#125;&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;plugins&gt;</span><br><span class="line">		&lt;plugin&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">		&lt;/plugin&gt;</span><br><span class="line">       &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8888</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://localhost:3306/test?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">  jpa:</span><br><span class="line">    hibernate:</span><br><span class="line">      ddl-auto: update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JavaBean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import javax.persistence.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 一定要写Entity、Table、主键id约束一定要写</span><br><span class="line"> */</span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;t_user&quot;)</span><br><span class="line">public class User &#123;</span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(strategy = GenerationType.IDENTITY)</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String  password;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(int id, String name, String password) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;User&#123;&quot; +</span><br><span class="line">                &quot;id=&quot; + id +</span><br><span class="line">                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; +</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DAO</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import com.example.demo.entity.User;</span><br><span class="line">import org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"></span><br><span class="line">public interface UserDAO  extends JpaRepository&lt;User,Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Controller</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;user&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserDAO userDAO;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;&quot;)</span><br><span class="line">    public String index() &#123;</span><br><span class="line">        return &quot;Hello &quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;list&quot;)</span><br><span class="line">    public Object list() &#123;</span><br><span class="line">        return  userDAO.findAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>入口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器访问 <code>http://localhost:8889/user/list</code></p>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]01_整合SpringDATA连接MySQL.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]01_整合SpringDATA连接MySQL.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]02_00_配置文件.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringBoot]02_00_配置文件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]00_入门.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]00_入门</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]16_MR之多Job串行 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="需求分析当我们的业务逻辑十分复杂时，一个 job 显然不能完成，所以需要多个 MRJOb。 举个例子下面的内容， ： 冒号左边是用户，右边是该用户的好友，需求 ==&amp;gt;  求两两用户间所有共同好友1234567891011121314A:B,C,D,F,E,OB:A,C,E,KC:F,A,D,ID:A,E,F,LE:B,C,D,M,LF:A,B,C,D,E,O,MG:A,C,D,E,FH:A,">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]16_MR之多Job串行">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]16_MR之多Job串行.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="需求分析当我们的业务逻辑十分复杂时，一个 job 显然不能完成，所以需要多个 MRJOb。 举个例子下面的内容， ： 冒号左边是用户，右边是该用户的好友，需求 ==&amp;gt;  求两两用户间所有共同好友1234567891011121314A:B,C,D,F,E,OB:A,C,E,KC:F,A,D,ID:A,E,F,LE:B,C,D,M,LF:A,B,C,D,E,O,MG:A,C,D,E,FH:A,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]16_MR之多Job串行">
+<meta name="twitter:description" content="需求分析当我们的业务逻辑十分复杂时，一个 job 显然不能完成，所以需要多个 MRJOb。 举个例子下面的内容， ： 冒号左边是用户，右边是该用户的好友，需求 ==&amp;gt;  求两两用户间所有共同好友1234567891011121314A:B,C,D,F,E,OB:A,C,E,KC:F,A,D,ID:A,E,F,LE:B,C,D,M,LF:A,B,C,D,E,O,MG:A,C,D,E,FH:A,">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]16_MR之多Job串行</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]16_MR之多Job串行</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:16:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#需求分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">需求分析</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#举个例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">举个例子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分析"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Coding</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#多job串行的基本步骤"><span class="post-toc-number">3.</span> <span class="post-toc-text">多job串行的基本步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]16_MR之多Job串行"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]16_MR之多Job串行</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:16:33" datetime="2017-08-27T16:16:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>当我们的业务逻辑十分复杂时，一个 job 显然不能完成，所以需要多个 MRJOb。</p>
+<h1 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h1><p>下面的内容， <code>：</code> 冒号左边是用户，右边是该用户的好友，需求 ==&gt;  求两两用户间所有共同好友<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">A:B,C,D,F,E,O</span><br><span class="line">B:A,C,E,K</span><br><span class="line">C:F,A,D,I</span><br><span class="line">D:A,E,F,L</span><br><span class="line">E:B,C,D,M,L</span><br><span class="line">F:A,B,C,D,E,O,M</span><br><span class="line">G:A,C,D,E,F</span><br><span class="line">H:A,C,D,E,O</span><br><span class="line">I:A,O</span><br><span class="line">J:B,O</span><br><span class="line">K:A,C,D</span><br><span class="line">L:D,E,F</span><br><span class="line">M:E,F,G</span><br><span class="line">O:A,H,I,J</span><br></pre></td></tr></table></figure></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ol>
+<li>第一次<ul>
+<li>map： (friend1，user)</li>
+<li>shuffle结果：(friend1，[u1,u2,u3..] ) =&gt; 集合内用户两两有共同好友 friend1</li>
+<li>reduce: 好友两两作key，好友做 value =&gt;（u1#u2,friend1）,(u1#u3,friend1)..</li>
+</ul>
+</li>
+<li>第二次<br>-map： (u1#u2,friend1)<ul>
+<li>shuffle结果：(u1#u2,[f1,f2,f3…])</li>
+<li>reduce: 将好友集合遍历即可</li>
+</ul>
+</li>
+</ol>
+<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>具体代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.conf.Configured;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.LongWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line">import org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.jobcontrol.ControlledJob;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.jobcontrol.JobControl;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;</span><br><span class="line">import org.apache.hadoop.util.Tool;</span><br><span class="line">import org.apache.hadoop.util.ToolRunner;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class CommonFriends extends Configured implements Tool &#123;</span><br><span class="line"></span><br><span class="line">    //把用户作为 value ， 好友作为 key</span><br><span class="line">    static class StepOneMapper extends Mapper&lt;LongWritable, Text, Text, Text&gt; &#123;</span><br><span class="line"></span><br><span class="line">        Text user = new Text();</span><br><span class="line">        Text friend = new Text();</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            String[] line = value.toString().split(&quot;:&quot;);</span><br><span class="line">            user.set(line[0]);</span><br><span class="line">            String[] friends = line[1].split(&quot;,&quot;);</span><br><span class="line">            for (String f : friends) &#123;</span><br><span class="line">                friend.set(f);</span><br><span class="line">                context.write(friend, user);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class StepOneReducer extends Reducer&lt;Text, Text, Text, Text&gt; &#123;</span><br><span class="line"></span><br><span class="line">        Text twoUsers = new Text();</span><br><span class="line"></span><br><span class="line">        //结果是  (   friend ,[u1,u2,u3....]   ), user 两两之间有共同好友</span><br><span class="line">        // 输出结果是  (u1#u2 ,  commonFriend)</span><br><span class="line">        @Override</span><br><span class="line">        protected void reduce(Text key, Iterable&lt;Text&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">            ArrayList&lt;String&gt; userList = new ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">            for (Text value : values) &#123;</span><br><span class="line">                userList.add(value.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            //避免出现 A#B B#A 重复情况</span><br><span class="line">            Collections.sort(userList);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            for (int i = 0; i &lt; userList.size() - 1; i++) &#123;</span><br><span class="line">                for (int j = (i + 1); j &lt; userList.size(); j++) &#123;</span><br><span class="line">                    twoUsers.set(userList.get(i) + &quot;#&quot; + userList.get(j));</span><br><span class="line">                    context.write(twoUsers, key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    static class StepTwoMapper extends Mapper&lt;LongWritable, Text, Text, Text&gt; &#123;</span><br><span class="line"></span><br><span class="line">        Text twoUsers = new Text();</span><br><span class="line">        Text commonFriend = new Text();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //将数据  (u1#u2 ,  commonFriend) 放入 map</span><br><span class="line">        // shuffle 输出 结果是   (u1#u2 ,[cf1, cf2, cf3 ....]  )</span><br><span class="line">        @Override</span><br><span class="line">        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">            String[] split = value.toString().split(&quot;\t&quot;);</span><br><span class="line">            twoUsers.set(split[0]);</span><br><span class="line">            commonFriend.set(split[1]);</span><br><span class="line">            context.write(twoUsers, commonFriend);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class StepTwoReducer extends Reducer&lt;Text, Text, Text, Text&gt; &#123;</span><br><span class="line"></span><br><span class="line">        Text commonFriends = new Text();</span><br><span class="line"></span><br><span class="line">        //将结果直接输出</span><br><span class="line">        @Override</span><br><span class="line">        protected void reduce(Text key, Iterable&lt;Text&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">            StringBuilder sb = new StringBuilder();</span><br><span class="line">            for (Text v : values) &#123;</span><br><span class="line">                sb.append(v.toString()).append(&quot;,&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            commonFriends.set(sb.substring(0, sb.length() - 1));</span><br><span class="line">            context.write(key, commonFriends);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public int run(String[] strings) throws Exception &#123;</span><br><span class="line">        Configuration conf = getConf();</span><br><span class="line">        //文件的输入 输出 ，临时缓存 路径</span><br><span class="line">        Path in = new Path(conf.get(&quot;in&quot;));</span><br><span class="line">        Path out = new Path(conf.get(&quot;out&quot;));</span><br><span class="line">        Path tmp = new Path(&quot;/commonFriendTmp&quot;);</span><br><span class="line"></span><br><span class="line">        //创建  第 1 步 执行任务 job1</span><br><span class="line">        Job job1 = Job.getInstance(conf, &quot;step-one-job&quot;);</span><br><span class="line">        job1.setJarByClass(this.getClass());</span><br><span class="line">        job1.setInputFormatClass(TextInputFormat.class);</span><br><span class="line">        job1.setMapperClass(StepOneMapper.class);</span><br><span class="line">        job1.setReducerClass(StepOneReducer.class);</span><br><span class="line">        job1.setOutputKeyClass(Text.class);</span><br><span class="line">        job1.setOutputValueClass(Text.class);</span><br><span class="line">        job1.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line">        TextInputFormat.addInputPath(job1, in);</span><br><span class="line">        //将处理结果存入临时文件夹</span><br><span class="line">        TextOutputFormat.setOutputPath(job1, tmp);</span><br><span class="line"></span><br><span class="line">        //创建 第 2 步 执行任务 job2</span><br><span class="line">        Job job2 = Job.getInstance(conf, &quot;step-two-job&quot;);</span><br><span class="line">        job2.setJarByClass(this.getClass());</span><br><span class="line">        job2.setInputFormatClass(TextInputFormat.class);</span><br><span class="line">        job2.setMapperClass(StepTwoMapper.class);</span><br><span class="line">        job2.setReducerClass(StepTwoReducer.class);</span><br><span class="line">        job2.setOutputKeyClass(Text.class);</span><br><span class="line">        job2.setOutputValueClass(Text.class);</span><br><span class="line">        job2.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line">        //将上次处理完毕的临时结果作为本次的输入路径</span><br><span class="line">        TextInputFormat.addInputPath(job2, tmp);</span><br><span class="line">        TextOutputFormat.setOutputPath(job2, out);</span><br><span class="line"></span><br><span class="line">        //将两个任务转换成  可控制的 ControlledJob</span><br><span class="line">        ControlledJob cjob1 = new ControlledJob(job1.getConfiguration());</span><br><span class="line">        cjob1.setJob(job1);</span><br><span class="line">        ControlledJob cjob2 = new ControlledJob(job2.getConfiguration());</span><br><span class="line">        cjob2.setJob(job2);</span><br><span class="line"></span><br><span class="line">        //添加关系 依赖</span><br><span class="line">        cjob2.addDependingJob(cjob1);</span><br><span class="line"></span><br><span class="line">        //使用 jobController 控制两个任务</span><br><span class="line">        JobControl jc = new JobControl(&quot;G-CommonFriends&quot;);</span><br><span class="line">        jc.addJob(cjob1);</span><br><span class="line">        jc.addJob(cjob2);</span><br><span class="line"></span><br><span class="line">        //开启一个新的线程 运行 job</span><br><span class="line">        Thread t = new Thread(jc);</span><br><span class="line">        t.start();</span><br><span class="line"></span><br><span class="line">        //当所有的任务完成返回0, 如果有失败的 返回 1</span><br><span class="line">        while (true) &#123;</span><br><span class="line"></span><br><span class="line">            if (jc.allFinished()) &#123;</span><br><span class="line">                jc.stop();</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            if (jc.getFailedJobList().size() &gt; 0) &#123;</span><br><span class="line">                jc.stop();</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        System.exit(ToolRunner.run(new CommonFriends(), args));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="多job串行的基本步骤"><a href="#多job串行的基本步骤" class="headerlink" title="多job串行的基本步骤"></a>多job串行的基本步骤</h1><p>以 2 个 job为例</p>
+<ol>
+<li>创建  2 个 job ： job1 ,jo2</li>
+<li>设置  2 个 job 相关配置</li>
+<li>job之间的数据关系，此处 job2 输入为 job1 输出</li>
+<li><p>将 2 个 job 转为 <code>可控制 ControlledJob</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ControlledJob cjob1 = new ControlledJob(job1.getConfiguration());</span><br><span class="line">cjob1.setJob(job1);</span><br><span class="line">ControlledJob cjob2 = new ControlledJob(job2.getConfiguration());</span><br><span class="line">cjob2.setJob(job2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置 <code>可控制 job</code>  依赖关系，此处job2等待job1完成才执行，所以 job2 依赖 job1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cjob2.addDependingJob(cjob1);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 job控制器 <code>JobControl</code> （该类实现了 Runnable接口），并将可控job添加进控制器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JobControl jc = new JobControl(&quot;G-CommonFriends&quot;);</span><br><span class="line">jc.addJob(cjob1);</span><br><span class="line">jc.addJob(cjob2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建新的线程运行控制器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t = new Thread(jc);</span><br><span class="line">t.start();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后续操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">while (true) &#123;</span><br><span class="line">		//判断是否全部完成</span><br><span class="line">        if (jc.allFinished()) &#123;</span><br><span class="line">            jc.stop();</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        //判断是否有失败的任务</span><br><span class="line">        if (jc.getFailedJobList().size() &gt; 0) &#123;</span><br><span class="line">            jc.stop();</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>代码都是套路代码，精华的是 处理问题的算法和思想， 套路记不住可以看笔记</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]16_MR之多Job串行.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]16_MR之多Job串行.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]17_HadoopHA搭建.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]17_Hadoop-HA搭建</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]15_Combiner.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]15_Combiner</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

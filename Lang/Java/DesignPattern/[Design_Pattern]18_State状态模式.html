@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Design_Pattern]18_State状态模式 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="状态模式是 行为模式 的一种， 当一个类的行为 随着 状态的改变而改变 时，需要使用 状态模式。 举例说明一个篮球运动员 ，场均得分 ： 正常状态可得 10, 疲惫状态可得 5，超常状态可得 15 , 伪代码如下 1234567if(state==&quot;normal&quot;)&amp;#123;    getScore(10);&amp;#125;else if(state==&quot;exhausted&quot;)&amp;#123;    g">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Design_Pattern]18_State状态模式">
+<meta property="og:url" content="https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]18_State状态模式.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="状态模式是 行为模式 的一种， 当一个类的行为 随着 状态的改变而改变 时，需要使用 状态模式。 举例说明一个篮球运动员 ，场均得分 ： 正常状态可得 10, 疲惫状态可得 5，超常状态可得 15 , 伪代码如下 1234567if(state==&quot;normal&quot;)&amp;#123;    getScore(10);&amp;#125;else if(state==&quot;exhausted&quot;)&amp;#123;    g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/dp18_state_00.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Design_Pattern]18_State状态模式">
+<meta name="twitter:description" content="状态模式是 行为模式 的一种， 当一个类的行为 随着 状态的改变而改变 时，需要使用 状态模式。 举例说明一个篮球运动员 ，场均得分 ： 正常状态可得 10, 疲惫状态可得 5，超常状态可得 15 , 伪代码如下 1234567if(state==&quot;normal&quot;)&amp;#123;    getScore(10);&amp;#125;else if(state==&quot;exhausted&quot;)&amp;#123;    g">
+<meta name="twitter:image" content="https://willon.cn/images/dp18_state_00.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Design_Pattern]18_State状态模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Design_Pattern]18_State状态模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-09T16:18:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举例说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">举例说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何解决"><span class="post-toc-number">2.</span> <span class="post-toc-text">如何解决</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">上代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#其他应用场景"><span class="post-toc-number"></span> <span class="post-toc-text">其他应用场景</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/DesignPattern/[Design_Pattern]18_State状态模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Design_Pattern]18_State状态模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-10 00:18:00" datetime="2018-06-09T16:18:00.000Z"  itemprop="datePublished">2018-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>状态模式是 <code>行为模式</code> 的一种， 当一个类的<code>行为</code> 随着 <code>状态的改变而改变</code> 时，需要使用 状态模式。</p>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>一个篮球运动员 ，场均得分 ： 正常状态可得 10, 疲惫状态可得 5，超常状态可得 15 , 伪代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(state==<span class="string">"normal"</span>)&#123;</span><br><span class="line">    getScore(<span class="number">10</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(state==<span class="string">"exhausted"</span>)&#123;</span><br><span class="line">    getScore(<span class="number">5</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(state==<span class="string">"better"</span>)&#123;</span><br><span class="line">    getScore()<span class="number">15</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果此时运动员 <code>多了一种状态</code>： <code>病态</code>，只能得分 <code>2</code>， 那么目前能做的就是，增加 <code>if..else</code> 结构语句，显然这是不友好的做法。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><ol>
+<li>将 <code>状态</code> 独立的抽象出来</li>
+<li>让<code>运动员</code> 持有一个 <code>状态属性</code></li>
+<li>不同 <code>具体状态</code> 的内部实现 <code>具体的行为</code></li>
+<li><code>具体行为</code> 中需要 <code>改变实体状态</code> 为 <code>当前状态</code>，并且实现其他操作</li>
+<li>结构图<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/dp18_state_00.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ol>
+<h2 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h2><ul>
+<li><p>运动员类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Athlete</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//持有一个状态实例</span></span><br><span class="line">    <span class="keyword">private</span> State state;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Athlete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        state = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.state = state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽象的状态接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 抽象的状态接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getScore</span><span class="params">(Athlete athlete)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>具体状态和具体的行为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 正常状态</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalState</span> <span class="keyword">implements</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//正常状态的行为</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getScore</span><span class="params">(Athlete athlete)</span> </span>&#123;</span><br><span class="line">        athlete.setState(<span class="keyword">this</span>);</span><br><span class="line">        System.out.println(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Normal"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 超常状态</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BetterState</span> <span class="keyword">implements</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//超常状态的行为</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getScore</span><span class="params">(Athlete athlete)</span> </span>&#123;</span><br><span class="line">        athlete.setState(<span class="keyword">this</span>);</span><br><span class="line">        System.out.println(<span class="number">15</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Better"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 疲惫状态</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExhaustedState</span>  <span class="keyword">implements</span> <span class="title">State</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//疲惫状态的行为</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getScore</span><span class="params">(Athlete athlete)</span> </span>&#123;</span><br><span class="line">        athlete.setState(<span class="keyword">this</span>);</span><br><span class="line">        System.out.println(<span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ExhaustedState"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Athlete athlete = <span class="keyword">new</span> Athlete();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        NormalState normalState = <span class="keyword">new</span> NormalState();</span><br><span class="line">        BetterState betterState = <span class="keyword">new</span> BetterState();</span><br><span class="line"></span><br><span class="line">        State curState;<span class="comment">//用于记录当前的状态</span></span><br><span class="line"></span><br><span class="line">        normalState.getScore(athlete); <span class="comment">//正常状态得分</span></span><br><span class="line">        curState = athlete.getState();</span><br><span class="line">        System.out.println(<span class="string">"Current State: "</span>+curState+<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        betterState.getScore(athlete); <span class="comment">//超常状态得分</span></span><br><span class="line">        curState = athlete.getState();</span><br><span class="line">        System.out.println(<span class="string">"Current State: "</span>+curState+<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">        ExhaustedState exhaustedState = <span class="keyword">new</span> ExhaustedState();</span><br><span class="line">        exhaustedState.getScore(athlete); <span class="comment">//疲惫状态得分</span></span><br><span class="line">        curState=athlete.getState(); </span><br><span class="line">        System.out.println(<span class="string">"Current State: "</span>+curState+<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*运行结果</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">Current State: Normal</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">15</span></span><br><span class="line"><span class="comment">Current State: Better</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">Current State: ExhaustedState</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="其他应用场景"><a href="#其他应用场景" class="headerlink" title="其他应用场景"></a>其他应用场景</h1><p>当然除了在不同的状态有不同的行为之外，还可以用于切换状态，建立一套完整的工作流。如：<br>计算机开机，先启动，开始初始化，初始化完毕之后进入开机状态，这是一套完整的流程。</p>
+<ol>
+<li>启动状态, 完毕之后设置状态为 初始化状态 ( <code>setState(new InitState())</code>)</li>
+<li>初始化状态, 完毕之后设置状态为  开机状态 (<code>setState(new StartedState())</code> )</li>
+<li>开机状态, 完毕之后设置状态为 待机状态 ( <code>setState(new SleepState)</code> )</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/DesignPattern/[Design_Pattern]18_State状态模式.html" target="_blank" rel="external">https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]18_State状态模式.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]19_NullObject空对象模式.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Design_Pattern]19_NullObject空对象模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]17_Observer观察者模式.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Design_Pattern]17_Observer观察者模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[OSI]OIS七层协议理解 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="OSI">
+    <meta name="description" content="以网络发展史看七层协议从最简单的两个普通硬件讲起：  两个硬件需要通信，怎么办？(物理层)弄两张网卡，找根网线，把两台硬件连接，用 比特流  （1、0）传输， 于是 物理层 出现了。 主要对接口类型，传输的介质(光缆、电磁波)，传输的速率等 制定标准 。现在可以用 比特流  进行 简单通信 了，那么问题又来了 B 怎么确定 A 发送的数据是 A 原来的数据，而且总不能每次靠不靠谱比特流传输吧？（链">
+<meta name="keywords" content="OSI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[OSI]OIS七层协议理解">
+<meta property="og:url" content="https://willon.cn/Other/HTTP/[OSI]OIS七层协议理解.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="以网络发展史看七层协议从最简单的两个普通硬件讲起：  两个硬件需要通信，怎么办？(物理层)弄两张网卡，找根网线，把两台硬件连接，用 比特流  （1、0）传输， 于是 物理层 出现了。 主要对接口类型，传输的介质(光缆、电磁波)，传输的速率等 制定标准 。现在可以用 比特流  进行 简单通信 了，那么问题又来了 B 怎么确定 A 发送的数据是 A 原来的数据，而且总不能每次靠不靠谱比特流传输吧？（链">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[OSI]OIS七层协议理解">
+<meta name="twitter:description" content="以网络发展史看七层协议从最简单的两个普通硬件讲起：  两个硬件需要通信，怎么办？(物理层)弄两张网卡，找根网线，把两台硬件连接，用 比特流  （1、0）传输， 于是 物理层 出现了。 主要对接口类型，传输的介质(光缆、电磁波)，传输的速率等 制定标准 。现在可以用 比特流  进行 简单通信 了，那么问题又来了 B 怎么确定 A 发送的数据是 A 原来的数据，而且总不能每次靠不靠谱比特流传输吧？（链">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[OSI]OIS七层协议理解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[OSI]OIS七层协议理解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-10-09T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-10-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OSI/">OSI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#以网络发展史看七层协议"><span class="post-toc-number">1.</span> <span class="post-toc-text">以网络发展史看七层协议</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Other/HTTP/[OSI]OIS七层协议理解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[OSI]OIS七层协议理解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-10-10 00:00:00" datetime="2016-10-09T16:00:00.000Z"  itemprop="datePublished">2016-10-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OSI/">OSI</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="以网络发展史看七层协议"><a href="#以网络发展史看七层协议" class="headerlink" title="以网络发展史看七层协议"></a>以网络发展史看七层协议</h1><p>从最简单的两个普通硬件讲起：</p>
+<ol>
+<li><strong>两个硬件需要通信，怎么办？<code>(物理层)</code></strong><br>弄两张网卡，找根网线，把两台硬件连接，用 <code>比特流</code>  （1、0）传输， 于是 <code>物理层</code> 出现了。 主要对接口类型，传输的介质(光缆、电磁波)，传输的速率等 <code>制定标准</code> 。现在可以用 <code>比特流</code>  进行 <code>简单通信</code> 了，那么问题又来了</li>
+<li><strong>B 怎么确定 A 发送的数据是 A 原来的数据，而且总不能每次靠不靠谱比特流传输吧？<code>（链路层）</code></strong><br> 所以不能乱发， 最好定义一个 <code>统一的格式</code> ，可以简单的对数据进行翻译校验，于是，<code>链路层</code> 产生了 。 这时候能实现对数据的 <code>传输格式</code> 进行规范。现在A、B可以按照  <code>一定格式</code>  <strong>（帧）</strong> 传输数据了，那么问题来了</li>
+<li><strong>A 想发送数据给 C、D、E 怎么办？<code>（网络层）</code> </strong><br>于是有了 <code>路由器</code> 、<code>交换机</code> 等等具有 <strong><code>寻址功能</code></strong>     的设备被发明了，他们可以通过 <code>IP</code> 找到网络中对应的目标设备， 这时候 <code>网络层</code> 形成了，可以实现 <code>自定义目标</code> 数据 <code>一次性完整</code> 传输了，那么问题又来了</li>
+<li><strong>A想发送一个超大的视频文件给C，中途网络断了怎么办？ 又要重新再来一次么？<code>（传输层）</code></strong><br>这时候 <code>TCP</code> 出现了， 把一个大文件 <code>拆分成 N 块</code> ，把每块数据封装成 <code>数据包</code> 、 <code>数据报</code>  等 发送给目标。 比如A的视频文件有 1W 个数据包，发送给B时， B 反馈说 1001, 888, 23 数据包没收到， 于是 A 把这三个 <code>丢失的</code> 包重新发送一遍。 <code>传输层</code> 就这样出现了，TCP 的兄弟 <code>UDP</code> 也出现， 这层可以实现数据的断点续传等 <code>可靠的传输服务</code> </li>
+<li><strong>A 每次发送数据给B都有手动打包发送，手动处理数据么？<code>（会话层）</code></strong><br>需要一个东西管理两个设备之间的连接，自动的进行数据打包，数据传输等工作， 于是 <code>会话层</code> 层产生了， 主要实现自动管理设备之间的连接，数据传输等。</li>
+<li><strong>A是windows，B是Linux，A发送了加密的数据给B, B 怎么读懂A发送过来的数据？<code>（表示层）</code></strong><br>  需要一个工具针对不同的系统， 对不同的语法进行解析， 翻译成本设备可读懂的数据，或者两者之间使用一套 <code>公共的语言</code> ， 这时候 <code>表示层</code> 出现了， 它可以实现对 <code>数据的加密</code> 和 <code>格式化数据</code> </li>
+<li><strong>如果 A 想自定义一套标准来传输数据怎么办？<code>（应用层）</code></strong><br>  这个时候就百花齐放了， 基于以上 6 层协议，开发出不同的数据传输协议 ， 常见的 <code>DNS</code> ,   <code>Http</code> ，<code>Https</code>、  <code>SMTP</code> ， <code>Telnet</code> ,  <code>FTP</code>、<code>SFTP</code> 等</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>传输的数据格式</th>
+<th>常见设备/协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物理层</td>
+<td>建立统一标准的物理通路，传输数据</td>
+<td>比特流</td>
+<td>中继器，网线</td>
+</tr>
+<tr>
+<td>链路层</td>
+<td>节点间按一定格式数据传输</td>
+<td>帧</td>
+<td>二层交换机，网桥，网卡，HDLC协议</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>实现寻址</td>
+<td>报文分组</td>
+<td>IP协议</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>可靠的数据传输</td>
+<td>报文</td>
+<td>TCP、UDP</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>管理连接</td>
+<td>报文</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>统一数据传输格式(传输语言)</td>
+<td>报文</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>为应用程序提供服务接口</td>
+<td>报文</td>
+<td>HTTP、HTTPS、FTP、SMTP等</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Other/HTTP/[OSI]OIS七层协议理解.html" target="_blank" rel="external">https://willon.cn/Other/HTTP/[OSI]OIS七层协议理解.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OSI/">OSI</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/[Spring]01_ IOC原理和使用.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Spring]01_ IOC原理和使用.md</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hbase]01_分区.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hbase]01_分区</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

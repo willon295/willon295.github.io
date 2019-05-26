@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]09_WorcCount | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="在代码编写前，先引入依赖1234567&amp;lt;dependencies&amp;gt;    &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;2.">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]09_WorcCount">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]09_WorcCount.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="在代码编写前，先引入依赖1234567&amp;lt;dependencies&amp;gt;    &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;2.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]09_WorcCount">
+<meta name="twitter:description" content="在代码编写前，先引入依赖1234567&amp;lt;dependencies&amp;gt;    &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;hadoop-client&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;2.">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]09_WorcCount</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]09_WorcCount</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:09:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CODING"><span class="post-toc-number">1.</span> <span class="post-toc-text">CODING</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#RUN"><span class="post-toc-number">2.</span> <span class="post-toc-text">RUN</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]09_WorcCount"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]09_WorcCount</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:09:33" datetime="2017-08-27T16:09:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在代码编写前，先引入依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.8.2&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="CODING"><a href="#CODING" class="headerlink" title="CODING"></a>CODING</h1><ol>
+<li><p><code>WcMapper</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package wc;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.LongWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 参数解释：</span><br><span class="line"> * KEYIN: 读取的数据的偏移量数据类型</span><br><span class="line"> * VALUEIN： 读取的数据的数据类型</span><br><span class="line"> * KEYOUT： 输出给框架的返回值的KEY的数据类型</span><br><span class="line"> * VALUEOUT： 输出给框架的返回只的 VALUE 的数据类型</span><br><span class="line"> * 注意; 由于java自带的数据类型序列化比较臃肿，所以hadoop采用了自己的包装类</span><br><span class="line"> * TEXT--String</span><br><span class="line"> * IntWritable--Integer</span><br><span class="line"> */</span><br><span class="line">public class WcMapper extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt; &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * mapper方法只负责提取有用的信息</span><br><span class="line">     *</span><br><span class="line">     * @param key     读取数据的偏移量，一般不需要处理</span><br><span class="line">     * @param value   读取完的一行内容，这里是文本类型的数据</span><br><span class="line">     * @param context 上下文对象，用于将数据返回给框架</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        //将数据转换成String类型</span><br><span class="line">        String line = value.toString();</span><br><span class="line"></span><br><span class="line">        //将内容进行切割</span><br><span class="line">        String[] words = line.split(&quot; &quot;);</span><br><span class="line"></span><br><span class="line">        //把读取到的每个单词 作为 key，value为 1</span><br><span class="line">        for (String word : words</span><br><span class="line">                ) &#123;</span><br><span class="line">            context.write(new Text(word), new IntWritable(1));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>WcReducer</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package wc;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 参数解释：</span><br><span class="line"> * KEYIN: mapper阶段设置的 KEY 数据类型</span><br><span class="line"> * VALUEIN： mapper阶段设置的 VALUE 数据类型</span><br><span class="line"> * KEYOUT： 输出给框架的返回值的 KEY 的数据类型</span><br><span class="line"> * VALUEOUT： 输出给框架的返回只的 VALUE 的数据类型</span><br><span class="line"> */</span><br><span class="line">public class WcReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt; &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 负责将一组结果进行处理，汇总 处理完一组之后，继续下一组</span><br><span class="line">     * 收到的数据是mapper之后经过shuffle处理的一组数据,比如：&lt;hello,&lt;1,1,1&gt;&gt;</span><br><span class="line">     *</span><br><span class="line">     * @param key     比如：&lt;hello,&lt;1,1,1&gt;&gt;中的 `hello`</span><br><span class="line">     * @param values  比如：&lt;hello,&lt;1,1,1&gt;&gt;中的`&lt;1,1,1&gt;`</span><br><span class="line">     * @param context 上下文对象</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (IntWritable value : values</span><br><span class="line">                ) &#123;</span><br><span class="line">            //将 `&lt;1,1,1,1,1&gt;遍历相加</span><br><span class="line">            count += value.get();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //将处理完的数据返回给框架这里是 `&lt;hello,5&gt;`</span><br><span class="line">        context.write(key, new IntWritable(count));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>WcJobSubmmiter</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package wc;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 其实是一个 yarn 的客户端</span><br><span class="line"> * 功能： 将jar 文件提交给yarn ，yarn再分发到服务器</span><br><span class="line"> */</span><br><span class="line">public class WcJobSubmiter &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        Configuration conf = new Configuration();</span><br><span class="line">        Job job = Job.getInstance(conf);</span><br><span class="line"></span><br><span class="line">        job.setJarByClass(WcJobSubmiter.class);</span><br><span class="line"></span><br><span class="line">        //设置 Mapper 和 Reducer 的类</span><br><span class="line">        job.setMapperClass(WcMapper.class);</span><br><span class="line">        job.setReducerClass(WcReducer.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //设置 Mapper 输出的数据类型</span><br><span class="line">        job.setMapOutputKeyClass(Text.class);</span><br><span class="line">        job.setMapOutputValueClass(IntWritable.class);</span><br><span class="line"></span><br><span class="line">        //设置 Reducer 输出的数据类型</span><br><span class="line">        job.setOutputKeyClass(Text.class);</span><br><span class="line">        job.setOutputValueClass(IntWritable.class);</span><br><span class="line"></span><br><span class="line">        //设置 输入的 数据类型 和 路径</span><br><span class="line">        job.setInputFormatClass(TextInputFormat.class);</span><br><span class="line">        FileInputFormat.setInputPaths(job, new Path(args[0]));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //设置 输出的 数据类型 和 路径</span><br><span class="line">        job.setOutputFormatClass(TextOutputFormat.class);</span><br><span class="line">        FileOutputFormat.setOutputPath(job, new Path(args[1]));</span><br><span class="line"></span><br><span class="line">        boolean res = job.waitForCompletion(true);</span><br><span class="line">        System.exit(res ? 0 : 1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包 <code>mvn package</code>, 生成的jar 文件为改名为 <code>wc.jar</code></p>
+</li>
+</ol>
+<h1 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h1><ol>
+<li>随便找一台 <code>非sourceManager</code> 的机器，上传 <code>wc.jar</code>, </li>
+<li><p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar wc.jar wc.WcJobSubmiter  /aa.txt  /wc/output</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看结果 <code>hadoop fs -cat /wc/output/part-r-00000</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">aaaa    1</span><br><span class="line">dfe     1</span><br><span class="line">eee     2</span><br><span class="line">eeerr   1</span><br><span class="line">hello   2</span><br><span class="line">lll     1</span><br><span class="line">me      1</span><br><span class="line">oooe    1</span><br><span class="line">sss     1</span><br><span class="line">world   1</span><br><span class="line">wwe     1</span><br><span class="line">www     1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]09_WorcCount.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]09_WorcCount.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]10_自定义VALUE类型.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]10_自定义VALUE类型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Bigdata/Hadoop/[Hadoop]08_MapReduce准备及标准的任务编写.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Hadoop]08_MapReduce准备及标准的任务编写</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

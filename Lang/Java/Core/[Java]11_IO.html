@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]11_IO.md | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="接口 Serializable： 序列化接口，如果某个类需要在网络传输，应实现此接口 DataInput： 将数据读取成java原始数据类型接口 DataOutput： 将java原始数据转换成二进制数据输出接口  字符流适用场景比较适合处理 文本类型 数据常用类123456|Reader|--BufferedReader|--InputStreamReader--FileReader|Write">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]11_IO.md">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]11_IO.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="接口 Serializable： 序列化接口，如果某个类需要在网络传输，应实现此接口 DataInput： 将数据读取成java原始数据类型接口 DataOutput： 将java原始数据转换成二进制数据输出接口  字符流适用场景比较适合处理 文本类型 数据常用类123456|Reader|--BufferedReader|--InputStreamReader--FileReader|Write">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]11_IO.md">
+<meta name="twitter:description" content="接口 Serializable： 序列化接口，如果某个类需要在网络传输，应实现此接口 DataInput： 将数据读取成java原始数据类型接口 DataOutput： 将java原始数据转换成二进制数据输出接口  字符流适用场景比较适合处理 文本类型 数据常用类123456|Reader|--BufferedReader|--InputStreamReader--FileReader|Write">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]11_IO.md</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]11_IO.md</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-11T16:11:00.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接口"><span class="post-toc-number">1.</span> <span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字符流"><span class="post-toc-number">2.</span> <span class="post-toc-text">字符流</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字节流"><span class="post-toc-number">3.</span> <span class="post-toc-text">字节流</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#具体细节"><span class="post-toc-number">4.</span> <span class="post-toc-text">具体细节</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]11_IO"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]11_IO.md</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 00:11:00" datetime="2016-05-11T16:11:00.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><ul>
+<li><code>Serializable</code>： 序列化接口，如果某个类需要在网络传输，应实现此接口</li>
+<li><code>DataInput</code>： 将数据读取成java原始数据类型接口</li>
+<li><code>DataOutput</code>： 将java原始数据转换成二进制数据输出接口</li>
+</ul>
+<h1 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h1><p><strong>适用场景</strong><br>比较适合处理 <code>文本类型</code> 数据<br><strong>常用类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|Reader</span><br><span class="line">|--BufferedReader</span><br><span class="line">|--InputStreamReader--FileReader</span><br><span class="line">|Writer</span><br><span class="line">|--BufferedWriter</span><br><span class="line">|--OutputStreamWriter--FileWriter</span><br></pre></td></tr></table></figure></p>
+<h1 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h1><p><strong>适用场景</strong></p>
+<p>字节流几乎可以处理所有类型的数据</p>
+<p><strong>常用类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">|InputStream</span><br><span class="line">|--FileInputStream</span><br><span class="line">|----BufferedInputStream</span><br><span class="line">|----DataInputStream</span><br><span class="line">|--ObjectInputStream</span><br><span class="line">|OutputStream</span><br><span class="line">|--FileOutputStream</span><br><span class="line">|----BufferedOutputStream</span><br><span class="line">|----DataOutputStream</span><br><span class="line">|--ObjectOutputStream</span><br></pre></td></tr></table></figure></p>
+<h1 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h1><ol>
+<li><p>什么是比特流？ 什么是字节流？ 什么是字符流？</p>
+<ul>
+<li>Bit（中文管它叫 <code>位</code> ）是最小的二进制，比特流传输的是0101</li>
+<li>一个字节Byte由 8 位 组成，取值-128-127</li>
+<li>一个字符占2个字节，所以由 16 位（比特）</li>
+</ul>
+</li>
+<li><p>Java 流分为哪几类<br>字节流，字符流</p>
+<ol>
+<li><p>字节流父类： InputStream, OutputStream<br>常用：ByteInputStream, BufferedInputStream,FileInputStream,SequenceInputStream，ObjectInputStream</p>
+</li>
+<li><p>字符流父类： Writer，Reader<br>常用： BufferedReader,InputStreamReader,FileReader,StringReader</p>
+</li>
+<li><p><strong>字节流 转 字符流</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">"file"</span>));</span><br><span class="line"><span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"file"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符流 转 字节流，不存在的！！  原因：字节流应用广泛，字符流操作方便，一个操作更加方便的流为什么还有转换成不方便的？ 如果就是要转，刚开始就可以直接使用字节流操作，为何还有用字符流再转回字节流？ </p>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>InputStream的 read() , read(byte[] b), 作用</p>
+<ul>
+<li>read(): 一个字节一个字节读取，返回的是下一个字节的  int 类型，可以强整为 <code>char</code> 查看 其原  字节， -1 表示已经读完</li>
+<li>read(byte[] b): 将读取的字节存进这个缓冲数组,返回值，本次写入数组的字节个数， -1 如果读完</li>
+</ul>
+</li>
+<li><p>readLine() 方法<br>BufferedReader的方法，读取一行，返回 本次读取 String 数据，原理是 使用将字节转换成String，将String放进StringBuffer（线程安全） </p>
+</li>
+<li><p>为了提高读写性能，一般会采用 缓冲流 <code>BufferedXXX</code></p>
+</li>
+<li><p>对 <code>基本数据类型</code>  包括 String 的读写，可以采用 <code>DataInputStream</code> , <code>DataOutputStream</code></p>
+</li>
+<li><p>RandomAccessFile, 只实现了 DataInput, DataOutput ，Closeable 接口，集 读取和输出功能为一身，可读取写入 基本数据类型的数据,也可以实现跳过的功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">      RandomAccessFile rw = <span class="keyword">new</span> RandomAccessFile(FILE, <span class="string">"rw"</span>);<span class="comment">//指定打开文件的方式</span></span><br><span class="line">      rw.readLine();</span><br><span class="line">rw.seek(<span class="number">100L</span>); <span class="comment">//跳过 100 个字节</span></span><br><span class="line">      rw.writeUTF(<span class="string">"aaa"</span>);</span><br><span class="line">      rw.writeInt(<span class="number">3</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]11_IO.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]11_IO.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Java]11_01_网络编程.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]11_01_网络编程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]10_多线程.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]10_多线程[待完善]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Scala]03_循环 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Scala">
+    <meta name="description" content="for循环的基本用法注意： &amp;lt;- 箭头表示赋值 ！ toa  to  b 用来表示范围,从a到b 1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10包括10	print(a)&amp;#125;//结果12345678910 utila util b: 表示从 a 到 b,不包含 b1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Scala]03_循环">
+<meta property="og:url" content="https://willon.cn/Lang/Scala/[Scala]03_循环.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="for循环的基本用法注意： &amp;lt;- 箭头表示赋值 ！ toa  to  b 用来表示范围,从a到b 1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10包括10	print(a)&amp;#125;//结果12345678910 utila util b: 表示从 a 到 b,不包含 b1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Scala]03_循环">
+<meta name="twitter:description" content="for循环的基本用法注意： &amp;lt;- 箭头表示赋值 ！ toa  to  b 用来表示范围,从a到b 1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10包括10	print(a)&amp;#125;//结果12345678910 utila util b: 表示从 a 到 b,不包含 b1234for (a &amp;lt;- 1 to 10 )&amp;#123;//表示 1--10">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Scala]03_循环</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Scala]03_循环</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-31T16:03:34.000Z" itemprop="datePublished" class="page-time">
+  2018-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#for循环的基本用法"><span class="post-toc-number">1.</span> <span class="post-toc-text">for循环的基本用法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#to"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">to</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#util"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">util</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多区间-多维遍历"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">多区间/多维遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遍历集合"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">遍历集合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#循环过滤"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">循环过滤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#yield返回结果"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">yield返回结果</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Scala/[Scala]03_循环"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Scala]03_循环</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-01 00:03:34" datetime="2017-12-31T16:03:34.000Z"  itemprop="datePublished">2018-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="for循环的基本用法"><a href="#for循环的基本用法" class="headerlink" title="for循环的基本用法"></a>for循环的基本用法</h1><p>注意： <code>&lt;-</code> 箭头表示赋值 ！</p>
+<h2 id="to"><a href="#to" class="headerlink" title="to"></a>to</h2><p><code>a  to  b</code> 用来表示范围,从a到b</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (a &lt;- 1 to 10 )&#123;//表示 1--10包括10</span><br><span class="line">	print(a)</span><br><span class="line">&#125;</span><br><span class="line">//结果12345678910</span><br></pre></td></tr></table></figure>
+<h2 id="util"><a href="#util" class="headerlink" title="util"></a>util</h2><p><code>a util b</code>: 表示从 a 到 b,不包含 b<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (a &lt;- 1 to 10 )&#123;//表示 1--10不包括10</span><br><span class="line">	print(a)</span><br><span class="line">&#125;</span><br><span class="line">//结果123456789</span><br></pre></td></tr></table></figure></p>
+<h2 id="多区间-多维遍历"><a href="#多区间-多维遍历" class="headerlink" title="多区间/多维遍历"></a>多区间/多维遍历</h2><p>可以通过分号“;” 隔开遍历的条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for( a &lt;- 1 to 3; b &lt;- 1 to 3)&#123;</span><br><span class="line">	println(a+&quot;---&quot;+b )</span><br><span class="line">&#125;</span><br><span class="line">//结果</span><br><span class="line">//1---2</span><br><span class="line">//2---1</span><br><span class="line">//2---2</span><br><span class="line">//3---1</span><br><span class="line">//3---2</span><br></pre></td></tr></table></figure>
+<h2 id="遍历集合"><a href="#遍历集合" class="headerlink" title="遍历集合"></a>遍历集合</h2><ol>
+<li><p>语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for( var x &lt;- List )&#123;</span><br><span class="line">   statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>举个离子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var nums = List(1,2,33,555,6)</span><br><span class="line">for (a &lt;- nums)&#123;</span><br><span class="line">	print(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="循环过滤"><a href="#循环过滤" class="headerlink" title="循环过滤"></a>循环过滤</h2><p>遍历的过程中可以过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//多个过滤条件用分号; 隔开</span><br><span class="line">for (a &lt;- numlist if a &lt; 5; if a &gt; 3) &#123;</span><br><span class="line">      println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="yield返回结果"><a href="#yield返回结果" class="headerlink" title="yield返回结果"></a>yield返回结果</h2><p><code>yield</code> 跟在for语句结束处，直接返回结果，注意此时用的是 <code>{}</code> 包含遍历条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//基本语法</span><br><span class="line">//for () yield &#123;&#125;</span><br><span class="line">var newList = for (a &lt;- numlist if a &gt;= 1; if a &lt; 5) yield a</span><br><span class="line"></span><br><span class="line">//如果迭代器由两个集合，返回类型取决于第一个</span><br><span class="line">for (a &lt;- seq ; b &lt;- 1 to 10) yield &#123;a+b&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Scala/[Scala]03_循环.html" target="_blank" rel="external">https://willon.cn/Lang/Scala/[Scala]03_循环.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Scala/[Scala]04_函数.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Scala]04_方法_函数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]01_基础变量.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]01_基础变量</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[MySQL]问题排查_优化 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="MySQL">
+    <meta name="description" content="[TOC] 查看是否由 MySQL 引起使用 top  命令查看是否是 由 MySQL 导致的 CPU爆满， 如果是进行下一步 解决问题 登陆mysql ， 使用命令show processlist 查看正在处理的请求 123+----+-------------+-----------+------+---------+------+------------| Id | User">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[MySQL]问题排查_优化">
+<meta property="og:url" content="https://willon.cn/Database/MySQL/[MySQL]CPU爆满问题排查.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="[TOC] 查看是否由 MySQL 引起使用 top  命令查看是否是 由 MySQL 导致的 CPU爆满， 如果是进行下一步 解决问题 登陆mysql ， 使用命令show processlist 查看正在处理的请求 123+----+-------------+-----------+------+---------+------+------------| Id | User">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[MySQL]问题排查_优化">
+<meta name="twitter:description" content="[TOC] 查看是否由 MySQL 引起使用 top  命令查看是否是 由 MySQL 导致的 CPU爆满， 如果是进行下一步 解决问题 登陆mysql ， 使用命令show processlist 查看正在处理的请求 123+----+-------------+-----------+------+---------+------+------------| Id | User">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[MySQL]问题排查_优化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[MySQL]问题排查_优化</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-01T16:00:01.000Z" itemprop="datePublished" class="page-time">
+  2018-02-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#查看是否由-MySQL-引起"><span class="post-toc-number">1.</span> <span class="post-toc-text">查看是否由 MySQL 引起</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#优化"><span class="post-toc-number">3.</span> <span class="post-toc-text">优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#explain-查看执行计划"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">explain 查看执行计划</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开启慢查询日志"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">开启慢查询日志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#合理建立索引-？"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">合理建立索引 ？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#索引失效-？"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">索引失效 ？</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Database/MySQL/[MySQL]CPU爆满问题排查"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[MySQL]问题排查_优化</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-02 00:00:01" datetime="2018-02-01T16:00:01.000Z"  itemprop="datePublished">2018-02-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>[TOC]</p>
+<h1 id="查看是否由-MySQL-引起"><a href="#查看是否由-MySQL-引起" class="headerlink" title="查看是否由 MySQL 引起"></a>查看是否由 MySQL 引起</h1><p>使用 <code>top</code>  命令查看是否是 由 <code>MySQL</code> 导致的 CPU爆满， 如果是进行下一步</p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><ol>
+<li><p>登陆mysql ， 使用命令<code>show processlist</code> 查看正在处理的请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+----+-------------+-----------+------+---------+------+------------</span><br><span class="line">| Id | User        | Host      | db   | Command | Time | State </span><br><span class="line">+----+-------------+-----------+------+---------+------+------------</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>找到 <code>Time</code>  字段处理时间较高的线程</p>
+</li>
+<li><p><code>kill   线程id</code> 杀死该线程 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  kill 103</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="explain-查看执行计划"><a href="#explain-查看执行计划" class="headerlink" title="explain 查看执行计划"></a>explain 查看执行计划</h2><ol>
+<li>复制刚才请求较慢的线程的   <code>Info</code> 字段中的 <code>SQL</code> 语句</li>
+<li>使用 <code>explain</code>  查看执行计划， 进行优化。</li>
+</ol>
+<p>一般情况下， 查询花费的时间主要会花在 <code>order by</code> ， <code>group by</code> , <code>批量操作</code> ， <code>嵌套查询</code> 上， 所以要重点关注这些sql语句</p>
+<h2 id="开启慢查询日志"><a href="#开启慢查询日志" class="headerlink" title="开启慢查询日志"></a>开启慢查询日志</h2><p>配置文件作出修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">slow_query_log=1  #开启慢查询</span><br><span class="line">long_query_time=5 #慢查询时间</span><br><span class="line">log-slow-queries = /var/log/mysql/slowquery.log #需有写入权限</span><br></pre></td></tr></table></figure>
+<p>通过查看log日志， 可以简单的查看慢SQL</p>
+<h2 id="合理建立索引-？"><a href="#合理建立索引-？" class="headerlink" title="合理建立索引 ？"></a>合理建立索引 ？</h2><p>查询过慢， 首先使用explain查看是否查询类型是全表扫描 <code>ALL</code> ， 再观察 <code>where</code> 条件后面的字段是否使用索引， 还有索引是否合理， 向下面这个例子就是不合理的索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a  <span class="keyword">left</span> jion b <span class="keyword">on</span> a.id = b.id ;     // 索引在  a.id , b.id 没有</span><br></pre></td></tr></table></figure>
+<p>左连接是以左表为主表 的查询， 所以需要使用右表来限制左表的数据 ， 所以不合理</p>
+<h2 id="索引失效-？"><a href="#索引失效-？" class="headerlink" title="索引失效 ？"></a>索引失效 ？</h2><p>这就是不合理的使用索引， 或者是索引已经失效</p>
+<p>以下这些情况， 会直接导致索引失效</p>
+<ol>
+<li><p>索引字段做<code>运算</code> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a <span class="keyword">where</span> <span class="keyword">id</span> * <span class="number">10</span> &gt; <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>索引条件后 使用 <code>or</code> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a <span class="keyword">where</span> <span class="keyword">id</span> &gt; <span class="number">10</span> <span class="keyword">or</span> <span class="keyword">name</span> = <span class="string">'zhangsan'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>左前缀</code> 模糊查询 <code>like  %xx</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'%an'</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'%an%'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>IS NULL</code> 、 <code>IS NOT NULL</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  a <span class="keyword">where</span> <span class="keyword">id</span> <span class="keyword">is</span> <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他情况：  使用  <code>&lt;&gt;</code>   、<code>not in</code>   、 <code>not exist</code> 、 <code>!=</code>  ， 会降低查询效率</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a <span class="keyword">where</span> <span class="keyword">id</span> &lt;&gt; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Database/MySQL/[MySQL]CPU爆满问题排查.html" target="_blank" rel="external">https://willon.cn/Database/MySQL/[MySQL]CPU爆满问题排查.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Spark/[Spark]00_环境搭建_安装.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Spark]00_环境搭建_安装.md</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/MySQL/[MySQL]主从复制.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[MySQL]主从复制配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

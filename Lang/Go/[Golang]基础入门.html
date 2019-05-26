@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Golang]基础入门.md | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Golang">
+    <meta name="description" content="环境搭建 下载sdk包： https://dl.google.com/go/go1.12.linux-amd64.tar.gz , 解压到相应的路径 配置环境变量：1export  PATH=$PATH:/usr/local/lib/go/bin   HelloWorld 新建一个 Test.go 文件 12345package mainfunc main()&amp;#123;    println(&quot;">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Golang]基础入门.md">
+<meta property="og:url" content="https://willon.cn/Lang/Go/[Golang]基础入门.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="环境搭建 下载sdk包： https://dl.google.com/go/go1.12.linux-amd64.tar.gz , 解压到相应的路径 配置环境变量：1export  PATH=$PATH:/usr/local/lib/go/bin   HelloWorld 新建一个 Test.go 文件 12345package mainfunc main()&amp;#123;    println(&quot;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Golang]基础入门.md">
+<meta name="twitter:description" content="环境搭建 下载sdk包： https://dl.google.com/go/go1.12.linux-amd64.tar.gz , 解压到相应的路径 配置环境变量：1export  PATH=$PATH:/usr/local/lib/go/bin   HelloWorld 新建一个 Test.go 文件 12345package mainfunc main()&amp;#123;    println(&quot;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Golang]基础入门.md</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Golang]基础入门.md</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-12-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Golang/">Golang</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境搭建"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境搭建</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HelloWorld"><span class="post-toc-number">2.</span> <span class="post-toc-text">HelloWorld</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#文件结构简单说明"><span class="post-toc-number">3.</span> <span class="post-toc-text">文件结构简单说明</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#变量、常量"><span class="post-toc-number">4.</span> <span class="post-toc-text">变量、常量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变量定义"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">变量定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变量组"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">变量组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常量"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">常量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常量组"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">常量组</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Go/[Golang]基础入门"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Golang]基础入门.md</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-21 00:00:00" datetime="2018-12-20T16:00:00.000Z"  itemprop="datePublished">2018-12-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Golang/">Golang</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li>下载sdk包： <code>https://dl.google.com/go/go1.12.linux-amd64.tar.gz</code> , 解压到相应的路径</li>
+<li>配置环境变量：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span>  PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/lib/go/bin</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h1><ol>
+<li><p>新建一个 Test.go 文件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">"HelloWorld"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go run  Test.go</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译并运行go文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go build  Test.go</span><br><span class="line"></span><br><span class="line">./Test</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="文件结构简单说明"><a href="#文件结构简单说明" class="headerlink" title="文件结构简单说明"></a>文件结构简单说明</h1><ol>
+<li>第一行代码 <strong>package main</strong> 定义包名</li>
+<li>名称为 <strong>main</strong> 的文件表示可以独立运行</li>
+<li><strong>import  “fmt” </strong> import关键字用于导入包</li>
+<li><strong>main(){}</strong> 函数是可运行程序的入口</li>
+<li>大写字母开头的变量可被外部代码引用，小写只能内部引用</li>
+</ol>
+<h1 id="变量、常量"><a href="#变量、常量" class="headerlink" title="变量、常量"></a>变量、常量</h1><ol>
+<li>方法里的变量，定义之后必须被引用（使用）， 否则编译不通过</li>
+<li><strong><code>const</code></strong> 用于定义常量，常量值不可变</li>
+<li><code>var</code> 用于定义变量</li>
+</ol>
+<h2 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>	 name <span class="keyword">string</span>			<span class="comment">// 1. 不赋值， 使用默认值</span></span><br><span class="line"><span class="keyword">var</span>  name2 <span class="keyword">string</span> = <span class="string">"Jack"</span>  <span class="comment">// 2. 定义，指定数据类型，并且赋值</span></span><br><span class="line"><span class="keyword">var</span>  lastName = <span class="string">"HeHe"</span>      <span class="comment">// 3. 不指定数据类型， 赋值（省略数据类型就必须赋值）</span></span><br><span class="line"></span><br><span class="line">firstName := <span class="string">"Will"</span>       <span class="comment">// 4. 这种定义只能在函数（方法）里</span></span><br></pre></td></tr></table></figure>
+<h2 id="变量组"><a href="#变量组" class="headerlink" title="变量组"></a>变量组</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name, pass, sex  <span class="keyword">string</span> = <span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>  <span class="comment">// 相同数据类型，可指定数据类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> id, name, age = <span class="number">10001</span>, <span class="string">"Willon"</span>, <span class="number">23</span>   <span class="comment">//不同数据类型， 不能指定数据类型</span></span><br><span class="line"></span><br><span class="line">id, name, age := <span class="number">1001</span>, <span class="string">"willon"</span>, <span class="number">24</span>   <span class="comment">// 必须定义方式在方法里，且变量全被引用，否则编译失败</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量组定义</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	id   = <span class="number">2001</span></span><br><span class="line">	name = <span class="string">"s"</span></span><br><span class="line">	age  = <span class="number">24</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面的几种定义方式， 变量和后面的值根据顺序一一对应</p>
+</blockquote>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>使用 <code>const</code> 关键字定义常量， 常量不可改变。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeOut = <span class="number">3600</span></span><br></pre></td></tr></table></figure>
+<h2 id="常量组"><a href="#常量组" class="headerlink" title="常量组"></a>常量组</h2><p>定义： </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	a = <span class="string">"a"</span></span><br><span class="line">    b = <span class="number">12</span></span><br><span class="line">    c = <span class="literal">true</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>特性一： 自动赋值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	a = <span class="string">"a"</span></span><br><span class="line">    b = <span class="string">"b"</span></span><br><span class="line">    c</span><br><span class="line">    d</span><br><span class="line">    e = <span class="string">"e"</span></span><br><span class="line">    f</span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(a,b,c,d,e,f)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 abbbee</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此处 c,d ,f 并未手动赋值， 则自动被赋予前一个常量的值</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li><code>package main</code> 包表示这个文件 <code>可独立运行</code>， 且在文件的 <code>第一行</code> </li>
+<li><code>func main(){}</code> 函数是程序执行入口</li>
+<li><code>函数里面</code> 的变量， 定义之后必须被使用(引用)， 否则编译不通过</li>
+<li><code>:=</code>  的注意点<ul>
+<li>必须赋值</li>
+<li>必须在函数里</li>
+<li>不可重复给同一个变量赋值</li>
+</ul>
+</li>
+<li>变量有变量组，常量有常量组</li>
+<li>常量组有自动赋值的特性</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Go/[Golang]基础入门.html" target="_blank" rel="external">https://willon.cn/Lang/Go/[Golang]基础入门.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/">Golang</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Go/[Golang]iota.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Golang]iota</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Security/[OAuth2]OAuth2_Framework.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[OAuth2]OAuth2 Framework</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

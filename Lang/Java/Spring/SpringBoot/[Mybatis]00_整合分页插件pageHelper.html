@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>00_整合分页插件pageHelper | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Mybatis">
+    <meta name="description" content="如何使用此项目基于 SpringBoot , 依赖 pagehelper-spring-boot-starter , common-lang3  依赖 12345678910&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.github.pagehelper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;pagehelper-spring">
+<meta name="keywords" content="Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="00_整合分页插件pageHelper">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[Mybatis]00_整合分页插件pageHelper.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="如何使用此项目基于 SpringBoot , 依赖 pagehelper-spring-boot-starter , common-lang3  依赖 12345678910&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.github.pagehelper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;pagehelper-spring">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="00_整合分页插件pageHelper">
+<meta name="twitter:description" content="如何使用此项目基于 SpringBoot , 依赖 pagehelper-spring-boot-starter , common-lang3  依赖 12345678910&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.github.pagehelper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;pagehelper-spring">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">00_整合分页插件pageHelper</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">00_整合分页插件pageHelper</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-30T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-07-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mybatis/">Mybatis</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">如何使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原理剖析"><span class="post-toc-number">2.</span> <span class="post-toc-text">原理剖析</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[Mybatis]00_整合分页插件pageHelper"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">00_整合分页插件pageHelper</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-01 00:00:00" datetime="2017-06-30T16:00:00.000Z"  itemprop="datePublished">2017-07-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mybatis/">Mybatis</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>此项目基于 <code>SpringBoot</code> , 依赖 <code>pagehelper-spring-boot-starter</code> , <code>common-lang3</code></p>
+<ol>
+<li><p>依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pageHelper配置信息</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pageHelper分页配置</span></span><br><span class="line"><span class="attr">pagehelper:</span></span><br><span class="line"><span class="attr">  helper-dialect:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  reasonable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  support-methods-arguments:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  params:</span> <span class="string">count=countSql</span></span><br><span class="line"><span class="attr">  page-size-zero:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>业务层使用</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PageInfo&lt;User&gt; <span class="title">findAll</span><span class="params">(<span class="keyword">int</span> page, <span class="keyword">int</span> pageSize)</span> </span>&#123;</span><br><span class="line">    PageHelper.startPage(page, pageSize);</span><br><span class="line">    List&lt;User&gt; all = userMapper.findAll();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PageInfo&lt;&gt;(all);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8888/list1?page=4&amp;pageSize=2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回数据</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"total"</span>: <span class="number">8</span>,</span><br><span class="line">	<span class="attr">"list"</span>: [&#123;</span><br><span class="line">		<span class="attr">"id"</span>: <span class="number">19</span>,</span><br><span class="line">		<span class="attr">"age"</span>: <span class="number">24</span>,</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"lisi"</span></span><br><span class="line">	&#125;, &#123;</span><br><span class="line">		<span class="attr">"id"</span>: <span class="number">20</span>,</span><br><span class="line">		<span class="attr">"age"</span>: <span class="number">24</span>,</span><br><span class="line">		<span class="attr">"name"</span>: <span class="string">"wanghwh"</span></span><br><span class="line">	&#125;],</span><br><span class="line">	<span class="attr">"pageNum"</span>: <span class="number">4</span>,</span><br><span class="line">	<span class="attr">"pageSize"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="attr">"size"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="attr">"startRow"</span>: <span class="number">7</span>,</span><br><span class="line">	<span class="attr">"endRow"</span>: <span class="number">8</span>,</span><br><span class="line">	<span class="attr">"pages"</span>: <span class="number">4</span>,</span><br><span class="line">	<span class="attr">"prePage"</span>: <span class="number">3</span>,</span><br><span class="line">	<span class="attr">"nextPage"</span>: <span class="number">0</span>,</span><br><span class="line">	<span class="attr">"isFirstPage"</span>: <span class="literal">false</span>,</span><br><span class="line">	<span class="attr">"isLastPage"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"hasPreviousPage"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"hasNextPage"</span>: <span class="literal">false</span>,</span><br><span class="line">	<span class="attr">"navigatePages"</span>: <span class="number">8</span>,</span><br><span class="line">	<span class="attr">"navigatepageNums"</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">	<span class="attr">"navigateFirstPage"</span>: <span class="number">1</span>,</span><br><span class="line">	<span class="attr">"navigateLastPage"</span>: <span class="number">4</span>,</span><br><span class="line">	<span class="attr">"lastPage"</span>: <span class="number">4</span>,</span><br><span class="line">	<span class="attr">"firstPage"</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="原理剖析"><a href="#原理剖析" class="headerlink" title="原理剖析"></a>原理剖析</h1><p>通过代理,拦截方法,拼接 <code>limit</code> 语句,执行查询</p>
+<p>过程:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(page, pageSize);</span><br><span class="line">List&lt;User&gt; userList = userMapper.findAll();</span><br><span class="line">PageInfo&lt;User&gt; pageUserInfo =  <span class="keyword">new</span> PageInfo&lt;&gt;(userList);</span><br></pre></td></tr></table></figure></p>
+<p>关键源码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PageSqlSource</span> <span class="keyword">implements</span> <span class="title">SqlSource</span> </span>&#123;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取正常的BoundSql</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> parameterObject</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> BoundSql <span class="title">getDefaultBoundSql</span><span class="params">(Object parameterObject)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取Count查询的BoundSql</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> parameterObject</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> BoundSql <span class="title">getCountBoundSql</span><span class="params">(Object parameterObject)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取分页查询的BoundSql</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> parameterObject</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> BoundSql <span class="title">getPageBoundSql</span><span class="params">(Object parameterObject)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取BoundSql</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> parameterObject</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BoundSql <span class="title">getBoundSql</span><span class="params">(Object parameterObject)</span> </span>&#123;</span><br><span class="line">        Boolean count = getCount();</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> getDefaultBoundSql(parameterObject);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count) &#123;</span><br><span class="line">            <span class="keyword">return</span> getCountBoundSql(parameterObject);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> getPageBoundSql(parameterObject);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么也就是说 <code>userMapper.findAll();</code> 此时查询出来的结果已经 <code>不是全部</code>, 而是分页查询的结果</p>
+<p><strong>new PageInfo&lt;&gt;(userList)干了什么?</strong></p>
+<p>PageInfo源代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageInfo</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">PageSerializable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pageNum;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pageSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> startRow;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> endRow;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pages;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> prePage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> nextPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isFirstPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLastPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> hasPreviousPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> hasNextPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigatePages;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] navigatepageNums;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigateFirstPage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> navigateLastPage;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传入一个带有类型的 list 的构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageInfo</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(list, <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[Mybatis]00_整合分页插件pageHelper.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[Mybatis]00_整合分页插件pageHelper.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]01_安装配置测试.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]01_安装配置测试</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Linux/[Linux]Curl发送各种请求.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Linux]Curl发送各种请求</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

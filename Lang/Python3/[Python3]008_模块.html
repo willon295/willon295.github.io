@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Python3]008_模块 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="python3">
+    <meta name="description" content="模块其实就是一个有一个的 .py 文件，将一些常用的函数工具进行封装，其他模块使用的时候秩序使用关键字import 导入即可 举个栗子模块一、1234567891011121314151617181920# Filename: support.py#这是要引用的模块   def test():    print(&amp;quot;hello world&amp;quot;) 模块二、 # Filename: d">
+<meta name="keywords" content="python3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python3]008_模块">
+<meta property="og:url" content="https://willon.cn/Lang/Python3/[Python3]008_模块.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="模块其实就是一个有一个的 .py 文件，将一些常用的函数工具进行封装，其他模块使用的时候秩序使用关键字import 导入即可 举个栗子模块一、1234567891011121314151617181920# Filename: support.py#这是要引用的模块   def test():    print(&amp;quot;hello world&amp;quot;) 模块二、 # Filename: d">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Python3]008_模块">
+<meta name="twitter:description" content="模块其实就是一个有一个的 .py 文件，将一些常用的函数工具进行封装，其他模块使用的时候秩序使用关键字import 导入即可 举个栗子模块一、1234567891011121314151617181920# Filename: support.py#这是要引用的模块   def test():    print(&amp;quot;hello world&amp;quot;) 模块二、 # Filename: d">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Python3]008_模块</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Python3]008_模块</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-16T12:57:28.000Z" itemprop="datePublished" class="page-time">
+  2017-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举个栗子"><span class="post-toc-number">1.</span> <span class="post-toc-text">举个栗子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统内置"><span class="post-toc-number">2.</span> <span class="post-toc-text">系统内置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#time"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">time</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OS"><span class="post-toc-number">3.</span> <span class="post-toc-text">OS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#os-chmod-path-mod"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">os.chmod(path,mod)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#os-close-fo"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">os.close(fo)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#os-read-fd-num"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">os.read(fd,num)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#os-rename-old-new-：重命名"><span class="post-toc-number">3.0.4.</span> <span class="post-toc-text">os.rename(old,new) ：重命名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#os-remove-删除"><span class="post-toc-number">3.0.5.</span> <span class="post-toc-text">os.remove():删除</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Python3/[Python3]008_模块"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Python3]008_模块</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-16 20:57:28" datetime="2017-04-16T12:57:28.000Z"  itemprop="datePublished">2017-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>模块其实就是一个有一个的 <code>.py</code> 文件，将一些常用的函数工具进行封装，其他模块使用的时候秩序使用关键字<code>import</code> 导入即可</p>
+<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><p>模块一、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Filename: support.py</span><br><span class="line"></span><br><span class="line">#这是要引用的模块   </span><br><span class="line">def test():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">模块二、</span><br><span class="line"></span><br><span class="line"> # Filename: demo.py</span><br><span class="line"></span><br><span class="line">import support</span><br><span class="line">#调用函数</span><br><span class="line">support.test()</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">运行结果</span><br><span class="line"></span><br><span class="line"> hello world</span><br></pre></td></tr></table></figure></p>
+<h2 id="系统内置"><a href="#系统内置" class="headerlink" title="系统内置"></a>系统内置</h2><p>python要使用某些功能，需要系统的自带一些模块</p>
+<h3 id="time"><a href="#time" class="headerlink" title="time"></a>time</h3><p>这个模块可以用来获取和处理一些时间的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">举个栗子</span><br><span class="line"></span><br><span class="line"> #获取格式化的本地时间</span><br><span class="line">import time</span><br><span class="line">date=time.localtime()</span><br><span class="line">currenttime=time.strftime(&apos;%Y-%m-%d %H:%M:%S&apos;,date)</span><br><span class="line">print(dates)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line"></span><br><span class="line">2017-03-26 22：13：04</span><br></pre></td></tr></table></figure></p>
+<h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><p>这个模块用来操作系统上的一些东西。</p>
+<h4 id="os-chmod-path-mod"><a href="#os-chmod-path-mod" class="headerlink" title="os.chmod(path,mod)"></a><code>os.chmod(path,mod)</code></h4><ul>
+<li>path: 文件夹或文件目录</li>
+<li>mod: 权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stat.S_IXOTH</td>
+<td>其他用户有执行权0o001</td>
+</tr>
+<tr>
+<td>stat.S_IWOTH</td>
+<td>其他用户有写权限0o002</td>
+</tr>
+<tr>
+<td>stat.S_IROTH</td>
+<td>其他用户有读权限0o004</td>
+</tr>
+<tr>
+<td>stat.S_IRWXO</td>
+<td>其他用户有全部权限(权限掩码)0o007</td>
+</tr>
+<tr>
+<td>stat.S_IXGRP</td>
+<td>组用户有执行权限0o010</td>
+</tr>
+<tr>
+<td>stat.S_IWGRP</td>
+<td>组用户有写权限0o020</td>
+</tr>
+<tr>
+<td>stat.S_IRGRP</td>
+<td>组用户有读权限0o040</td>
+</tr>
+<tr>
+<td>stat.S_IRWXG</td>
+<td>组用户有全部权限(权限掩码)0o070</td>
+</tr>
+<tr>
+<td>stat.S_IXUSR</td>
+<td>拥有者具有执行权限0o100</td>
+</tr>
+<tr>
+<td>stat.S_IWUSR</td>
+<td>拥有者具有写权限0o200</td>
+</tr>
+<tr>
+<td>stat.S_IRUSR</td>
+<td>拥有者具有读权限0o400</td>
+</tr>
+<tr>
+<td>stat.S_IRWXU</td>
+<td>拥有者有全部权限(权限掩码)0o700</td>
+</tr>
+<tr>
+<td>stat.S_ISVTX</td>
+<td>目录里文件目录只有拥有者才可删除更改0o1000</td>
+</tr>
+<tr>
+<td>stat.S_ISGID</td>
+<td>执行此文件其进程有效组为文件所在组0o2000</td>
+</tr>
+<tr>
+<td>stat.S_ISUID</td>
+<td>执行此文件其进程有效用户为文件所有者0o4000</td>
+</tr>
+<tr>
+<td>stat.S_IREAD</td>
+<td>windows下设为只读</td>
+</tr>
+<tr>
+<td>stat.S_IWRITE</td>
+<td>windows下取消只读</td>
+</tr>
+</tbody>
+</table>
+<h4 id="os-close-fo"><a href="#os-close-fo" class="headerlink" title="os.close(fo)"></a><code>os.close(fo)</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> #关闭文件</span><br><span class="line">import os, sys</span><br><span class="line"></span><br><span class="line"># 打开文件</span><br><span class="line">fd = os.open( &quot;foo.txt&quot;, os.O_RDWR|os.O_CREAT )</span><br><span class="line"></span><br><span class="line"># 写入字符串</span><br><span class="line">os.write(fd, &quot;This is test&quot;)</span><br><span class="line"></span><br><span class="line">#关闭文件</span><br><span class="line">os.close( fd )</span><br><span class="line"></span><br><span class="line">print (&quot;关闭文件成功!!&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="os-read-fd-num"><a href="#os-read-fd-num" class="headerlink" title="os.read(fd,num)"></a><code>os.read(fd,num)</code></h4><ul>
+<li>fd: 打开的文件对象</li>
+<li>num: 读取的字节数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#举个栗子</span><br><span class="line"></span><br><span class="line">import os, sys</span><br><span class="line"># 打开文件</span><br><span class="line">fd = os.open(&quot;foo.txt&quot;,os.O_RDWR)</span><br><span class="line"></span><br><span class="line"># 读取文本</span><br><span class="line">str1 = os.read(fd,12)</span><br><span class="line">print (str1)</span><br><span class="line"></span><br><span class="line"># 关闭文件</span><br><span class="line">os.close(fd)</span><br><span class="line">print (&quot;关闭文件成功!）</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line"></span><br><span class="line">This is test</span><br><span class="line">关闭文件成功!</span><br></pre></td></tr></table></figure>
+<h4 id="os-rename-old-new-：重命名"><a href="#os-rename-old-new-：重命名" class="headerlink" title="os.rename(old,new) ：重命名"></a><code>os.rename(old,new)</code> ：重命名</h4><h4 id="os-remove-删除"><a href="#os-remove-删除" class="headerlink" title="os.remove():删除"></a><code>os.remove()</code>:删除</h4><p>更多可以参考文档…</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Python3/[Python3]008_模块.html" target="_blank" rel="external">https://willon.cn/Lang/Python3/[Python3]008_模块.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python3/">python3</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Python3/[Python3]009_正则表达式.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Python3]009_正则表达式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Python3/[Python3]007_其他常用函数.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Python3]007_其他常用函数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

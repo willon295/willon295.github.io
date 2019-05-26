@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[NIO]01_ByteBuffer源码走读 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="NIO">
+    <meta name="description" content="在 NIO编程中，  最常用的缓存就是 ByteBuffer ,  它也几乎是万能的 、  既然它如此重要， 底层实现就很有必要看一看  类的结构123public abstract class ByteBuffer    extends Buffer    implements Comparable&amp;lt;ByteBuffer&amp;gt; 从此处我们得到的结论是：  抽象类： 不可以new,  本身">
+<meta name="keywords" content="NIO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NIO]01_ByteBuffer源码走读">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[NIO]01_ByteBuffer源码走读.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="在 NIO编程中，  最常用的缓存就是 ByteBuffer ,  它也几乎是万能的 、  既然它如此重要， 底层实现就很有必要看一看  类的结构123public abstract class ByteBuffer    extends Buffer    implements Comparable&amp;lt;ByteBuffer&amp;gt; 从此处我们得到的结论是：  抽象类： 不可以new,  本身">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[NIO]01_ByteBuffer源码走读">
+<meta name="twitter:description" content="在 NIO编程中，  最常用的缓存就是 ByteBuffer ,  它也几乎是万能的 、  既然它如此重要， 底层实现就很有必要看一看  类的结构123public abstract class ByteBuffer    extends Buffer    implements Comparable&amp;lt;ByteBuffer&amp;gt; 从此处我们得到的结论是：  抽象类： 不可以new,  本身">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[NIO]01_ByteBuffer源码走读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[NIO]01_ByteBuffer源码走读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-30T16:00:01.000Z" itemprop="datePublished" class="page-time">
+  2018-07-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#类的结构"><span class="post-toc-number">1.</span> <span class="post-toc-text">类的结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基类-Buffer"><span class="post-toc-number">2.</span> <span class="post-toc-text">基类 Buffer</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试基类属性"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">测试基类属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#flip"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">flip()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试结论"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">测试结论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mark-reset"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">mark(), reset()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#clear"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">clear()</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#allocate-allocateDirect"><span class="post-toc-number">3.</span> <span class="post-toc-text">allocate_allocateDirect</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[NIO]01_ByteBuffer源码走读"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[NIO]01_ByteBuffer源码走读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-01 00:00:01" datetime="2018-06-30T16:00:01.000Z"  itemprop="datePublished">2018-07-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在 NIO编程中，  最常用的缓存就是 ByteBuffer ,  它也几乎是万能的 、  既然它如此重要， 底层实现就很有必要看一看 </p>
+<h1 id="类的结构"><a href="#类的结构" class="headerlink" title="类的结构"></a>类的结构</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ByteBuffer</span></span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">Buffer</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">ByteBuffer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>从此处我们得到的结论是：</p>
+<ol>
+<li>抽象类： 不可以new,  本身 <code>没有实例</code> ， 我们用的实例是他的 <code>子类</code> </li>
+<li>继承 <code>Buffer</code> ， 猜测 Buffer 基类封装了所有缓存的 <code>通用属性</code>、 <code>方法</code> </li>
+<li>可比较</li>
+</ol>
+<h1 id="基类-Buffer"><a href="#基类-Buffer" class="headerlink" title="基类 Buffer"></a>基类 Buffer</h1><p>源码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Buffer</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Invariants: mark &lt;= position &lt;= limit &lt;= capacity</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mark = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> position = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> limit;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有几个比较重要的属性， 暂时直译， 不知其作用， 再看源码</p>
+<ul>
+<li>mark ： 标记 （某种标记作用）</li>
+<li>position： 位置 （可能与读写的指针有关）</li>
+<li>limit: 限制（暂时不知道什么用处）</li>
+<li>capacity： 容量， 缓存容量</li>
+</ul>
+<h2 id="测试基类属性"><a href="#测试基类属性" class="headerlink" title="测试基类属性"></a>测试基类属性</h2><p>多次向缓存中存放数据， 观察 <code>position</code> , <code>limit</code>  , <code>capacity</code> 变化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testBuffer</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    String a = <span class="string">"abcde"</span>;</span><br><span class="line">    String b = <span class="string">"fghjk"</span>;</span><br><span class="line">    ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    System.out.println(<span class="string">"--------写模式-------"</span>);</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">    buffer.put(a.getBytes());</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">    buffer.put(b.getBytes());</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">"--------读模式-------"</span>);</span><br><span class="line">    buffer.flip();</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[buffer.limit()];</span><br><span class="line">    <span class="comment">// 读取2个</span></span><br><span class="line">    buffer.get(bytes, <span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">    <span class="comment">// 读取5个</span></span><br><span class="line">    buffer.get(bytes,<span class="number">2</span>,<span class="number">5</span>);</span><br><span class="line">    System.out.println(buffer.position() + <span class="string">"\t"</span> + buffer.limit() + <span class="string">"\t"</span> + buffer.capacity());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--------写模式-------</span><br><span class="line">0	1024	1024</span><br><span class="line">5	1024	1024</span><br><span class="line">10	1024	1024</span><br><span class="line">--------切换成读模式-------</span><br><span class="line">0	10	1024</span><br><span class="line">2	10	1024</span><br><span class="line">7	10	1024</span><br></pre></td></tr></table></figure>
+<h2 id="flip"><a href="#flip" class="headerlink" title="flip()"></a>flip()</h2><p>源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">flip</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    limit = position;</span><br><span class="line">    position = <span class="number">0</span>;</span><br><span class="line">    mark = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结论： </p>
+<ol>
+<li>将limit 赋值为 <code>写入</code> 的数据字节长度</li>
+<li>初始位置从 0 开始</li>
+<li>没有标记</li>
+</ol>
+<h2 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h2><ol>
+<li>position 表示本次操作的指针位置</li>
+<li>limit 表示本次操作的上限<ul>
+<li>写： 能写的位置上限</li>
+<li>读： 可读数据的位置上限</li>
+</ul>
+</li>
+<li>capacity： 不变，数组容量</li>
+</ol>
+<h2 id="mark-reset"><a href="#mark-reset" class="headerlink" title="mark(), reset()"></a>mark(), reset()</h2><p>源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sets this buffer's mark at its position.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">mark</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mark = position;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Resets this buffer's position to the previously-marked position.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">reset</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = mark;</span><br><span class="line">    <span class="keyword">if</span> (m &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InvalidMarkException();</span><br><span class="line">    position = m;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结论： </p>
+<ol>
+<li>mark() : 标记当前操作指针 position 的位置</li>
+<li>reset(): 将 position 复原至上次标记的位置</li>
+</ol>
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    position = <span class="number">0</span>;</span><br><span class="line">    limit = capacity;</span><br><span class="line">    mark = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察源码发现， 只是改变了 <code>指针</code> 的位置， 并没有真正清空数组数据 </p>
+<h1 id="allocate-allocateDirect"><a href="#allocate-allocateDirect" class="headerlink" title="allocate_allocateDirect"></a>allocate_allocateDirect</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title">allocate</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (capacity &lt; <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> HeapByteBuffer(capacity, capacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title">allocateDirect</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DirectByteBuffer(capacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再往下就是底层代码， 看不到</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[NIO]01_ByteBuffer源码走读.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[NIO]01_ByteBuffer源码走读.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NIO/">NIO</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[NIO]02_文件IO.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[NIO]02_文件IO</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Other/Share/[分享]百度网盘视频加速播放.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[分享]百度网盘视频加速播放.md</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

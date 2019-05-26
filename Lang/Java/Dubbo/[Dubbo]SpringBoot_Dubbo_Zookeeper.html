@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Dubbo]SpringBoot_Dubbo_Zookeeper | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java,Dubbo">
+    <meta name="description" content="功能实现Spring Boot 整合 Dubbo , 注册中心使用 zookeeper , 实现最简单的服务注册发现, 并且调用 Zookeeper 集群搭建zk集群共 3 台机器  下载文件, 官网: 点击这里 解压配置123456789101112131415161718192021222324mkdir -p /usr/local/apptar -zxf   zookeeper-3.4.13">
+<meta name="keywords" content="Java,Dubbo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Dubbo]SpringBoot_Dubbo_Zookeeper">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Dubbo/[Dubbo]SpringBoot_Dubbo_Zookeeper.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="功能实现Spring Boot 整合 Dubbo , 注册中心使用 zookeeper , 实现最简单的服务注册发现, 并且调用 Zookeeper 集群搭建zk集群共 3 台机器  下载文件, 官网: 点击这里 解压配置123456789101112131415161718192021222324mkdir -p /usr/local/apptar -zxf   zookeeper-3.4.13">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Dubbo]SpringBoot_Dubbo_Zookeeper">
+<meta name="twitter:description" content="功能实现Spring Boot 整合 Dubbo , 注册中心使用 zookeeper , 实现最简单的服务注册发现, 并且调用 Zookeeper 集群搭建zk集群共 3 台机器  下载文件, 官网: 点击这里 解压配置123456789101112131415161718192021222324mkdir -p /usr/local/apptar -zxf   zookeeper-3.4.13">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Dubbo]SpringBoot_Dubbo_Zookeeper</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Dubbo]SpringBoot_Dubbo_Zookeeper</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-20T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-09-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#功能实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">功能实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Zookeeper-集群搭建"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Zookeeper 集群搭建</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SpringBoot整合Dubbo"><span class="post-toc-number">2.</span> <span class="post-toc-text">SpringBoot整合Dubbo</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#提供者"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">提供者</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#消费者"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">消费者</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">验证</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Dubbo/[Dubbo]SpringBoot_Dubbo_Zookeeper"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Dubbo]SpringBoot_Dubbo_Zookeeper</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-21 00:00:00" datetime="2018-09-20T16:00:00.000Z"  itemprop="datePublished">2018-09-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><p>Spring Boot 整合 Dubbo , 注册中心使用 zookeeper , 实现最简单的服务注册发现, 并且调用</p>
+<h2 id="Zookeeper-集群搭建"><a href="#Zookeeper-集群搭建" class="headerlink" title="Zookeeper 集群搭建"></a>Zookeeper 集群搭建</h2><p>zk集群共 3 台机器</p>
+<ol>
+<li>下载文件, 官网: <a href="https://zookeeper.apache.org" target="_blank" rel="noopener">点击这里</a></li>
+<li>解压配置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/<span class="built_in">local</span>/app</span><br><span class="line">tar -zxf   zookeeper-3.4.13.tar.gz  -C /usr/<span class="built_in">local</span>/app/</span><br><span class="line">mv /usr/<span class="built_in">local</span>/app/zookeeper-3.4.13  /usr/<span class="built_in">local</span>/app/zookeeper-3</span><br><span class="line">mkdir -p  /usr/<span class="built_in">local</span>/app/zookeeper-3/zkdata</span><br><span class="line"></span><br><span class="line"><span class="comment">#不同的zk机器写入对应的 id</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt; /usr/<span class="built_in">local</span>/app/zookeeper-3/zkdata/myid</span><br><span class="line"></span><br><span class="line">cat  &gt; /usr/<span class="built_in">local</span>/app/zookeeper-3/conf/zoo.cfg &lt;&lt; EOF</span><br><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/usr/<span class="built_in">local</span>/app/zookeeper-3/zkdata</span><br><span class="line">clientPort=2181</span><br><span class="line">server.1=zk01.willon.cn:2888:38888</span><br><span class="line">server.2=zk02.willon.cn:2888:38888</span><br><span class="line">server.3=zk03.willon.cn:2888:38888</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &gt;&gt; /etc/profile &lt;&lt; EOF</span><br><span class="line"><span class="comment">##__ZK_HOME__##</span></span><br><span class="line"><span class="built_in">export</span> ZK_HOME=/usr/<span class="built_in">local</span>/app/zookeeper-3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ZK_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>已做 hosts 映射</p>
+</blockquote>
+<ol start="3">
+<li>配置一键zk启动, 停止脚本</li>
+</ol>
+<ul>
+<li><p><strong>zkStartAll.sh</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">SERVERS=&quot;zk01.willon.cn zk02.willon.cn zk03.willon.cn&quot;</span><br><span class="line">for SERVER in $SERVERS</span><br><span class="line">do</span><br><span class="line">   ssh $&#123;SERVER&#125; &quot;source /etc/profile; /usr/local/app/zookeeper-3.4/bin/zkServer.sh  start&quot;</span><br><span class="line">done</span><br><span class="line">for SERVER in $SERVERS</span><br><span class="line">do</span><br><span class="line">   ssh $&#123;SERVER&#125; &quot;source /etc/profile; /usr/local/app/zookeeper-3.4/bin/zkServer.sh  status&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>zkStopAll.sh</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">SERVERS=&quot;zk01.willon.cn zk02.willon.cn zk03.willon.cn&quot;</span><br><span class="line">for SERVER in $SERVERS</span><br><span class="line">do</span><br><span class="line">   ssh $&#123;SERVER&#125; &quot;source /etc/profile; /usr/local/app/zookeeper-3.4/bin/zkServer.sh  stop&quot;</span><br><span class="line">done</span><br><span class="line">for SERVER in $SERVERS</span><br><span class="line">do</span><br><span class="line">   ssh $&#123;SERVER&#125; &quot;source /etc/profile; /usr/local/app/zookeeper-3.4/bin/zkServer.sh  status&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="SpringBoot整合Dubbo"><a href="#SpringBoot整合Dubbo" class="headerlink" title="SpringBoot整合Dubbo"></a>SpringBoot整合Dubbo</h1><p>整合区分一下 <code>提供者</code>  ,<code>消费者</code></p>
+<h2 id="提供者"><a href="#提供者" class="headerlink" title="提供者"></a>提供者</h2><ol>
+<li><p>Maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--如果需要消费其他服务, 则需要引入对应的jar包 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--Springboot 配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--dubbo 配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--spring-boot-dubbo 配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.dubbo.springboot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--解决版本冲突问题--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>application.properties</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">##端口号</span><br><span class="line">server.port=8880</span><br><span class="line">## Dubbo 服务提供者配置</span><br><span class="line">spring.dubbo.application.name=dubbo_server</span><br><span class="line">spring.dubbo.registry.address=zookeeper://zk01.willon.cn:2181?back=zk02.willon.cn:2181,zk03.willon.cn:2181</span><br><span class="line">spring.dubbo.protocol.name=dubbo</span><br><span class="line">spring.dubbo.protocol.port=20880</span><br><span class="line">spring.dubbo.scan=com.demo.dubboprovider</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写业务类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line">    <span class="function">String  <span class="title">say</span><span class="params">(String word)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">say</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello__"</span> + word;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对外暴露的接口配置: <code>xx-provider.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd </span></span></span><br><span class="line"><span class="tag"><span class="string">       http://code.alibabatech.com/schema/dubbo </span></span></span><br><span class="line"><span class="tag"><span class="string">       http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span></span><br><span class="line">       </span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">timeout</span>=<span class="string">"10000"</span> <span class="attr">delay</span>=<span class="string">"-1"</span> <span class="attr">threadpool</span>=<span class="string">"fixed"</span> <span class="attr">threads</span>=<span class="string">"10"</span> <span class="attr">loadbalance</span>=<span class="string">"leastactive"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.demo.dubboprovider.service.IUserService"</span> <span class="attr">ref</span>=<span class="string">"userService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动类关键配置, 引入配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@ImportResource(locations = &quot;classpath:*.xml&quot;)</span><br><span class="line">public class DubboConsumerApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        SpringApplication.run(DubboConsumerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><ol>
+<li>Maven依赖相同</li>
+<li><p><strong>application.properties</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">##端口号</span><br><span class="line">server.port=8888</span><br><span class="line">## Dubbo 服务提供者配置</span><br><span class="line">spring.dubbo.application.name=dubbo_server</span><br><span class="line">spring.dubbo.registry.address=zookeeper://zk01.willon.cn:2181?back=zk02.willon.cn:2181,zk03.willon.cn:2181</span><br><span class="line">spring.dubbo.protocol.name=dubbo</span><br><span class="line">spring.dubbo.protocol.port=20880</span><br><span class="line">spring.dubbo.scan=com.demo.dubboconsumer</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件 <code>xx-consumer.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:dubbo</span>=<span class="string">"http://code.alibabatech.com/schema/dubbo"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:consumer</span> <span class="attr">timeout</span>=<span class="string">"500"</span> <span class="attr">check</span>=<span class="string">"false"</span> <span class="attr">filter</span>=<span class="string">"executelimit"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"userService"</span>   <span class="attr">interface</span>=<span class="string">"com.demo.dubboprovider.service.IUserService"</span>  <span class="attr">version</span>=<span class="string">"1.0.0"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Controller编写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    IUserService userService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/get/&#123;name&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(@PathVariable(name = <span class="string">"name"</span>)</span> String name) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService.say(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动入口引用资源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ImportResource</span>(locations = <span class="string">"classpath:*.xml"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboConsumerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        SpringApplication.run(DubboConsumerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>浏览器输入 <code>localhost:8889/get/willon</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Dubbo/[Dubbo]SpringBoot_Dubbo_Zookeeper.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Dubbo/[Dubbo]SpringBoot_Dubbo_Zookeeper.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Other/Share/[Share]破解Vysor.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Share]破解Vysor</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Database/MySQL/MySQL]数据库使用规范.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Mysql]数据库使用规范</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[编程题]04_小米笔试_号码分身_数字单词还原 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="编程题">
+    <meta name="description" content="题目继MIUI8推出手机分身功能之后，MIUI9计划推出一个电话号码分身的功能：   首先将电话号码中 每个数字 加上 8   , 取个位 使用对应的大写字母代替 （”ZERO”, “ONE”, “TWO”, “THREE”, “FOUR”, “FIVE”, “SIX”, “SEVEN”, “EIGHT”,”NINE” 然后随机打乱这些字母，所生成的字符串即为电话号码对应的分身  题目解释难点在于">
+<meta name="keywords" content="编程题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[编程题]04_小米笔试_号码分身_数字单词还原">
+<meta property="og:url" content="https://willon.cn/Programming/[编程题]04_小米笔试_号码分身.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="题目继MIUI8推出手机分身功能之后，MIUI9计划推出一个电话号码分身的功能：   首先将电话号码中 每个数字 加上 8   , 取个位 使用对应的大写字母代替 （”ZERO”, “ONE”, “TWO”, “THREE”, “FOUR”, “FIVE”, “SIX”, “SEVEN”, “EIGHT”,”NINE” 然后随机打乱这些字母，所生成的字符串即为电话号码对应的分身  题目解释难点在于">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[编程题]04_小米笔试_号码分身_数字单词还原">
+<meta name="twitter:description" content="题目继MIUI8推出手机分身功能之后，MIUI9计划推出一个电话号码分身的功能：   首先将电话号码中 每个数字 加上 8   , 取个位 使用对应的大写字母代替 （”ZERO”, “ONE”, “TWO”, “THREE”, “FOUR”, “FIVE”, “SIX”, “SEVEN”, “EIGHT”,”NINE” 然后随机打乱这些字母，所生成的字符串即为电话号码对应的分身  题目解释难点在于">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[编程题]04_小米笔试_号码分身_数字单词还原</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[编程题]04_小米笔试_号码分身_数字单词还原</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-19T16:04:00.000Z" itemprop="datePublished" class="page-time">
+  2018-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目解释"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目解释</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Input"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Input</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Output"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Output</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Coding"><span class="post-toc-number">2.</span> <span class="post-toc-text">Coding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#扩展"><span class="post-toc-number">3.</span> <span class="post-toc-text">扩展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Example"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Example</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Coding-1"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Coding</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Programming/[编程题]04_小米笔试_号码分身"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[编程题]04_小米笔试_号码分身_数字单词还原</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-20 00:04:00" datetime="2018-03-19T16:04:00.000Z"  itemprop="datePublished">2018-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程题/">编程题</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>继MIUI8推出手机分身功能之后，MIUI9计划推出一个电话号码分身的功能： </p>
+<ol>
+<li>首先将电话号码中 每个数字 加上 8   , 取个位</li>
+<li>使用对应的大写字母代替 （”ZERO”, “ONE”, “TWO”, “THREE”, “FOUR”, “FIVE”, “SIX”, “SEVEN”, “EIGHT”,”NINE”</li>
+<li>然后随机打乱这些字母，所生成的字符串即为电话号码对应的分身</li>
+</ol>
+<h2 id="题目解释"><a href="#题目解释" class="headerlink" title="题目解释"></a>题目解释</h2><p>难点在于如何将随机的字符串转化成有意义的单词，仔细观察 9 个单词，找出规律：<br>如 <code>ZERO</code> 独有的 <code>Z</code>, <code>EIGHT</code> 独有的 <code>G</code>, <code>TWO</code> 独有的 <code>W</code>, <code>SIX</code> 独有的 <code>X</code> </p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行是一个整数T（1 ≤ T ≤ 100)表示测试样例数；接下来T行，每行给定一个分身后的电话号码的分身（长度在3到10000之间）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">EIGHT</span><br><span class="line">ZEROTWOONE</span><br><span class="line">OHWETENRTEO</span><br><span class="line">OHEWTIEGTHENRTEO</span><br></pre></td></tr></table></figure></p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出T行，分别对应输入中每行字符串对应的分身前的最小电话号码（允许前导0）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">234</span><br><span class="line">345</span><br><span class="line">0345</span><br></pre></td></tr></table></figure>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">// 1. 将输入的   随机字母   组合成  一串有意义 的 英文</span><br><span class="line">// 2. 将对应的  英文 转化成  数字</span><br><span class="line">// 3. 所有  数字 减8   =&gt; 得到多个  新的数字　　　　</span><br><span class="line">// 4. 新的数字串  排列成 最小的数字串  可以 0 开头　</span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Scanner sc = new Scanner(System.in);</span><br><span class="line">        int n = sc.nextInt();</span><br><span class="line">        String sar[] = new String[n];</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            sar[i] = sc.next();</span><br><span class="line">        &#125;</span><br><span class="line">        for (String s : sar) &#123;</span><br><span class="line">            resolve(s);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void resolve(String s) &#123;</span><br><span class="line"></span><br><span class="line">        // `-8 取个位 ` (即 （i+2） % 10) 之后的索引，表示  `转换之后` 的 数字</span><br><span class="line">        // 出现一次 arr[i]++ ，最后 arr[i] 表示出现的次数</span><br><span class="line">        // 可以巧妙的省去 重新排列的问题</span><br><span class="line">        int arr[] = new int[10];</span><br><span class="line">        StringBuilder sb = new StringBuilder(s);</span><br><span class="line">        while (sb.toString().contains(&quot;Z&quot;)) &#123; //0  独有Z, 删除 Z E R O  剩下 4 , 3 有 R</span><br><span class="line">            arr[2]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;Z&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;R&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;O&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">        while (sb.toString().contains(&quot;W&quot;)) &#123; //2  独有的 W ，删除 T W O</span><br><span class="line">            arr[4]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;T&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;W&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;O&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">        while (sb.toString().contains(&quot;X&quot;)) &#123; //6 ，独有的X ，删除 SIX ，剩下 7 有 S</span><br><span class="line">            arr[8]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;S&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;I&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;X&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">        while (sb.toString().contains(&quot;S&quot;)) &#123; // 7 , 删除 SEVEN</span><br><span class="line">            arr[9]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;S&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;V&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;N&quot;));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (sb.toString().contains(&quot;U&quot;)) &#123; //4   独有的 U ， 删除 FOUR， 剩下 5 有 F, 3 有 R</span><br><span class="line">            arr[6]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;F&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;O&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;U&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;R&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">        while (sb.toString().contains(&quot;F&quot;)) &#123;//5  在 4 之后，只有 5 有 F</span><br><span class="line">            arr[7]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;F&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;I&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;V&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while (sb.toString().contains(&quot;G&quot;)) &#123; //8， 独有的 G, </span><br><span class="line">            arr[0]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;I&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;G&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;H&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;T&quot;));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //剩下 1 9  ONE NINE</span><br><span class="line">        while (sb.toString().contains(&quot;O&quot;)) &#123; //1 </span><br><span class="line">            arr[3]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;O&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;N&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">        while (sb.toString().contains(&quot;I&quot;)) &#123; //9</span><br><span class="line">            arr[1]++;</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;N&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;I&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;N&quot;));</span><br><span class="line">            sb.deleteCharAt(sb.toString().indexOf(&quot;E&quot;));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 索引 i 的值  arr[i] 不为0, 输出 i，输出次数为 arr[i]</span><br><span class="line">        for (int i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">            // arr[i] &gt;= 1 时，循环输出</span><br><span class="line">            if (arr[i]!=0)&#123;</span><br><span class="line">                for (int j = 0; j &lt;arr[i] ; j++) &#123;</span><br><span class="line">                    System.out.print(i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>Given a non-empty string containing an out-of-order English representation of digits 0-9, output the digits in ascending order.<br><strong>Note</strong></p>
+<pre><code>1. Input contains only lowercase English letters.
+2. Input is guaranteed to be valid and can be transformed to its original digits. That means invalid inputs such as &quot;abc&quot; or &quot;zerone&quot; are not permitted.
+3. Input length is less than 50,000.
+</code></pre><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;owoztneoer&quot;</span><br><span class="line"></span><br><span class="line">Output: &quot;012&quot;</span><br><span class="line"></span><br><span class="line">Input: &quot;fviefuro&quot;</span><br><span class="line"></span><br><span class="line">Output: &quot;45&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="Coding-1"><a href="#Coding-1" class="headerlink" title="Coding"></a>Coding</h2><p>此代码适用于任何合法输入的还原</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// zero one two three four five six seven eight nine</span><br><span class="line">//find the unique character of each letter</span><br><span class="line">// zero -- z , two - w , six -x , eight - g, four - u</span><br><span class="line">// s -- seven,six     h -- three ,eight    f -- five ,four</span><br><span class="line">// o -- one zero four two  i-- nine five</span><br><span class="line">public static String originalDigits(String s) &#123;</span><br><span class="line"></span><br><span class="line">    int count[] = new int[10];</span><br><span class="line">    for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">        char c = s.charAt(i);</span><br><span class="line">        if (c == &apos;z&apos;) count[0]++;  // 0</span><br><span class="line">        if (c == &apos;w&apos;) count[2]++;  // 2</span><br><span class="line">        if (c == &apos;x&apos;) count[6]++;  // 6</span><br><span class="line">        if (c == &apos;s&apos;) count[7]++;  // 6 7 =&gt; we have got the count of 6</span><br><span class="line">        if (c == &apos;g&apos;) count[8]++;  // 8</span><br><span class="line">        if (c == &apos;u&apos;) count[4]++;  // 4</span><br><span class="line">        if (c == &apos;f&apos;) count[5]++;  // 4 5 =&gt; we have got the count of 4</span><br><span class="line">        if (c == &apos;h&apos;) count[3]++;  // 8 3 =&gt; we have got the count of 3</span><br><span class="line">        if (c == &apos;i&apos;) count[9]++;  // 5 9 8 6 =&gt; we have got the count of  5</span><br><span class="line">        if (c == &apos;o&apos;) count[1]++;  // 0 2 4 1 =&gt; we have got the count of  0 2 4</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    count[7] = count[7] - count[6];</span><br><span class="line">    count[5] = count[5] - count[4];</span><br><span class="line">    count[3] = count[3] - count[8];</span><br><span class="line">    count[9] = count[9] - count[8] - count[5] - count[6];</span><br><span class="line">    count[1] = count[1] - count[0] - count[2] - count[4];</span><br><span class="line"></span><br><span class="line">    StringBuilder sb = new StringBuilder();</span><br><span class="line">    for (int i = 0; i &lt;= 9; i++) &#123;</span><br><span class="line">        for (int k = 0; k &lt; count[i]; k++) &#123;</span><br><span class="line">            sb.append(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return sb.toString();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Programming/[编程题]04_小米笔试_号码分身.html" target="_blank" rel="external">https://willon.cn/Programming/[编程题]04_小米笔试_号码分身.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程题/">编程题</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Programming/[编程题]06_最长回文串.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[编程题]06_最长回文串</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Programming/[编程题]03_二进制.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[编程题]03_数字二进制比较</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]04_02_反射_方法反射 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="方法反射方法反射是反射里最常见的一种发射，看代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class ClassDemo1 &amp;#123;   public static void main(String[] args) &amp;#123;">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]04_02_反射_方法反射">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]04_02_反射_方法反射.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="方法反射方法反射是反射里最常见的一种发射，看代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class ClassDemo1 &amp;#123;   public static void main(String[] args) &amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]04_02_反射_方法反射">
+<meta name="twitter:description" content="方法反射方法反射是反射里最常见的一种发射，看代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class ClassDemo1 &amp;#123;   public static void main(String[] args) &amp;#123;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]04_02_反射_方法反射</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]04_02_反射_方法反射</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-11T16:04:02.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法反射"><span class="post-toc-number">1.</span> <span class="post-toc-text">方法反射</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#List集合反射"><span class="post-toc-number">2.</span> <span class="post-toc-text">List集合反射</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]04_02_反射_方法反射"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]04_02_反射_方法反射</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 00:04:02" datetime="2016-05-11T16:04:02.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="方法反射"><a href="#方法反射" class="headerlink" title="方法反射"></a>方法反射</h3><p>方法反射是反射里最常见的一种发射，看代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class ClassDemo1 &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       //创建一个A 类型的 对象</span><br><span class="line">       A a1 = new A();</span><br><span class="line">       //调用方法</span><br><span class="line">       a1.print();</span><br><span class="line">       a1.print(10, 20);</span><br><span class="line">       a1.print(&quot;hello &quot;, &quot;WORLD&quot;);</span><br><span class="line">       System.out.println(&quot;----------------&quot;);</span><br><span class="line"></span><br><span class="line">       //反射步骤：</span><br><span class="line">       //1. 获取实例类的类类型</span><br><span class="line">       //2. 通过 getMethod() 方法获取 类的方法</span><br><span class="line">       //3. 反射该方法</span><br><span class="line">       </span><br><span class="line">       Class ctype = a1.getClass();</span><br><span class="line">       try &#123;</span><br><span class="line">           Method m = ctype.getMethod(&quot;print&quot;);</span><br><span class="line">           Method m1 = ctype.getMethod(&quot;print&quot;, int.class, int.class);</span><br><span class="line">           Method m2 = ctype.getMethod(&quot;print&quot;, String.class, String.class);</span><br><span class="line">           m.invoke(a1);</span><br><span class="line">           m1.invoke(a1, 10, 20);</span><br><span class="line">           m2.invoke(a1, &quot;hello&quot;, &quot;WORLD&quot;);</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A &#123;</span><br><span class="line"></span><br><span class="line">   	public void print() &#123;</span><br><span class="line">       	System.out.println(&quot;No param method&quot;);</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   	public void print(int a, int b) &#123;</span><br><span class="line">       	System.out.println(a + b);</span><br><span class="line">   	&#125;</span><br><span class="line">   </span><br><span class="line">   	public void print(String a, String b) &#123;</span><br><span class="line">       	System.out.println(a.toUpperCase() + &quot;,&quot; + b.toLowerCase());</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line">#运行结果</span><br><span class="line">#No param method</span><br><span class="line">#30</span><br><span class="line">#HELLO ,world</span><br><span class="line">#----------------</span><br><span class="line">#No param method</span><br><span class="line">#30</span><br><span class="line">#HELLO,world</span><br></pre></td></tr></table></figure>
+<h3 id="List集合反射"><a href="#List集合反射" class="headerlink" title="List集合反射"></a>List集合反射</h3><p>看代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class ListReDemo &#123;</span><br><span class="line">   	public static void main(String[] args) &#123;</span><br><span class="line">       	ArrayList  list1 = new ArrayList();</span><br><span class="line">       	ArrayList &lt;String&gt;  stringlist  =new ArrayList&lt;&gt;();</span><br><span class="line">       // 这些都是编译时的操作</span><br><span class="line">       	stringlist.add(&quot;hello&quot;);</span><br><span class="line">       	stringlist.add(&quot;world&quot;);</span><br><span class="line">       	System.out.println(&quot;未反射： &quot;+stringlist);</span><br><span class="line">       // stringlist.add(100);报错，stringlist无法添加int 类型数据</span><br><span class="line"></span><br><span class="line">       	Class ctype1 = list1.getClass();</span><br><span class="line">       	Class ctype2= stringlist.getClass();</span><br><span class="line">       	System.out.println(&quot;list 和 stringlist类类型结果：&quot;+(ctype1==ctype2));</span><br><span class="line"></span><br><span class="line">       try &#123;</span><br><span class="line">           Method m = ctype1.getMethod(&quot;add&quot;,Object.class);</span><br><span class="line">           m.invoke(stringlist,100);</span><br><span class="line">           //int 类型的数据被添加进 stringlist；运行时进行</span><br><span class="line">           System.out.println(&quot;反射： &quot;+stringlist);</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">#运行结果</span><br><span class="line">#未反射： [hello, world]</span><br><span class="line">#list 和 stringlist类类型结果：true</span><br><span class="line">#反射： [hello, world, 100]</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]04_02_反射_方法反射.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]04_02_反射_方法反射.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Java]06_面试题笔记.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]06_面试题笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Java]04_01_反射_Class类_静态加载_动态加载.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]04_01_反射_Class类_静态加载_动态加载</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

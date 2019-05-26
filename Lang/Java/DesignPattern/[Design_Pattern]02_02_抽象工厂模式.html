@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Design_Pattern]02_02_抽象工厂模式 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="设计模式">
+    <meta name="description" content="抽象工厂模式 属于 创建模式 ，通俗的理解就是 工厂的工厂， 使用工厂生成类 获取 相应的工厂 大概步骤 创建要被生产的接口和实现类（具体的事物） 创建 抽象工厂类 ，该工厂类声明 获取实现了产品接口类 的方法 创建不同的 工厂类，继承 抽象工厂类， 重写自己该有的方法。 创建一个 工厂生成类 ， 该类返回 抽象工厂类型的工厂，根据参数不同返回不同工厂。  DEMO">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Design_Pattern]02_02_抽象工厂模式">
+<meta property="og:url" content="https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]02_02_抽象工厂模式.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="抽象工厂模式 属于 创建模式 ，通俗的理解就是 工厂的工厂， 使用工厂生成类 获取 相应的工厂 大概步骤 创建要被生产的接口和实现类（具体的事物） 创建 抽象工厂类 ，该工厂类声明 获取实现了产品接口类 的方法 创建不同的 工厂类，继承 抽象工厂类， 重写自己该有的方法。 创建一个 工厂生成类 ， 该类返回 抽象工厂类型的工厂，根据参数不同返回不同工厂。  DEMO">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/dp02_abstractFactory_00.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Design_Pattern]02_02_抽象工厂模式">
+<meta name="twitter:description" content="抽象工厂模式 属于 创建模式 ，通俗的理解就是 工厂的工厂， 使用工厂生成类 获取 相应的工厂 大概步骤 创建要被生产的接口和实现类（具体的事物） 创建 抽象工厂类 ，该工厂类声明 获取实现了产品接口类 的方法 创建不同的 工厂类，继承 抽象工厂类， 重写自己该有的方法。 创建一个 工厂生成类 ， 该类返回 抽象工厂类型的工厂，根据参数不同返回不同工厂。  DEMO">
+<meta name="twitter:image" content="https://willon.cn/images/dp02_abstractFactory_00.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Design_Pattern]02_02_抽象工厂模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Design_Pattern]02_02_抽象工厂模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-09T16:02:01.000Z" itemprop="datePublished" class="page-time">
+  2018-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#大概步骤"><span class="post-toc-number">1.</span> <span class="post-toc-text">大概步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DEMO"><span class="post-toc-number">2.</span> <span class="post-toc-text">DEMO</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/DesignPattern/[Design_Pattern]02_02_抽象工厂模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Design_Pattern]02_02_抽象工厂模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-10 00:02:01" datetime="2018-06-09T16:02:01.000Z"  itemprop="datePublished">2018-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><code>抽象工厂模式</code> 属于 <code>创建模式</code> ，通俗的理解就是 <code>工厂的工厂</code>， 使用<code>工厂生成类</code> 获取 <code>相应的工厂</code></p>
+<h1 id="大概步骤"><a href="#大概步骤" class="headerlink" title="大概步骤"></a>大概步骤</h1><ol>
+<li>创建要被生产的接口和实现类（具体的事物）</li>
+<li>创建 <code>抽象工厂类</code> ，该工厂类声明 <code>获取实现了产品接口类</code> 的方法</li>
+<li>创建不同的 <code>工厂类</code>，继承 <code>抽象工厂类</code>， 重写自己该有的方法。</li>
+<li>创建一个 <code>工厂生成类</code> ， 该类返回 <code>抽象工厂类型的工厂</code>，根据参数不同返回不同工厂。</li>
+</ol>
+<h1 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/dp02_abstractFactory_00.png" alt="01" title="">
+                </div>
+                <div class="image-caption">01</div>
+            </figure>
+<ol>
+<li><p>创建手机、电脑的接口和实现类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//电脑的接口和具体的实现类</span><br><span class="line">public interface Computer &#123;</span><br><span class="line">    void boot();</span><br><span class="line">&#125;</span><br><span class="line">public class ThinkPad implements Computer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void boot() &#123;</span><br><span class="line">        System.out.println(&quot;ThinkPad  computer boot....&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Hasee implements Computer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void boot() &#123;</span><br><span class="line">        System.out.println(&quot;Hasee computer boot.... &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//手机的接口和具体实现类</span><br><span class="line">public interface MobilePhone &#123;</span><br><span class="line">    void boot();</span><br><span class="line">&#125;</span><br><span class="line">public class Xiaomi implements MobilePhone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void boot() &#123;</span><br><span class="line">        System.out.println(&quot;XiaoMi mobilePhone boot...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Sumsung implements MobilePhone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void boot() &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;Sumsung mobile phone boot... &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 <code>抽象工厂类</code>，声明获取手机、电脑的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AbstractFactory &#123;</span><br><span class="line">    abstract Computer getComputer(Integer type);</span><br><span class="line">    abstract MobilePhone getPhone(Integer type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建手机、电脑的 <code>工厂类</code>，继承 <code>抽象工厂类</code>，重写方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//电脑的工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComputerFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HASEE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THINKPAD = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写获取具体电脑的逻辑</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">Computer <span class="title">getComputer</span><span class="params">(Integer type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (type.equals(ComputerFactory.HASEE)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Hasee();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(ComputerFactory.THINKPAD)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ThinkPad();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">MobilePhone <span class="title">getPhone</span><span class="params">(Integer type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//手机的工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MobilePhoneFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Integer XIAOMI = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Integer SUMSUNG = <span class="number">2</span>;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">Computer <span class="title">getComputer</span><span class="params">(Integer type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//重写获取具体手机的逻辑</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function">MobilePhone <span class="title">getPhone</span><span class="params">(Integer type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (type.equals(XIAOMI)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Xiaomi();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (type.equals(SUMSUNG)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Sumsung();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 <code>工厂生成类</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryProducer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COMPUTER_FACTORY = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MOBILE_PHONE_FACTORY = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//根据参数的不同，返回不同的工厂类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AbstractFactory <span class="title">getFactory</span><span class="params">(Integer facType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (facType.equals(COMPUTER_FACTORY)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ComputerFactory();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (facType.equals(MOBILE_PHONE_FACTORY)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MobilePhoneFactory();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//通过工厂生成类， 获取相应的工厂</span></span><br><span class="line">        AbstractFactory computer_factory = FactoryProducer.getFactory(FactoryProducer.COMPUTER_FACTORY);</span><br><span class="line">        AbstractFactory mobilePhone_factory = FactoryProducer.getFactory(FactoryProducer.MOBILE_PHONE_FACTORY);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//通过具体工厂类， 获取相应的产品</span></span><br><span class="line">        Computer hasee = computer_factory.getComputer(ComputerFactory.HASEE);</span><br><span class="line">        Computer thinkpad = computer_factory.getComputer(ComputerFactory.THINKPAD);</span><br><span class="line">        hasee.boot();</span><br><span class="line">        thinkpad.boot();</span><br><span class="line"></span><br><span class="line">        MobilePhone sumsung = mobilePhone_factory.getPhone(MobilePhoneFactory.SUMSUNG);</span><br><span class="line">        MobilePhone xiaomi = mobilePhone_factory.getPhone(MobilePhoneFactory.XIAOMI);</span><br><span class="line">        sumsung.boot();</span><br><span class="line">        xiaomi.boot();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.681Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/DesignPattern/[Design_Pattern]02_02_抽象工厂模式.html" target="_blank" rel="external">https://willon.cn/Lang/Java/DesignPattern/[Design_Pattern]02_02_抽象工厂模式.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]02_01_工厂模式.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Design_Pattern]02_01_工厂模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/DesignPattern/[Design_Pattern]01_单例模式.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Design_Pattern]01_单例模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

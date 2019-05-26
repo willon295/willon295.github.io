@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Java]Clone详解 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Java">
+    <meta name="description" content="调用 Object clone如果要实现克隆，， 必须注意一下几点 clone()  是  Object  的 方法，且访问权限是  protected  1protected native Object clone() throws CloneNotSupportedException; 一个简单错误的例子：  12345678910public class Street &amp;#123;    p">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java]Clone详解">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Java]Clone详解.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="调用 Object clone如果要实现克隆，， 必须注意一下几点 clone()  是  Object  的 方法，且访问权限是  protected  1protected native Object clone() throws CloneNotSupportedException; 一个简单错误的例子：  12345678910public class Street &amp;#123;    p">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Java]Clone详解">
+<meta name="twitter:description" content="调用 Object clone如果要实现克隆，， 必须注意一下几点 clone()  是  Object  的 方法，且访问权限是  protected  1protected native Object clone() throws CloneNotSupportedException; 一个简单错误的例子：  12345678910public class Street &amp;#123;    p">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Java]Clone详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Java]Clone详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-10T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-08-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#调用-Object-clone"><span class="post-toc-number">1.</span> <span class="post-toc-text">调用 Object clone</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深拷贝-浅拷贝"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深拷贝_浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浅拷贝例子"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">浅拷贝例子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浅拷贝测试结果"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">浅拷贝测试结果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深拷贝"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">深拷贝</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深度拷贝测试结果"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">深度拷贝测试结果</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通过序列化实现深度拷贝"><span class="post-toc-number">2.</span> <span class="post-toc-text">通过序列化实现深度拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试结果"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">测试结果</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Java]Clone详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]Clone详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-11 00:00:00" datetime="2018-08-10T16:00:00.000Z"  itemprop="datePublished">2018-08-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="调用-Object-clone"><a href="#调用-Object-clone" class="headerlink" title="调用 Object clone"></a>调用 Object clone</h1><p>如果要实现克隆，， 必须注意一下几点</p>
+<p><code>clone()</code>  是  <code>Object</code>  的 方法，且访问权限是  <code>protected</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">native</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br></pre></td></tr></table></figure>
+<p>一个简单错误的例子： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Street</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line">	<span class="comment">// get...set..</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>其他包之外无权访问 clone 方法</li>
+<li>有权访问也会抛出 <code>CloneNotSupportedException</code> 异常</li>
+</ol>
+<p>所以， 一个类如果想通过<code>Object.clone()</code> 方法 实现 clone 的功能， </p>
+<ol>
+<li>必须实现 <code>Cloneable</code> </li>
+<li>重写 <code>clone()</code> 方法</li>
+</ol>
+<p>正确的例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Street</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// get...set..</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="深拷贝-浅拷贝"><a href="#深拷贝-浅拷贝" class="headerlink" title="深拷贝_浅拷贝"></a>深拷贝_浅拷贝</h2><h3 id="浅拷贝例子"><a href="#浅拷贝例子" class="headerlink" title="浅拷贝例子"></a>浅拷贝例子</h3><ol>
+<li>问题来源<br>对象的属性 不是基本数据类型，拷贝的 <code>只是引用</code> </li>
+</ol>
+<p>举个例子：</p>
+<p><strong>人物</strong> 包含 <strong>地址</strong> ， <strong>地址</strong> 包含 <strong>街道</strong>， 三者都是 实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *人物类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Address address;  <span class="comment">//地址</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *Address 地址信息类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">    <span class="keyword">private</span> Street street;  <span class="comment">// 街道</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> cn.willon.clone;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *Street 街道</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Street</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="浅拷贝测试结果"><a href="#浅拷贝测试结果" class="headerlink" title="浅拷贝测试结果"></a>浅拷贝测试结果</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line"></span><br><span class="line">      Street street = <span class="keyword">new</span> Street(<span class="string">"南京路"</span>, <span class="number">888</span>);</span><br><span class="line">      Address address = <span class="keyword">new</span> Address(<span class="string">"江苏省"</span>, <span class="string">"南京市"</span>, street);</span><br><span class="line">      Person zhangsan = <span class="keyword">new</span> Person(<span class="number">23</span>, <span class="string">"张三"</span>, address);</span><br><span class="line"><span class="comment">// clone 一份实例</span></span><br><span class="line">      Person lisi = (Person) zhangsan.clone();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出实例的属性，对比是否相同</span></span><br><span class="line">      System.out.println(zhangsan == lisi);</span><br><span class="line">      System.out.println(zhangsan.getAddress() == lisi.getAddress());</span><br><span class="line">      System.out.println(zhangsan.getAddress().getStreet() == lisi.getAddress().getStreet());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure></p>
+<p><strong>说明</strong> zhangsan、lisi 的住址街道等信息都是 <code>同一个</code> 实例， 并没有真正的拷贝</p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>将所依赖的实体的 clone 方法内， 将 依赖的对象也重新 <code>clone</code> 一份， 如</p>
+<ol>
+<li>clone 住址时，顺便 clone 一份他的 street</li>
+<li>clone Person，顺便 clone 一份 他的 address </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">    <span class="keyword">private</span> Street street; </span><br><span class="line">	<span class="comment">// 住址深度拷贝</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        Address address = (Address) <span class="keyword">super</span>.clone();</span><br><span class="line">        address.street = (Street) street.clone();</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">	<span class="comment">// Person的深度拷贝</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        Person person = (Person) <span class="keyword">super</span>.clone();</span><br><span class="line">        person.address = (Address) address.clone();</span><br><span class="line">        <span class="keyword">return</span> person;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="深度拷贝测试结果"><a href="#深度拷贝测试结果" class="headerlink" title="深度拷贝测试结果"></a>深度拷贝测试结果</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line"></span><br><span class="line">      Street street = <span class="keyword">new</span> Street(<span class="string">"南京路"</span>, <span class="number">888</span>);</span><br><span class="line">      Address address = <span class="keyword">new</span> Address(<span class="string">"江苏省"</span>, <span class="string">"南京市"</span>, street);</span><br><span class="line">      Person zhangsan = <span class="keyword">new</span> Person(<span class="number">23</span>, <span class="string">"张三"</span>, address);</span><br><span class="line"><span class="comment">// clone 一份实例</span></span><br><span class="line">      Person lisi = (Person) zhangsan.clone();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出实例的属性，对比是否相同</span></span><br><span class="line">      System.out.println(zhangsan == lisi);</span><br><span class="line">      System.out.println(zhangsan.getAddress() == lisi.getAddress());</span><br><span class="line">      System.out.println(zhangsan.getAddress().getStreet() == lisi.getAddress().getStreet());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">false</span><br><span class="line">false</span><br></pre></td></tr></table></figure></p>
+<h1 id="通过序列化实现深度拷贝"><a href="#通过序列化实现深度拷贝" class="headerlink" title="通过序列化实现深度拷贝"></a>通过序列化实现深度拷贝</h1><p>通过  <code>先序列化</code> —&gt;  <code>再反序列化</code> ， 可以生成一个新的克隆实例对象，且是深度拷贝，不会存在共享 引用的问题</p>
+<ol>
+<li>被序列化的实体类必须实现 <code>Serializable</code> 接口</li>
+<li>不用实现 Cloneable 接口，不需要 clone 方法</li>
+</ol>
+<p>举个例子，先自定义一个克隆的工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created By willon</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> willon</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Serializable&gt; <span class="function">T <span class="title">clone</span><span class="params">(T t)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先将对象序列化  到 字节缓存 中</span></span><br><span class="line">        ByteArrayOutputStream byteOut = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(byteOut);</span><br><span class="line">        oos.writeObject(t);</span><br><span class="line">        oos.close();</span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 再从 字节缓存 中 反序列化出 对象</span></span><br><span class="line">        ByteArrayInputStream byteIn = <span class="keyword">new</span> ByteArrayInputStream(byteOut.toByteArray());</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(byteIn);</span><br><span class="line">        ois.close();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (T) ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException, IOException, ClassNotFoundException </span>&#123;</span><br><span class="line"></span><br><span class="line">      Street street = <span class="keyword">new</span> Street(<span class="string">"南京路"</span>, <span class="number">888</span>);</span><br><span class="line">      Address address = <span class="keyword">new</span> Address(<span class="string">"江苏省"</span>, <span class="string">"南京市"</span>, street);</span><br><span class="line">      Person zhangsan = <span class="keyword">new</span> Person(<span class="number">23</span>, <span class="string">"张三"</span>, address);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用序列化方式克隆对象</span></span><br><span class="line">      Person lisi = CloneUtil.clone(zhangsan);</span><br><span class="line"></span><br><span class="line">      System.out.println(zhangsan == lisi);</span><br><span class="line">      System.out.println(zhangsan.getAddress() == lisi.getAddress());</span><br><span class="line">      System.out.println(zhangsan.getAddress().getStreet() == lisi.getAddress().getStreet());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">false</span><br><span class="line">false</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Java]Clone详解.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Java]Clone详解.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Java]Hash和解决Hash冲突.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]Hash和解决Hash冲突</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Code]00_HashMap.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]JDK8中HashMap存储结构[修正版]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

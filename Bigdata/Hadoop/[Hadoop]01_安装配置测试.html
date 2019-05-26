@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Hadoop]01_安装配置测试 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Hadoop">
+    <meta name="description" content="Hadoop安装准备工作下载Hadoop和jdk Hadoop点击 官网链接，下载相应的版本的 hadoop-xxx-bin.tar.gz包 jdk1.8点击官网链接,下载Linux版本的文件。  安装jdk 解压到 /usr/local/lib/目录下 配置 java环境变量，分为两种，为所有用户配置 /etc/profile,为当前用户配置 ~/.bashrc，追加以下代码 1234#set">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hadoop]01_安装配置测试">
+<meta property="og:url" content="https://willon.cn/Bigdata/Hadoop/[Hadoop]01_安装配置测试.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Hadoop安装准备工作下载Hadoop和jdk Hadoop点击 官网链接，下载相应的版本的 hadoop-xxx-bin.tar.gz包 jdk1.8点击官网链接,下载Linux版本的文件。  安装jdk 解压到 /usr/local/lib/目录下 配置 java环境变量，分为两种，为所有用户配置 /etc/profile,为当前用户配置 ~/.bashrc，追加以下代码 1234#set">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Hadoop]01_安装配置测试">
+<meta name="twitter:description" content="Hadoop安装准备工作下载Hadoop和jdk Hadoop点击 官网链接，下载相应的版本的 hadoop-xxx-bin.tar.gz包 jdk1.8点击官网链接,下载Linux版本的文件。  安装jdk 解压到 /usr/local/lib/目录下 配置 java环境变量，分为两种，为所有用户配置 /etc/profile,为当前用户配置 ~/.bashrc，追加以下代码 1234#set">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Hadoop]01_安装配置测试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Hadoop]01_安装配置测试</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T16:01:33.000Z" itemprop="datePublished" class="page-time">
+  2017-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hadoop安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">Hadoop安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载Hadoop和jdk"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">下载Hadoop和jdk</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装jdk"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">安装jdk</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装Hadoop"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">安装Hadoop</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hadoop-web页面端口占用情况"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">hadoop web页面端口占用情况</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Bigdata/Hadoop/[Hadoop]01_安装配置测试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Hadoop]01_安装配置测试</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-28 00:01:33" datetime="2017-08-27T16:01:33.000Z"  itemprop="datePublished">2017-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hadoop/">Hadoop</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Hadoop安装"><a href="#Hadoop安装" class="headerlink" title="Hadoop安装"></a>Hadoop安装</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="下载Hadoop和jdk"><a href="#下载Hadoop和jdk" class="headerlink" title="下载Hadoop和jdk"></a>下载Hadoop和jdk</h3><ol>
+<li>Hadoop<br>点击 <a href="http://hadoop.apache.org" target="_blank" rel="noopener">官网链接</a>，下载相应的版本的 <code>hadoop-xxx-bin.tar.gz</code>包</li>
+<li>jdk1.8<br>点击<a href="http://www.oracle.com/technetwork/java/javase/downloads/" target="_blank" rel="noopener">官网链接</a>,下载Linux版本的文件。</li>
+</ol>
+<h3 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h3><ol>
+<li>解压到 <code>/usr/local/lib/</code>目录下</li>
+<li><p>配置 <code>java环境变量</code>，分为两种，为所有用户配置 <code>/etc/profile</code>,为当前用户配置 <code>~/.bashrc</code>，追加以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set java enviroment</span><br><span class="line">export JAVA_HOME=/usr/local/lib/jdk1.8.0_131</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>保存重新加载<code>.bashrc</code>或者是<code>profile</code>,输入<code>which java</code>测试</p>
+</li>
+</ol>
+<h3 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h3><ol>
+<li>解压到 <code>/usr/local/lib</code>目录</li>
+<li><p>配置<code>Hadoop环境变量</code>，编辑 <code>/usr/local/lib/hadoop3/etc/hadoop/hadoop-env.sh</code> 文件，追加以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#set hadoop environment</span><br><span class="line">export HADOOP_HOME=/usr/local/lib/hadoop3</span><br><span class="line">export HADOOP_INSTALL=$HADOOP_HOME</span><br><span class="line">export HADOOP_MAPRED_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_HDFS_HOME=$HADOOP_HOME</span><br><span class="line">export YARN_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native</span><br><span class="line">export HADOOP_OPTS=&quot;-Djava.library.path=$&#123;HADOOP_HOME&#125;/lib/native/&quot;</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成之后使用 cd 到 <code>hadoop3/sbin/</code>目录，执行<code>start-all.sh</code></p>
+</li>
+</ol>
+<h2 id="hadoop-web页面端口占用情况"><a href="#hadoop-web页面端口占用情况" class="headerlink" title="hadoop web页面端口占用情况"></a>hadoop web页面端口占用情况</h2><p>管理界面：<a href="http://localhost:8088" target="_blank" rel="noopener">http://localhost:8088</a></p>
+<p>NameNode界面：<a href="http://localhost:50070" target="_blank" rel="noopener">http://localhost:50070</a></p>
+<p>HDFS NameNode界面：<a href="http://localhost:8042" target="_blank" rel="noopener">http://localhost:8042</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.673Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Bigdata/Hadoop/[Hadoop]01_安装配置测试.html" target="_blank" rel="external">https://willon.cn/Bigdata/Hadoop/[Hadoop]01_安装配置测试.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Bigdata/Hadoop/[Hadoop]02_分布式服务器环境搭建.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Hadoop]02_分布式服务器网络环境搭建</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[Mybatis]00_整合分页插件pageHelper.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">00_整合分页插件pageHelper</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

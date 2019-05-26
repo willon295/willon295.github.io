@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[SpringBoot]03_全局异常捕获_核心注解 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringBoot">
+    <meta name="description" content="@SpringBootApplication: Spring boot Application entrance @SpringBootConfiguration: A replacement of @Configuraion, which has the same function as &amp;lt;bean /&amp;gt; in traditional spring xml @enableAutoC">
+<meta name="keywords" content="SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SpringBoot]03_全局异常捕获_核心注解">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]03_Annotations_全局异常.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="@SpringBootApplication: Spring boot Application entrance @SpringBootConfiguration: A replacement of @Configuraion, which has the same function as &amp;lt;bean /&amp;gt; in traditional spring xml @enableAutoC">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SpringBoot]03_全局异常捕获_核心注解">
+<meta name="twitter:description" content="@SpringBootApplication: Spring boot Application entrance @SpringBootConfiguration: A replacement of @Configuraion, which has the same function as &amp;lt;bean /&amp;gt; in traditional spring xml @enableAutoC">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[SpringBoot]03_全局异常捕获_核心注解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[SpringBoot]03_全局异常捕获_核心注解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-19T16:03:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#全局Controller异常捕获"><span class="post-toc-number">1.</span> <span class="post-toc-text">全局Controller异常捕获</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Example"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Example</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#全局404处理"><span class="post-toc-number">2.</span> <span class="post-toc-text">全局404处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#返回-404-html"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">返回 404.html</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#返回JSON信息"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">返回JSON信息</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[SpringBoot]03_Annotations_全局异常"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[SpringBoot]03_全局异常捕获_核心注解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-20 00:03:00" datetime="2018-06-19T16:03:00.000Z"  itemprop="datePublished">2018-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li><code>@SpringBootApplication</code>: Spring boot Application entrance</li>
+<li><code>@SpringBootConfiguration</code>: A replacement of <code>@Configuraion</code>, which has the same function as <code>&lt;bean /&gt;</code> in traditional spring <code>xml</code></li>
+<li><code>@enableAutoConfiguration</code>: Enable  load coonfigurations of <code>jar</code> automaticly</li>
+<li><code>@ComponemtScan</code>: An replacement of <code>&lt;context: component-scan /&gt;</code></li>
+<li><code>@RestController</code>: Equals to <code>@Controller</code> + <code>@RequestMapping</code></li>
+<li><code>@Value</code>: Get the value  defined in <code>application.yml</code> </li>
+<li><code>@ControllerAdvice</code>: Unifid excption handler.</li>
+</ul>
+<h1 id="全局Controller异常捕获"><a href="#全局Controller异常捕获" class="headerlink" title="全局Controller异常捕获"></a>全局Controller异常捕获</h1><p><code>@ControllerAdvice</code>、 can handle all the excption in  <code>@Controller</code></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><ul>
+<li><p>custom excption</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyExcption</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyExcption</span><span class="params">(String code, String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyExcption</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(String code)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMsg</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyExcption&#123;"</span> +</span><br><span class="line">                <span class="string">"code='"</span> + code + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", msg='"</span> + msg + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ControllerAdvice</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyControllerAdvice</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 全局异常处理， 指定处理的异常的类型</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e 异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 统一的处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="comment">//指定处理异常的类型， 可以是自定义异常</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">errorHandler</span><span class="params">(Exception e)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"code"</span>, -<span class="number">1</span>);</span><br><span class="line">        map.put(<span class="string">"msg"</span>, e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义异常类的处理</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> me 自定义异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 异常处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = MyExcption.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">myexcprionHandler</span><span class="params">(MyExcption me)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"code"</span>, me.getCode());</span><br><span class="line">        map.put(<span class="string">"msg"</span>, me.getMessage());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="全局404处理"><a href="#全局404处理" class="headerlink" title="全局404处理"></a>全局404处理</h1><p>404 处理分为两种情况：</p>
+<ol>
+<li>返回一个错误的 html</li>
+<li>返回 JSON 格式的信息</li>
+</ol>
+<h2 id="返回-404-html"><a href="#返回-404-html" class="headerlink" title="返回 404.html"></a>返回 404.html</h2><p>默认的 404 映射的 请求路径是 <code>/error</code>，所以要对这个请求路径进行特殊处理：</p>
+<ol>
+<li><p>自定义 ErrorController, 实现 <code>ErrorController</code> 接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyNotFoundController</span> <span class="keyword">implements</span> <span class="title">ErrorController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//请求的路径， /error默认</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ERROR_PATH = <span class="string">"/error"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//返回的 html 文件名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String FILE_PATH = <span class="string">"404"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 404 映射</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 404 文件路径</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(ERROR_PATH)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">error</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> FILE_PATH;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getErrorPath</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ERROR_PATH;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里使用 <code>Thymleaf</code> 模板， 所以需要引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建  <code>404.html</code>  放在 <code>resource/templates/</code> 目录即可</p>
+</li>
+</ol>
+<h2 id="返回JSON信息"><a href="#返回JSON信息" class="headerlink" title="返回JSON信息"></a>返回JSON信息</h2><ol>
+<li><p>在 ControllerAdvice中定义处理 404 异常的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyControllerAdvice</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//NoHandlerFoundException就是 404 异常</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = NoHandlerFoundException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">notfound</span><span class="params">(NoHandlerFoundException e)</span> </span>&#123;</span><br><span class="line">        map.put(<span class="string">"code"</span>, <span class="string">"404"</span>);</span><br><span class="line">        map.put(<span class="string">"msg"</span>, e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>application.yml</code> 文件中修改配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment">#404直接抛出</span></span><br><span class="line"><span class="attr">  mvc:</span></span><br><span class="line"><span class="attr">    throw-exception-if-no-handler-found:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment">#不给静态资源创建映射</span></span><br><span class="line"><span class="attr">  resources:</span></span><br><span class="line"><span class="attr">    add-mappings:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试结果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	msg: "No handler found for GET /",</span><br><span class="line">	code: "404"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]03_Annotations_全局异常.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]03_Annotations_全局异常.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]04_RabbitMQ_Install.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[SpringBoot]04_RabbitMQ_Install</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]02_01_SpringBoot与各种视图整合.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[SpringBoot]02_01_SpringBoot与各种视图整合</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

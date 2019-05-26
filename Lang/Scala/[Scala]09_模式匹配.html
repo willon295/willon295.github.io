@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Scala]09_模式匹配 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="Scala">
+    <meta name="description" content="模式匹配基本的语法： 1234567elem  match&amp;#123;	case x: XX =&amp;gt; &amp;#123;  &amp;#125;	case y: YY =&amp;gt; &amp;#123;   &amp;#125;	//下划线表示其他	case _  =&amp;gt; &amp;#123;   &amp;#125;&amp;#125; 简单匹配 简单的匹配元素的值1234567891011121314package day04//匹配模式一">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Scala]09_模式匹配">
+<meta property="og:url" content="https://willon.cn/Lang/Scala/[Scala]09_模式匹配.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="模式匹配基本的语法： 1234567elem  match&amp;#123;	case x: XX =&amp;gt; &amp;#123;  &amp;#125;	case y: YY =&amp;gt; &amp;#123;   &amp;#125;	//下划线表示其他	case _  =&amp;gt; &amp;#123;   &amp;#125;&amp;#125; 简单匹配 简单的匹配元素的值1234567891011121314package day04//匹配模式一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Scala]09_模式匹配">
+<meta name="twitter:description" content="模式匹配基本的语法： 1234567elem  match&amp;#123;	case x: XX =&amp;gt; &amp;#123;  &amp;#125;	case y: YY =&amp;gt; &amp;#123;   &amp;#125;	//下划线表示其他	case _  =&amp;gt; &amp;#123;   &amp;#125;&amp;#125; 简单匹配 简单的匹配元素的值1234567891011121314package day04//匹配模式一">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Scala]09_模式匹配</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Scala]09_模式匹配</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-31T16:09:34.000Z" itemprop="datePublished" class="page-time">
+  2018-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模式匹配"><span class="post-toc-number">1.</span> <span class="post-toc-text">模式匹配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单匹配"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">简单匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型匹配"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数据类型匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合匹配"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">集合匹配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#List"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">List</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tuple"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">tuple</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#样例匹配"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">样例匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#偏函数-amp-匹配函数"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">偏函数&amp;匹配函数</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Scala/[Scala]09_模式匹配"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Scala]09_模式匹配</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-01 00:09:34" datetime="2017-12-31T16:09:34.000Z"  itemprop="datePublished">2018-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Scala/">Scala</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h1><p>基本的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">elem  match&#123;</span><br><span class="line">	case x: XX =&gt; &#123;  &#125;</span><br><span class="line">	case y: YY =&gt; &#123;   &#125;</span><br><span class="line">	//下划线表示其他</span><br><span class="line">	case _  =&gt; &#123;   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单匹配"><a href="#简单匹配" class="headerlink" title="简单匹配"></a>简单匹配</h2><ol>
+<li>简单的匹配元素的值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package day04</span><br><span class="line">//匹配模式一：  匹配元素</span><br><span class="line">object CaseDemo1 extends App &#123;</span><br><span class="line">  val arr  = Array(&quot;birds&quot;,&quot;dog&quot;,&quot;rabbits&quot;,&quot;sdfsss&quot;,&quot;bbbbb&quot;)</span><br><span class="line">  val name = arr(Random.nextInt(arr.length))</span><br><span class="line">  println(&quot;随机取出：&quot;+name)</span><br><span class="line">  name match &#123;</span><br><span class="line">    case &quot;birds&quot; =&gt; println(&quot;birds&quot;)</span><br><span class="line">    case &quot;dog&quot; =&gt; println(&quot;dog&quot;)</span><br><span class="line">    case &quot;rabbits&quot; =&gt; println(&quot;rabbits&quot;)</span><br><span class="line">    case _ =&gt; println(&quot;other----&quot;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="数据类型匹配"><a href="#数据类型匹配" class="headerlink" title="数据类型匹配"></a>数据类型匹配</h2><ol>
+<li>匹配 <code>数据类型</code>，当 <code>类型匹配</code> 时，处理相应的逻辑</li>
+<li>传入的值 ，可以通过变量获取</li>
+<li>匹配的数据类型可以是 <code>自定义类型的数据</code></li>
+<li>举个例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//匹配   数据类型</span><br><span class="line">object CaseDemo2 extends App &#123;</span><br><span class="line"></span><br><span class="line">  //自定义的数据类型</span><br><span class="line">  val dog = new  Dog</span><br><span class="line">  val arr = Array(  &quot;names&quot;  ,    11    ,   2.3   , CaseDemo2  , dog)</span><br><span class="line">  val elem = arr(4)</span><br><span class="line"></span><br><span class="line">  elem match &#123;</span><br><span class="line">    //引用变量</span><br><span class="line">    case  x:String =&gt; println(&quot;String:&quot;+x)</span><br><span class="line">    case  y:Int  =&gt; println(&quot;Int:&quot;+y)</span><br><span class="line">    case z:Double if (z&gt;2.0) =&gt; println(&quot;double:&quot;+z)</span><br><span class="line">    case  CaseDemo2 =&gt; println(&quot;casedemo&quot;)</span><br><span class="line">    case  d:Dog  =&gt; println(&quot;dog --- &quot;)</span><br><span class="line">    case _ =&gt; println(&quot;other&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="集合匹配"><a href="#集合匹配" class="headerlink" title="集合匹配"></a>集合匹配</h2><h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val lst = List(1, 2, 3, 4)</span><br><span class="line"></span><br><span class="line">  // :: 代表不同的 集合拼接 ， 单个元素可以直接拼接在集合的前面</span><br><span class="line">  val lst2 = 1 :: lst</span><br><span class="line">  lst2 match &#123;</span><br><span class="line">    case 0 :: x =&gt; println(s&quot;0 -- $x&quot;)</span><br><span class="line">    //1  ----   List(1, 2, 3, 4)</span><br><span class="line">    case x :: y =&gt; println(s&quot;$x  ----   $y&quot;)</span><br><span class="line">    case _ =&gt; println(&quot;other&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val  tup  = (3,2,6)</span><br><span class="line">tup match &#123;</span><br><span class="line">  case (1,_,_ ) =&gt; println(&quot;start with 1&quot;)</span><br><span class="line">  case (_ , _ ,3) =&gt; println(&quot;end with  3 &quot;)</span><br><span class="line">  case  (a ,b ,c) =&gt; println(s&quot;$a -  $b -  $c&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="样例匹配"><a href="#样例匹配" class="headerlink" title="样例匹配"></a>样例匹配</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//定义 样例 类 和 对象</span><br><span class="line">case class Task(id:Int,name:String )</span><br><span class="line">case  class  HeartBeat(i:Int )</span><br><span class="line">case  object  CheckTimeOut</span><br><span class="line"></span><br><span class="line">object CaseDemo4  extends  App &#123;</span><br><span class="line"></span><br><span class="line">  val a = Array(Task(1, &quot;t1&quot;), Task(2,&quot;t2&quot;),HeartBeat(100),HeartBeat(200) ,CheckTimeOut)</span><br><span class="line">  val elem  = a(1)</span><br><span class="line">  elem match &#123;</span><br><span class="line"></span><br><span class="line">    case Task(id:Int , name:String ) =&gt; println(id ,name)</span><br><span class="line">    case  HeartBeat(i:Int ) =&gt; println(&quot;heart: &quot;+i)</span><br><span class="line">    case  CheckTimeOut  =&gt; println(&quot;check time &quot;)</span><br><span class="line">    case  _ =&gt; println(&quot;other&quot;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="偏函数-amp-匹配函数"><a href="#偏函数-amp-匹配函数" class="headerlink" title="偏函数&amp;匹配函数"></a>偏函数&amp;匹配函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//定义一个方法，匹配字符串返回相应的数字</span><br><span class="line">def f1(num:String) :Int  = num match&#123;</span><br><span class="line">  case &quot;one&quot; =&gt; 1</span><br><span class="line">  case  &quot;two&quot; =&gt; 2</span><br><span class="line">  case &quot;three&quot; =&gt; 3</span><br><span class="line">  case _ =&gt; 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//偏函数： 第一个参数化类型表示 传入的数据类型，第二个表示返回的数据类型</span><br><span class="line">def f2:PartialFunction[String ,Int] =&#123;</span><br><span class="line">  case &quot;one&quot; =&gt; 1</span><br><span class="line">  case  &quot;two&quot; =&gt; 2</span><br><span class="line">  case &quot;three&quot; =&gt; 3</span><br><span class="line">  case _ =&gt; 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println(f1(&quot;one&quot;))</span><br><span class="line"></span><br><span class="line">println(f2(&quot;two&quot;))</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Scala/[Scala]09_模式匹配.html" target="_blank" rel="external">https://willon.cn/Lang/Scala/[Scala]09_模式匹配.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Scala/[Scala]10_一行代码实现WordCount.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Scala]10_一行代码WordCount</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Scala/[Scala]08_继承与实现.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Scala]08_继承与实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

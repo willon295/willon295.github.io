@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Maven]03_ssh依赖 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="maven">
+    <meta name="description" content="Maven 基本配置 创建JavaWeb项目 1mvn archetype:generate -DgroupId=组织名 -DartifactId=项目名-模块  -Dversion=版本号 -Dpackage=包名  修改web.xml文件 12345678&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;we">
+<meta name="keywords" content="maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Maven]03_ssh依赖">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Core/[Maven]03_ssh框架搭建.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="Maven 基本配置 创建JavaWeb项目 1mvn archetype:generate -DgroupId=组织名 -DartifactId=项目名-模块  -Dversion=版本号 -Dpackage=包名  修改web.xml文件 12345678&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;we">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Maven]03_ssh依赖">
+<meta name="twitter:description" content="Maven 基本配置 创建JavaWeb项目 1mvn archetype:generate -DgroupId=组织名 -DartifactId=项目名-模块  -Dversion=版本号 -Dpackage=包名  修改web.xml文件 12345678&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;we">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Maven]03_ssh依赖</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Maven]03_ssh依赖</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-07T17:00:51.000Z" itemprop="datePublished" class="page-time">
+  2017-10-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/maven/">maven</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Maven-基本配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">Maven 基本配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Maven项目依赖"><span class="post-toc-number">2.</span> <span class="post-toc-text">Maven项目依赖</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主要依赖"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">主要依赖</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#web-xml"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">web.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hibernate-cfg-xml"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">hibernate.cfg.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#applicationContext-xml"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">applicationContext.xml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jdbc-mysql-properties"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">jdbc.mysql.properties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#log4j-properties"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">log4j.properties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Beans-hbm-xml"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">Beans.hbm.xml</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Maven部署项目"><span class="post-toc-number">4.</span> <span class="post-toc-text">Maven部署项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加tomcat插件"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">添加tomcat插件</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Core/[Maven]03_ssh框架搭建"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Maven]03_ssh依赖</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-08 01:00:51" datetime="2017-10-07T17:00:51.000Z"  itemprop="datePublished">2017-10-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/maven/">maven</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Maven-基本配置"><a href="#Maven-基本配置" class="headerlink" title="Maven 基本配置"></a>Maven 基本配置</h1><ol>
+<li><p>创建<code>JavaWeb</code>项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=组织名 -DartifactId=项目名-模块  -Dversion=版本号 -Dpackage=包名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>web.xml</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span><br><span class="line">         version=&quot;3.1&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>pom.xml</code>文件，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">  &lt;--这里是解决中文乱码 --&gt;</span><br><span class="line">  &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;-- 修改编译器版本号--&gt;</span><br><span class="line">  &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</span><br><span class="line">  &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Maven项目依赖"><a href="#Maven项目依赖" class="headerlink" title="Maven项目依赖"></a>Maven项目依赖</h1><h2 id="主要依赖"><a href="#主要依赖" class="headerlink" title="主要依赖"></a>主要依赖</h2><ol>
+<li><code>junit</code>： 单元测试</li>
+<li><code>Struts2-core</code>: struts核心</li>
+<li><code>hibernate-core</code>: hibernate核心</li>
+<li><code>spring-core</code>: spring核心</li>
+<li><code>spring-struts</code>: spring-struts整合插件</li>
+<li><code>spring-hibernate</code>: spring-hibernate整合插件</li>
+<li><code>spring-tx</code>: spring事务管理</li>
+<li><code>spring-orm</code>: orm</li>
+<li><code>aspectj</code>: aop依赖</li>
+<li><code>c3p0</code>：数据库连接池</li>
+<li><code>mysql-connector-java</code>: 数据库驱动</li>
+</ol>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h2 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h2><p>主要配置Struts过滤器，spring文件的自动加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span><br><span class="line">         version=&quot;3.1&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!--1. 配置struts2的过滤器--&gt;</span><br><span class="line">    &lt;filter&gt;</span><br><span class="line">        &lt;filter-name&gt;struts2&lt;/filter-name&gt;</span><br><span class="line">        &lt;filter-class&gt;org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;</span><br><span class="line">    &lt;/filter&gt;</span><br><span class="line">    &lt;filter-mapping&gt;</span><br><span class="line">        &lt;filter-name&gt;struts2&lt;/filter-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/filter-mapping&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!--2. 配置spring配置文件--&gt;</span><br><span class="line">    &lt;context-param&gt;</span><br><span class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">        &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</span><br><span class="line">    &lt;/context-param&gt;</span><br><span class="line">    &lt;!--2.1 spring 配置自动加载--&gt;</span><br><span class="line">    &lt;listener&gt;</span><br><span class="line">        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</span><br><span class="line">    &lt;/listener&gt;</span><br><span class="line"></span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="hibernate-cfg-xml"><a href="#hibernate-cfg-xml" class="headerlink" title="hibernate.cfg.xml"></a>hibernate.cfg.xml</h2><p>主要配置hibernate信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">        &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;</span><br><span class="line">        &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;</span><br><span class="line">&lt;hibernate-configuration&gt;</span><br><span class="line">    &lt;session-factory&gt;</span><br><span class="line">        &lt;!--设置数据库更新方式--&gt;</span><br><span class="line">        &lt;property name=&quot;hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</span><br><span class="line">        &lt;!--控制台输出 SQL语句 ，格式化SQL语句--&gt;</span><br><span class="line">        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;</span><br><span class="line">        &lt;property name=&quot;format_sql&quot;&gt;true&lt;/property&gt;</span><br><span class="line">        &lt;!--配置映射文件--&gt;</span><br><span class="line">        &lt;!--&lt;mapping resource=&quot;cn/willon/beans/Customer.hbm.xml&quot;/&gt; --&gt;</span><br><span class="line">    &lt;/session-factory&gt;</span><br><span class="line">&lt;/hibernate-configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="applicationContext-xml"><a href="#applicationContext-xml" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h2><p>最重要的配置文件，包括三个框架的整合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/context</span><br><span class="line">        http://www.springframework.org/schema/context/spring-context.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop.xsd</span><br><span class="line">        http://www.springframework.org/schema/tx</span><br><span class="line">        http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--1. 配置  注解 自动扫描，以及要扫描的包--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=&quot;cn.willon&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--2. 配置 Struts2 : Action,Service,DAO--&gt;</span><br><span class="line">    &lt;bean id=&quot;customer&quot; class=&quot;cn.willon.webapp.entity.Customer&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!--3. 配置 Hibernate--&gt;</span><br><span class="line">    &lt;!--3.1 配置读取 properties 的 bean--&gt;</span><br><span class="line">    &lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;location&quot; value=&quot;classpath:jdbc.mysql.properties&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;!--3.2 配置 dataSource，数据库连接信息--&gt;</span><br><span class="line">    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.mysql.driverClass&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.mysql.jdbcUrl&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.mysql.user&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.mysql.password&#125;&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;!--3.3 配置 sessionFactory,引入hibernate配置文件--&gt;</span><br><span class="line">    &lt;bean id=&quot;sessionFactory&quot; class=&quot;org.springframework.orm.hibernate5.LocalSessionFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;configLocations&quot; value=&quot;classpath:hibernate.cfg.xml&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;!--3.4 配置 hibernateTemplate ,用于数据库操作--&gt;</span><br><span class="line">    &lt;bean id=&quot;hibernateTemplate&quot; class=&quot;org.springframework.orm.hibernate5.HibernateTemplate&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--3.5 配置 事务管理bean--&gt;</span><br><span class="line">    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.hibernate5.HibernateTransactionManager&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; proxy-target-class=&quot;true&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="jdbc-mysql-properties"><a href="#jdbc-mysql-properties" class="headerlink" title="jdbc.mysql.properties"></a>jdbc.mysql.properties</h2><p>配置数据库的连接信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.mysql.driverClass=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.mysql.jdbcUrl=jdbc:mysql://localhost/maven_ssh_demo</span><br><span class="line">jdbc.mysql.user=root</span><br><span class="line">jdbc.mysql.password=root</span><br></pre></td></tr></table></figure>
+<h2 id="log4j-properties"><a href="#log4j-properties" class="headerlink" title="log4j.properties"></a>log4j.properties</h2><p>配置log文件的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.Target=System.err</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;ABSOLUTE&#125; %5p %c&#123;1&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line">log4j.appender.file=org.apache.log4j.FileAppender</span><br><span class="line">log4j.appender.file.File=mylog.log</span><br><span class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;ABSOLUTE&#125; %5p %c&#123;1&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line">log4j.rootLogger=info,stdout</span><br></pre></td></tr></table></figure>
+<h2 id="Beans-hbm-xml"><a href="#Beans-hbm-xml" class="headerlink" title="Beans.hbm.xml"></a>Beans.hbm.xml</h2><p>配置持久层数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;</span><br><span class="line">&lt;!DOCTYPE hibernate-mapping PUBLIC</span><br><span class="line">        &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;</span><br><span class="line">        &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt;</span><br><span class="line">&lt;hibernate-mapping&gt;</span><br><span class="line">    &lt;!--配置映射的类,对应的表--&gt;</span><br><span class="line">    &lt;class name=&quot;cn.willon.webapp.entity.Customer&quot;&gt;</span><br><span class="line">	&lt;!--主键--&gt;</span><br><span class="line">        &lt;id name=&quot;customer_id&quot; column=&quot;customer_id&quot; table=&quot;t_customer&quot;&gt;</span><br><span class="line">            &lt;generator class=&quot;native&quot;/&gt;</span><br><span class="line">        &lt;/id&gt;</span><br><span class="line">	&lt;!--其他字段--&gt;</span><br><span class="line">        &lt;property name=&quot;name&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;address&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;phone&quot;/&gt;</span><br><span class="line">    &lt;/class&gt;</span><br><span class="line"></span><br><span class="line">&lt;/hibernate-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="Maven部署项目"><a href="#Maven部署项目" class="headerlink" title="Maven部署项目"></a>Maven部署项目</h1><h2 id="添加tomcat插件"><a href="#添加tomcat插件" class="headerlink" title="添加tomcat插件"></a>添加tomcat插件</h2><ol>
+<li><p>在<code>pom.xml</code>文件写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;tomcat-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.1&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;path&gt;/maven_ssh_demo&lt;/path&gt;</span><br><span class="line">                &lt;url&gt;http://localhost:8080/manager/&lt;/url&gt;</span><br><span class="line">                &lt;server&gt;tomcat&lt;/server&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line"></span><br><span class="line">    &lt;finalName&gt;maven_ssh_demo&lt;/finalName&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在maven的<code>settings.xml</code>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;server&gt;</span><br><span class="line">  &lt;id&gt;tomcat&lt;/id&gt;</span><br><span class="line">  &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;123456&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.677Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Core/[Maven]03_ssh框架搭建.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Core/[Maven]03_ssh框架搭建.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Lang/Java/Core/[Maven]02_ssm依赖.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Maven]02_ssm依赖</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Lang/Java/Core/[Maven]01_maven基本使用.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Maven]01_maven基本使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

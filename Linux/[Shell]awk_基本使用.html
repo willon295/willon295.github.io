@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[Shell]awk_基本使用 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="awk">
+    <meta name="description" content="什么是 awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。 awk命令基本说明1awk [参数]  &amp;apos;&amp;#123;语句&amp;#125;&amp;apos;  操作文件  参数 -F ： 指定分割符，如： awk -F&amp;#39;,&amp;#39; &amp;#39;{print $1,$2}&amp;#39;  a.txt =&amp;gt; 用逗号分割 -v: 指定变量，如： awk  -va=10  &amp;#39;{">
+<meta name="keywords" content="awk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Shell]awk_基本使用">
+<meta property="og:url" content="https://willon.cn/Linux/[Shell]awk_基本使用.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="什么是 awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。 awk命令基本说明1awk [参数]  &amp;apos;&amp;#123;语句&amp;#125;&amp;apos;  操作文件  参数 -F ： 指定分割符，如： awk -F&amp;#39;,&amp;#39; &amp;#39;{print $1,$2}&amp;#39;  a.txt =&amp;gt; 用逗号分割 -v: 指定变量，如： awk  -va=10  &amp;#39;{">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Shell]awk_基本使用">
+<meta name="twitter:description" content="什么是 awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。 awk命令基本说明1awk [参数]  &amp;apos;&amp;#123;语句&amp;#125;&amp;apos;  操作文件  参数 -F ： 指定分割符，如： awk -F&amp;#39;,&amp;#39; &amp;#39;{print $1,$2}&amp;#39;  a.txt =&amp;gt; 用逗号分割 -v: 指定变量，如： awk  -va=10  &amp;#39;{">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[Shell]awk_基本使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">[Shell]awk_基本使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-08-27T16:01:33.000Z" itemprop="datePublished" class="page-time">
+  2016-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Shell/">Shell</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是-awk"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是 awk</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#awk命令"><span class="post-toc-number">2.</span> <span class="post-toc-text">awk命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本说明"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则，字符串匹配"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">正则，字符串匹配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单实例"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">简单实例</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#awk脚本"><span class="post-toc-number">3.</span> <span class="post-toc-text">awk脚本</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#awk-简单实现-wordcount"><span class="post-toc-number">4.</span> <span class="post-toc-text">awk 简单实现 wordcount</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux/[Shell]awk_基本使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[Shell]awk_基本使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-08-28 00:01:33" datetime="2016-08-27T16:01:33.000Z"  itemprop="datePublished">2016-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Shell/">Shell</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="什么是-awk"><a href="#什么是-awk" class="headerlink" title="什么是 awk"></a>什么是 awk</h1><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。</p>
+<h1 id="awk命令"><a href="#awk命令" class="headerlink" title="awk命令"></a>awk命令</h1><h2 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk [参数]  &apos;&#123;语句&#125;&apos;  操作文件</span><br></pre></td></tr></table></figure>
+<ol>
+<li>参数<ul>
+<li><code>-F</code> ： 指定分割符，如： <code>awk -F&#39;,&#39; &#39;{print $1,$2}&#39;  a.txt</code> =&gt; 用逗号分割</li>
+<li><code>-v</code>: 指定变量，如： <code>awk  -va=10  &#39;{print $1+a}&#39; a.txt</code>  =&gt; 指定一个变量 a=10</li>
+<li><code>-f</code> : 读取另一个 <code>awk脚本</code> ，如： <code>awk -f &#39;aa.awk&#39; &#39;{print $1}&#39;  a.txt</code></li>
+</ul>
+</li>
+<li>语句解释<ul>
+<li><code>print</code>： 终端打印，可以用 ‘,’ 分割要输出的多个内容，输出的内容以空格分开</li>
+<li><code>$0</code>: 读取到完整的内容</li>
+<li><code>$n</code>: n 代表 1,2,3,4…. 表示分割后的第 n 个字段</li>
+</ul>
+</li>
+<li>内置变量<br>|变量|含义|<br>|—-|—-|<br>|$0  |  完整的输入记录  |<br>| $n |  当前记录的第n个字段，字段间由FS分隔  |<br>| FILENAME |  当前文件名  |<br>|  NF | 一条记录的字段数   |<br>|  NR  | 当前行号   |<br>|  FS  |    字段分隔符 |<br>|  OFS  |   输出记录字段间分隔符 |</li>
+</ol>
+<h2 id="正则，字符串匹配"><a href="#正则，字符串匹配" class="headerlink" title="正则，字符串匹配"></a>正则，字符串匹配</h2><ol>
+<li><p>正常的匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;内容  ～  /正则/  &#123;语句&#125; &apos; 文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>忽略大小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN&#123;IGNORECASE=1&#125;  /t/ &apos; passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模式取反</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;内容  !~  /正则/  &#123;语句&#125; &apos; 文件</span><br><span class="line">awk &apos;!/正则/  &#123;语句&#125; &apos; 文件</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.解释：</p>
+<pre><code>- 内容： 要匹配的字段=&gt; $2
+- `~`: 模式匹配开始
+- `//`： 要匹配的字符表达式
+</code></pre><h3 id="简单实例"><a href="#简单实例" class="headerlink" title="简单实例"></a>简单实例</h3><p><code>num.txt</code> 文件内容为 1-100 数字</p>
+<ol>
+<li><p>将文件每个数字加10,打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk  -va=10   &apos;&#123;print $1+a&#125;&apos; num.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取Linux系统所有用户的用户名和家目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F&apos;:&apos;  &apos;&#123;print $1,$6 &#125;&apos;  /etc/passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示第 20到30行的文本信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;if( NR&gt;=20 &amp;&amp; NR&lt;=30 ) print $1&#125;&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查找用户名含有 ‘t’ 的用户名及家目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk  -F: &apos;$1 ~ /t/  &#123;print $1,$6&#125;&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将所有用户名及其家目录用 =&gt; 分割输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk  -F: &apos;  &#123;print $1,$6&#125;&apos; OFS=&apos;=&gt;&apos; passwd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="awk脚本"><a href="#awk脚本" class="headerlink" title="awk脚本"></a>awk脚本</h1><p>一个简单脚本定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/awk -f</span><br><span class="line"></span><br><span class="line">#运行前</span><br><span class="line">BEGIN&#123;</span><br><span class="line">	pi=3.14</span><br><span class="line">	r=4</span><br><span class="line">	s=0</span><br><span class="line">	printf &quot;This is the begin line&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#运行中</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	r+=$1</span><br><span class="line">	s=pi*r*r</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#运行后</span><br><span class="line">END&#123;</span><br><span class="line">	print  &quot;Result:&quot;,r,s</span><br><span class="line">	printf &quot;This is the  end line&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="awk-简单实现-wordcount"><a href="#awk-简单实现-wordcount" class="headerlink" title="awk 简单实现 wordcount"></a>awk 简单实现 wordcount</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F&quot; &quot;  &apos;&#123;for(i=1;i&lt;=NF;i++) print $i&#125;&apos; ./* | sort | uniq  -c | awk &apos;&#123;print $2,$1&#125;&apos; | cat &gt;&gt; ../out1/res.txt</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.689Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Linux/[Shell]awk_基本使用.html" target="_blank" rel="external">https://willon.cn/Linux/[Shell]awk_基本使用.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Linux/[Shell]系统变量.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Shell]系统常用的自带变量</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Linux/[Linux]Grub2制作多启动U盘.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Linux]Grub2制作多启动U盘.md</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

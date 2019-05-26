@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title> [SpringBoot]15_搭建自己的Spring Initializr服务器 | Willon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#546e7a">
+    
+    
+    <meta name="keywords" content="SpringBoot">
+    <meta name="description" content="使用 Spring Initializr  创建项目是个不错的选择，但是由于不是天朝的服务器，所以体验不是很好。逛了一逛csdn， 发现千篇一律的文章， 也不知道是谁抄袭谁的， 个人感觉这是一个很不好的现象。发现他们的搭建步骤，可能我运气不好，可能也是因为菜吧， 反正是搭建失败。 于是自己看官方文档摸索出了一个 自认为 是 最简单 的搭建步骤。 开始搭建 安装 maven ： 这个就跳过。 下载">
+<meta name="keywords" content="SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" [SpringBoot]15_搭建自己的Spring Initializr服务器">
+<meta property="og:url" content="https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]15_搭建自己的Spring Initializr服务器.html">
+<meta property="og:site_name" content="Willon">
+<meta property="og:description" content="使用 Spring Initializr  创建项目是个不错的选择，但是由于不是天朝的服务器，所以体验不是很好。逛了一逛csdn， 发现千篇一律的文章， 也不知道是谁抄袭谁的， 个人感觉这是一个很不好的现象。发现他们的搭建步骤，可能我运气不好，可能也是因为菜吧， 反正是搭建失败。 于是自己看官方文档摸索出了一个 自认为 是 最简单 的搭建步骤。 开始搭建 安装 maven ： 这个就跳过。 下载">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://willon.cn/images/spring_boot_inititalizr.png">
+<meta property="og:updated_time" content="2019-05-26T15:53:48.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" [SpringBoot]15_搭建自己的Spring Initializr服务器">
+<meta name="twitter:description" content="使用 Spring Initializr  创建项目是个不错的选择，但是由于不是天朝的服务器，所以体验不是很好。逛了一逛csdn， 发现千篇一律的文章， 也不知道是谁抄袭谁的， 个人感觉这是一个很不好的现象。发现他们的搭建步骤，可能我运气不好，可能也是因为菜吧， 反正是搭建失败。 于是自己看官方文档摸索出了一个 自认为 是 最简单 的搭建步骤。 开始搭建 安装 maven ： 这个就跳过。 下载">
+<meta name="twitter:image" content="https://willon.cn/images/spring_boot_inititalizr.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Willon" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Willon</h5>
+          <a href="mailto:1411082228@qq.com" title="1411082228@qq.com" class="mail">1411082228@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"> [SpringBoot]15_搭建自己的Spring Initializr服务器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"> [SpringBoot]15_搭建自己的Spring Initializr服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-13T16:15:00.000Z" itemprop="datePublished" class="page-time">
+  2018-07-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始搭建"><span class="post-toc-number">1.</span> <span class="post-toc-text">开始搭建</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行截图"><span class="post-toc-number">2.</span> <span class="post-toc-text">运行截图</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Lang/Java/Spring/SpringBoot/[SpringBoot]15_搭建自己的Spring Initializr服务器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"> [SpringBoot]15_搭建自己的Spring Initializr服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-14 00:15:00" datetime="2018-07-13T16:15:00.000Z"  itemprop="datePublished">2018-07-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/SpringBoot/">SpringBoot</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>使用 <a href="http://start.spring.io" target="_blank" rel="noopener">Spring Initializr</a>  创建项目是个不错的选择，但是由于不是天朝的服务器，所以体验不是很好。逛了一逛csdn， 发现千篇一律的文章， 也不知道是谁抄袭谁的， 个人感觉这是一个很不好的现象。发现他们的搭建步骤，可能我运气不好，可能也是因为菜吧， 反正是搭建失败。 于是自己看官方文档摸索出了一个 自认为 是 <code>最简单</code> 的搭建步骤。</p>
+<h1 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h1><ol>
+<li>安装 maven ： 这个就跳过。</li>
+<li><p>下载  <code>Spring Initializr</code>  源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone  https://github.com/spring-io/initializr.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比如我克隆的项目在  <code>~/Others/initializr</code><br> 因为  <code>initializr-docs</code> 项目有问题，构建失败，导致 <code>initializr-service</code> 失败，所以删除 <code>initializr-docs</code>， 删除 <code>pom.xml</code> 中的 <code>&lt;module&gt;initializr-docs&lt;/module&gt;</code> ， 接下来开始构建 ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Others/initializr</span><br><span class="line">mvn clean install -Pfull</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>全部构建完毕之后 ， 把 <code>需要的jar</code> 文件,拷贝出来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.m2/repository/io/spring/initializr/initializr-service/0.6.0.BUILD-SNAPSHOT/initializr-service-0.6.0.BUILD-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行,并且指定 监听端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar initializr-service-0.6.0.BUILD-SNAPSHOT.jar --server.port=9000</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h1><p><img src="/images/spring_boot_inititalizr.png" alt=""></p>
+<p>分享自己的 Spring initializr</p>
+<p><a href="http://willon.cn:9000">http://willon.cn:9000</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T15:53:48.685Z" itemprop="dateUpdated">2019-05-26 23:53:48</time>
+</span><br>
+
+
+        
+        转载请注明出处：<a href="/Lang/Java/Spring/SpringBoot/[SpringBoot]15_搭建自己的Spring Initializr服务器.html" target="_blank" rel="external">https://willon.cn/Lang/Java/Spring/SpringBoot/[SpringBoot]15_搭建自己的Spring Initializr服务器.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://willon.cn">
+            <img src="/img/avatar.jpg" alt="Willon">
+            Willon
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/Tools/GIT/[Github]加速github访问.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Github]加速github访问</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/Frontend/[AJAX]03_跨域问题的产生_解决办法.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[AJAX]03_跨域问题的产生_解决办法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@1.3.0/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "shozXSRq3ArSnwt18m8EUxHD-gzGzoHsz",
+            appKey: "Rr16HzzMSYzQoUujCx9Tt69v",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Willon &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">赣ICP备16012130号-2</a><br>
+                
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="/js/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

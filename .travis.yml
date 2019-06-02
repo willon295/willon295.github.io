@@ -1,35 +1,16 @@
 language: node_js
-node_js: stable
-
-# S: Build Lifecycle
-install:
-  - npm install
-  - npm install hexo-generator-sitemap --save
-  - npm install hexo-generator-baidu-sitemap --save
-  - npm install hexo-renderer-less --save
-  - npm install hexo-generator-feed --save
-  - npm install hexo-generator-json-content --save
-  - npm install hexo-helper-qrcode --save
-before_script:
-  - npm install -g gulp
-
+node_js:
+  - lts/*
 script:
-  - hexo g
-
-after_script:
-  - cd ./public
-  - echo '![Travis-CI](https://api.travis-ci.org/willon295/willon295.github.io.svg?branch=blog-source)' > readme.md
-  - git init
-  - git config user.name "willon295"
-  - git config user.email "willon295@gmail.com"
-  - git add .
-  - git commit -m "Update docs"
-  - git push --force --quiet "https://${github_token}@${GH_REF}" master:master
-# E: Build LifeCycle
-
+  - npm run docs:build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: docs/.vuepress/dist
+  github-token: ${github_token}
+  keep-history: true
+  on:
+    branch: master
 branches:
   only:
     - blog-source
-env:
-  global:
-    - GH_REF: github.com/willon295/willon295.github.io.git
